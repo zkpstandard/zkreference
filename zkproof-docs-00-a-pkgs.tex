@@ -1,0 +1,122 @@
+%%%%%%%%%%%% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage{multicol}
+\usepackage{etoolbox}
+	\patchcmd{\thebibliography}{\chapter*}{\section*}{}{} %will prevent the bibliography from breaking the page
+
+\usepackage[style=alphabetic,
+						giveninits=true,
+						isbn=false,url=false,
+						minbibnames=4,minalphanames=4,mincitenames=4,  %minnames=4,
+						maxbibnames=99,maxalphanames=6,maxcitenames=6, %maxnames=99,
+						backend=biber, %bibtex8
+						sorting=nyt]{biblatex}
+
+\DeclareListFormat{location}{}
+\newcommand{\eprintiacr}[2]{IACR Cryptology Eprint Archive: \href{https://eprint.iacr.org/#1/#2}{ia.cr/#1/#2}}
+
+\usepackage[left=1in,right=1in,top=1in,bottom=1in]{geometry}
+\usepackage{ifthen} %allows command \ifthenelse{}{}{}
+\usepackage{titlesec}
+
+\titlespacing*{\chapter}{0pt}{-25pt}{0pt} %%-40pt
+\titleformat{\chapter}[display]{\normalfont\huge\centering}{Chapter \thechapter.\enskip}{20pt}{\Huge}
+\titleformat{\chapter}[hang] 
+{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter.}{.5em}{} 
+\titlespacing{\subsubsection}{0pt}{1em}{0em}
+
+\usepackage{caption}
+\captionsetup[table]{skip=10pt,labelfont=bf}
+
+\usepackage{amsmath} % Or mathtools
+\usepackage{amssymb} % allows \mathbb{F}
+
+\usepackage{iftex} %%%provides commands: \ifPDFTeX, \ifXeTeX, and \ifLuaTeX 
+
+\usepackage{graphicx}
+\usepackage{xcolor}
+ \definecolor{urldocblue}{RGB}{17,85,204}
+ \definecolor{ongoingred}{RGB}{224,102,102}
+ \definecolor{darkblue}{RGB}{0,0,191}
+
+\usepackage{enumitem}
+	\setitemize{itemsep=0em}
+
+\usepackage{diagbox} %allows command \diagbox to indicate the label for rows and columns in a single cell
+\usepackage[edtable,longtable]{lineno}\linenumbers
+\renewcommand\linenumberfont{\normalfont\tiny\rmfamily}
+
+\usepackage{colortbl}
+\usepackage{pdfcomment}
+\usepackage{enumitem} %allows command \setlist, e.g., \setlist[itemize]{leftmargin=1em}
+
+\usepackage{hyperref}
+\hypersetup{linktocpage,bookmarksnumbered,bookmarksopen,bookmarksdepth=3,bookmarksopenlevel=1}
+\hypersetup{
+		pdfdisplaydoctitle=true,
+		pdfstartview={FitH},    % fits the width of the page to the window
+		breaklinks=true,
+		colorlinks=true,
+		allcolors=darkblue,
+}
+\urlstyle{rm}
+
+\usepackage[all]{hypcap}
+%\newcommand{\myhyperref}[2]{\hyperref[#1]{\textcolor{urldocblue}{#2}}}
+
+\usepackage{array} % for extended column definitions  		
+\usepackage{longtable} %environment longtable replaces tabular, and no need to wrap it within table
+
+\usepackage{assoccnt}
+\newcounter{mysec}[chapter]
+\DeclareAssociatedCounters{section}{mysec}
+
+\usepackage[normalem]{ulem} %allows command \sout for strikethrough text
+			%option normalem makes the \emph{} command remain untouched. Needed to get correctly formatted refs
+\usepackage{theorem}  %allows simple definition of new theorem-like environments, e.g., 'remark'
+\usepackage{tocloft} %command \setcounter{tocdepth}{1}
+\usepackage{float} %allows option H for floats, e.g., \begin{table}[H], which is stronger than \begin{table}{!h}
+\usepackage{multirow}
+
+
+\usepackage{pdflscape} 
+\usepackage{afterpage}
+
+\usepackage{bookmark}\bookmarksetup{startatroot} 
+
+\usepackage{fancyhdr}\setlength{\headheight}{13.6pt}
+
+%%%%%%%%%%%% Formatting
+\theorembodyfont{\rm}\newtheorem{remark}{Remark} %needs package theorem
+\setcounter{tocdepth}{1} %needs package rocloft
+\renewcommand\cftchapafterpnum{\vskip0pt} %spacing between items in toc
+\renewcommand\cftsecafterpnum{\vskip0pt} %spacing between items in toc
+\setlist[itemize]{noitemsep, topsep=0pt}
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0pt}
+
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+
+\fancypagestyle{mainmatter}{\fancyhead{}
+		%\lhead[]{\nouppercase{\leftmark}}  		        %\lhead[\thepage]{\nouppercase{\leftmark}} 
+		%\rhead[Section \nouppercase{\rightmark}]{}    %\rhead[Section \nouppercase{\rightmark}]{\thepage}
+		\fancyhead[LE]{\nouppercase{\leftmark}}
+		\fancyhead[RO]{Section \nouppercase{\rightmark}}
+		\fancyfoot[C]{\thepage}
+}
+
+\fancypagestyle{references}{\fancyhead{}
+		\fancyhead[LE]{References}
+		\fancyhead[RO]{References}
+		\fancyfoot[C]{\thepage}}
+
+\fancypagestyle{appendix}{\fancyhead{}
+		%\lhead[]{\nouppercase{\leftmark}}  		        %\lhead[\thepage]{\nouppercase{\leftmark}} 
+		%\rhead[Section \nouppercase{\rightmark}]{}    %\rhead[Section \nouppercase{\rightmark}]{\thepage}
+		\fancyhead[LE]{\nouppercase{\leftmark}}
+		\fancyhead[RO]{Section \nouppercase{\rightmark}}
+		\fancyfoot[C]{\thepage}
+}

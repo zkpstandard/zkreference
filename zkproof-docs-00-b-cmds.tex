@@ -1,0 +1,130 @@
+
+%%%%%%%%%%%% Commands
+\newcommand{\subtab}[2][c]{\begin{tabular}{@{}#1}#2\end{tabular}}
+\newcommand{\subtabL}[1]{\subtab[l]{#1}}
+
+\newcommand{\edsubtab}[2][c]{\begin{edtable}{tabular}{@{}#1}#2\end{edtable}}
+
+\newcommand{\brkttext}[1]{\ensuremath{\left\langle\right.}#1\ensuremath{\left.\right\rangle}}
+\newcommand{\brktmath}[1]{\ensuremath{\left\langle\right.#1\left.\right\rangle}}
+
+\newenvironment{bulletize}{\begin{itemize}[label={$\bullet$}]}{\end{itemize}}
+
+\newcommand{\mypar}[1]{\paragraph{#1}\mbox{}\\\vspace{-1ex}}
+\newcommand{\myurl}[1]{\href{#1}{\nolinkurl{#1}}}
+\newcommand{\myemail}[1]{\href{mailto:#1}{#1}}
+
+\newcommand{\red}[1]{{\color[rgb]{1,0,0}#1}}
+\newcommand{\blue}[1]{{\color[rgb]{0,0,1}#1}}
+
+
+%%%%%%%%%%%% Auxi commands for longtable
+\newcommand{\begmin}[2][t]{\begin{minipage}[#1]{#2\textwidth}\vspace{0pt}} %-1.5ex need to coordinate with the space in last column
+\newcommand{\myendmini}{\vspace{1ex}\end{minipage}}
+\newcommand{\rowend}{\end{minipage}\\}
+
+
+\newcommand{\restoline}[1]{\resizebox{\linewidth}{!}{#1}}
+
+\newcommand\cleartooddpage{\clearpage\ifodd\value{page}\else\null\clearpage\fi}
+
+\newcommand{\shortleftarrow}{\ensuremath{\scalebox{1}{\ensuremath{\leftarrow}}}}
+
+
+\makeatletter
+\@ifpackageloaded{babel}{%
+	\addto\captionsenglish{% Replace "english" with the language you use %is using package `babel', must specify the language
+  \renewcommand{\contentsname}{\pdfbookmark[1]{Contents}{pdfbkm:contents}\pdfbookmark[2]{Table of Contents}{pdfbkm:toc}\label{toc:toc}Table of Contents}}%
+	%\addto\captionsenglish{\renewcommand{\refname}{\pdfbookmark[1]{References}{pdfbkm:refs}References}}%if using babel
+	\addto\captionsenglish{\renewcommand{\bibname}{\pdfbookmark[1]{References}{pdfbkm:refs}References}}%if using babel
+	}{%
+	\renewcommand{\contentsname}{\pdfbookmark[1]{Contents}{pdfbkm:contents}\pdfbookmark[2]{Table of Contents}{pdfbkm:toc}\label{toc:toc}Table of Contents}%
+	%\renewcommand{\refname}{\pdfbookmark[1]{References}{pdfbkm:refs}References}
+	\renewcommand{\bibname}{\pdfbookmark[1]{References}{pdfbkm:refs}References}
+	}
+\makeatother
+
+
+%LB: colors for bookmarks of table and Figures
+\newcommand{\colorbkmtab}{brown}
+\newcommand{\colorbkmfig}{blue}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% Caption for Table, adding special pdf bookmark and allowing line number
+
+%%% LB: \mytabcap: to be used (instead of \caption) inside environment table
+  % does not require the `table' environment, but can be inside of it
+  % Enables correct line numbers and it also creates a pdfbookmark
+  % 1st arg is the text for the listoffigures (lot); 2nd arg is the main text of the caption
+\newcommand{\mytabcap}[2]{%
+	%\addtocounter{table}{1}\hypertarget{ht:table:\thetable}{}\addtocounter{table}{-1}
+	\internallinenumbers\refstepcounter{table}\centering{\bfseries \hypertarget{ht:table:\thetable}{Table}~\thetable{}:} %intentional space before comment %
+				\addcontentsline{lot}{table}{Table~\thetable{}: #1}%  %%%\protect\ifthenelse{\equal{#1}{}}{#2}{#1}
+				#2 %next there is an intentional empty line
+
+	\nolinenumbers
+	{
+														\bookmarksetup{color=\colorbkmtab}%,bold=true
+	\ifthenelse{\equal{\arabic{section}}{0}}{\bookmarksetup{level=1}}{\ifthenelse{\equal{\arabic{subsection}}{0}}{\bookmarksetup{level=2}}{\ifthenelse{\equal{\arabic{subsubsection}}{0}}{\bookmarksetup{level=3}}{\bookmarksetup{level=4}}}}%
+	%in the line above, change the last bookmarksetup-level to 3 is wanting the pdf-bookmark to go inside the subsection
+	\bookmark[dest=ht:table:\thetable]{Table~\thetable}%
+	\bookmarksetup{color=black}%,bold=false
+	}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% Caption for Figure, adding special pdf bookmark
+
+\newcommand{\myfigcap}[2]{\refstepcounter{figure}\centering{\bfseries Figure~\thefigure{}:}
+														 \addcontentsline{lof}{figure}{Figure~\thefigure{}: #1} #2 \nolinenumbers}
+
+\definecolor{colorRowHead}{rgb}{0.95,0.95,0.95}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% Commands
+
+\def\fillindesc{\red{$<$fill with description$>$}}
+
+\newcommand{\loosen}{\looseness=-1}
+
+\newcommand{\refsec}[1]{Section~\ref{#1}}
+\newcommand{\reftab}[1]{Table~\ref{#1}}
+\newcommand{\reffig}[1]{Figure~\ref{#1}}
+
+\newcommand{\refrem}[1]{Remark~\ref{#1}}
+\newcommand{\refGad}[1]{Gadget~\ref{#1}}
+\newcommand{\refgad}[1]{gadget~\ref{#1}}
+
+
+\newcommand{\prov}{\tops{\ensuremath{P}}{P}}
+\newcommand{\veri}{\tops{\ensuremath{V}}{V}}
+
+\newcommand{\XOR}{\texttt{XOR}}
+\newcommand{\AND}{\texttt{AND}}
+
+\newcommand{\privsetP}{\tops{\ensuremath{\textmd{PrivateSetup}_{\prov}}}{PrivateSetup\_\prov}}
+\newcommand{\privsetV}{\tops{\ensuremath{\textmd{PrivateSetup}_{\veri}}}{PrivateSetup\_\veri}}
+\newcommand{\setP}{\tops{\ensuremath{\textmd{setup}_{\prov}}}{setup\_\prov}}
+\newcommand{\setV}{\tops{\ensuremath{\textmd{setup}_{\veri}}}{setup\_\veri}}
+\newcommand{\setR}{\tops{\ensuremath{\textmd{setup}_{R}}}{setup\_R}}
+\newcommand{\params}{\textit{parameters}}  %LB: consider using params
+
+\newcommand{\pslabel}{\phantomsection\label}
+
+\newcommand{\tops}[2]{\texorpdfstring{#1}{#2}}
+
+\newcommand{\field}{\ensuremath{\mathbb{F}}}  %needs package amssymb
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% Commands
+%%% Define here new personalized commands for leaving comments
+
+\newcommand{\popupColor}[3][blue]{\pdfcomment[color=#1,opacity=0.5,author={#2}]{#3}}
+\newcommand{\suggest}[2][]{\popupColor[blue]{#1}{Suggestion: #2}}
+\newcommand{\edited}[2][]{\popupColor[green]{#1}{Edited: #2}}
+\newcommand{\smttodo}[2][]{\popupColor[red]{#1}{To-do: #2}}
+
+\newcommand{\luis}[1]{\popupColor[blue]{Lu{\'i}s B.}{#1}}
+\let\luiscom\luis
+\newcommand{\luissug}[1]{\suggest[Lu{\'i}s B.]{#1}}
+\newcommand{\luised}[1]{\edited[Lu{\'i}s B.]{#1}}
+\newcommand{\luistodo}[1]{\smttodo[Lu{\'i}s B.]{#1}}
+\newcommand{\luisin}[1]{\red{[[Lu{\'i}s B.: #1]]}}
+
+

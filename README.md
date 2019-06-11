@@ -21,10 +21,10 @@ __Step 1 (by June 22nd ): Confirm intent to contribute and identify items of con
 
 If your name appears in the list of contributors or you want to volunteer with a new suggestion, then, by June 22nd, please do:
 
-1. Reply to this email confirming (or refuting) your contribution, including the details listed below; or
+1. Send an email to contributors@zkproof.org confirming (or refuting) your contribution, including the details listed below; or
 2. Submit the initial explanation as a GitHub issue in the zkreference repository (see the existing issues as examples).
 
-If you confirmed your proposed contribution through email, or by default if you’ve volunteered earlier but do not reply now, the editors will create the GitHub Issue for the identified contribution (see the [existing issues](https://github.com/zkpstandard/zkreference/issues)).
+If you confirmed your proposed contribution through email, or by default if you’ve volunteered earlier but do not confirm, the editors will create the GitHub Issue for the identified contribution (see the [existing issues](https://github.com/zkpstandard/zkreference/issues)).
 
 Each contribution should be accompanied by an explanation, which the editors will later use in a “diff” file (that will cross reference all changes with their explanations). The explanation should include:
 

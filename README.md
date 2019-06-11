@@ -1,5 +1,5 @@
 # zkreference
-The official repository hosting the ZKProof Community Reference document. We are currently accepting contributions to the documents, see below for specific instructions on how to contribute.
+The official repository hosting the ZKProof Community Reference document and the submitted Community Proposals. We are [currently accepting contributions](https://docs.google.com/spreadsheets/d/1QSSrz9IgcTDtzvwuufLuz19hE0y1FWwtrzNPZ9jVDU0/edit#gid=1588990810) to the documents, see below for specific instructions on how to contribute.
 
 ## Current Call to Action 
   
@@ -52,4 +52,4 @@ The table below shows a list of all current documents and content from the ZKPro
 | ZKProof Community Reference | A document which serves as reference for the zero-knowledge field, built by the ZKProof community, in collaboration with NIST | 1st & 2nd ZKProof Workshops | [LINK](https://zkproof.org/ZKProofCommunityReference.pdf) |
 | ZKProof Community Proposals | A set of documents that were submitted as proposals to be discussed and standardized | 2nd ZKProof Workshop | [LINK](https://github.com/zkpstandard/zkreference) |
 | Workshop Notes | A set of topics in the community forum that include the notes of the breakout sessions from the 2nd ZKProof Workshop | 2nd ZKProof Workshop | [LINK](https://community.zkproof.org/c/zkproof-2019) |
-| Public ZKProof Documentation | Aside from this repository and the [website](https://ZKProof.org), we have this folder with all the public documents from the effort | All workshops | [LINK](https://drive.google.com/drive/u/2/folders/1HWZYMH-6Mx8wcX8geium506L0KRxcgPe) |
+| Public ZKProof Documentation | Aside from this repository and the [website](https://ZKProof.org), we have this folder with all the public documents from the effort | 1st & 2nd ZKProof Workshops | [LINK](https://drive.google.com/drive/u/2/folders/1HWZYMH-6Mx8wcX8geium506L0KRxcgPe) |

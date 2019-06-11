@@ -48,6 +48,6 @@ Choose any of these three official methods to submit your contribution:
 The table below shows a list of all current documents and content from the ZKProof effort.
 
 | Name | Description | Related Event | Link | 
-|-------------|-------|------|
+|-------------|-------|------| ----|
 | ZKProof Community Reference | A document which serves as reference for the zero-knowledge field, built by the ZKProof community, in collaboration with NIST | 1st & 2nd ZKProof Workshops | [LINK](https://zkproof.org/ZKProofCommunityReference.pdf) |
 | ZKProof Community Proposals | A set of documents that were submitted as proposals to be discussed and standardized | 2nd ZKProof Workshop | [LINK](https://github.com/zkpstandard/zkreference) |

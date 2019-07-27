@@ -1,0 +1,183 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Correctness and Trust}
+\label{implem:correctness}
+
+In this section we explore the requirements for making the implementation of the proof system trustworthy. Even if the mathematical scheme fulfills the claimed properties (e.g., it is proven secure in the requisite sense, its assumptions hold and security parameters are chosen judiciously), many things can go wrong in the subsequent implementation: code bugs, structured reference string subversion, compromise during deployment, side channels, tampering attacks, etc. This section aims to highlight such risks and offer considerations for practitioners.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Considerations}
+
+
+\paragraph{Design of high-level protocol and statement.}
+
+The specification of the high-level protocol that invokes the ZK proof system (and in particular, the NP statement to be proven in zero knowledge) may fail to achieve the intended domain-specific security properties.
+
+Methodology for specifying and verifying these protocols is at its infancy, and in practice often relies on manual review and proof sketches. 
+Possible methods for attaining assurance include reliance on peer-reviewed academic publications 
+(e.g., Zerocash \cite{2014:SP:Zerocash} %[BCGGMT14] 
+and Cinderella \cite{2016:SP:cinderella}) %[DFKP16]), 
+reuse of high-level gadgets as discussed in the \hyperref[chap:apps]{Applications Track}, careful manual specification and proving of protocol properties by trained cryptographers, and emerging tools for formal verification.
+
+Whenever nontrivial optimizations are applied to a statement, such as algebraic simplification, or replacement of an algorithm used in the original intended statement with a more efficient alternative, those optimizations should be supported by proofs at an appropriate level of formality.
+
+See the \hyperref[chap:apps]{Applications Track} document for further discussion.
+
+
+\paragraph{Choice of cryptographic primitives.}
+
+Traditional cryptographic primitives (hash functions, PRFs, etc.) in common use are generally not designed for efficiency when implemented in circuits for ZK proof systems. Within the past few years, alternative "circuit-friendly" primitives have been proposed that may have efficiency advantages in this setting (e.g., LowMC and MiMC). We recommend a conservative approach to assessing the security of such primitives, and advise that the criteria for accepting them need to be as stringent as for the more traditional primitives.
+
+
+\paragraph{Implementation of statement.}
+
+The concrete implementation of the statement to be proven by the ZK proof system (e.g., as a Boolean circuit or an R1CS) may fail to capture the high-level specification. This risk increases if the statement is implemented in a low abstraction level, which is more prone to errors and harder to reason about.
+
+The use of higher-level specifications and domain-specific languages (see the Front Ends section) can decrease the risk of this error, though errors may still occur in the higher-level specifications or in the compilation process.
+
+Additionally, risk of errors often arises in the context of optimizations that aim to reduce the size of the statement (e.g., circuit size or number of R1CS constraints).
+
+Note that correct statement semantics is crucial for security. Two implementations that use the same high-level protocol, same constraint system and compatible backends may still fail to correctly interoperate if their instance reductions (from high-level statement to the low-level input required by the backend) are incompatible -- both in completeness (proofs don’t verify) or soundness (causing false but convincing proofs, implying a security vulnerability).
+
+
+\paragraph{Side channels.}
+Developers should be aware of the different processes in which side channel attacks can be detrimental and take measure to minimize the side channels. These include:
+\begin{itemize}[label={- }]
+    \item SRS generation --- in some schemes, randomly sampled elements which are discarded can be used, if exposed, to subvert the soundness of the system.
+    \item Assignment generation / proving --- the private auxiliary data can be exposed, which allows the attacker to understand the secret data used for the proof.
+\end{itemize}
+
+
+\paragraph{Auditing.}
+
+First of all, circuit designers should provide a high-level description of their circuit and statement
+alongside the low-level circuit, and explain the connections between them.             
+
+The high-level description should facilitate auditing of the security properties of the protocol
+being implemented, and whether these match the properties intended by the designers or that are likely to be expected by users.
+
+If the low-level description is not expressed directly in code, then the correspondence between the code and the description should be clear enough to be checked in the auditing process, either manually or with tool support.
+
+A major focus of auditing the correctness and security of a circuit implementation will be in verifying that the low-level description matches the high-level one. This has several aspects, corresponding to the security properties of a ZK proof system:
+\begin{itemize}
+    \item An instance for the low-level circuit must reveal no more information than an instance for the high-level statement. This is most easily achieved by ensuring that it is a canonical encoding of the high-level instance.
+    \item It must not be possible to find an instance and witness for the low-level circuit that does not correspond to an instance and witness for the high-level statement.
+\end{itemize}
+
+At all levels of abstraction, it is beneficial to use types to clarify the domains and representations of the values being manipulated. Typically, a given proving system will not be able to *directly* represent all of the types of value needed for a given high-level statement; instead, the values will be encoded, for example as field elements in the case of R1CS-based proof systems. The available operations on these elements may differ from those on the values they are representing; for instance, field addition does not correspond to integer addition in the case of overflow.
+
+An adversary who is attempting to prove an instance of the statement that was not intended to be provable, is not necessarily constrained to using instance and witness variables that correspond to these intended representations. Therefore, close attention is needed to ensuring that the constraint system explicitly excludes unintended representations.
+
+There is a wide space of design tradeoffs in how the frontend to a proof system can help to address this issue. The frontend may provide a rich set of types suitable for directly expressing high-level statements; it may provide only field elements, leaving representation issues to the frontend user; it may provide abstraction mechanisms by which users can define new types; etc. Auditability of statements expressed using the frontend should be a major consideration in this design choice.
+
+If the frontend takes a "gadget" approach to composition of statement elements, then it must be clear whether each gadget is responsible for constraining the input and/or output variables to their required types.
+
+
+\paragraph{Testing.}
+Methods to test constraint systems include:
+\begin{itemize}[label={- }]
+    \item Testing for failure - does the implementation accept an assignment that should not be accepted?
+    \item Fuzzing the circuit inputs.
+    \item Finding missing constraints - e.g., missing boolean constraints on variables that represent bits, or other missing type constraints.
+    \item Finding dead constraints, and reporting them (instead of optimising out).
+    \item Detection of unintended nondeterminism. For instance, given a partial fixed assignment, solve for the remainder and check that there is only one solution.
+\end{itemize}
+
+A proof system implementation can support testing by providing access, for test and debugging purposes, to the reason why a given assignment failed to satisfy the constraints. It should also support injection of values for instance and witness variables that would not occur in normal use (e.g. because they do not represent a value of the correct type). These features facilitate “white box testing”, i.e. testing that the circuit implementation rejects an instance and witness \emph{for the intended reason}, rather than incidentally. Without this support, it is difficult to write correct tests with adequate coverage of failure modes.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{SRS Generation}
+
+A prominent trust issue arises in proving systems which require a parameter setup process (structured reference string) that involves secret randomness. 
+These may have to deal with scenarios where the process is vulnerable or expensive to perform security. 
+We explore the real world social and technical problems that these setups must confront, such as air gaps, public verifiability, scalability, handing aborts, and the reputation of participants, and randomness beacons.
+
+ZKP schemes require a URS (\emph{uniform} reference string) or SRS (\emph{structured} reference string) for their soundness and/or ZK properties. 
+This necessitates suitable randomness sources and, in the case of a common reference string, a securely-executed setup algorithm. 
+Moreover, some of the protocols create reference strings that can be reused across applications. 
+We thus seek considerations for executing the setup phase of the leading ZKP scheme families, and for sharing of common resources.\\
+This section summarizes an open discussion made by the participants of the Implementation Track, aiming to provide considerations for practitioners to securely generate a CRS.
+
+
+\paragraph{SRS subversion and failure modes.}
+Constructing the SRS in a single machine might fit some scenarios. 
+For example, this includes a scenario where the verifier is a single entity --- the one who generates the SRS. 
+In that scenario, an aspect that should be considered is subversion zero-knowledge --- a property of proving schemes allowing to maintain zero-knowledge, even if the SRS is chosen maliciously by the verifier.
+
+Strategies for subversion zero knowledge include:
+\begin{itemize}[label={- }]
+    \item Using a multi-party computation to generate the SRS
+    \item Adaptation of either \cite{2016:Eurocrypt:On-the-Size-of-Pairing-Based-Non-interactive-Arguments} %[Groth16] or 
+		[PHGR13]
+    \item Updatable SRS - the SRS is generated once in a secure manner, and can then be specialized to many different circuits, without the need to re-generate the SRS
+\end{itemize}
+
+There are other subversion considerations which are discussed in the ZKProof \hyperref[chap:security]{Security Track}.
+
+
+
+\paragraph{SRS generation using MPC}
+
+In order to reduce the need of trust in a single entity generating the SRS, it is possible to use a multi-party computation to generate the SRS. 
+This method should ideally be secure as long as one participant is honest (per independent computation phase). 
+Some considerations to strengthen the security of the MPC include:
+\begin{itemize}[label={- }]
+    \item Have as many participants as possible
+				\begin{itemize}
+        \item Diversity of participants; reduce the chance they will collude
+        \item Diversity of implementations (curve, MPC code, compiler, operating system, language)
+        \item Diversity of hardware (CPU architecture, peripherals, RAM)
+						\begin{itemize}[label={- }]
+            \item One-time-use computers
+            \item GCP / EC2 (leveraging enterprise security)
+						\end{itemize}
+        \item If you are concerned about your hardware being compromised, then avoid side channels (power, audio/radio, surveillance)
+            \begin{itemize}[label={- }]
+						\item Hardware removal:
+								\begin{itemize}[label={- }]
+                \item Remove WiFi/Bluetooth chip
+                \item Disconnect webcam / microphone / speakers
+                \item Remove hard disks if not needed, or disable swap
+								\end{itemize}
+            \item Air gaps
+						\end{itemize}[label={- }]
+        \item Deterministic compilation
+        \item Append-only logs
+        \item Public verifiability of transcripts
+        \item Scalability
+        \item Handling aborts
+        \item Reputation
+			\end{itemize}
+    \item Information extraction from the hardware is difficult
+				\begin{itemize}[label={- }]
+        \item Flash drives with hardware read-only toggle
+				\end{itemize}
+\end{itemize}
+
+Some protocols (e.g., Powers of Tau) also require sampling unpredictable public randomness. Such randomness can be harnessed from proof of work blockchains or other sources of entropy such as stock markets. Verifiable Delay Functions can further reduce the ability to bias these sources [BBBF18]
+
+\paragraph{SRS reusability}
+For schemes that require an SRS, it may be possible to design an SRS generation process that allows the re-usability of a part of the SRS, thus reducing the attack surface. A good example of it is the \href{https://github.com/ebfull/powersoftau}{Powers of Tau} method for the \href{https://eprint.iacr.org/2016/260}{Groth16} construction, where most of the SRS can be reused before specializing to a specific constraint system.
+
+
+\paragraph{Designated-verifier setting}
+There are cases where the verifier is a known-in-advance single entity. There are schemes that excel in this setting. Moreover, schemes with public verifiability can be specialized to this setting as well.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Contingency plans}
+We would like to explore in future workshops the notion of contingency plans. For example, how do we cope:
+\begin{itemize}[label={- }]
+    \item With our proof system being compromised? 
+    \item With our specific circuit having a bug?  
+    \item When our ZKP protocol has been breached  (identifying proofs with invalid witness, etc)
+\end{itemize}
+Some ideas that were discussed and can be expanded on are:
+\begin{itemize}[label={- }]
+    \item Scheme-agility and protocol-agility in protocols - when designing the system, allow flexibility for the primitives used
+    \item Combiners (using multiple proof systems in parallel) - to reduce the reliance on a single proof system, use multiple
+    \item Discuss ways to identify when ZKP protocol has been breached (identifying proofs with invalid witness, etc)
+\end{itemize}
+

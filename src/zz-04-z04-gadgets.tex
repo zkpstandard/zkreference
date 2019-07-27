@@ -1,0 +1,268 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Gadgets within predicates}
+\label{apps:gadgets-within-predicates}
+
+
+Formalizing the security of these protocols is a very difficult task, especially since there is no predetermined set of requirements, making it an ad-hoc process. 
+Here we outline a set of initial gadgets to be taken into account.%
+\luised{Created one table containing only the gadget names and the description in English; then included one table for each gadget. 
+This enables shorter tables, not breaking the page, and allows easier indexing of each gadget (e.g., now showing in the initial List of Tables).} 
+See \reftab{tab:list-gadgets} for a simple list of gadgets --- this list should be expanded continuously and on a case by case basis.
+	For each of the gadgets %below, 
+we write the following representations, specifying what is the secret / witness, what is public / statement:
+
+NP statements for non-technical people:
+
+\hspace{.08\textwidth}\begin{minipage}{.92\textwidth}\bfseries
+		For the [public] chess board configurations $A$ and $B$;\newline
+		I know some [secret] sequence $S$ of chess moves;\newline
+		such that when starting from configuration $A$, and applying $S$, all moves are legal and the final configuration is $B$.
+		\end{minipage}\luissug{This is a nice example that does not require whose instance does not require commitments or encryption --- consider perhaps adding it to \reftab{tab:basic-examples-what-is-a-ZK}, depending on how the documentation wants to position ZKPs of language vs. ZKPoKs.
+		}~~~\luiscom{(Another chess-related example can be formed from the ``eight queens puzzle''. A party wants to prove that it knows a chess-table configuration with 8 queens, such that no queen is attacking any other.\textCR This is not a suggestion for inclusion in the text, but just a note to recall to check how the distinct definitions/notations of ZKP of membership vs. ZKP of knowledge cover different examples.}
+
+General form (Camenisch-Stadler): \textbf{Zk \{ ( wit):   P(wit, statement)  \}}
+
+Example of ring signature: \textbf{Zk \{ (sig):  VerifySignature(P1, sig) or VerifySignature(P2, sig)  \}}
+
+
+
+\newcounter{cntGadget}\setcounter{cntGadget}{0}
+\renewcommand{\thecntGadget}{G\arabic{cntGadget}}
+\newcommand{\newGadget}[1][]{\refstepcounter{cntGadget}\protect\ifthenelse{\equal{#1}{}}{}{\label{#1}}\thecntGadget}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\mytablecap[tab:list-of-gadgets]{List of gadgets}
+\begin{table}[H]
+\mytabcap{List of gadgets}{List of gadgets}\label{tab:list-gadgets}
+\begin{center}
+\begin{edtable}{tabular}{|>{\begmin{.04}\centering}c<{\myendmini}|>{\begmin{.23}}l<{\myendmini}||>{\begmin{.48}}l<{\myendmini}|>{\begmin{.13}\centering}c<{}|}
+\hline \rowcolor{colorRowHead} \bfseries \raisebox{-3ex}{\#}
+			& \centering \bfseries \raisebox{-3ex}{Gadget name}
+			& \centering \bfseries English description of the initial gadget (before adding ZKP) %\subtab[l]{ \\ }
+			& \centering \bfseries Table with examples \rowend
+\hline 
+\hline \newGadget[gad:commitment] & Commitment 
+				& Envelope\luiscom{``Commitment'' is traditionally equated to a ``sealed envelop'' ... but a ``vault'' would have the additional feature of requiring a secret key for the opening phase. (Reflect on the best way to convey intuition to a non-cryptographer.) One can actually implement a commitment by sending a vault by mail ... and later the key} & \reftab{tab:gadget-commitment-envelope} \rowend
+\hline \newGadget[gad:signatures] & Signatures 
+				& \subtab{\fillindesc\\\red{(inc. blind, ring, \red{homom}?)}} & \reftab{tab:gadget-signature} \rowend
+\hline \newGadget[gad:encryption] & Encryption 
+				& Envelope with a receiver stamp & \reftab{tab:gadget-encryption} \rowend
+\hline \newGadget[gad:dist-decryption] & Distributed decryption 
+				& Envelope with a receiver stamp that requires multiple people to open & \reftab{tab:gadget-dist-decryption} \rowend
+\hline \newGadget[gad:rand-func] & Random function 
+				& Lottery machine & \reftab{tab:gadget-random-function} \rowend
+\hline \newGadget[gad:set-membership] & Set membership 
+				& \fillindesc & \reftab{tab:gadget-set-membership} \rowend
+\hline \newGadget[gad:mix-net] & Mix-net 
+				& Ballot box & \reftab{tab:gadget-mix-net} \rowend
+\hline \newGadget[gad:gen-calculations] & Generic circuits, TMs, or RAM programs 
+				& General calculations & \reftab{tab:gadget-general-computation} \rowend
+\hline
+\end{edtable}\vspace{1em}
+\end{center}
+\end{table}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\headerRowForGadgets}{\rowcolor{colorRowHead}Enhanced gadget (after adding ZKP) 
+		& ZKP statement (in a PoK notation) 
+		& Prover knows a witness ...
+		& ...for the public instance ...
+		& ...s.t. the following predicate holds
+		& Technical notation (API) \rowend}
+
+%the six arguments are factors for the width of the 6 columns
+\newenvironment{gadgettabular}[6]{\begin{center}\footnotesize\begin{edtable}{tabular}{|>{\begmin{#1}}l<{\myendmini}|>{\begmin{#2}}l<{\myendmini}|>{\begmin{#3}}l<{\myendmini}|>{\begmin{#4}}l<{\myendmini}|>{\begmin{#5}}l<{\myendmini}|>{\begmin{#6}}c|}\hline \headerRowForGadgets \hline}{\end{edtable}\vspace{1em}\end{center}}
+
+%\newenvironment{gadgettabular}{\begin{center}\footnotesize\begin{edtable}{tabular}{|*{5}{>{\begmin{.21}}l<{\myendmini}|}>{\begmin{.1}}c|}\hline \headerRowForGadgets \hline}{\end{edtable}\vspace{1em}\end{center}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\afterpage{%
+    \clearpage% 
+    \begin{landscape} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[H]
+\mytabcap{Commitment gadget}{Commitment gadget (\ref{gad:commitment}; envelope)\luiscom{Would it be better to include these tables in landscape-oriented pages?\textCR Should each row have its own index, e.g., G1a, G1b, G1c, G1d?}}
+\label{tab:gadget-commitment-envelope}
+\begin{gadgettabular}{.21}{.21}{.21}{.21}{.21}{.1}
+			I know the value hidden inside this envelope, even though I cannot change it
+		& Knowledge of committed value(s) (openings)
+    & Opening(s) $O = (v,r)$ containing a value and randomness
+    & Committed value(s) $C$
+    & $C = Comm(O)$, component-wise if there are multiple $C, O$
+    & \rowend
+\hline 
+		  I know that the value hidden inside these two envelopes are equal
+    & Equality of committed values
+    & Opening $O$
+    & Committed values $C_1$ and $C_2$
+    & $C_1 = Comm(O)$ and $C_2 = Comm(O)$
+    & \rowend
+\hline
+		  I know that the values hidden inside these two envelopes are related in a specific way
+    & Relationships between committed values -- logical, arithmetic, etc.
+		& Witnesses $O_1$ and $O_2$
+		& Committed values $C_1$ and $C_2$, relation $R$
+		& $C_1 = Comm(O_1)$, $C_2 = Comm(O_2)$, and $R(O_1, O'_2) = \texttt{True}$
+		& \rowend
+\hline
+      The value inside this envelope is within a particular range
+		& Range proofs
+		& Opening $O$
+		& Committed value $C$, interval $I$
+		& $C = Comm(O)$ and $O$ is in the range $I$
+		& \rowend
+\hline
+\end{gadgettabular}
+\end{table}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[H]
+\mytabcap{Signature gadget}{Signature gadget (\ref{gad:signatures}; \fillindesc)}\label{tab:gadget-signature}
+\begin{gadgettabular}{.21}{.21}{.21}{.21}{.21}{.1}
+			\fillindesc 
+		& Knowledge of a signature on a message\luissug{Consider differentiating more explicitly the secret vs.\ public info. For example: ``Knowledge of a secret signature of a public message'' or ``Knowledge of a secret signature of a commonly known message''}
+    & Signature $\sigma$
+    & Verification key $VK$, message $M$
+    & Verify$(VK, m, \sigma) = \tt True$
+    & \rowend
+\hline 
+		  \textbf{\red{propose: blind, ring, group, homom.}}\luistodo{Unclear in the original document if this row is to be within the signature gadget. I just assumed yes, as in blind signature, ring signature, ...}
+		& Knowledge of a signature on a committed value\luissug{Consider differentiating more explicitly the secret vs.\ public info. For example: ``Knowledge of a secret signature on a publicized commitment of a known secret message [and knowledge of its opening]'' (maybe the suggestion fails by stretching the sentence too much, but the current statement seems somewhat dubious about what is secret.)}
+		& Message $M$\luissug{It appears that an opening O should also be included here. An alternative (more contrived) scenario is the prover only knowing a transferable NIZK that C is a correct commitment of M, and proving possessing such NIZK :-) ...}, signature $\sigma$
+		& Verification key $VK$, committed value $C$
+		& $C = Comm(M)$ and Verify$(VK, m, \sigma) = \tt True$
+    & \rowend
+\hline
+\end{gadgettabular}
+\end{table}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[H]
+\mytabcap{Encryption gadget}{Encryption gadget (\ref{gad:encryption}; envelope with a receiver stamp)}\label{tab:gadget-encryption}
+\begin{gadgettabular}{.21}{.21}{.21}{.21}{.21}{.1}
+			\fillindesc 
+		& Knowledge of a signature on a message
+    & Signature $\sigma$
+    & Verification key $VK$, message $M$
+    & Verify$(VK, m, \sigma) = \tt True$
+    & \rowend
+\hline
+\end{gadgettabular}
+\end{table}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[H]
+\mytabcap{Distributed-decryption gadget}{Distributed-decryption gadget (\ref{gad:dist-decryption}; envelope with a receiver stamp that requires multiple people to open)}\label{tab:gadget-dist-decryption}
+\begin{gadgettabular}{.21}{.21}{.21}{.21}{.21}{.1}
+			The output plaintext(s) correspond to the public ciphertext(s).
+     & Knowledge of the plaintext
+     & Secret shares of the decryption key
+     & Ciphertext(s) $C$ and Encryption key $PK$
+     & $Dec(SK, C) = P$, component-wise if $\exists$ multiple $C$
+     & \rowend
+\hline
+\end{gadgettabular}
+\end{table}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[H]
+\mytabcap{Random-function gadget}{Random-function gadget (\ref{gad:rand-func}; lottery machine)}\label{tab:gadget-random-function}
+\begin{gadgettabular}{.21}{.21}{.21}{.21}{.21}{.1}
+			Verifiable random function (VRF)
+     & VRF was computed correctly from a secret seed and a public (or secret) input
+     & Secret seed $W$
+     & Input $X$, Output $Y$
+     & $Y = VRF(W, X)$
+     & \rowend
+\hline
+\end{gadgettabular}
+\end{table}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[H]
+\mytabcap{Set-membership gadget}{Set-membership gadget (\ref{gad:set-membership}; \fillindesc)}\label{tab:gadget-set-membership}
+\vspace{-.4em} %adjustment \vspace to revise ... temporarily here to enable 3 tables to fit within 1 page
+\begin{gadgettabular}{.21}{.21}{.21}{.21}{.21}{.1}
+			Accumulator
+     & Set inclusion
+		 & \fillindesc 
+		 & \fillindesc 
+		 & \fillindesc 
+		 & \rowend
+\hline
+			 \fillindesc 
+     & Set non-inclusion
+		 & \fillindesc 
+		 & \fillindesc 
+		 & \fillindesc 
+		 & \rowend
+\hline
+\end{gadgettabular}
+\end{table}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{-1.5em} %adjustment \vspace to revise ... temporarily here to enable 3 tables to fit within 1 page
+\begin{table}[H]
+\mytabcap{Mix-net gadget}{Mix-net gadget (\ref{gad:mix-net}; ballot box)}\label{tab:gadget-mix-net}
+\vspace{-.4em} %adjustment \vspace to revise ... temporarily here to enable 3 tables to fit within 1 page
+\begin{gadgettabular}{.18}{.28}{.17}{.21}{.21}{.1}
+			 Shuffle
+     & The set of plaintexts in the input and the output ciphertexts respectively are identical.
+     & Permutation $\pi$, Decryption key $SK$
+     & Input ciphertext list $C$ and Output ciphertext list $C'$
+     & $\forall j, Dec(SK, \pi(C_j)) = Dec(SK, C'_j)$
+     & \rowend
+\hline
+		   Shuffle and reveal
+		 & The set of plaintexts in the input ciphertexts is identical to the set of plaintexts in the output.
+		 & Permutation $\pi$, Decryption key $SK$
+		 & Input ciphertext list C and Output plaintext list $P$
+		 & $\forall j, Dec(SK, \pi(C_j)) = P_j$
+		 & \rowend
+\hline
+\end{gadgettabular}
+\end{table}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{-1.5em} %adjustment \vspace to revise ... temporarily here to enable 3 tables to fit within 1 page
+\begin{table}[H]
+\mytabcap{Generic-computation gadget}{Generic circuits, TMs, or RAM programs\luissug{Find a more concise name to identify the type of gadget} gadgets (\ref{gad:gen-calculations}; general calculations)}\label{tab:gadget-general-computation}
+\vspace{-.4em} %adjustment \vspace to revise ... temporarily here to enable 3 tables to fit within 1 page
+\begin{gadgettabular}{.21}{.26}{.14}{.28}{.16}{.1}
+			 There exists some secret input that makes this calculation correct
+     & ZK proof of correctness of circuit/Turing machine/RAM program computation
+     & Secret input w
+     & Program $C$ (either a circuit, TM, or RAM program), public input $x$, output $y$
+     & $C(x, w) = y$
+     & \rowend
+\hline
+		   This calculation is correct, given that I already know that some sub-calculation is correct
+		 & ZK proof of verification + postprocessing of another output (Composition)
+		 & Secret input $w$
+		 & Program $C$ with subroutine $C'$, public input $x$, output $y$, intermediate value $z = C'(x, w)$, zk proof $\pi$ that $z = C'(x, w)$
+		 & $C(x, w) = y$
+		 & \rowend
+\hline
+\end{gadgettabular}
+\end{table}
+
+
+\end{landscape} 
+} %end of \afterpage
+    

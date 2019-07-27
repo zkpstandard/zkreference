@@ -1,0 +1,131 @@
+%%% Luis B: ADD-ON TO INITIATE PART WITH TABLES OF NOTES, IN THE SAME DOCUMENT, 
+%%% (CHANGED TO LANDSCAPE) TO CROSS-REFERENC FEEDBACK NOTES AND CORRESPONDING CHANGES
+%%% It's appearance vs. not-appearing is controlled with the bit flag boolShowFeedbackNotes
+
+\notbool{boolShowFeedback}{
+		%%%% IF NOT INSERTING THE TABLE OF COMMENTS
+		\renewcommand{\revblock}[2][]{} %then also do not tag the revision blocks in the main text
+	}{
+		%%% IF DECIDING TO INSERT THE TABLE OF COMMENTS
+		\cleartooddpage %%%\clearpage
+		\nolinenumbers %disables line numbering
+		%%% CHANGE PAGE FORMAT MID-DOCUMENT
+		\KOMAoption{paper}{landscape}%
+		\typearea{12}% sets new DIV ??
+		\recalctypearea
+		\newgeometry{margin=.65in,footskip=.25in}
+		%\newgeometry{left=.5in,right=.5in,top=.5in, bottom=.5in}
+		% needed to show page in landscape in viewer
+		%\pdfpageheight=\paperheight
+		%\pdfpagewidth=\paperwidth
+		%\setlength{\textwidth}{10in}
+		%\setlength{\textheight}{7.5in}
+
+	\def\mytextfooter{Table of proposed/implemented contributions}
+	\fancypagestyle{lscapetablecontribs}{
+		\fancyhf{}\lfoot{\mytextfooter}\rfoot{\thepage}
+	}
+
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%		
+		%\clearpage\newpage
+		\pagebreak
+		\thispagestyle{lscapetablecontribs}%
+		\pagestyle{lscapetablecontribs}%
+		
+
+		\def\tempTitle{Table of comments and contributions v0.1 \tops{$\rightarrow$}{\textrightarrow} 0.2}
+		\phantomsection%\section*{\tempTitle}
+		~\hfill\scalebox{2}{\textbf{\tempTitle}}\hfill~
+		\addcontentsline{toc}{chapter}{\tempTitle}
+	
+		\vspace{1em}
+		The following pages describe proposed contributions to upgrade the draft reference document from version 0.1 
+	(dated 2019-04-11, available during the 2nd ZKProof Workshop) to version 0.2.
+		\red{[[The current draft 0.1.x only contains description of proposed contributions for 
+		which, at the time of writing, there are proposed contributors.
+			The draft version 0.2 (to appear) will only mention the actual committed contributions;
+		other contributions may be deferred to a future version.]]}
+
+
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\def\tmpSecTitle{Explanation of the tables of contributions}
+	\section*{\tmpSecTitle}\pdfbookmark[2]{\tmpSecTitle}{pdfbkm:explain-table-contributions}
+	
+	Each table describes proposed contributions and corresponding changes/edits 
+made to the baseline version 0.1, in order to achieve version 0.2.
+	Each table, indexed as D$x$ (where $x$ is an integer), corresponds to 
+	a \href{https://github.com/zkpstandard/zkreference/issues}{GitHub issue} 
+	(GI$y$, where $y$ is an integer) describing proposed contributions --- 
+	see \myurl{https://github.com/zkpstandard/zkreference/issues}.
+		However, compared with GitHub, the description here can be adjusted and better detailed
+	for the purpose of enabling a better cross-referencing to the edits made in the document.
+		Each table has a header as follows:
+	
+	{
+	\vspace{-1em}
+	\renewcommand{\thecntIssue}{D$x$}
+	\renewcommand{\rowIssueName}{\emph{issue title}}
+	\beginlongtab\hline\rowcolor{LLyellow}\headerForIssue\rowend\hline\end{longtable}
+	%\renewcommand{\thecntIssue}{D\arabic{cntIssue}}
+	}
+
+	From left to right, the columns represent:
+
+	\begin{itemize}
+	
+	\item \bm{\#}:
+		A consecutive positive integer, used to count all described items of contribution
+	
+	\item \textbf{Item id} 
+		An index of the contribution item, with a numbering subordinate to the table index. 
+		For example, D1.3 would be the third item (row) of contribution (table) D1.
+	%	Each row shows D$x$.$z$ as the item id, where $z$ is an integer 
+	%and D.$x$ is the identification of the table.
+		
+	\item \textbf{Location:} 
+		A hint about the location (typically in the old document) of the edits.
+	
+	\item \textbf{Contribution D$x$: \emph{issue title}}: 
+		An identifier \textbf{D$x$} (with integer $x$) of the contribution 
+	\textbf{d}escription, and a title of the issue / contributions.
+
+	\item \textbf{Related}: Related references, 
+	such as references (GI$x$) to GitHub issues, 
+	and/or ids of other contribution items.
+	
+	\item \textbf{Context and changes}: 
+		Column to fill-in with contextual information about the proposed contribution,
+	as well as a high level description of the changes in the document.
+	
+	\item \textbf{Edit id}:
+		Index (or possibly several indices) of the edits (E$y$, with integer $y$) made
+	in the document.
+		Across the document, changes will be marked in the right margin with this index,
+	so that the reader can hyperlink it directly to the description of the contribution,
+	i.e., to an explanation of why the change was made.
+	\looseness=-1
+
+	\end{itemize}
+	
+	%%% LIST OF CONTRIBUTIONS
+	\clearpage
+	\phantomsection\addcontentsline{toc}{section}{\listcontributionname}
+	
+	{
+	\setlength{\cftbeforeloctitleskip}{2em}
+	\setlength{\cftsecindent}{0em}
+	\setlength{\cftsecnumwidth}{0em}
+	\renewcommand\cftloctitlefont{\bfseries\LARGE}
+	\addtocontents{loc}{\vspace*{-3em}}
+	\listofcontribution
+	}
+
+	%%%\newcommand{\itemlinerev}[2]{\item \ref{#1} --- #2 \hspace{.5em}\dotfill\hspace{.5em}\pageref{#1}}
+
+	\clearpage
+	%\fontsize{9}{10.8}\selectfont
+	\fontsize{10}{11.2}\selectfont
+	%\phantomsection\pdfbookmark[1]{Contributions}{pdfbkm:feedback-index}
+	\input{zzz-01-comments-on-v0.1.tex}
+}
+	

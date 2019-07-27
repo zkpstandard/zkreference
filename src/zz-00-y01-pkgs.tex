@@ -1,0 +1,174 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%% Packages
+
+\usepackage{iftex} %%%provides commands: \ifPDFTeX, \ifXeTeX, and \ifLuaTeX 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% Font related
+
+\ifPDFTeX
+	\usepackage[utf8]{inputenc}
+	\usepackage{bold-extra}  % if using PdfTeX, allows bold small caps when compiling with PdfTex?, e.g., {\bfseries\textsc Changed:}
+\fi
+
+\ifXeTeX\else %i.e., if PdfTex or LuaLaTeX
+	\usepackage[T1]{fontenc} % does it ensure that undirected double-quotes remain undirected
+	\usepackage{microtype}   % Produces warning, if using LuaLaTeX, about overwriting function `keepligature'
+\fi
+
+\usepackage{amsmath} % Or mathtools
+\usepackage{amssymb} % allows \mathbb{F}
+
+\usepackage{textcomp} %allows \textrightarrow (arrow in text mode)
+
+\usepackage{bm} %command \bm allows bold math
+
+%\usepackage{lmodern} %used by default?
+%%%\usepackage{times} %newtxtext has font simultaneously bold and small caps
+%\usepackage{newtxtext,newtxmath} %newtxtext,newtxmath  %package `newtxtext' is incompatible with package `textcomp'
+\usepackage{anyfontsize} %allows command \fontsize{size}{skip}
+
+%if using XeTeX or LuaLaTeX, the compilation will not be able to use font simultaneously bold and small caps (see command \Chan)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% Geometry related
+
+%%% \usepackage{geometry} % may be needed to call \newgeometry later on
+\usepackage[left=1in,right=1in,top=1in,bottom=1in]{geometry}
+
+%%% The package typearea will redefine the following lengths:
+\newcommand{\newsetlength}[2]{\newlength{#1}\setlength{#1}{#2}}
+\newsetlength{\oldtopmargin}{\topmargin}
+\newsetlength{\oldheadheight}{\headheight}
+\newsetlength{\oldoddsidemargin}{\oddsidemargin}
+\newsetlength{\oldevensidemargin}{\evensidemargin}
+\newsetlength{\oldtextwidth}{\textwidth}
+\newsetlength{\oldtextheight}{\textheight}
+
+
+\usepackage{silence} %useful to silence some harmless/unavoidab warnings 
+\WarningFilter{typearea}{Bad type area settings!}
+\WarningFilter*{geometry}{Over-specification in }
+
+\usepackage[usegeometry]{typearea} % needed to change to landscape in the middle of the document
+%option `usegeometry' enables the correct resizing of text area when adding pages in landscape mode
+
+
+\setlength{\topmargin}{\oldtopmargin}
+\setlength{\headheight}{\oldheadheight}
+\setlength{\oddsidemargin}{\oldoddsidemargin}
+\setlength{\evensidemargin}{\oldevensidemargin}
+\setlength{\textwidth}{\oldtextwidth}
+\setlength{\textheight}{\oldtextheight}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% Bibliography related
+
+%\patchcmd requires package etoolbox
+\patchcmd{\thebibliography}{\chapter*}{\section*}{}{} %will prevent the bibliography from breaking the page
+
+\usepackage[style=alphabetic,
+						giveninits=true,
+						isbn=false,url=false,
+						minbibnames=4,minalphanames=4,mincitenames=4,  %minnames=4,
+						maxbibnames=99,maxalphanames=6,maxcitenames=6, %maxnames=99,
+						backend=biber, %bibtex8
+						sorting=nyt]{biblatex}
+
+\DeclareListFormat{location}{}
+\newcommand{\eprintiacr}[2]{IACR Cryptology Eprint Archive: \href{https://eprint.iacr.org/#1/#2}{ia.cr/#1/#2}}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+
+\usepackage{multicol}
+
+\usepackage{marginnote} %for comments in the margin, with command \marginnote
+
+%%%https://tex.stackexchange.com/questions/69595/marginnote-always-on-right-side-of-the-page
+%% make the margin always appear on the right side if using the twocol option of the documentclass `article'
+%% \makeatletter
+%% \patchcmd{\@addmarginpar}{\ifodd\c@page}{\ifodd\c@page\@tempcnta\m@ne}{}{}
+%% \makeatother
+%% \reversemarginpar
+
+
+\usepackage{titlesec}
+
+\usepackage{caption}
+\captionsetup[table]{skip=10pt,labelfont=bf}
+
+\usepackage{graphicx}
+\usepackage{xcolor}
+ \definecolor{urldocblue}{RGB}{17,85,204}
+ \definecolor{ongoingred}{RGB}{224,102,102}
+ \definecolor{darkblue}{RGB}{0,0,191}
+
+\usepackage{enumitem}
+	\setitemize{itemsep=0em}
+
+\usepackage{diagbox} %allows command \diagbox to indicate the label for rows and columns in a single cell
+\usepackage[edtable,longtable]{lineno}\linenumbers
+\renewcommand\linenumberfont{\normalfont\tiny\rmfamily}
+
+\usepackage{colortbl} %allows coloring of rows (using \rowcolor) and columns in tabular
+\usepackage{pdfcomment}
+\usepackage{enumitem} %allows command \setlist, e.g., \setlist[itemize]{leftmargin=1em}
+
+
+%https://stackoverflow.com/questions/2640111/url-latex-linebreak
+\PassOptionsToPackage{hyphens}{url}
+\usepackage{hyperref}
+\hypersetup{linktocpage,bookmarksnumbered,bookmarksopen,bookmarksdepth=3,bookmarksopenlevel=2}
+\hypersetup{
+		pdfdisplaydoctitle=true,
+		pdfstartview={FitH},    % fits the width of the page to the window
+		breaklinks=true,
+		colorlinks=true,
+		allcolors=darkblue,
+}
+\urlstyle{rm}
+
+\usepackage[all]{hypcap}
+%\newcommand{\myhyperref}[2]{\hyperref[#1]{\textcolor{urldocblue}{#2}}}
+
+\usepackage{array} % for extended column definitions  		  % allows using >{...} and <{...} in specifying columns
+\usepackage{longtable} %environment longtable replaces tabular, and no need to wrap it within table
+%allows table to break across pages; allows command \endhead to define what rows to repeat
+
+\usepackage{assoccnt}
+\newcounter{mysec}[chapter]
+\DeclareAssociatedCounters{section}{mysec}
+
+\usepackage[normalem]{ulem} %allows command \sout for strikethrough text
+			%option normalem makes the \emph{} command remain untouched. Needed to get correctly formatted refs
+\usepackage{theorem}  %allows simple definition of new theorem-like environments, e.g., 'remark'
+\usepackage{tocloft} %command \setcounter{tocdepth}{1}, also allows creating other lists
+\usepackage{float} %allows option H for floats, e.g., \begin{table}[H], which is stronger than \begin{table}{!h}
+\usepackage{multirow}
+
+
+\usepackage{pdflscape} %alllows landscape environment with automatic rotation of the page %for use when integrating with other documents
+\usepackage{afterpage}
+
+\usepackage{bookmark}\bookmarksetup{startatroot} 
+\bookmarksetup{open,
+    addtohook={%
+        \ifnum\bookmarkget{level}=0 %
+        \bookmarksetup{bold}%
+        \fi
+    },
+}
+
+\usepackage{fancyhdr}\renewcommand{\headrulewidth}{0pt}
+
+%https://tex.stackexchange.com/questions/59785/how-to-execute-command-on-every-table-column
+\usepackage{collcell} %command \collectcell\function and \endcollectcell to apply a function to a cell
+
+

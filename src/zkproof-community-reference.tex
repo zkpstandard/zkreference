@@ -1,0 +1,68 @@
+%%% ZKProof Community Reference
+%%% Main source at https://github.com/zkpstandard/zkreference
+%%% This is the main compilation file
+
+\documentclass[11pt,letterpaper,oneside]{report}    
+%using option `oneside' instead of `twoside' makes some definitions easier, although the fancyhdr options then use conditionals to define different headers between odd and even pages
+
+\usepackage{ifthen,etoolbox} %allows command \ifthenelse{}{}{}
+\newcommand{\newsetbool}[2]{\newbool{#1}\setbool{#1}{#2}}
+\newsetbool{boolShowFeedback}{true} % Use true to show the table of feedback comments
+
+
+\input{zz-00-y01-pkgs.tex}
+\input{zz-00-y02-cmds.tex}
+\input{zz-00-y02-cmds-diff.tex}
+\input{zz-00-y03-format.tex}
+\graphicspath{{}{figs/}}
+
+\addbibresource{zz-99-biblio-01-security.bib}
+\addbibresource{zz-99-biblio-02-implem.bib}
+\addbibresource{zz-99-biblio-03-apps.bib}
+
+
+\begin{document}
+
+\addtocontents{toc}{\vspace*{-2em}}
+\input{zz-00-frontmatter}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\thesection}{\thechapter.\arabic{mysec}}
+
+\cleartooddpage\pagenumbering{arabic}\setcounter{page}{1}
+\thispagestyle{mainmatter}\pagestyle{mainmatter}
+\input{zz-01-baseline.tex}
+
+\cleartooddpage
+\input{zz-02-paradigms.tex}
+
+\cleartooddpage
+\input{zz-03-implem.tex}
+
+\cleartooddpage
+\input{zz-04-apps.tex}
+
+
+\cleartooddpage\pagestyle{references}\thispagestyle{references}
+\phantomsection\section*{References}\addcontentsline{toc}{chapter}{References}
+\label{security:references}{\small\printbibliography[heading=none]}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\cleartooddpage\pagestyle{appendix}\thispagestyle{appendix}
+
+\appendix
+\input{zz-A-abbrevs.tex}
+
+\cleartooddpage
+\input{zz-B-proposals.tex}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifbool{boolShowFeedback}{
+	%Insert the table of review comments to be cross-referenced with the introduced changes
+	\input{zzz-00-insert-comments.tex}
+}{}
+
+
+\end{document}

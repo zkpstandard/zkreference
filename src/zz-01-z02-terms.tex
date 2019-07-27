@@ -1,0 +1,65 @@
+\section{Terminology}
+\label{security:terminology}
+
+
+\luissug{Consider defining upfront the symbols for prover (\prov) and verifier (\veri), 
+since the symbols will often be used as subscripts and/or as abbreviated forms.
+\textCR\textCR
+For example: ``A zero-knowledge proof exists in a context of two parties with different roles --- 
+the prover produces the proof; the verifier verifies the proof.
+Notation: \prov{} (prover); \veri{} (verifier).
+Some generalizations consider the existence of several verifiers.''}
+%%%%%
+%%%%%
+{\bfseries \hypertarget{def:instance}{Instance}:} Public input\luissug{Change ``public input'' to ``common input''.
+Rationale: ZK proofs make sense even in a context private to prover-and-verifier, where the input made available to the verifier is not supposed to be disclosed publicly, e.g., to avoid linkability in a broader context;
+while the use of ``public'' may be usual (e.g., present when mentioning ``private|public'' key systems, 
+where ``private'' means ``secret'', and where ``public'' may mean ``private but shareable''), 
+a more cautious use (e.g., ``common'') can be more informative about the actual requirement --- 
+that it be known by both prover and verifier.
+} 
+that is known to both prover and verifier.
+%LB: Consider changing to ``Scientific articles sometimes'' or ``Certain scientific articles use'' or ``Some works use''
+Sometimes scientific articles use “instance” and “statement” interchangeably, but we %will 
+distinguish between the two. 
+Notation: $x$.
+\loosen
+ 
+{\bfseries  \hypertarget{def:witness}{Witness}:} 
+Private input to the prover. Others may or may not know something about the witness. 
+Notation: $w$.
+ 
+{\bfseries \hypertarget{def:relation}{Relation}:}\luissug{Consider organizing the set of definitions in two or three classes: 
+\textCR: a) participants (prover and verifier);
+\textCR: b) elements instantiated in each proof execution (instance, witness, statement, setup);
+\textCR: c) elements defining a proof system (language, relation) that define the proof system;} 
+	Specification of relationship between instances and witness.
+	A relation can be viewed as a set of permissible pairs (instance, witness). 
+Notation: $R$.
+ 
+{\bfseries \hypertarget{def:language}{Language}:} 
+Set of instances that appear as a permissible pair in $R$. 
+Notation: $L$.
+ 
+{\bfseries \hypertarget{def:statement}{Statement}:} 
+Defined by instance and relation. Claims the instance has a witness in the relation (which is either true or false). 
+Notation: $x \in L$.
+
+{\bfseries Security parameter:} 
+Positive integer indicating the desired security level (e.g. 128 or 256) where higher security parameter means greater security.
+In most constructions, distinction is made between computational security parameter and statistical security parameter. 
+Notation: $k$ (computational) or $s$ (statistical).
+ 
+{\bfseries  \hypertarget{def:setup}{Setup}:} Input to e.g. prover and verifier\luissug{Include ``CRS'' as a sub-item of the ``setup''; differentiate private setup from common setup; make a concrete definition, rather than one based on example "e.g.";\textCR\textCR
+Concrete suggestion: "Setup: The inputs given to the prover and to the verifier, independent from the instance x and the witness w. The setup of each party can be decomposed into a private component (``\privsetP'' or ``\privsetV'', respectively not known to the other party) and a common component ``CommonSetup = CRS'' (known by both parties). Notation: \setP\ = (\privsetP, CRS) and : \setV\ = (\privsetV, CRS), where CRS denotes a ``\textbf{common reference string}'' (required by some zero-knowledge proof systems)."
+\textCR\textCR
+Another option could be to define the common setup to include x, and the private setup of P to include w, but that does not seem to be the notation option used in the subsequent sections.
+}
+
+{\bfseries Common reference string:} Some zero-knowledge systems require common public input, e.g., CRS = \setP\ = \setV.\luissug{Comment and suggestion: As is, the text may convey (there is an ``e.g.'' but it's easy to miss it) 
+	that the existence of a CRS implies that the full setup of \prov\ is equal to the full setup of \veri.
+	Suggestion --- explicitly define CRS as the CommonSetup component of the setup, regardless of whether or not there is a PrivateSetup components. Then if useful provide two examples, one where a CRS is enough; another where there is for example a PKI with secret keys.
+	\textCR The text, using ``common public'', also seems to convey that the CRS must be public.
+	Suggestion: remove "public" and require only the ``common'' aspect.
+	FOr example, being public vs. common-but-not-public may make the difference between a ZK proof being transferable or not.}
+

@@ -1,0 +1,22 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction and Motivation}
+\label{apps:intro}
+ 
+In this track we aim to overview existing techniques for building ZKP based systems, including designing the protocols to meet the best-practice security requirements. One can distinguish between high-level and low-level applications, where the former are the protocols designed for specific use-cases and the latter are the underlying operations needed to define a ZK predicate. We call gadgets the sub-circuits used to build the actual constraint system needed for a use-case. In some cases, a gadget can be interpreted as a security requirement (e.g.: using the commitment verification gadget is equivalent to ensuring the privacy of underlying data). 
+
+As we will see, the protocols can be abstracted and generalized to admit several use-cases; similarly, there exist compilers that will generate the necessary gadgets from commonly used programming languages. Creating the constraint systems is a fundamental part of the applications of ZKP, which is the reason why there is a large variety of front-ends available.
+
+In this document, we present three use-cases and a set of useful gadgets to be used within the predicate of each of the three use-cases: identity framework, asset transfer and regulation compliance.\pdfcomment[author={Eran Tromer}]{Missing coverage of recursive composition and Proof-Carrying Data as an important high-level tool (in existing prototypes and emerging real applications).
+There's a couple of brief mentions in the Implementation track, but those don't cover the usefulness in applications.}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{What this document is NOT about:}
+\begin{itemize}
+ \item A unique explanation of how to build ZKP applications
+ \item An exhaustive list of the security requirements needed to build a ZKP system
+ \item A comparison of front-end tools
+ \item A show of preference for some use-cases or others
+\end{itemize}
+

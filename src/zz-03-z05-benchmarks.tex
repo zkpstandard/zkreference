@@ -1,0 +1,123 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Benchmarks}
+\label{implem:benchmarks}
+
+As the variety of zero-knowledge proof systems and the complexity of applications has grown, it has become more and more difficult for users to understand which proof system is the best for their application. Part of the reason is that the tradeoff space is high-dimensional. Another reason is the lack of good, unified benchmarking guidelines. We aim to define benchmarking procedures that both allow fair and unbiased comparisons to prior work and also aim to give enough freedom such that scientists are incentivized to explore the whole tradeoff space and set nuanced benchmarks in new scenarios and thus enable more applications.\\
+The benchmark standardisation is meant to document best practices, not hard requirements. They are especially recommended for new general-purpose proof systems as well as implementations of existing schemes. Additionally the long-term goal is to enable independent benchmarking on standardized hardware.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{What metrics and components to measure}
+
+We recommend that as the primary metrics the \textbf{running time (single-threaded)} and the \textbf{communication complexity} (proof size, in the case of non-interactive proof systems) of all components should be measured and reported for any benchmark. The measured components should at least include the \textbf{prover} and the \textbf{verifier}. If the setup is significant then this should also be measured, further system components like parameter loading and number of rounds (for interactive proof systems) are suggested.
+
+The following metrics are additionally suggested:
+\begin{itemize}[label={- }]
+\item Parallelizability
+\item Batching
+\item Memory consumption (either as a precise measurement or as an upper bound)
+\item Operation counts (e.g. number of field operations, multi-exponentiations, FFTs and their sizes)
+\item Disk usage/Storage requirement
+\item Crossover point: point where verifying is faster than running the computation
+\item Largest instance that can be handled on a given system
+\item Witness generation (this depends on the higher-level compiler and application)
+\item Tradeoffs between any of the metrics.
+\end{itemize}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{How to run the benchmarks}
+Benchmarks can be both of analytical and computational nature. Depending on the system either may be more appropriate or they can supplement each other. An analytical benchmark consists of asymptotic analysis as well as concrete formulas for certain metrics (e.g. the proof size). Ideally analytical benchmarks are parameterized by a security level or otherwise they should report the security level for which the benchmark is done, along with the assumptions that are being used.
+
+Computational benchmarks should be run on a consistent and commercially available machine. The use of cloud providers is encouraged, as this allows for cheap reproducibility. The machine specification should be reported along with additional restrictions that are put on it (e.g. throttling, number of threads, memory supplied). Benchmarking machines should generally fall into one of the following categories and the machine description should indicate the category. If the software implementation makes certain architectural assumptions (such as use of special hardware instructions) then this should be clearly indicated.
+
+\begin{itemize}[label={- }]
+    \item Battery powered mobile devices
+    \item Personal computers such as laptops
+    \item Server style machines with many cores and large memories
+    \item Server clusters using multiple machines 
+    \item Custom hardware (should not be used to compare to software implementations)
+\end{itemize}
+
+
+We recommend that most runs are executed on a single-threaded machine, with parallelizability being an optional metric to measure. The benchmarks should be run at approximately \textbf{120}-bit security or larger. The conjectured security level, and whether it is in a post-quantum or classical setting, should be clearly stated.
+
+In order to enable better comparisons we recommend that the metrics of other proof systems\slash implementations are also run on the same machine and reported. The onus is on the library developer to provide a simple way to run any instance on which a benchmark is reported.   This will additionally aid the reproducibility of results. Links to implementations will be gathered at zkp.science and library developers are encouraged to ensure that their library is properly referenced. Further we encourage scientific publishing venues to require the submission of source code if an implementation is reported. Ideally these venues even test the reproducibility and indicate whether results could be reproduced.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{What benchmarks to run}
+We propose a set of benchmarks that is informed by current applications of zero-knowledge proofs, as well as by differences in proving systems. This list in no way complete and should be amended and updated as new applications emerge and new systems with novel properties are developed. Zero-knowledge proof systems can be used in a black-box manner on an existing application, but often designing the application with a proof system in mind can yield large efficiency gains. To cover both scenarios we suggest a set of benchmarks that include commonly used primitives (e.g. SHA-256) and one where only the functionality is specified but not the primitives (e.g. a collision-resistant hash function at 120-bit classical security). 
+
+
+\paragraph{Commonly used primitives.}
+
+Here we list a set of primitives that both serve as microbenchmarks and are of separate interest. Library developers are free to choose how their library runs a given primitive, but we will aid the process by providing circuit descriptions in commonly used file formats (e.g. R1CS). 
+
+Recommended
+\begin{itemize}[label={- }]
+    \item SHA-256
+    \item AES
+    \item A simple vector or matrix product at different sizes
+\end{itemize}
+Further suggestions
+\begin{itemize}[label={- }]
+    \item Zcash Sapling “spend” relation
+    \item RC4 (for RAM memory access)
+    \item Scrypt
+    \item TinyRAM running for n steps with memory size s 
+    \item Number theoretic transform (coefficients to points)
+		\begin{itemize}[label={- }]
+        \item Small fields 
+        \item Big fields
+        \item Pattern matching
+		\end{itemize}
+\end{itemize}
+
+
+Repetition
+
+The above relations, parallelized by putting $n$ copies in parallel.
+
+
+
+\paragraph{Functionalities.}
+
+The following are examples of cryptographic functionalities that are especially interesting to application developers. The realization of the primitive may be secondary, as long as it achieves the security properties. It is helpful to provide benchmarks for a constraint-system implementation of a realization of these primitives that is tailored for the NIZK backend.
+
+In all of the following, the primitive should be given at a level of 120 bits or higher and match the security of the NIZK proof system.
+\begin{itemize}
+    \item Asymmetric cryptography
+				\begin{itemize}[label={- }]
+        \item Signature verification
+        \item Public key encryption
+        \item Diffie Hellman key exchange over any group with 128 bit security
+				\end{itemize}
+    \item Symmetric \& Hash
+				\begin{itemize}[label={- }]
+        \item Collision-resistant hash function on a 1024-byte message
+        \item Set membership in a set of size $2^{20}$ (e.g., using Merkle authentication tree)
+        \item MAC
+        \item AEAD
+				\end{itemize}
+    \item The scheme’s own verification circuit, with matching parameters, for recursive composition (Proof-Carrying Data)
+    \item Range proofs [Freely chosen commitment scheme]
+				\begin{itemize}[label={- }]
+        \item Proof that number is in $[0, 2^{64})$ 
+        \item Proof that number is positive
+				\end{itemize}
+    \item Proof of permutation (proving that two committed lists contain the same elements)
+\end{itemize}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Security}
+When benchmarking it is important to compare the claimed and achieved security of different proof systems. To aid this benchmarks should make it clear which security level (Definition see theory track\luissug{Revise ``Security'' vs. ``Theory''?} document) is being used. 
+In particular the benchmark should clearly state under which assumptions the claimed security is achieved. 
+If the security is conjectured then benchmarks should display both the conjectured as well as the proven performance. 
+Benchmarks should be run with at least 120-bit security. 
+If the proof system claims to be quantum-resistant it should be clearly stated whether the benchmarks are in the classical or quantum setting. 
+Further if the quantum setting is benchmarked, the benchmarked primitives should be adjusted as well.

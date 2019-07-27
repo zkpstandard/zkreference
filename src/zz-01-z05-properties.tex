@@ -1,0 +1,187 @@
+\section{Definition and Properties}
+\label{security:defs-props}
+ 
+A proof system (Setup, Prove, Verify) for a relation R must be complete and sound.
+It may have additional desirable security properties such as being a proof of knowledge or being zero knowledge.\loosen
+ 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Completeness}
+\label{sec:security:defs-props:completeness}
+
+Intuitively, a proof system is complete if an honest prover with a valid witness $w$ for a statement $x \in L$ can convince an honest verifier that the statement is true. 
+A full specification of a proof system \textbf{must} include a precise definition of completeness that captures this intuition. 
+We give an example of a definition below for a proof system where the prover initiates.
+ 
+Consider a completeness attacker \textbf{Adversary} in the following experiment.
+
+\begin{enumerate}
+    \item Run \textbf{Setup}(\params) $\rightarrow (\setR, \setP, \setV, aux)$
+    \item Let the adversary choose a worst case instance and witness:\\
+					\textbf{Adversary}$(\params, \setR, \setP, \setV, aux) \rightarrow (x,w)$
+    \item Run the interaction between Prove and Verify until the prover returns {\tt error} or the verifier accepts or rejects. 
+		Let $result$ be the outcome, with the convention that $result = \tt error$ if the protocol does not terminate.
+		\brkttext{\textbf{Prove}$(\setP, x, w, \tt start)$ ; \textbf{Verify}$(\setV, x)$} $\rightarrow result$
+\end{enumerate}
+
+
+\begin{bulletize}
+    \item \textbf{Adversary} wins if $(\setR, x, w) \in R$ and result is not {\tt accept}.
+\end{bulletize}
+ 
+We define the adversary’s advantage as a function of parameters to be
+              	Advantage(\params) = Pr[\textbf{Adversary} wins]
+ 
+A proof system for $R$ running on parameters is complete if nobody ever constructs an efficient adversary with significant advantage.
+ 
+It depends on the application what is an efficient adversary (computing equipment, running time, memory consumption, usage lifetime, incentives, etc.) and how large an advantage can be tolerated. 
+Special strong cases include statistical completeness (aka unconditional completeness) where the winning probability is small for any adversary, and perfect completeness, where for any adversary the advantage is exactly 0.
+ 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Soundness}
+\label{sec:security:defs-props:soundness}
+
+Intuitively, a proof system is sound if a cheating prover has little or no chance of convincing an honest verifier that a false statement is true. 
+A full specification of a proof system must include a precise definition of soundness that captures this intuition. 
+We give an example of a definition below.
+\loosen
+ 
+Consider a soundness attacker \textbf{Adversary} in the following experiment.
+
+\begin{enumerate}
+    \item Run \textbf{Setup}(\params) $\rightarrow (\setR, \setP, \setV, aux)$
+    \item Let the (stateful) adversary choose an instance\\
+					\textbf{Adversary}$(\params, \setR, \setP, \setV, aux) \rightarrow x$
+    \item Let the adversary interact with the verifier and $result$ be the verifier’s output 	
+					(letting $result = \tt reject$ if the protocol does not terminate).
+\brkttext{\textbf{Adversary} ; \textbf{Verify}$(\setV, x)$} $\rightarrow result$
+\end{enumerate}
+
+    \begin{bulletize}
+		\item \textbf{Adversary} wins if $(\setR, x) \notin L$ and result is {\tt accept}.
+		\end{bulletize}
+ 
+We define the adversary’s advantage as a function of parameters to be \newline
+\hphantom{We define the } Advantage(\params) = \text{Pr}[\textbf{Adversary} wins]
+ 
+A proof system for $R$ running on parameters is sound if nobody ever constructs an efficient adversary with significant advantage.
+ 
+It depends on the application what is considered an efficient adversary (computing equipment, running time, memory consumption, usage lifetime, etc.) and how large an advantage can be tolerated. 
+Special strong notions of soundness includes statistical soundness (aka unconditional soundness) where any adversary has small chance of winning, and perfect soundness, where for any adversary the advantage is exactly 0.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Proof of knowledge}
+\label{sec:security:defs-props:proof-of-knowledge}
+
+ Intuitively, a proof system is a proof of knowledge if it is not just sound, but that the ability to convince an honest verifier implies that the prover must “know” a witness. 
+To “know” a witness can be defined as it being possible to extract a witness from a successful prover. 
+If a proof system is claimed to be a proof of knowledge, then the full specification \textbf{must} include a precise definition of knowledge soundness that captures this intuition, but we do not define proofs of knowledge here.\luissug{Consider explaining better the meaning of ZKPoK, and presenting the definition / game for extractability. It's unclear why the document makes the option to not proceed with this discussion.}\revblock[rev:pok:describe]{\ref{it:pok:describe}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Zero knowledge}
+\label{sec:security:defs-props:zero-knowledge}
+
+Intuitively, a proof system is zero knowledge if it does not leak any information about the prover’s witness beyond what the attacker may already know about the witness from other sources. Zero knowledge is defined through the specification of an efficient simulator that can generate kosher looking proofs without access to the witness. 
+If a proof system is claimed to be zero knowledge, then the full specification MUST include a precise definition of zero knowledge that captures this intuition. 
+We give an example of a definition below.
+ 
+A proof system is zero knowledge if the designers provide additional efficient algorithms \textbf{SimSetup}, \textbf{SimProve} such that realistic attackers have small advantage in the game below. 
+Let \textbf{Adversary} be an attacker in the following experiment:
+
+\newcounter{cntStepZKgame}\setcounter{cntStepZKgame}{0}
+\newcommand{\newStepZKgame}{\refstepcounter{cntStepZKgame}\item[\arabic{cntStepZKgame}.]}
+
+\begin{enumerate}
+    \newStepZKgame\label{step:ZKgame:rand-bit} Choose a bit uniformly at random {0,1} $\rightarrow$ b
+    \newStepZKgame\label{step:ZKgame:setup-if-0} If $b = 0$ run \textbf{Setup}(\params) $\rightarrow (\setR, \setP, \setV, aux)$
+    \newStepZKgame\label{step:ZKgame:setup-if-1} Else if $b = 1$ run \textbf{SimSetup}(\params) $\rightarrow (\setR, \setP, \setV, aux, trapdoor)$
+    \newStepZKgame\label{step:ZKgame:adv-choose-inst-and-witn} Let the (stateful) adversary choose an instance and witness\\
+					\textbf{Adversary}$(\params, \setR, \setP, \setV, aux) \rightarrow (x,w)$
+    \newStepZKgame\label{step:ZKgame:not-in-R} If $(\setR, x, w) \notin R$ return $guess = 0$
+    \newStepZKgame\label{step:ZKgame:interact-if-0} If $b = 0$ let the adversary interact with the prover and output a guess (letting $guess = 0$ if the protocol does not terminate).
+\brkttext{\textbf{Prove}$(\setP, x, w)$ ; \textbf{Adversary}} $\rightarrow guess$
+    \newStepZKgame\label{step:ZKgame:interact-if-1} Else if $b = 1$ let the adversary interact with a simulated prover and output a guess (letting $guess = 0$ if the protocol does not terminate)\\
+					\brkttext{\textbf{SimProve}$(\setP, x, trapdoor)$ ; \textbf{Adversary}} $\rightarrow guess$
+\end{enumerate}
+ 
+\begin{bulletize}
+    \item \textbf{Adversary} wins if $guess = b$
+\end{bulletize}
+ 
+We define the adversary’s advantage as a function of parameters to be \newline
+\hphantom{We define the } Advantage(parameters) = | \text{Pr}[\textbf{Adversary} wins] - $1/2$ |
+ 
+A proof system for $R$ running on parameters is zero knowledge if nobody ever constructs an efficient adversary with significant advantage.
+ 
+It depends on the application what is considered an efficient adversary (computing equipment, running time, memory consumption, usage lifetime, etc.) and how large an advantage can be tolerated. 
+Special strong notions include statistical zero knowledge (aka unconditional zero knowledge) where any adversary has small advantage, and perfect zero knowledge, where for any adversary the advantage is exactly 0.
+
+\luissug{Consider adding the following remark / special case: 
+``The ZK property of a proof does not depend on whether or not the verifier knows something about the witness being proven.
+	However, certain proofs may be designed for the specific case where the verifier 
+also knows the witness (or a valid witness), and where such knowledge enables an 
+efficient production of a proof (via some interaction), and/or an efficient verification.%
+	%May be interesting to provide a concrete example. To-do: check that all the notation is consistent even with this type of case.
+''}
+
+
+\underline{multi-theorem zero knowledge.} 
+In the zero-knowledge definition, the adversary interacts with the prover or simulator on a single instance. 
+It is possible to strengthen the zero-knowledge definition to guard also against an adversary that sees proofs for multiple instances.
+ 
+\underline{Honest verifier zero knowledge.} 
+	A weaker privacy notion is honest verifier zero-knowledge, where we assume the adversary follows the protocol honestly 
+(i.e., in steps \ref{step:ZKgame:interact-if-0} and \ref{step:ZKgame:interact-if-1} in the definition it runs the verification algorithm). 
+	It is a common design technique to first construct an HVZK proof system, and then use efficient standard transformations to get a proof system with full zero knowledge.
+ 
+\underline{Witness indistinguishability and witness hiding.} 
+Sometimes a weaker notion of privacy than zero knowledge suffices. 
+Witness-indistinguishable proof systems make it infeasible for an adversary to distinguish which out of several possible witnesses the prover has. Witness-hiding proof systems ensure the interaction with an honest prover does not help the adversary to compute a witness.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Advanced security properties}
+\label{sec:security:defs-props:advanced-security-properties}
+
+The literature describes many advanced security notions a proof system may have.
+These include security under concurrent composition and nonmalleability to guard against man-in-the-middle attacks, security against reset attacks in settings where the adversary has physical access, simulation soundness and simulation extractability to assist sophisticated security proofs, and universal composability.
+ 
+\underline{Universal composability.} The UC framework defines a protocol to be secure if it realizes an ideal functionality in an arbitrary environment. We can think of an ideal zero-knowledge functionality as taking an input $(x,w)$ from the prover and if and only if $(x,w) \in R$ it sends the message$ (x, \tt accept)$ to the verifier. The ideal functionality is perfectly sound, since no statement without valid witness will be accepted, and perfectly zero knowledge, since the proof is just the message accept. A proof system is then UC secure, if the real life execution of the system is `security-equivalent’ to the execution of the ideal proof system functionality. Usually it takes more work to demonstrate a proof system is UC secure, but on the other hand the framework offers strong security guarantees when the proof system is composed with other cryptographic protocols.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Examples of setup and trust}
+\label{sec:security:defs-props:examples-of-setup-and-trust}
+
+The security definitions assume a trusted setup. There are several variations of what the setup looks like and the level of trust placed in it.
+
+\begin{bulletize}
+	\item \underline{No setup or trustless setup.}
+	This is when no trust is required, for instance because the setup is just a copy of a security parameter $k$, or because everybody can verify the setup is correct directly.
+    
+	\item \underline{Uniform random string.}
+	All parties have access to a uniform random string URS = \setR = \setP = \setV. 
+	We can distinguish between the lighter trust case where the parties just need to get a uniformly sampled string, which they may for instance get from a trusted common source of randomness e.g. sunspot activity, and the stronger trust case where zero-knowledge relies on the ability to simulate the URS generation together with a simulation trapdoor.
+
+  \item \underline{Common reference string.}
+	The URS model is a special case of the CRS model. 
+	But in the CRS model it is also possible that the common setup is sampled with a non-uniform distribution, which may exclude easy access to a trusted common source. 
+	A distinction can be made whether the CRS has a verifiable structure, i.e., it is easy to verify it is well-formed, or whether full trust is required.
+    
+	\item \underline{Designated verifier setup.}
+	If we have a setup that generates correlated \setP\ and \setV, where \setV\ is intended only for a designated verifier, we also need to place trust in the setup algorithm. 
+	This is for instance the case in Cramer-Shoup public-key encryption where a designated verifier NIZK proof is used to provide security under chosen-ciphertext attack. 
+	Here the setup is generated as part of the key generation process, and the recipient can be trusted to do this honestly because it is the recipient’s own interest to make the encryption scheme secure.
+    
+	\item \underline{Random oracle model.}
+	The common setup describes a cryptographic hash function, e.g. SHA256. 
+	In the random oracle model, the hash function is heuristically assumed to act like a random oracle that returns a random value whenever it is queried on an input not seen before. 
+	There are theoretical examples where the random oracle model fails, exploiting the fact that in real life the hash function is a deterministic function, but in practice the heuristic gives good efficiency and currently no weaknesses are known for ‘natural’ proof systems.
+    
+	\item There are several proposals to reduce the trust in the setup such as using secure multi-party computation to generate a CRS, using a multi-string model where there are many CRSs and security only relies on a majority being honestly generated, and subversion resistant CRS where zero-knowledge holds even against a maliciously generated CRS.
+\end{bulletize}
+

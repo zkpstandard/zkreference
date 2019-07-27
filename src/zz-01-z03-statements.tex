@@ -1,0 +1,61 @@
+\section{Specifying Statements for ZK}
+\label{security:spec-statements-ZK}
+
+ 
+	This document considers types of statements defined by a relation $R$ between instances $x$ and witnesses $w$.
+	The relation $R$ specifies which pairs $(x,w)$ are considered related to each other, and which are not related to each other.
+	The relation defines a matching language $L$ consisting of instances $x$ that have a witness $w$ in $R$.
+	A statement is a claim $x \in L$, which can be true or false.
+ 
+	The relation $R$ can for instance be specified as a program (e.g. in C or Java), which given inputs $x$ and $w$ decides to accept, meaning $(x,w) \in R$, or reject, meaning $w$ is not a witness to $x \in L$. 
+	Examples of such specifications of the relation are detailed in the \hyperref[chap:apps]{Applications track}.
+	In the academic literature, relations are often specified either as 
+random access memory\luised{Introduced the extended expression of the acronym} (RAM)
+programs or through %boolean 
+Boolean
+and arithmetic circuits, which we describe below.
+
+
+\textbf{Circuits:} A circuit is a directed acyclic graph (DAG) comprised of nodes and labels for nodes, which satisfy the following constraints:
+\begin{itemize}
+\item Nodes with in-degree 0 are referred to as the \textbf{input nodes}\luissug{Consider adjusting all items to become of the form \textbf{<new term>}: <description>.} and are labeled with some constant (e.g., $0, 1, \ldots$) or with input variable names (e.g., $v_1, v_2, \ldots$)
+\item There is a single node with out-degree 0 that is referred to as the \textbf{output node}.
+\item Internal nodes\luised{``will be'' --> ``are'', consistent with the text in the first bullet} %will be 
+are 
+referred to as \textbf{gate nodes} and %will 
+describe a computation %to be 
+performed at the node.\loosen
+\end{itemize}
+
+
+%%%LB: Consider moving the `parametes' up, because it defines n_x and n_w, which are used in the subsequent bullets
+\underline{Parameters.} Depending on the application, various parameters may be important, for instance the number of gates in the circuit, the number of instance variables $n_x$, the number of witness variables $n_w$, the circuit depth, or the circuit width.
+ 
+\underline{Boolean Circuit satisfiability.} 
+	The relation $R$ has instances of the form $x = (C, v_1, \ldots, v_{n_x})$ and witnesses $w = (w_1,...,w_{n_w})$. 
+	For $(x,w)$ to be in the relation, $C$ must be a circuit with fan-in 2 gate nodes 
+that are labeled with Boolean operations, e.g., \XOR\ or \AND, $v_1,...,v_{n_x}$ must specify 
+truth values for some of the input nodes, and $w_1,...,w_{n_w}$ must specify 
+truth values for the remaining input variables, such that when evaluating the circuit the output node becomes 1 (true).
+ 
+\underline{Arithmetic Circuit satisfiability.} 
+	The relation has instances of the form $x = (F, C, v_1,...,v_{n_x})$ and witnesses $w = (w_1,...,w_{n_w})$.
+	For $(x,w)$ to be in the relation, $F$ must be a finite field (e.g., integers modulo a prime $p$), $C$ must be a circuit with gate nodes that are labeled with field operations, i.e., addition or multiplication, $v_1,...,v_{n_x}$ must specify field elements for some of the input nodes, and $w_1,...,w_{n_w}$ must specify field elements for the remaining input variables, such that when evaluating the circuit the output node becomes 1.
+ 
+
+ 
+\textbf{Special purpose relations:} Circuit satisfiability is 
+a complete problem within the non-deterministic polynomial\luised{introduced the extended form of NP} (NP) class,
+i.e., it it NP-complete,
+but a relation does not have to be that. 
+	Examples of statements that appear in cryptographic usage include that a committed value falls in a certain range $[A;B]$ or belongs to a set $S$, that a ciphertext has plaintext 0 or that two ciphertexts encrypt the same value, that the prover has a secret key associated with a set of public verification keys for a signature scheme, etc.
+ 
+\textbf{Setup-dependent relations:} 
+Sometimes it is convenient to let the relation $R$ take an additional input setup$_R$, i.e., let the relation contain triples $(\textmd{setup}_R, x, w)$. 
+	The input setup$_R$ can be used to specify persistent information, e.g., 
+for arithmetic circuit satisfiability maybe the same finite field and circuit is used many times, 
+so we let $\textmd{setup}_R = (F, C)$ and $x = (v_1,...,v_{n_x})$.
+	The input setup$_R$ can also be used to capture trusted input the relation does not check, 
+e.g., a trusted Rivest--Shamir--Adleman\luised{Introduced the extended form of the acronym.} (RSA)
+modulus.
+

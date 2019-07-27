@@ -1,0 +1,117 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Regulation Compliance}
+\label{apps:regulation-compliance}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Overview}
+\label{apps:regulation-compliance:overview}
+
+An important pattern of applications in which zero-knowledge protocols are useful is within settings in which a regulator wishes to monitor, or assess the risk related to some item managed by a regulated party. One such example can be whether or not taxes are being paid correctly by an account holder, or is a bank or some other financial entity solvent, or even stable. 
+
+The regulator in such cases is interested in learning “the bottom line”, which is typically derived from some aggregate measure on more detailed underlying data, but does not necessarily need to know all the details. For example, the answer to the question of “did the bank take on too many loans?” Is eventually answered by a single bit (Yes/No) and can be answered without detailing every single loan provided by the bank and revealing recipients, their income, and other related data. 
+
+Additional examples of such scenarios include: 
+\begin{itemize}
+    \item[--] Checking that taxes have been properly paid by some company or person.
+    \item[--] Checking that a given loan is not too risky.
+    \item[--] Checking that data is retained by some record keeper (without revealing or transmitting the data)
+    \item[--] Checking that an airplane has been properly maintained and is fit to fly 
+\end{itemize}
+
+The use of Zero knowledge proofs can then allow the generation of a proof that demonstrate the correctness of the aggregate result. The idea is to show something like the following statement: There is a commitment (possibly on a blockchain) to records that show that the result is correct. 
+
+\textbf{Trusting data fed into the computation: }
+In order for a computation on hidden data to prove valuable, the data that is fed in must be grounded as well. Otherwise, proving the correctness of the computation would be meaningless. To make this point concrete: A credit score that was computed from some hidden data can be correctly computed from some financial records, but when these records are not exposed to the recipient of the proof, how can the recipient trust that they are not fabricated? 
+
+Data that is used for proofs should then generally be committed to by parties that are separate from the prover, and that are not likely to be colluding with the prover. To continue our example from before: an individual can prove that she has a high credit score based on data commitments that were produced by her previous lenders (one might wonder if we can indeed trust previous lenders to accurately report in this manner, but this is in fact an assumption implicitly made in traditional credit scoring as well).   
+
+The need to accumulate commitments regarding the operation and management of the processes that are later audited using zero-knowledge often fits well together with blockchain systems, in which commitments can be placed in an irreversible manner. Since commitments are hiding, such publicly shared data does not breach privacy, but can be used to anchor trust in the veracity of the data. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{An example in depth: Proof of compliance for aircraft}
+\label{apps:regulation-compliance:example-compliance-aircraft}
+
+An operator is flying an aircraft, and holds a log of maintenance operations on the aircraft.  These records are on different parts that might be produced by different companies.
+Maintenance and flight records are attested to by engineers at various locations around the world (who we assume do not collude with the operator). \newline
+The regulator wants to know that the aircraft is allowed to fly according to a certain set of rules.
+(Think of the Volkswagen emissions cheating story.)
+
+The problem: Today, the regulator looks at the records (or has an auditor do so) only once in a while. We would like to move to a system where compliance is enforced in “real time”, however, this reveals the real-time operation of the aircraft if done naively.
+
+Why is zero-knowledge needed? We would like to prove that regulation is upheld, without revealing the underlying operational data of the aircraft which is sensitive business operations. 
+Regulators themselves prefer not to hold the data (liability and risk from loss of records), prefer to have companies self-regulate to the extent possible. 
+
+What is the threat model beyond the engineers/operator not colluding?  What about the parts manufacturers?  Regulators?  Is there an antagonistic relationship between the parts manufacturers?
+
+This scheme will work on regulation that isn't vague, such as aviation regulation. In some cases, the rules are vague on purpose and leave room for interpretation.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Protocol high level}
+\label{apps:regulation-compliance:protocol-high-level}
+
+\textbf{Parties:} 
+\begin{itemize}
+    \item Operator / Party under regulation: performs operations that need to comply to a regulation. For example an airline operator that operates aircrafts
+    \item Risk bearer / Regulator : verifies that all regulated parties conform to the rules; updates the rules when risks evolve. For example, the FAA regulates and enforces that all aircrafts to be airworthy at all times. For an aircraft owner leasing their assets, they want to know that operation and maintenance does not degrade their asset. Same for a bank that financed an aircraft, where the aircraft is the collateral for the financing.  
+    \item Issuer / 3rd party attesting to data: Technicians having examined parts, flight controllers attesting to plane arriving at various locations, embarked equipment providing signed readings of sensors.
+\end{itemize}
+
+\textbf{What is being proved:}
+\begin{itemize}
+    \item The operator proves to the regulator that the latest maintenance data indicates the aircraft is airworthy
+    \item The operator proves to the bank that the aircraft maintenance status means it is worth a given value, according to a formula provided by that bank
+\end{itemize}
+
+\textbf{What are the privacy requirements?}
+\begin{itemize}
+    \item An operator does not want to reveal the details of his operations and assets maintenance status to competition
+    \item The aircraft identity must be kept anonymous from all parties except the regulators and the technicians.
+    \item The technician’s identity must be kept anonymous from the regulator but if needed the operator can be asked to open the commitments for the regulator to validate the reports
+\end{itemize}
+ 
+\textbf{The proof predicate:} “The operator is the owner of the aircraft, and knows some signed data attesting to the compliance with regulation rules: all the components are safe to fly”. 
+	\begin{itemize}
+     \item The plane is made up of the components $x_1, \ldots, x_n$ and for each of the components: 
+				\begin{itemize}
+            \item There is an legitimate attestation by an engineer who checked the component, and signed it's OK
+            \item The latest attestation by a technician is recent: the timestamp of the check was done before date $D$
+				\end{itemize}
+	\end{itemize}
+
+
+\textbf{What is the public / private data:}
+    \begin{itemize}
+		\item Private:
+        \begin{itemize}
+				\item Identity of the operator
+        \item Airplane record
+        \item Examination report of the technicians
+        \item Identity of the technician who signed the report
+				\end{itemize}
+    \item Public:
+        \begin{itemize}
+				\item Commitment to airplane record
+				\item 
+				\end{itemize}
+		\end{itemize}
+
+There is a record for the airplane that is committed to a public ledger, which includes miles flown. \newline
+There are records that attest to repairs / inspections by mechanics that are also committed to the ledger. The decommitment is communicated to the operator. These records reference the identifier of the plane.
+
+Whenever the plane flies, the old plane record needs to be invalidated, and a new on committed with extra mileage.  \newline
+When a proof of “airworthiness” is required, the operator proves that for each part, the mileage is below what requires replacement, or that an engineer replaced the part (pointing to a record committed by a technician).
+
+\textbf{At the gadget level: }
+\begin{itemize}
+    \item The prover proves knowledge of a de-commitment of an airplane record (decommitment) 
+    \item The record is in the set of records on the blockchain (set membership)
+    \item and knowledge of de-commitments for records for the parts (decommitment) that are also in the set of commitments on the ledger (set membership)
+    \item The airplane record is not revoked (i.e., it is the most recent one), (requires set non-membership for the set of published nullifiers)
+    \item The id of the plane noted in the parts is the same as the id of the plane in the plane record.  (equality) 
+    \item The mileage of the plane is lower than the mileage needed to replace each part (range proofs) OTHERWISE 
+    \item There exists a record (set membership)that says  that the part was replaced by a technician (validate signature of the technician (maybe use ring signature outside of ZK?))
+		\end{itemize}

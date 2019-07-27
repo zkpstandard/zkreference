@@ -1,0 +1,73 @@
+\section{Efficiency}
+\label{security:Efficiency}
+ 
+A specification of a proof system may include claims about efficiency and if it does the units of measurement MUST be clearly stated. Relevant metrics may include:
+
+\begin{bulletize}
+    \item \textbf{Round complexity:} Number of transmissions between prover and verifier. Usually measured in the number of moves, where a move is a message from one party to the other.
+An important special case is that of 1-move proof systems, aka non-interactive proof systems, where the verifier receives a proof from the prover and directly decides whether to accept or not. Non-interactive proofs may be transferable, i.e., they can be copied, forwarded and used to convince several verifiers.
+    \item \textbf{Communication:} Total size of communication between prover and verifier. Usually measured in bits.
+    \item \textbf{Prover computation:} Computational effort the prover expends over the duration of the protocol. Sometimes measured as a count of the dominant cryptographic operations (to avoid system dependence) and sometimes measured in seconds on a particular system (when making concrete measurements).
+    \item Depending on the intended usage, many other metrics may be important: memory consumption, energy consumption, entropy consumption, potential for parallelisation to reduce time, and offline/online computation trade-offs.
+    \item \textbf{Verifier computation:} Computational effort the verifier expends over the duration of the protocol.
+    \item Setup \textbf{cost:} Size of setup parameters, e.g. a common reference string, and computational cost of creating the setup.
+\end{bulletize} 
+
+Readers of a proof system specification may differ in the granularity they need in the efficiency measurements. Take as an example a proof system consisting of an information theoretic core that is then compiled with cryptographic primitives to yield the full system. An implementer will likely want to have a detailed performance analysis of the information theoretic core as well as the cryptographic compilation, since this will guide her choice of trade-offs and optimizations. A consumer on the other hand will likely want to have a high-level performance analysis and an apples-to-apples comparison to competing proof systems. We therefore recommend to provide both a detailed analysis that quantifies all the dominant efficiency costs, and a bottom-line analysis that summarizes performance for reasonable choices of parameters and identifies the optimal performance region.
+\loosen
+
+
+
+\paragraph{List of references:}\pdfbookmark[1]{List of references}{pdfbkm:security:list-refs}
+\cite{2013:tcc:snargs-via-LIPs},
+\cite{2016:tcc:IOPs},
+\cite{2017:eurocrypt:lattice-based-snargs},
+\cite{2016:eurocrypt:efficient-zk-args-for-arithmetic},
+\cite{2017:asiacrypt:linear-time-zkps-for-arithmetic},
+\cite{2018:asiacrypt:arya-nearly-lineat-time-zkps-for-correct},
+\cite{1998:crypto:zkps-for-finite-field-arithmetic},
+\cite{2013:QSPs-and-succinct-NIZKs-without-PCPs},
+\cite{2015:JACM:delegating-computation-interactive-proofs-for-muggles},
+\cite{2010:asiacrypt:short-NIZKPs},
+\cite{2018:SP:Doubly-efficient-zkSNARKs-without-trusted-setup},
+\cite{2007:stoc:ZK-from-SMPC},
+\cite{2012:tcc:On-Efficient-ZK-PCPs},
+\cite{1995:crypto:Improved-Efficient-Arguments},
+\cite{2008:icalp:interactive-PCP},
+\cite{2017:ccs:ligero},
+\cite{2000:SIAM:Computationally-Sound-Proofs},
+\cite{2016:stoc:Constant-round-Interactive-Proofs-for-Delegating-Computation},
+\cite{2018:SP:vRAM},
+\cite{2017:SP:vSQL},
+\cite{2016:Sec:ZKBoo}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\section{References:}
+%\label{security:references}
+
+%%%%%	\begin{itemize}
+%%%%%    \item{} [BCIOP] Bitansky, N., Chiesa, A., Ishai, Y., Ostrovsky, R. \& Paneth, O. "Succinct non-interactive arguments via linear interactive proofs." TCC (2013).
+%%%%%    \item{} [BCS16] Ben-Sasson, E., Chiesa, A., \& Spooner, N. "Interactive oracle proofs." TCC (2016).
+%%%%%    \item{} [BISW17] Boneh, D., Ishai, Y., Sahai, A., \& Wu, D. J. “Lattice-based snargs and their application to more efficient obfuscation.” Eurocrypt (2017).
+%%%%%    \item{} [Bootle16] Bootle, J., Cerulli, A., Chaidos, P., Groth, J., \& Petit, C. “Efficient zero-knowledge arguments for arithmetic circuits in the discrete log setting.” Eurocrypt (2016).
+%%%%%    \item{} [Bootle17] Bootle, J., Cerulli, A., Ghadafi, E., Groth, J., Hajiabadi, M., \& Jakobsen, S. K. “Linear-time zero-knowledge proofs for arithmetic circuit satisfiability.” Asiacrypt (2017).
+%%%%%    \item{} [Bootle18] Bootle, J., Cerulli, A., Groth, J., Jakobsen, S., \& Maller, M. “Nearly Linear-Time Zero-Knowledge Proofs for Correct Program Execution” ePrint 2018/380 (2018).
+%%%%%    \item{} [Cramer-Damgård] Cramer, R., \& Damgård, I. “Zero-knowledge proofs for finite field arithmetic, or: Can zero-knowledge be for free?.” CRYPTO (1998).
+%%%%%    \item{} [GGPR] Gennaro, R., Gentry, C., Parno, B., \& Raykova, M. “Quadratic span programs and succinct NIZKs without PCPs.” Eurocrypt (2013).
+%%%%%    \item{} [GKW] Goldwasser, S., Kalai, Y. T., \& Rothblum, G. N. “Delegating computation: interactive proofs for muggles.” STOC (2008).
+%%%%%    \item{} [Groth10] Groth, J.”Short Non-interactive Zero-Knowledge Proofs.” ASIACRYPT (2010)
+%%%%%    \item{} [Hyrax] Wahby, R. S., Tzialla, I., Thaler, J., \& Walfish, M. “Doubly-efficient zkSNARKs without trusted setup.” IEEE Security and Privacy (2018).
+%%%%%    \item{} [IKOS] Ishai, Y., Kushilevitz, E., Ostrovsky, R., \& Sahai, A. “Zero-knowledge from secure multiparty computation.” STOC (2007).
+%%%%%    \item{} [IMS] Ishai, Y., Mahmoody, M., \& Sahai, A. “On Efficient Zero-Knowledge PCPs.” TCC (2012)
+%%%%%    \item{} [Kilian] Kilian, J. “Improved efficient arguments.” CRYPTO (1995).
+%%%%%    \item{} [KR08] Kalai, Y. T., \& Raz, R. “Interactive PCP.” ICALP (2008).
+%%%%%    \item{} [Ligero] Ames, S., Hazay, C., Ishai, Y., \& Venkitasubramaniam, M. “Ligero: Lightweight sublinear arguments without a trusted setup.” CCS (2017).
+%%%%%    \item{} [Micali] Micali, S. "Computationally sound proofs." SIAM Journal on Computing (2000).
+%%%%%    \item{} [RRR] Reingold, O., Rothblum, G. N., \& Rothblum, R. D. “Constant-round interactive proofs for delegating computation.” STOC (2016).
+%%%%%    \item{} [vRAM] Zhang, Y., Katz, J., Papadopoulos, D., \& Papamanthou, C. “vRAM: Faster Verifiable RAM With Program-Independent Preprocessing.” IEEE Security and Privacy (2018).
+%%%%%    \item{} [vSQL] Zhang, Y., Genkin, D., Katz, J., Papadopoulos, D., \& Papamanthou, C. “vSQL: Verifying arbitrary SQL queries over dynamic outsourced databases.” IEEE Security and Privacy (2017).
+%%%%%	\end{itemize}
+
+
+

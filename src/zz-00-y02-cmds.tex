@@ -1,5 +1,19 @@
+%%% This file: defines counters and commands useful for cross-referencing feedback notes and corresponding changes
+
+
+\newcommand{\ifoddeven}[2]{\ifthenelse{\isodd{\value{page}}}{#1}{#2}}
+
+
+\providecommand{\ifNotEmpty}[2]{\ifthenelse{\equal{#1}{}}{}{#2}}
+\providecommand{\ifNotEmptyPrepend}[2]{\ifthenelse{\equal{#1}{}}{}{#2#1}}
+\providecommand{\ifNotEmptyAppend}[2]{\ifthenelse{\equal{#1}{}}{}{#1#2}}
+
+
 
 %%%%%%%%%%%% Commands
+\newcommand{\tops}[2]{\texorpdfstring{#1}{#2}}
+\newcommand{\nolink}[1]{\href*{#1}{#1}}
+
 \newcommand{\subtab}[2][c]{\begin{tabular}{@{}#1}#2\end{tabular}}
 \newcommand{\subtabL}[1]{\subtab[l]{#1}}
 
@@ -12,6 +26,9 @@
 
 \newcommand{\mypar}[1]{\paragraph{#1}\mbox{}\\\vspace{-1ex}}
 \newcommand{\myurl}[1]{\href{#1}{\nolinkurl{#1}}}
+%%%\newcommand{\myurl}[1]{{\hypersetup{pdfborder={0 0 0}}\url{#1}}}
+\urlstyle{rm} %tm, tt, sf, ... same, ...
+
 \newcommand{\myemail}[1]{\href{mailto:#1}{#1}}
 
 \newcommand{\red}[1]{{\color[rgb]{1,0,0}#1}}
@@ -29,20 +46,6 @@
 \newcommand\cleartooddpage{\clearpage\ifodd\value{page}\else\null\clearpage\fi}
 
 \newcommand{\shortleftarrow}{\ensuremath{\scalebox{1}{\ensuremath{\leftarrow}}}}
-
-
-\makeatletter
-\@ifpackageloaded{babel}{%
-	\addto\captionsenglish{% Replace "english" with the language you use %is using package `babel', must specify the language
-  \renewcommand{\contentsname}{\pdfbookmark[1]{Contents}{pdfbkm:contents}\pdfbookmark[2]{Table of Contents}{pdfbkm:toc}\label{toc:toc}Table of Contents}}%
-	%\addto\captionsenglish{\renewcommand{\refname}{\pdfbookmark[1]{References}{pdfbkm:refs}References}}%if using babel
-	\addto\captionsenglish{\renewcommand{\bibname}{\pdfbookmark[1]{References}{pdfbkm:refs}References}}%if using babel
-	}{%
-	\renewcommand{\contentsname}{\pdfbookmark[1]{Contents}{pdfbkm:contents}\pdfbookmark[2]{Table of Contents}{pdfbkm:toc}\label{toc:toc}Table of Contents}%
-	%\renewcommand{\refname}{\pdfbookmark[1]{References}{pdfbkm:refs}References}
-	\renewcommand{\bibname}{\pdfbookmark[1]{References}{pdfbkm:refs}References}
-	}
-\makeatother
 
 
 %LB: colors for bookmarks of table and Figures
@@ -93,6 +96,7 @@
 \newcommand{\refgad}[1]{gadget~\ref{#1}}
 
 
+
 \newcommand{\prov}{\tops{\ensuremath{P}}{P}}
 \newcommand{\veri}{\tops{\ensuremath{V}}{V}}
 
@@ -108,23 +112,5 @@
 
 \newcommand{\pslabel}{\phantomsection\label}
 
-\newcommand{\tops}[2]{\texorpdfstring{#1}{#2}}
-
 \newcommand{\field}{\ensuremath{\mathbb{F}}}  %needs package amssymb
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%% Commands
-%%% Define here new personalized commands for leaving comments
-
-\newcommand{\popupColor}[3][blue]{\pdfcomment[color=#1,opacity=0.5,author={#2}]{#3}}
-\newcommand{\suggest}[2][]{\popupColor[blue]{#1}{Suggestion: #2}}
-\newcommand{\edited}[2][]{\popupColor[green]{#1}{Edited: #2}}
-\newcommand{\smttodo}[2][]{\popupColor[red]{#1}{To-do: #2}}
-
-\newcommand{\luis}[1]{\popupColor[blue]{Lu{\'i}s B.}{#1}}
-\let\luiscom\luis
-\newcommand{\luissug}[1]{\suggest[Lu{\'i}s B.]{#1}}
-\newcommand{\luised}[1]{\edited[Lu{\'i}s B.]{#1}}
-\newcommand{\luistodo}[1]{\smttodo[Lu{\'i}s B.]{#1}}
-\newcommand{\luisin}[1]{\red{[[Lu{\'i}s B.: #1]]}}
-
 

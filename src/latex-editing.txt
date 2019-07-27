@@ -1,43 +1,59 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 %%% Notes since 2019-04-01, Luís Brandão:
+  % Latest update of this file: 2019-07-26
   % This LaTeX project is open for collaboration under the ZKProof.org terms.
-  % The main file for compilation is zkproof-docs.tex (use pdfLaTeX)
+  % The main file for compilation is zkproof-community-reference.tex
+  
   %%%%%%%%%%%%
   % SUMMARY:
-  % The initial LaTeX version (2019-04-01) is a porting to LaTeX of the ZKProofs 
-  %   docs downloaded from https://zkproof.org/documents.html in March 2019.
+  % The initial LaTeX version 0.1 (2019-04-01) was a porting to LaTeX of the
+  % ZKProof docs downloaded in Mar-2019 from https://zkproof.org/documents.html
   % The porting included editorial adjustments for indexation, consistency, etc.
   % The underlying content was authored by the ZKProof team/collaborators.
+  
   %%%%%%%%%%%%
-  % VIEWING POPUP ANNOTATIONS:
-    % Note: the popup annotations are not shown in the "Built-In" Overleaf PDF-viewer.
-    % Option 1: Menu --> PDF viewer --> Native
-    % Option 2: open the PDF file with a regular PDF-viewer in your local computer.
-  %%%%%%%%%%%% 
-  % ADDING COMMENTS AS POPUP ANNOTATIONS: 
-  % To insert a blue popup, starting with "Your name\\Suggestion: " 
-    % \suggest[your name]{your suggestion} 
-  % To insert a green popup, starting with "Your name\\Edited: "
-    % \edited[your name]{notes about what you edited} 
-  % To insert a red popup, starting with "Your name\\To-do: "
-    % \smttodo[your name]{note on something to be edited} 
-  % To insert a blue popup starting with "Your name\\"
-    % \popupColor{your name}{your comment}
-  % If adding many popups, define shortcut commands in the end of ...-b-cmds.tex
-    % This facilitates a selective search, highlight or omission of those comments
+  % FILE STRUCTURE
+  % (let <d> and <e> be integers 1, 2, ...; let `L' be a letter A, B, ...)
+  %
+  % "zkproof-community-reference.tex": file for compilation
+  %
+  % "zz-00-y01-pkgs": loads LaTeX packages 
+  % "zz-00-y02-cmds": custom commands with global applicability
+  % "zz-00-y02-cmds-diff": commands related to diff and cross-references
+  % "zz-00-y03-format": formatting configurations
+  %
+  % "zz-00-frontmatter.tex": loads the input files with content for the preamble
+  % "zz-00-z0<d>-....tex": content for some section of the preamble
+  %
+  % "zz-0<d>-<words>.tex": loads the input files with content for chapter 0<d>
+  % "zz-0<d>-z<ee>-<words>.tex": content of section <d>.<ee>
+  %
+  % "zz-99-biblio-0<d>-<word>.bib": bibliographic references used in chapter 0<d>
+  %                      (may later be consolidated into a single file)
+  %
+  % "zz-A-<word>.tex and "zz-B-<word>.tex": content for appendices A and B, respectively
+  %
+  % "zzz-00-insert-comments.tex": preamble of the appendix with review comments
+  % "zzz-01-comments-on-v0.1.tex": tables of descriptions of comments/contributions
+  %
+  % subfolder ./figs/: contains graphic files (.pdf, .svg)
+  
   %%%%%%%%%%%%
   % ADDING NEW CONTENT:
-  % - New commands with global applicability: defined inside zkproof-docs-00-b-cmds.tex
-  % - New non-appendix chapter: create a file name zkproof-docs-0<d>-....tex, where <d> is a digit
-  % - New appendix chapter: use a file name zkproof-0<L>-<tttt>.tex, where <L> is a letter B, C, ...
-  % - New content in the preamble: fit into existing file or create file with name zkproof-docs-00-<L>...
-  % - Loading of new packages: add \usepackage{...} inside zkproof-docs-00-a-pkgs.tex
-  % - Files with externally-generated figures go inside the subfolder \figs
-  % - New bibliographic reference: include a bibtex formatted entry inside one of the .bib files
+  % (let <d> be an integer 1, 2, ...; let `L' be a letter A, B, ...)
+  % - Load new packages by adding \usepackage{...} inside "zz-00-y01-pkgs.tex"
+  % - New commands with global applicability: define inside zz-00-y02-cmds.tex
+  % - New content in the preamble: create or fit into existing file "zz-00-z0<d>-....tex"
+  % - New non-appendix chapter: create a file with name zz-0<d>-<word>.tex
+  % - New section in non-appendix chapter: create a file with name zz-0<d>-z<ee>-<word>.tex
+  % - New appendix chapter: create a file with name zz-0<L>-<tttt>.tex
+  % - New section in appendix: create a file with name zz-0<L>-z<ee>-<word>.tex
+  % - Files with externally-generated figures: upload inside the subfolder ./figs/
+  % - New bibliographic reference: include a bibtex entry inside one of the .bib files
+  
   %%%%%%%%%%%%
   % LOCAL COMPILATION:
-  % - compile with pdfLaTeX (will later also make compatible with LuaLaTeX)
+  % - compile with pdfLaTeX (will later also make it compatible with LuaLaTeX)
   % - the bibliography is using biblatex and biber
   % - check that 'biber' is set as the processor working with biblatex
-  % To hide the popup annotations, add to the bottom of ...-b-cmds.tex:
-    % \renewcommand{\popupColor}[3][]{}

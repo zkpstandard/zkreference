@@ -1,0 +1,168 @@
+%%% This file: defines counters and commands useful for cross-referencing feedback notes and corresponding changes
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% Commands
+%%% Define here new personalized commands for leaving comments
+
+\newcommand{\popupColor}[3][blue]{\pdfcomment[color=#1,opacity=0.5,author={#2}]{#3}}
+\newcommand{\suggest}[2][]{\popupColor[blue]{#1}{Suggestion: #2}}
+\newcommand{\edited}[2][]{\popupColor[green]{#1}{Edited: #2}}
+\newcommand{\smttodo}[2][]{\popupColor[red]{#1}{To-do: #2}}
+
+\newcommand{\luis}[1]{\popupColor[blue]{Lu{\'i}s B.}{#1}}
+\let\luiscom\luis
+\newcommand{\luissug}[1]{\suggest[Lu{\'i}s B.]{#1}}
+\newcommand{\luised}[1]{\edited[Lu{\'i}s B.]{#1}}
+\newcommand{\luistodo}[1]{\smttodo[Lu{\'i}s B.]{#1}}
+\newcommand{\luisin}[1]{\red{[[Lu{\'i}s B.: #1]]}}
+
+
+%%%%% Mark revision blocks
+\newcounter{cntRev}\renewcommand{\thecntRev}{E\arabic{cntRev}}
+
+
+%\revblock[label]{refs}
+\newcommand{\revblock}[2][]{\marginnote{\resizebox{.85in}{!}{{\color[rgb]{1,0,0}%
+			\begin{minipage}{1.1in}\vspace{0em}\refstepcounter{cntRev}%
+				\ifNotEmpty{#1}{\label{#1}} %adds a labels to the review edit
+				\thecntRev\ifNotEmptyPrepend{#2}{: }
+			\end{minipage}}}}}
+\newcommand{\revblockmini}[2][]{{\scriptsize\revblock[#1]{#2}}}
+%\renewcommand{\revblock}[2][]{}   % Uncomment this line to get ride of all margin notes
+
+
+%\revblockRight[label]{refs}{rightShiftSpace}
+\newcommand{\revblockRight}[3][]{\marginnote{\hspace*{#3}\resizebox{.85in}{!}{{\color[rgb]{1,0,0}%
+			\begin{minipage}{1.1in}\vspace{0em}\refstepcounter{cntRev}%
+				\ifNotEmpty{#1}{\label{#1}} %adds a labels to the review edit
+				\thecntRev\ifNotEmptyPrepend{#2}{: }
+			\end{minipage}}}}}
+
+
+
+
+\providecommand{\blue}[1]{{\color[rgb]{0,0,1}#1}}
+\providecommand{\red}[1]{{\color[rgb]{1,0,0}#1}}
+\providecommand{\dgreen}[1]{{\color[rgb]{0,.33,0}#1}}
+\definecolor{mycoral}{rgb}{.9,.333,.2000}
+\definecolor{brown}{rgb}{0.6,0.3,0}
+\definecolor{LLgray}{rgb}{0.9,0.9,0.9}
+\definecolor{LLyellow}{rgb}{1,1,.8}
+\definecolor{darkgreen}{rgb}{0,0.5,0}
+
+
+\newcommand{\Note}{{\textcolor{blue}{\textbf{-- \textsc{Note:} }}}}
+\newcommand{\Chan}{\newline\textcolor{mycoral}{{{\bfseries-- {\scshape Changed:} }}}}
+\newcommand{\NoChan}{\Chan\ No change.}
+
+\newcommand{\propContrib}{{\bfseries\textcolor{blue}{-- Proposed contribution:} }}
+\newcommand{\contributors}{\newline{\bfseries\textcolor{darkgreen}{-- Proposed contributors:} }}
+\newcommand{\ccontext}{{\bfseries\textcolor{blue}{-- Context:} }}
+
+
+\newcommand{\newcol}{&}
+\newcommand{\rowendL}{\end{minipage}\\\hline}  %%%NEED TO COORDINATE WITH DEFINITION OF LAST COLUMN, currently using a minipage
+
+\newcommand{\singlebullet}[1]{\protect\begin{itemize}\item #1 \protect\end{itemize}}
+
+
+\newcounter{cntItA} %counts the items sequentially: 1, 2, ..., 210
+\newcounter{cntIssue}\renewcommand{\thecntIssue}{D\arabic{cntIssue}} %counts the reviewer: A, B, ..., L
+\newcounter{cntItB}[cntIssue] %counts the item inside the Issue: A1, A2, .., A7, B1, ..., 
+% \inc... % increment some counter(s)
+
+%\incItem: the optional argument (#1) is a label
+\renewcommand{\thecntItB}{\thecntIssue.\arabic{cntItB}}
+\newcommand{\incItem}[1][]{\refstepcounter{cntItA}\ifNotEmpty{#1}{\label{it:#1}}\thecntItA \newcol \refstepcounter{cntItB}\ifNotEmpty{#1}{\label{#1}}\pdfbookmark[3]{\thecntItB}{pdfbkm:\thecntItB}\thecntItB \newcol } %incremment comment number
+
+\newcommand{\rowIssueName}{Issue title}
+\newcommand{\needscontributors}{\red{needs contributors}}
+
+%\newcommand{\tabhead}{\rowColorHeader\# & Ref & \centering \scalebox{.75}{\mycol{Location in\\initial draft}} & \centering Comment received & \scalebox{.75}{\mycol{Related\\items}} & \centering Reply notes & \begmin{.04}\scalebox{.8}{\mycol{Revie-\\wed?}}\myendmini}
+\setlength{\tabcolsep}{1ex}
+
+
+%Use of commands defined with optionla arguments inside cells can break the workings of tabular
+%See complicated solution in https://tex.stackexchange.com/questions/277140/optional-argument-breaks-command-with-multicolumn
+%As a temporary solution, I'll just define all commands as mandatory
+%\newcommand{\headreviewer}[2]{\rowcolor{LLyellow}\incIssue[#1]\pdfbookmark[2]{\thecntIssue\ --- #2}{pdfbkm:\thecntIssue}\textbf{\thecntIssue} & Location & Comments from #2 & & & \rowend}
+
+
+%%% 
+\newcommand{\beginlongtab}{%
+\begin{longtable}{%
+|>{\begmin{.025}\centering}c<{\myendmini}%               #
+|>{\begmin{.035}\centering}c<{\myendmini}%               Ref
+|>{\begmin{.080}}c<{\myendmini}%                         Old location
+|>{\begmin{.320}}c<{\myendmini}%                         Comment / Issue
+|>{\begmin{.060}\centering}c<{\myendmini}%               Related
+%|>{\collectcell\funcCellTemp}{c}<{\endcollectcell}%
+%|>{\funcCellTemp}{c}<{}%
+|>{\begmin{.320}}c<{\myendmini}%                         Reply notes / Notes about changes
+%%%\rule[raise]{width}{height}
+|>{\begmin{.050}\centering}c<{}|%                        Rev [in main document]
+%this will be ended explicitly with \rowend, which contains a \end{minipage}
+%this one is not within a minipage because it would be harder to escape from it, since there will be no
+%|>{\rule[0pt]{0pt}{2.75ex}}c|%   %this one is not within a minipage because it would be harder to escape from it, since there will be no \endcol
+}%
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\headerForIssue}{%
+	  \centering \#
+	& \centering \scalebox{.7}{Item id}
+	& \centering Location %Old location
+	& \centering \textbf{Contribution \thecntIssue}: \rowIssueName{}
+	& \centering Related %\scalebox{.75}{\mycol{Related\\items}}
+	& \centering Context and changes
+	& \centering Edit id
+}
+
+
+\newcommand{\githubissue}[1]{\href{https://github.com/zkpstandard/zkreference/issues/#1}{GI#1}}
+
+
+
+%%%%%%%%%%% TO GENERATE A LIST OF COMMENTS/CONTRIBUTIONS
+% contentslines added on each example or examples
+
+
+\newcommand\listcontributionname{List of Contributions}
+%%%\newlistof[hwithini]{hentryi}{hexti}{hlistofnamei}, from package tocloft
+\newlistof[chapter]{contribution}{loc}{\listcontributionname}
+%creates the file name zkproof-community-reference.contribs with the index of contribution issues/items
+
+
+%%%\makeatletter
+%%%\newcommand\listofcontributions{%
+%%%  \section*{\listcontributionname}\@starttoc{contribs}}
+%%%	%creates the file name zkproof-community-reference.contribs with the index of contribution issues/items
+%%%\makeatother
+
+
+\newcommand{\incIssue}[1][]{\refstepcounter{cntIssue}\ifNotEmpty{#1}{\label{#1}}} %increment the issue number
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% \newIssue[label]{issue title}
+\newcommand{\newIssue}[2]{%
+	%\ifthenelse{\equal{\arabic{cntIssue}}{0}}{}{\end{longtable}\pagebreak} %if it is not the first Issue, then makes a page break
+	\ifthenelse{\equal{\arabic{cntIssue}}{0}}{%
+		\let\firstIssue\newIssue
+		\renewcommand{\newIssue}{\end{longtable}
+		%\pagebreak
+		
+		\firstIssue} %the \end{longtable}\pagebreak will only be applied in the subsequent times
+		}{}
+	%%%\incIssue[#1]% increments the counter cntIssue
+	\refstepcounter{cntIssue}\label{#1}
+	\addcontentsline{loc}{subsection}{Contribution \thecntIssue\ --- #2}
+	\renewcommand{\rowIssueName}{#2}
+	\noindent\beginlongtab\hline%
+			\rowcolor{LLyellow} %must be the first command in the cell, namely before pdfbookmark
+			\pdfbookmark[2]{\thecntIssue: \rowIssueName{}}{pdfbkm:\thecntIssue}% adds a pdf bookmark if this is the first header for this Issue	
+			\headerForIssue\rowend\hline\hline%
+		\endfirsthead\hline%
+			\rowcolor{LLgray}\headerForIssue\rowend\hline\hline%
+		\endhead%ensures that all lines above this one will repeat as a header
+}

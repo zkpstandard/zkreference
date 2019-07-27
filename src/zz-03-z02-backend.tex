@@ -1,0 +1,26 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Backends: Cryptographic System Implementations}
+\label{implem:backends}
+
+The backend of a ZK proof implementation is the portion of the software that contains an implementation of the low-level cryptographic protocol. It proves statements where the instance and witness are expressed as variable assignments, and relations are expressed via low-level languages (such as arithmetic circuits, Boolean circuits, R1CS/QAP constraint systems or arithmetic constraint satisfaction problems).
+
+The backend typically consists of a concrete implementation of the ZK proof system(s) given as pseudocode in a corresponding publication (see the \hyperref[chap:security]{Security Track} document for extensive discussion of these), along with supporting code for the requisite arithmetic operations, serialization formats, tests, benchmarking etc.
+
+There are numerous such backends, including implementations of many of the schemes discussed in the \hyperref[chap:security]{Security Track}. 
+Most have originated as academic research prototypes, and are available as open-source projects. 
+Since the offerings and features of backends evolve rapidly, we refer the reader to the curated taxonomy at https://zkp.science for the latest information.
+
+Considerations for the choice of backends include:
+
+\begin{itemize}
+\item ZK proof system(s) implemented by the backend, and their associated security, assumptions and asymptotic performance (as discussed in the Security Track document)
+\item Concrete performance (see Benchmarks section)
+\item Programming language and API style (this consideration may be satisfied by adherence to prospective ZK proof standards; see the the API and File Formats section)
+\item Platform support
+\item Availability as open source
+\item Active community of maintainers and users
+\item Correctness and robustness of the implementation (as determined, e.g., by auditing and formal verification)
+\item Applications (as evidence of usability and scrutiny).
+\end{itemize}
+

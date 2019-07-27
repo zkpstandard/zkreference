@@ -1,0 +1,71 @@
+
+
+%%% Related to package titlesec
+%%%\titlespacing{<command>}{<left>}{<before-sep>}{<after-sep>}[<right>]
+%\titlespacing*{\chapter}{0pt}{-25pt}{0pt} %%-40pt
+\titlespacing*{\chapter}{0pt}{-25pt}{2em} %%-40pt
+\titleformat{\chapter}[display]{\normalfont\huge\centering}{Chapter \thechapter.\enskip}{20pt}{\Huge}
+\titleformat{\chapter}[hang] 
+{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter.}{.5em}{} 
+\titlespacing{\subsubsection}{0pt}{1em}{0em}
+
+
+
+\renewcommand{\headrulewidth}{0pt}
+
+
+%%%%%%%%%%%% Formatting
+\theorembodyfont{\rm}\newtheorem{remark}{Remark} %needs package theorem
+\setcounter{tocdepth}{1} %needs package rocloft
+\renewcommand\cftchapafterpnum{\vskip0pt} %spacing between items in toc
+\renewcommand\cftsecafterpnum{\vskip0pt} %spacing between items in toc
+\setlist[itemize]{noitemsep, topsep=0pt}
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0pt}
+
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+
+
+
+%%%%%%%%%%%% Related to package fancyhdr
+
+\setlength{\headheight}{13.6pt}
+
+\fancypagestyle{mainmatter}{\fancyhead{}
+		\lhead{\ifoddeven{\nouppercase{\leftmark}}{}}
+		\rhead{\ifoddeven{}{Section \nouppercase{\rightmark}}}
+		\cfoot{\thepage}
+}
+
+\fancypagestyle{references}{\fancyhead{}
+		\lhead{\ifoddeven{References}{}}
+		\rhead{\ifoddeven{}{References}}
+		\cfoot{\thepage}}
+
+\fancypagestyle{appendix}{\fancyhead{}
+		\lhead{\ifoddeven{\nouppercase{\leftmark}}{}}
+		\rhead{\ifoddeven{}{Section \nouppercase{\rightmark}}}
+		\cfoot{\thepage}
+}
+
+
+%%% Same font size as section header ?
+\renewcommand\cfttoctitlefont{\bfseries\Large}
+\renewcommand\cftloftitlefont{\bfseries\Large}
+\renewcommand\cftlottitlefont{\bfseries\Large}
+
+\makeatletter
+\@ifpackageloaded{babel}{%
+	%if using babel
+	\addto\captionsenglish{% Replace "english" with the language you use %is using package `babel', must specify the language
+		\renewcommand{\contentsname}{\phantomsection\pdfbookmark[2]{Table of Contents}{pdfbkm:toc}\label{toc:toc}Table of Contents}
+		\renewcommand{\bibname}{\pdfbookmark[1]{References}{pdfbkm:refs}References}
+		}%
+		%%% \renewcommand{\refname}
+	}%
+	{%
+		\renewcommand{\contentsname}{\phantomsection\pdfbookmark[2]{Table of Contents}{pdfbkm:toc}\label{toc:toc}Table of Contents}%
+		\renewcommand{\bibname}{\pdfbookmark[1]{References}{pdfbkm:refs}References}
+	}
+\makeatother

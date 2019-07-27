@@ -1,0 +1,96 @@
+\section{Introduction}
+\label{security:intro}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{What is a zero-knowledge proof?}
+\label{security:intro:what-is-a-ZK}
+
+	A zero-knowledge proof makes it possible to prove a statement is true while preserving confidentiality of secret information.
+	There are numerous uses of zero-knowledge proofs. 
+\reftab{tab:basic-examples-what-is-a-ZK}\luised{Changed from ``, the table below gives a few examples'' to ``Table 1.1 gives three examples''} %, the table below gives a few examples 
+gives three example\luissug{Consider saying ``example scenarios'', since the table calls it ``scenarios''} where proving claims about confidential data can be useful.
+\loosen
+
+
+%\begin{table}[!h]
+%\caption{Basic example scenarios for ZK proofs}
+\begin{center}
+\def\tempTabTitle{Basic example scenarios for ZK proofs}
+\mytabcap{\tempTabTitle}{\tempTabTitle\luised{Introduced table caption and table number in this and in all other tables. In the first cell, introduced the qualifier "elements" to differentiate from "scenarios"}~~~\luissug{To enable adding new examples, consider transposing the table (i.e., one example scenario per row).}}
+\label{tab:basic-examples-what-is-a-ZK}
+
+\begin{edtable}{tabular}{|l||l||l||l|}   %\begin{tabular}{|l||l|l|l|}
+\hline \rowcolor{colorRowHead}\diagbox{\small \bfseries \makebox[3em]{\hspace{1em}Elements}}{\small \bfseries \makebox[0pt]{\hspace*{-3.5em}Scenarios}}
+		& \bfseries \subtab[l]{1. Legal age\\\hphantom{1. }for purchase}
+		& \bfseries \subtab[l]{2. Hedge fund solvency} 
+		& \bfseries \subtab[l]{3. Asset transfer} \\
+\hline
+\hline \bfseries Statement
+		& I am an adult 
+		& We are not bankrupt 
+		& \subtab[l]{I own this asset}\\
+\hline \bfseries \subtab[l]{Confidential\\information}
+		& \subtab[l]{Exact age and\\personal data} 
+		& Composition of portfolio 
+		& Past transactions\\
+%%%\hline \bfseries \subtab[l]{Supporting\\instance}
+%%%		& \subtab[l]{Driver's license\\smartcard chip} 
+%%%		& Encrypted bank records
+%%%		& Blockchain block\\
+\hline 
+\end{edtable}\vspace{1em}
+\end{center}
+
+A zero-knowledge proof system is a specification of how a prover and verifier 
+can interact for the prover to convince the verifier that the statement is true.
+\luissug{Comment and suggestion.\textCR
+    Contrary to the chess example in section 2.4, where there is no commitment as a starting point,
+for each of the three examples in Table 1.1 there must be some substract (an ``instance'') 
+to support the statement with respect to the confidential info.
+	\textCR\textCR
+	Without the ``instance'', a ZK proof in these cases seems like magic: 
+how can I prove that the license place of my car starts with the letter ``C'' 
+if there is no corresponding substract (e.g., a picture of the car, or a 
+car-registration record? (do you even known whether or not I have a car?).
+	\textCR\textCR
+	Suggestion: Consider providing some intuition about the need for a supporting ``instance''.
+Depending on where the intuition is added, a corresponding row ``Supporting instance'' could 
+possibly be added to \reftab{tab:basic-examples-what-is-a-ZK}, e.g., with values 
+``Driver's license smartcard chip''; ``Encrypted bank records''; ``Blockchain block''. 
+	\textCR\textCR
+	More generally, a reflection about how to position this may come from considering how to distinguish ZKPs of membership from ZKPoKs.
+	\textCR\textCR
+	Might the chessboard example (described in \refsec{apps:gadgets-within-predicates}) be
+interesting to put in this table? It implicitly contains the supporting instance --- everything 
+is about the chessboard and chess rules that the verifier already known.}
+    The proof system must be complete, sound and zero-knowledge.
+\begin{itemize}
+\item \textbf{Complete:} If the statement is true and both prover and verifier follow the protocol; the verifier will accept.
+\item \textbf{Sound:} If the statement is false, and the verifier follows the protocol; the verifier will not be convinced.
+\item \textbf{Zero-knowledge:} If the statement is true and the prover follows the protocol; the verifier will not learn any confidential information from the interaction with the prover but the fact the statement is true.
+\end{itemize}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[Requirements for a ZK proof system specification]{Requirements for a zero-knowledge proof system specification}
+\label{security:intro:requirements-ZK}
+
+A full proof system specification MUST include:
+\begin{enumerate}
+\item Precise specification of the type of statements the proof system is designed to handle
+\item Construction including algorithms used by the prover and verifier
+\item If applicable, description of setup the prover and verifier use
+\item Precise definitions of security the proof system is intended to provide
+\item A security analysis that proves the zero-knowledge proof system satisfies the security definitions and a full list of any unproven assumptions that underpin security
+\end{enumerate}
+
+Efficiency claims about a zero-knowledge proof system should include all relevant performance parameters for the intended usage.
+Efficiency claims must be reported fairly and accurately, and if a comparison is made to other zero-knowledge proof systems a best effort must be made to compare apples to apples.
+
+The remainder of the document will outline common approaches to specifying 
+a %LB
+zero-knowledge proof system, outline some construction paradigms, and give guidelines for how to present efficiency claims.
+\loosen
+

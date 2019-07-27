@@ -1,0 +1,201 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section[Taxonomy of Constructions]{Taxonomy of Constructions{\normalsize\revblock[rev:move-taxonomy-to-new-chapter]{\ref{it:move-taxonomy-to-new-chapter}}}}
+\label{security:taxonomy} 
+ 
+There are many different types of zero-knowledge proof systems in the literature that offer different tradeoffs between communication cost, computational cost, and underlying cryptographic assumptions. 
+Most of these proofs can be decomposed into an “information-theoretic” zero-knowledge proof system, sometimes referred to as a zero-knowledge \emph{probabilistically checkable proof} (PCP), and a \emph{cryptographic compiler}, or crypto compiler for short, that compiles such a PCP into a zero-knowledge proof.
+(Here and in the following, we will sometimes omit the term “zero-knowledge” for brevity even though we focus on zero-knowledge proof systems by default.)
+ 
+Different kinds of PCPs require different crypto compilers. 
+The crypto compilers are needed because PCPs make unrealistic independence assumptions between values contributed by the prover and queries made by the verifier, and also do not take into account the cost of communicating a long proof. 
+The main advantage of this separation is modularity: PCPs can be designed, analyzed and optimized independently of the crypto compilers, and their security properties (soundness and zero-knowledge) do not depend on any cryptographic assumptions. 
+It may be beneficial to apply different crypto compilers to the same PCP, as different crypto compilers may have incomparable efficiency and security features (e.g., trade succinctness for better computational complexity or post-quantum security).
+\loosen
+ 
+PCPs can be divided into two broad categories: ones in which the verifier makes point queries, namely reads individual symbols from a proof string, and ones where the verifier makes linear queries that request linear combinations of field elements included in the proof string. Crypto compilers for the former types of PCPs typically only use symmetric cryptography (a collision-resistant hash function in their interactive variants and a random oracle in their non-interactive variants) whereas crypto compilers for the latter type of PCPs typically use homomorphic public-key cryptographic primitives (such as SNARK-friendly pairings).
+ 
+\reftab{tab:different-types-of-PCP} %The following table 
+summarizes different types of PCPs and corresponding crypto compilers. 
+The efficiency and security features of the resulting zero-knowledge proofs depend on both the parameters of the PCP and the features of the crypto compiler.
+ 
+
+\begin{table}[H]
+\begin{center}
+\mytabcap{Different types of PCPs}{Different types of PCPs}\label{tab:different-types-of-PCP}
+
+\newcommand{\murii}[1]{\multirow{2}{*}{\subtabL{#1}}}
+\newcommand{\muriii}[1]{\multirow{3}{*}{\subtabL{#1}}}
+
+\begin{edtable}{tabular}{|l|c|l|l|l|}
+\hline \rowcolor{colorRowHead}\textbf{Proof System} & \bfseries \subtab{Inter-\\action} & \textbf{Queries to Proof} & \textbf{Crypto Compilers}\luistodo{Replace/add entries in this column by/with corresponding citation tags using command \textbackslash cite\{...\}} & \textbf{Features} \\
+\hline \murii{\hyperref[proof-system:classical-proof]{Classical proof}\\(no zk)} & No & All 
+			& GMW, ..., 
+			& \ref{feat:plain},\ref{feat:symm-key},\ref{subfeat:succinct:non}\\
+	\cline{4-5}
+			& & & Cramer-Damgård 98, ...
+			& \ref{feat:plain},\ref{subfeat:succinct:non} \\
+\hline \hyperref[proof-system:classical-PCP]{Classical PCP} & No & Point Queries 
+			& Kilian, Micali, IMS 
+			& \ref{feat:plain},\ref{feat:symm-key},\ref{subfeat:succinct:polylog} \\
+\hline \hyperref[proof-system:linear-PCP]{Linear PCP} & No & Inner-product Queries 
+			& \subtabL{IKO,Groth10,GGPR,BCIOP}
+			& \ref{subfeat:succinct:fully} \\
+\hline \murii{\hyperref[proof-system:IOP]{IOP}} & \murii{Yes} & \murii{Point Queries}
+			& BCS16+ZKStarks
+			& \ref{feat:plain},\ref{feat:symm-key},\ref{subfeat:succinct:polylog}\\
+	\cline{4-5}
+			& & & BCS16+Ligero
+			& \ref{feat:plain},\ref{feat:symm-key},\ref{subfeat:succinct:sqrt}\\
+\hline \muriii{\hyperref[proof-system:linear-IOP]{Linear IOP}} & \muriii{Yes} & \muriii{Inner-product\\Queries} 
+			& Hyrax
+			& \ref{feat:plain},\ref{subfeat:succinct:polylog}/\ref{subfeat:succinct:depth} \\
+	\cline{4-5}
+			& & & vSQL
+			& \ref{subfeat:succinct:depth} \\
+	\cline{4-5}
+			& & & vRAM
+			& \ref{subfeat:succinct:polylog} \\
+\hline \murii{\hyperref[proof-system:ILC]{ILC}} & \murii{Yes} & \murii{Matrix-vector\\Queries}
+			& \subtabL{Bootle 16,18\\} 
+			& \ref{feat:plain},\ref{subfeat:succinct:polylog} \\
+	\cline{4-5}
+			& & & Bootle 17
+			& \ref{feat:plain},\ref{feat:symm-key},\ref{subfeat:succinct:sqrt} \\
+\hline 
+\end{edtable}\vspace{1em}
+\end{center}
+\end{table}
+ 
+\textbf{Notation:} We say that a verifier makes “point queries” to the proof $\Pi$ if the verifier has access to 
+a proof oracle $O^{\Pi}$ that takes as input an index i and outputs the $i$-th symbol $\Pi(i)$ of the proof. 
+	We say that a verifier makes “inner-product queries” to the proof $\Pi \in \field^m$ (for some finite field \field) if 
+the proof oracle takes as input a vector $q \in \field^m$ and returns the value $\brktmath{\Pi, q} \in \field$. 
+	We say that a verifier makes “matrix-vector queries” to the proof $\Pi \in \field^{m\times k}$ if the proof oracle 
+takes as input a vector $q \in \field^k$ and returns the matrix-vector product $(\Pi.q) \in \field^m$.
+
+\newcounter{cntFeat}\setcounter{cntFeat}{0}
+\newcommand{\newfeat}{\refstepcounter{cntFeat}\arabic{cntFeat}}
+
+\newcounter{cntSubFeat}[cntFeat]\setcounter{cntSubFeat}{0}
+\newcommand{\newsubfeat}{\refstepcounter{cntSubFeat}\alph{cntSubFeat}}
+\renewcommand{\thecntSubFeat}{\arabic{cntFeat}\alph{cntSubFeat}}
+
+
+\begin{enumerate}
+    \item[\newfeat.\label{feat:plain}] No trusted setup
+    \item[\newfeat.\label{feat:symm-key}] Relies only on symmetric-key cryptography (e.g., collision-resistant hash functions and/or random oracles)
+    \item[\newfeat.\label{feat:succint}] Succinct proofs
+				\begin{enumerate}
+        \item[(\newsubfeat)\label{subfeat:succinct:fully}] Fully succinct: Proof length independent of statement size. $O(1)$ crypto elements (fully)
+        \item[(\newsubfeat)\label{subfeat:succinct:polylog}] Polylog succinct: Polylogarithmic number of crypto elements
+        \item[(\newsubfeat)\label{subfeat:succinct:depth}] Depth-succinct: Depends on depth of a verification circuit representing the statement.
+        \item[(\newsubfeat)\label{subfeat:succinct:sqrt}] Sqrt succinct: Proportional to square root of circuit size
+        \item[(\newsubfeat)\label{subfeat:succinct:non}] Non succinct: Proof length is larger than circuit size.
+				\end{enumerate}
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%\paragraph{i) Proof Systems}
+\subsection{Proof Systems}
+
+\emph{Note:} For all of the applications we consider, the prover must run in polynomial time, given a statement-witness pair, and the verifier must run in (possibly randomized) polynomial time.\loosen
+
+	\begin{enumerate}[label=\alph*.]
+	
+	\item\pslabel{proof-system:classical-proof} \underline{Classical Proofs}: In a classical NP/MA proof, the prover sends the verifier a proof string $\pi$, the verifier reads the entire proof $\pi$ and the entire statement $x$, and accepts or rejects.
+  
+	\item\pslabel{proof-system:classical-PCP} \underline{PCP (Probabilistically Checkable Proofs)}: In a PCP proof, the prover sends the verifier a (possibly very long) proof string $\pi$, the verifier makes “point queries” to the proof, reads the entire statement x, and accepts or rejects. Relevant complexity measures for a PCP include the verifier’s query complexity, the proof length, and the alphabet size.
+  
+	\item\pslabel{proof-system:linear-PCP} \underline{Linear PCPs:} In a linear PCP proof, the prover sends the verifier a (possibly very long) proof string $\pi$, which lies in some vector space $\field^m$. 
+	The verifier makes some number of linear queries to the proof, reads the entire statement $x$, and accepts or rejects. 
+	Relevant complexity measures for linear PCPs include the proof length, query complexity, field size, and the complexity of the verifier’s decision predicate (when expressed as an arithmetic circuit).
+  
+	\item\pslabel{proof-system:IOP} \underline{IOP (Interactive Oracle Proofs)}: 
+	An IOP is a generalization of a PCP to the interactive setting. 
+	In each round of communication, the verifier sends a challenge string $c_i$ to the prover and the prover responds with a PCP proof $\pi_i$ that the verifier may query via point queries.
+	After several rounds of interactions, the verifier accepts or rejects. 
+	Relevant complexity measures for IOPs are the round complexity, query complexity, and alphabet size. 
+	IOP generalizes the notion of Interactive PCP \cite{2008:icalp:interactive-PCP}, and coincides with the notion of Probabilistically Checkable Interactive Proof \cite{2016:stoc:Constant-round-Interactive-Proofs-for-Delegating-Computation}.
+  
+	\item\pslabel{proof-system:linear-IOP} \underline{Linear IOP}: 
+	A linear IOP is a generalization of a linear PCP to the interactive setting. (See IOP above.) 
+	Here the prover sends in each round a proof vector $\pi_i$ that the verifier may query via linear (inner-product) queries.
+  
+	\item\pslabel{proof-system:ILC} \underline{ILC (Ideal Linear Commitment)}: 
+	The ILC model is similar to linear IOP, except that the prover sends in each round a proof matrix rather than proof vector, and the verifier learns the product of the proof matrix and the query vector. 
+	This model relaxes the Linear Interactive Proofs (LIP) model from \cite{2013:tcc:snargs-via-LIPs}. 
+	(That is, each ILC proof matrix may be the output of an arbitrary function of the input and the verifier’s messages. In contrast, each LIP proof matrix must be a linear function of the verifier’s messages.) 
+	Important complexity measures for ILCs are the round complexity, query complexity, and dimensions of matrices.
+	
+	\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\textbf{ii) Compilers: Cryptographic}
+\subsection{Compilers: Cryptographic}
+	
+	\begin{enumerate}[label=\alph*.]
+  
+	%\item \underline{Cramer-Damgård:} 
+	\item \underline{Cramer-Damgård \cite{1998:crypto:zkps-for-finite-field-arithmetic}:} 
+	Compiles an NP proof into a zero-knowledge proof. 
+	The prover evaluates the circuit $C$ recognizing the relation on its statement-witness pair $(x,w)$. 
+	The prover commits to every wire value in the circuit and sends these commitments to the verifiers. 
+	The prover then convinces the verifier using sigma protocols that the wire values are all consistent with each other. 
+	The prover opens the input wires to $x$ and thus convinces the verifier that the circuit $C(x, .)$ is satisfied on some witness $w$. 
+	The compiler uses additively homomorphic commitments (instantiated using the discrete-log assumption, for example) and generating or verifying the proof requires a number of public-key operations that is linear in the size of the circuit $C$.
+   
+	\item \underline{Kilian \cite{1995:crypto:Improved-Efficient-Arguments} / Micali \cite{2000:SIAM:Computationally-Sound-Proofs} / IMS \cite{2012:tcc:On-Efficient-ZK-PCPs}}: 
+	Compiles a PCP with a small number of queries into a succinct proof. 
+	The prover produces a PCP proof that $x$ in $L$. 
+	The prover commits to the entire PCP proof using a Merkle tree. 
+	The verifier asks the prover to open a few positions in the proof. 
+	The prover opens these positions and uses Merkle proofs to convince the verifier that the openings are consistent with the Merkle commitment. 
+	The verifier accepts iff the PCP verifier accepts. 
+	The compiler can be made non-interactive in the random oracle model via the Fiat-Shamir\luiscom{add somewhere a reference to the Fiat-Shamir transformation} heuristic.
+	
+  \item \underline{GGPR \cite{2013:QSPs-and-succinct-NIZKs-without-PCPs} / BCIOP \cite{2013:tcc:snargs-via-LIPs}:} 
+	Compiles a linear PCP into a SNARG via a transformation to LIPs. 
+	The public parameters of the SNARG are as long as the linear PCP proof and the SNARG proof consists of a constant number of ciphertexts/commitments (if the linear PCP has constant query complexity). 
+	In the public verification setting, this compiler relies on “SNARG-friendly” bilinear maps and is thus not post-quantum secure. 
+	In the designated verifier setting, it can be made post-quantum secure via linear-only encryption \cite{2017:eurocrypt:lattice-based-snargs}. 
+	Generating the proof requires a number of public-key operations that grows linearly (or quasi-linearly) in the size of the circuit recognizing the relation.
+   
+	\item \underline{BCS16 \cite{2016:tcc:IOPs}:} 
+	A generalization of the Fiat-Shamir compiler that is useful for collapsing many-round public-coin proofs (such as IOPs) into NIZKs in the random-oracle model.
+
+	\item \underline{Hyrax \cite{2018:SP:Doubly-efficient-zkSNARKs-without-trusted-setup} and vSQL \cite{2017:SP:vSQL}:} 
+	Give mechanisms for compiling the GKR protocol \cite{2015:JACM:delegating-computation-interactive-proofs-for-muggles} into NIZKs in the random oracle model. 
+	The techniques in these works generalize to compile any public-coin linear IOP (without zero knowledge) into a non-interactive zero-knowledge proof in the random-oracle model, that additionally relies on algebraic commitment schemes.
+	The latter are typically implemented using homomorphic public-key cryptography.
+
+	\item \underline{Bootle16 \cite{2016:eurocrypt:efficient-zk-args-for-arithmetic}:} 
+	Compiler for converting an ILC proof into a many-round succinct proof under the discrete-log assumption. 
+	Generating and verifying the proof requires a number of public-key operations that grows linearly with the size of the circuit recognizing the NP relation in question.
+	\end{enumerate} 
+	
+		\vspace{1em}
+	Note: In addition to the crypto compilers described above, there are information-theoretic compilers that convert between different types of information-theoretic objects.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\paragraph{iii) Compilers: Information-theoretic}
+\subsection{Compilers: Information-theoretic}
+	
+	\begin{enumerate}[label=\alph*.]
+  
+	\item \underline{MPC-in-the-Head (IKOS \cite{2007:stoc:ZK-from-SMPC}, ZKboo \cite{2016:Sec:ZKBoo}, Ligero \cite{2017:ccs:ligero}):} 
+	Compiles secure multi-party computation protocols into either (zero-knowledge) PCPs or IOPs.
+  
+	\item \underline{BCIOP \cite{2013:tcc:snargs-via-LIPs}:} 
+	Compiles quadratic arithmetic programs (QAPs) or quadratic span programs (QSPs) into linear PCPs such that resulting linear PCP has a degree-two decision predicate. 
+	The BCIOP paper also gives a compiler for converting linear PCP into 1-round LIP/ILC and adding zero-knowledge to linear PCP.
+  
+	\item \underline{Bootle17 \cite{2017:asiacrypt:linear-time-zkps-for-arithmetic}:} 
+	Compiles a proof in the ILC model into an IOP.
+	They also give an example instantiation of the ILC proof that yields an IOP proof system with square-root complexity.
+	
+	\end{enumerate}
+

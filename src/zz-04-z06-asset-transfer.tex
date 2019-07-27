@@ -1,0 +1,240 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Asset Transfer}
+\label{apps:asset-transfer}
+
+\subsection{Privacy-preserving asset transfers and balance updates}
+
+In this section, we examine two use-cases involving using ZK Proofs (ZKPs) to facilitate private asset-transfer for transferring fungible or non-fungible digital assets.  These use-cases are motivated by privacy-preserving cryptocurrencies, where users must prove that a transaction is valid, without revealing the underlying details of the transaction.  We explore two different frameworks, and outline the technical details and proof systems necessary for each.
+
+There are two dominant paradigms for tracking fungible digital assets, tracking ownership of assets individually, and tracking account balances.  The Bitcoin system introduced a form of asset-tracking known as the UTXO model, where Unspent Transaction Outputs correspond roughly to single-use “coins”.  Ethereum, on the other hand, uses the balance model, and each account has an associated balance, and transferring funds corresponds to decrementing the sender’s balance, and incrementing the receiver’s balance accordingly. 
+
+These two different models have different privacy implications for users, and have different rules for ensuring that a transaction is valid.  Thus the requirements and architecture for building ZK proof systems to facilitate privacy-preserving transactions are slightly different for each model, and we explore each model separately below.
+
+In its simplest form, the asset-tracking model can be used to track non-fungible assets.  In this scenario, a transaction is simply a transfer of ownership of the asset, and a transaction is valid if: the sender is the current owner of the asset.  In the balance model (for fungible assets), each account has a balance, and a transaction decrements the sender’s account balance while simultaneously incrementing the receivers.  In a “balance” model, a transaction is valid if 1) The amount the sender’s balance is decremented is equal to the amount the receiver’s balance is incremented, 2) The sender’s balance remains non-negative 3) The transaction is signed using the sender’s key.
+
+\subsection{Zero-Knowledge Proofs in the asset-tracking model}
+
+In this section, we describe a simple ZK proof system for privacy-preserving transactions in the asset-tracking (UTXO) model.  The architecture we outline is essentially a simplification of the ZCash system.  The primary simplification is that we assume that each asset (“coin”) is indivisible.  In other words, each asset has an owner, but there is no associated value, and a transaction is simply a transfer of ownership of the asset.
+
+\textbf{Motivation:} Allow stakeholders to transfer non-fungible assets, without revealing the ownership of the assets publicly, while ensuring that assets are never created or destroyed.
+
+\textbf{Parties:} There are three types of parties in this system: a Sender, a Receiver and a distributed set of validators.  The sender generates a transactions and a proof of validity.  The (distributed) validators act as verifiers and check the validity of the transaction.  The receiver has no direct role, although the sender must include the receiver’s public-key in the transaction.
+
+\textbf{What is being proved:} At high level, the sender must prove three things to convince the validators that a transaction is valid.
+\begin{itemize}
+ \item The asset (or “note”) being transferred is owned by the sender.  (Each asset is represented by a unique string)
+ \item The sender proves that they have the private spending keys of the input notes, giving them the authority to send asset.
+ \item The private spending keys of the input assets are cryptographically linked to a signature over the whole transaction, in such a way that the transaction cannot be modified by a party who did not know these private keys.
+\end{itemize}
+
+\textbf{What information is needed by the verifier:}
+\begin{itemize}
+ \item The verifiers need access  to the CRS used by the proof system
+ \item The validators need access to the entire history of transactions (this includes all UTXOs, commitments and nullifiers as described later).  This history can be stored on a distributed ledger (e.g. the Bitcoin blockchain)
+\end{itemize}
+		
+		
+\textbf{Possible attacks:}
+\begin{itemize}
+ \item CRS compromise: If an attacker learns the private randomness used to generate the CRS, the attacker can forge proofs in the underlying system
+ \item Ledger attacks: validating a transaction requires reading the entire history of transactions, and thus a verifier with an incorrect view of the transaction history may be convinced to accept an incorrect transaction as valid.
+ \item Re-identification attacks: The purpose of incorporating ZKPs into this system is to facilitate transactions without revealing the identities of the sender and receiver.  If anonymity is not required, ZKPs can be avoided altogether, as in Bitcoin.  Although this system hides the sender and receiver of each transaction, the fact that a transaction occurred (and the time of its occurrence) is publicly recorded, and thus may be used to re-identify individual users.
+ \item IP-level attacks: by monitoring network traffic, an attacker could link transactions to specific senders or receivers (each transaction requires communication between the sender and receiver) or link public-keys (pseudonyms) to real-world identities
+ \item Man-it-the-Middle attacks: An attacker could convince a sender to transfer an asset to an “incorrect” public-key
+\end{itemize}
+
+
+\emph{\textbf{Setup scenario:}}  This system is essentially a simplified version of Zcash proof system, modified for indivisible assets.  Each asset is represented by a unique AssetID, and for simplicity we assume that the entire set of assets has been distributed, and no assets are ever created or destroyed.
+
+At any given time, the public state of the system consists of a collection of “asset notes”.  These notes are stored as leaves in a Merkle Tree, and each leaf represents a single indivisible asset represented by unique assetID.  In more detail, a “note” is a commitment to { Nullifier, publicKey, assetID }, indicating that publicKey “owns” assetID.
+
+
+\paragraph{Main transaction type:} 
+Sending an asset from Current Owner $A$ to New Owner $B$
+
+\paragraph{Security goals:}
+  \begin{itemize} 
+		\item Only the current owner can transfer the asset
+    \item Assets are never created or destroyed
+	\end{itemize}
+
+\paragraph{Privacy goals:} 
+Ideally, the system should hide all information about the ownership and transaction patterns of the users.
+The system sketched below does not attain that such a high-level of privacy, but instead achieves the following privacy-preserving features
+   \begin{itemize}
+		\item Transactions are publicly visible, i.e., anyone can see that a transaction occurred
+    \item Transactions do not reveal which asset is being transferred
+    \item Transactions do not reveal the identities (public-keys) of the sender or receiver.
+			\begin{itemize}
+        \item Limitation: Previous owner can tell when the asset is transferred.  (Mitigation: after receiving asset, send it to yourself)
+			\end{itemize}
+	\end{itemize}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Details of a transfer:}
+
+	Each transaction is intended to transfer ownership of an asset from a Current Owner to a New Owner.  
+	In this section, we outline the proofs used to ensure the validity of a transaction. 
+	Throughout this description, we use \blue{Blue} to denote information that is globally and \blue{publicly} visible in the protocol / statement.  
+	We use \red{Red} to denote \red{private} information, e.g. a secret witness held by the prover or information shared between the Current Owner and New Owner.
+
+The Current Owner, $A$, has the following information
+	\begin{itemize}
+    \item A \red{publicKey} and corresponding \red{secretKey}
+    \item An assetID corresponding to the asset being transferred
+    \item A \blue{note} in the MerkleTree corresponding to the asset
+    \item Knows how to open the \red{commitment} (\blue{Nullifier}, \red{assetID, publicKey}) \red{publicKeyOut} of the new Owner $B$
+	\end{itemize}
+
+The Current Owner, $A$, generates
+	\begin{itemize}
+    \item A new \red{NullifierOut}
+    \item A new commitment \red{commitment (NullifierOut, assetID, publicKey)}
+	\end{itemize}
+
+The Current owner, $A$, sends
+	\begin{itemize}
+    \item Privately to $B$: \red{NullifierOut, publicKeyOut, assetID}
+    \item Publicly to the blockchain: \blue{Nullifier, comOut, ZKProof} (the structure of \blue{ZKProof} is outlined below)
+	\end{itemize}
+
+If \blue{Nullifier} does not exist in \blue{MerkleTree} and and \blue{ZKProof} validates, then \blue{comOut} is added to the merkleTree.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{The structure of the Zero-Knowledge Proof:}
+
+We use a modification of \href{https://www.research-collection.ethz.ch/bitstream/handle/20.500.11850/69316/eth-3353-01.pdf}{Camenisch-Stadler} notation to describe the describe the structure of the proof.
+
+Public state: \blue{MerkleTree} of Notes:
+Note = \red{Commitment} to \{ \blue{Nullifier}, \red{publicKey, assetID} \}
+
+\blue{ZKProof} = ZkPoK\textsubscript{pp}\{  
+\begin{itemize}
+\item[] (witness: publicKey, publicKeyOut, merkleProof, NullifierOut, com, assetID, sig
+\item[] statement: MerkleTree, Nullifier, comOut ) :  
+\item[] predicate: 
+		\begin{itemize} 
+			\item[-] \red{com} is included in \blue{MerkleTree} (using \red{merkleProof})
+			\item[-] \red{com} is a commitment to ( \blue{Nullifier}, \red{publicKey, assetID} )
+			\item[-] \blue{comOut} is a commitment to ( \red{NullifierOut, publicKeyOut, assetID} )
+			\item[-] \red{sig} is a signature on \blue{comOut} for \red{publicKey}
+		\end{itemize}
+\end{itemize}
+\hphantom{\blue{ZKProof} = ZkPoK\textsubscript{pp}}\}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Zero-Knowledge proofs in the balance model}
+
+In this section, we outline a simple system for privately transferring fungible assets, in the “balance model.”  This system is essentially a simplified version of \href{https://www.usenix.org/system/files/conference/nsdi18/nsdi18-narula.pdf}{zkLedger}.  The state of the system is an (encrypted) account balance for each user.  Each account balance is encrypted using an additively homomorphic cryptosystem, under the account-holder’s key.  A transaction decrements the sender’s account balance, while incrementing the receiver’s account by a corresponding amount.  If the number of users is fixed, and known in advance, then a transaction can hide all information about the sender and receiver by simultaneously updating all account balances.  This provides a high-degree of privacy, and is the approach taken by zkLedger.  If the set of users is extremely large, dynamically changing, or unknown to the sender, the sender must choose an “anonymity set” and the transaction will reveal that it involved members of the anonymity set, but not the amount of the transaction or which members of the set were involved.  For simplicity of presentation, we assume a model like zkLedger’s where the set of parties in the system is fixed, and known in advance, but this assumption does not affect the details of the zero-knowledge proofs involved.
+
+\textbf{Motivation:} Each entity maintains a private account balance, and a transaction decrements the sender’s balance and increments the receiver’s balance by a corresponding amount.  We assume that every transaction updates every account balance, thus all information the origin, destination and value of a transaction will be completely hidden.  The only information revealed by the protocol is the fact that a transaction occurred.
+
+\textbf{Parties:}
+\begin{itemize}
+    \item A set of n stakeholders who wish to transfer fungible assets anonymously
+    \item The stakeholder who initiates the transaction is called the “prover” or the “sender”
+    \item The receiver, or receivers do not have a distinguished role in a transaction
+    \item A set of validators who maintain the (public) state of the system (e.g. using a blockchain or other DLT).
+\end{itemize}
+
+
+\textbf{What is being proved:} The sender must convince the validators that a proposed transaction is “valid” and the state of the system should be updated to reflect the new transaction.  A transaction consists of a set of n ciphertexts, $(c_1, \ldots, c_n)$, and where $c_i$ = Enc$_{pk}(x_i)$, and a transaction is valid if:\loosen
+	\begin{itemize}
+    \item The sum of all committed values is 0 (i.e., $x_1 + \cdots + x_n = 0$)
+    \item The sender owns the private key corresponding to all negative $x_i$
+    \item After the update, all account balances remain positive
+	\end{itemize}
+
+What information is needed by the verifier:
+	\begin{itemize}
+    \item The verifiers need access  to the CRS used by the proof system
+    \item The verifiers need access to the current state of the system (i.e., the current vector of $n$ encrypted account balances).  
+		This state can be stored on a distributed ledger
+	\end{itemize}
+
+Possible attacks:
+	\begin{itemize}
+    \item CRS compromise: If an attacker learns the private randomness used to generate the CRS, the attacker can forge proofs in the underlying system
+    \item Ledger attacks: validating a transaction requires knowing the current state of the system (encrypted account balances), thus a validator with an incorrect view of the current state may be convinced to accept an incorrect transaction as valid.
+    \item Re-identification attacks: The purpose of incorporating ZKPs into this system is to facilitate transactions without revealing the identities of the sender and receiver.  If anonymity is not required, ZKPs can be avoided altogether, as in Bitcoin.  Although this system hides the sender and receiver of each transaction, the fact that a transaction occurred (and the time of its occurrence) is publicly recorded, and thus may be used to re-identify individual users.
+    \item IP-level attacks: by monitoring network traffic, an attacker could link transactions to specific senders or receivers (each transaction requires communication between the sender and the validators) or link public-keys (pseudonyms) to real-world identities
+    \item Man-it-the-Middle attacks: An attacker could convince a sender to transfer an asset to an “incorrect” public-key.  This is perhaps less of a concern in the situation where the user-base is static, and all public-keys are known in advance.
+	\end{itemize}
+
+
+\paragraph{Setup scenario:} 
+There are fixed number of users, $n$.  
+User $i$ has a known public-key, $pk_i$.
+Each user has an account balance, maintained as an additively homomorphic encryption of their current balance under their $pk$.
+Each transaction is a list of $n$ encryptions, corresponding to the amount each balance should be incremented or decremented by the transaction.
+To ensure money is never created or destroyed, the plaintexts in an encrypted transaction must sum to 0.
+We assume that all account balance are initialized to non-negative values.
+
+
+\paragraph{Main transaction type:} 
+Transferring funds from user $i$ to user $j$
+
+
+\paragraph{Security goals:}
+    \begin{itemize}
+		\item An account balance can only be decremented by the owner of that account
+    \item Account balances always remain non-negative
+    \item The total amount of money in the system remains constant
+		\end{itemize}
+
+
+\paragraph{Privacy goals:}
+Ideally, the system should hide all information about the ownership and transaction patterns of the users.
+The system sketched below does not attain that such a high-level of privacy, but instead achieves the following privacy-preserving features:
+    \begin{itemize}
+		\item Transactions are publicly visible, i.e., anyone can see that a transaction occurred
+    \item Transactions do not reveal which asset is being transferred
+    \item Transactions do not reveal the identities (public-keys) of the sender or receiver.
+
+		Limitation: transaction times are leaked
+		\end{itemize}
+
+
+
+\paragraph{Details of a transfer:}
+
+Each transaction is intended to update the current account balances in the system.  In this section, we outline the proofs used to ensure the validity of a transaction.  Throughout this description, we use \blue{Blue} to denote information that is globally and \blue{publicly} visible in the protocol / statement.  We use \red{Red} to denote \red{private} information, e.g. a secret witness held by the prover.
+
+The Sender, $A$, has the following information
+	\begin{itemize}
+    \item Public keys \blue{$pk_1,\ldots,pk_n$}
+    \item \red{secretKey$_i$} corresponding to \red{publicKey$_i$}, and a values \red{$x_j$}, to transfer to user $j$
+    \item The sender’s own current account balance, \red{$y_i$}
+	\end{itemize}
+
+The Sender, $A$, generates
+	\begin{itemize}
+    \item a vector of ciphertexts, \blue{$C_1,\ldots,C_n$} with \blue{$C_t$} = Enc$_{\blue{pk_t}}(\red{x_t})$
+	\end{itemize}
+
+The Sender, $A$, sends
+	\begin{itemize}
+    \item The vector of ciphertexts \blue{$C_1,\ldots,C_n$} and \blue{ZKProof} (described below) to the blockchain
+	\end{itemize}
+
+ZK Circuit: 
+
+Public state: The current state of the system, i.e., a vector of (encrypted) account balances, \blue{$B_1,\ldots,B_n$}.
+
+  \blue{ZKProof} = ZkPoK\textsubscript{pp}\{  (witness: \red{$i, x_1, \ldots, x_n, sk$} statement: \blue{$C_1,\ldots,C_n$} ) :
+
+\hspace{1em}predicate: 
+\begin{itemize}
+\item[-] $C_t$ is an encryption to $x_t$ under public key $pk_t$ for $t=1,\ldots,n$
+\item[-] $x_1 + \cdots + x_n = 0$
+\item[-] $x_t \geq 0$ OR $sk$ corresponds to $pk_t$ for $t = 1,\ldots,n$
+\item[-] $x_t \geq 0$ OR current balance $B_t$ encrypts a value no smaller than $|x_t|$ for $t = 1,\ldots,n$
+\end{itemize}
+\}

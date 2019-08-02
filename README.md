@@ -3,8 +3,8 @@ The official repository hosting the ZKProof Community Reference document and the
 
 ## Current Call to Action 
   
-  1. __Confirm (or suggest) the intended contributions by June 22nd; and__
-  2. __Submit the contributions by August 10th__
+  1. __Confirm (or suggest) the intended contributions by July 16th; and__
+  2. __Submit the contributions by September 10th__
 
 The submission can be done through __this__ zkreference GitHub repository (start a Pull Request or open an Issue) or through email, by emailing contributors@zkproof.org; see below for further details.
 
@@ -17,7 +17,7 @@ The complete and up-to-date list of contributions can be [found here](https://do
 
 ## Submission Process
 
-__Step 1 (by June 22nd ): Confirm intent to contribute and identify items of contribution__
+__Step 1 (by July 16th): Confirm intent to contribute and identify items of contribution__
 
 If your name appears in the list of contributors or you want to volunteer with a new suggestion, then, by June 22nd, please do:
 
@@ -34,7 +34,7 @@ Each contribution should be accompanied by an explanation, which the editors wil
 - __Proposed contributors:__ _<who is proposing to do something>_
 - __Contribution context:__ _<e.g., which session in the ZKProof workshop motivated this>_
 
-__Step 2 (by July 30th): Submit the contributions__
+__Step 2 (by September 10th): Submit the contributions__
 
 Choose any of these three official methods to submit your contribution:
 

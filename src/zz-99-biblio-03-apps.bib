@@ -117,3 +117,50 @@ abstract="Anonymous credential system promise efficient, ubiquitous access to di
 isbn="978-3-642-15317-4",
 doi={10.1007/978-3-642-15317-4_28}
 }
+
+@Article{2017:Alg:Scalable-Zero-Knowledge-Via-Cycles-of-Elliptic-Curves,
+author="Ben-Sasson, Eli
+and Chiesa, Alessandro
+and Tromer, Eran
+and Virza, Madars",
+title="Scalable Zero Knowledge Via Cycles of Elliptic Curves",
+journal="Algorithmica",
+year="2017",
+month="Dec",
+day="01",
+volume="79",
+number="4",
+pages="1102--1160",
+abstract="Non-interactive zero-knowledge proofs of knowledge for general NP statements are a powerful cryptographic primitive, both in theory and in practical applications. Recently, much research has focused on achieving an additional property, succinctness, requiring the proof to be very short and easy to verify. Such proof systems are known as zero-knowledge succinct non-interactive arguments of knowledge (zk-SNARKs), and are desired when communication is expensive, or the verifier is computationally weak. Existing zk-SNARK implementations have severe scalability limitations, in terms of space complexity as a function of the size of the computation being proved (e.g., running time of the NP statement's decision program). First, the size of the proving key is quasilinear in the upper bound on the computation size. Second, producing a proof requires ``writing down'' all intermediate values of the entire computation, and then conducting global operations such as FFTs. The bootstrapping technique of Bitansky et al. (STOC '13), following Valiant (TCC '08), offers an approach to scalability, by recursively composing proofs: proving statements about acceptance of the proof system's own verifier (and correctness of the program's latest step). Alas, recursive composition of known zk-SNARKs has never been realized in practice, due to enormous computational cost. Using new elliptic-curve cryptographic techniques, and methods for exploiting the proof systems' field structure and nondeterminism, we achieve the first zk-SNARK implementation that practically achieves recursive proof composition. Our zk-SNARK implementation runs random-access machine programs and produces proofs of their correct execution, on today's hardware, for any program running time. It takes constant time to generate the keys that support all computation sizes. Subsequently, the proving process only incurs a constant multiplicative overhead compared to the original computation's time, and an essentially-constant additive overhead in memory. Thus, our zk-SNARK implementation is the first to have a well-defined, albeit low, clock rate of ``verified instructions per second''.",
+issn="1432-0541",
+doi="10.1007/s00453-016-0221-0",
+url="https://doi.org/10.1007/s00453-016-0221-0"
+}
+
+@inproceedings{2013:Recursive-Composition-and-Bootstrapping-for-SNARKS-and-Proof-carrying-Data,
+ author = {Bitansky, Nir and Canetti, Ran and Chiesa, Alessandro and Tromer, Eran},
+ title = {Recursive Composition and Bootstrapping for SNARKS and Proof-carrying Data},
+ booktitle = {Proceedings of the Forty-fifth Annual ACM Symposium on Theory of Computing},
+ series = {STOC '13},
+ year = {2013},
+ isbn = {978-1-4503-2029-0},
+ location = {Palo Alto, California, USA},
+ pages = {111--120},
+ numpages = {10},
+ url = {http://doi.acm.org/10.1145/2488608.2488623},
+ doi = {10.1145/2488608.2488623},
+ acmid = {2488623},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ keywords = {delegation of computation, snargs, succinct arguments},
+}
+
+@inproceedings{2010:ICS:proof-carrying-data,
+  title={Proof-Carrying Data and Hearsay Arguments from Signature Cards},
+  author={Alessandro Chiesa and Eran Tromer},
+  booktitle={Innovations in Computer Science --- {ICS} 2010},
+	volume={10},
+	pages={310--331},
+  year={2010}
+}
+

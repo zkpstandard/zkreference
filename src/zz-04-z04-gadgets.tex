@@ -46,7 +46,7 @@ Example of ring signature: \textbf{Zk \{ (sig):  VerifySignature(P1, sig) or Ver
 \hline \newGadget[gad:commitment] & Commitment 
 				& Envelope\luiscom{``Commitment'' is traditionally equated to a ``sealed envelop'' ... but a ``vault'' would have the additional feature of requiring a secret key for the opening phase. (Reflect on the best way to convey intuition to a non-cryptographer.) One can actually implement a commitment by sending a vault by mail ... and later the key} & \reftab{tab:gadget-commitment-envelope} \rowend
 \hline \newGadget[gad:signatures] & Signatures 
-				& \subtab{\fillindesc\\\red{(inc. blind, ring, \red{homom}?)}} & \reftab{tab:gadget-signature} \rowend
+				& Signature authorization letter & \reftab{tab:gadget-signature} \rowend
 \hline \newGadget[gad:encryption] & Encryption 
 				& Envelope with a receiver stamp & \reftab{tab:gadget-encryption} \rowend
 \hline \newGadget[gad:dist-decryption] & Distributed decryption 
@@ -54,7 +54,7 @@ Example of ring signature: \textbf{Zk \{ (sig):  VerifySignature(P1, sig) or Ver
 \hline \newGadget[gad:rand-func] & Random function 
 				& Lottery machine & \reftab{tab:gadget-random-function} \rowend
 \hline \newGadget[gad:set-membership] & Set membership 
-				& \fillindesc & \reftab{tab:gadget-set-membership} \rowend
+				& Whitelist/blacklist & \reftab{tab:gadget-set-membership} \rowend
 \hline \newGadget[gad:mix-net] & Mix-net 
 				& Ballot box & \reftab{tab:gadget-mix-net} \rowend
 \hline \newGadget[gad:gen-calculations] & Generic circuits, TMs, or RAM programs 
@@ -122,20 +122,21 @@ Example of ring signature: \textbf{Zk \{ (sig):  VerifySignature(P1, sig) or Ver
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{table}[H]
-\mytabcap{Signature gadget}{Signature gadget (\ref{gad:signatures}; \fillindesc)}\label{tab:gadget-signature}
+\mytabcap{Signature gadget}{Signature gadget (\ref{gad:signatures}; signature authorization letter)}\label{tab:gadget-signature}
 \begin{gadgettabular}{.21}{.21}{.21}{.21}{.21}{.1}
-			\fillindesc 
-		& Knowledge of a signature on a message\luissug{Consider differentiating more explicitly the secret vs.\ public info. For example: ``Knowledge of a secret signature of a public message'' or ``Knowledge of a secret signature of a commonly known message''}
+			Secret valid signature over commonly known message
+		& Knowledge of a secret signature $\sigma$ on a commonly known message $M$\luissug{Consider differentiating more explicitly the secret vs.\ public info. For example: ``Knowledge of a secret signature of a public message'' or ``Knowledge of a secret signature of a commonly known message''}
     & Signature $\sigma$
     & Verification key $VK$, message $M$
-    & Verify$(VK, m, \sigma) = \tt True$
+    & Verify$(VK, M, \sigma) = \tt True$
     & \rowend
 \hline 
-		  \textbf{\red{propose: blind, ring, group, homom.}}\luistodo{Unclear in the original document if this row is to be within the signature gadget. I just assumed yes, as in blind signature, ring signature, ...}
-		& Knowledge of a signature on a committed value\luissug{Consider differentiating more explicitly the secret vs.\ public info. For example: ``Knowledge of a secret signature on a publicized commitment of a known secret message [and knowledge of its opening]'' (maybe the suggestion fails by stretching the sentence too much, but the current statement seems somewhat dubious about what is secret.)}
+			Secret valid signature over committed message
+		  %\textbf{\red{propose: blind, ring, group, homom.}}\luistodo{Unclear in the original document if this row is to be within the signature gadget. I just assumed yes, as in blind signature, ring signature, ...}
+		& Knowledge of a secret signature $\sigma$ on a commonly known commitment $C$ of a secret message $M$\luissug{Consider differentiating more explicitly the secret vs.\ public info. For example: ``Knowledge of a secret signature on a publicized commitment of a known secret message [and knowledge of its opening]'' (maybe the suggestion fails by stretching the sentence too much, but the current statement seems somewhat dubious about what is secret.)}
 		& Message $M$\luissug{It appears that an opening O should also be included here. An alternative (more contrived) scenario is the prover only knowing a transferable NIZK that C is a correct commitment of M, and proving possessing such NIZK :-) ...}, signature $\sigma$
 		& Verification key $VK$, committed value $C$
-		& $C = Comm(M)$ and Verify$(VK, m, \sigma) = \tt True$
+		& $C = Comm(M)$ and Verify$(VK, M, \sigma) = \tt True$
     & \rowend
 \hline
 \end{gadgettabular}
@@ -146,11 +147,11 @@ Example of ring signature: \textbf{Zk \{ (sig):  VerifySignature(P1, sig) or Ver
 \begin{table}[H]
 \mytabcap{Encryption gadget}{Encryption gadget (\ref{gad:encryption}; envelope with a receiver stamp)}\label{tab:gadget-encryption}
 \begin{gadgettabular}{.21}{.21}{.21}{.21}{.21}{.1}
-			\fillindesc 
-		& Knowledge of a signature on a message
-    & Signature $\sigma$
-    & Verification key $VK$, message $M$
-    & Verify$(VK, m, \sigma) = \tt True$
+			The output plaintext(s) correspond to the public ciphertext(s).
+    & Knowledge of a secret plaintext $M$
+    & Secret decryption key $SK$
+    & Ciphertext(s) $C$ and Encryption key $PK$
+    & $Dec(SK, C) = M$, component-wise if $\exists$ multiple $C$ and $M$
     & \rowend
 \hline
 \end{gadgettabular}
@@ -163,10 +164,10 @@ Example of ring signature: \textbf{Zk \{ (sig):  VerifySignature(P1, sig) or Ver
 \mytabcap{Distributed-decryption gadget}{Distributed-decryption gadget (\ref{gad:dist-decryption}; envelope with a receiver stamp that requires multiple people to open)}\label{tab:gadget-dist-decryption}
 \begin{gadgettabular}{.21}{.21}{.21}{.21}{.21}{.1}
 			The output plaintext(s) correspond to the public ciphertext(s).
-     & Knowledge of the plaintext
-     & Secret shares of the decryption key
+     & Knowledge of a secret plaintext $M$
+	& Secret shares $[SK_i]$ of the decryption key $SK$
      & Ciphertext(s) $C$ and Encryption key $PK$
-     & $Dec(SK, C) = P$, component-wise if $\exists$ multiple $C$
+	& $SK = Derive([SK_i])$ and $Dec(SK, C) = M$, component-wise if $\exists$ multiple $C$
      & \rowend
 \hline
 \end{gadgettabular}
@@ -191,21 +192,28 @@ Example of ring signature: \textbf{Zk \{ (sig):  VerifySignature(P1, sig) or Ver
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{table}[H]
-\mytabcap{Set-membership gadget}{Set-membership gadget (\ref{gad:set-membership}; \fillindesc)}\label{tab:gadget-set-membership}
+	\mytabcap{Set-membership gadget}{Set-membership gadget (\ref{gad:set-membership}; whitelist/blacklist)}\label{tab:gadget-set-membership}
 \vspace{-.4em} %adjustment \vspace to revise ... temporarily here to enable 3 tables to fit within 1 page
 \begin{gadgettabular}{.21}{.21}{.21}{.21}{.21}{.1}
 			Accumulator
      & Set inclusion
-		 & \fillindesc 
-		 & \fillindesc 
-		 & \fillindesc 
+		 & Secret element $X$
+		 & Public set $S$ 
+		 & $X \in S$ 
 		 & \rowend
 \hline
-			 \fillindesc 
+			Universal accumulator 
      & Set non-inclusion
-		 & \fillindesc 
-		 & \fillindesc 
-		 & \fillindesc 
+		 & Secret element $X$ 
+		 & Public set $S$ 
+		 & $X \notin S$ 
+		 & \rowend
+\hline
+			Merkle Tree	
+     & Element occupies a certain position within the vector
+		 & Secret element $X$ 
+		 & Public vector $V$ 
+		 & $X = V[i]$ for some $i$ 
 		 & \rowend
 \hline
 \end{gadgettabular}

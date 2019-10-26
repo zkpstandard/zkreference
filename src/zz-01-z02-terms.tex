@@ -61,5 +61,55 @@ Another option could be to define the common setup to include x, and the private
 	Suggestion --- explicitly define CRS as the CommonSetup component of the setup, regardless of whether or not there is a PrivateSetup components. Then if useful provide two examples, one where a CRS is enough; another where there is for example a PKI with secret keys.
 	\textCR The text, using ``common public'', also seems to convey that the CRS must be public.
 	Suggestion: remove "public" and require only the ``common'' aspect.
-	FOr example, being public vs. common-but-not-public may make the difference between a ZK proof being transferable or not.}
+	For example, being public vs. common-but-not-public may make the difference between a ZK proof being transferable or not.}
 
+
+
+\reftab{tab:example-scenarios-zkps} exemplifies at a high level a differentiation between the \emph{statement}, the \emph{instance} and the \emph{witness} elements for the initial examples mentioned in \refsec{security:intro:what-is-a-ZK}.
+
+
+\begin{table}[H]\centering
+\mytabcap{Example scenarios for zero-knowledge proofs}{Example scenarios for zero-knowledge proofs}\label{tab:example-scenarios-zkps}\revblock[rev:ZKP:enhance-table-of-examples]{\ref{it:ZKP:enhance-table-of-examples}}
+
+\vspace{1em}\small
+\newcommand{\scaleTitle}[1]{\scalebox{.95}{#1}}
+%\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l||l||l||l|}
+\hline \rowcolor{colorRowHead}
+			\bfseries \scalebox{.85}{\#}
+		& \diagbox{\small \bfseries \makebox[2.25em]{\hspace{1em}\scalebox{.8}{Scenarios}}}{\small \bfseries \makebox[0pt]{\hspace*{-2.75em}\scalebox{.8}{Elements}}}
+		& \subtab[l]{{\bfseries Statement}\\being proven}
+		& \subtab[l]{{{\bfseries Instance}}\\used as substrate}
+		& \subtab[l]{{\bfseries Witness}\\treated as confidential}\\
+\hline
+\hline \bfseries 1 
+		& \bfseries \scaleTitle{\subtab[l]{Legal age for\\purchase}}
+		& I am an adult 
+		& \subtab[l]{Tamper-resistant\\identification chip}
+		& \subtab[l]{Birthdate and personal\\data (signed by a CA)}\\
+\hline \bfseries 2 
+		&	\bfseries \scaleTitle{\subtab[l]{Hedge fund\\solvency}}
+		& \subtab[l]{We are not bankrupt}
+		& \subtab[l]{Encrypted \& certified\\bank records}
+		& \subtab[l]{Portfolio data and\\decryption key}\\
+\hline \bfseries 3
+		&	\bfseries \scaleTitle{\subtab[l]{Asset\\transfer}}
+		& I own this $<$asset$>$
+		& \subtab[l]{A blockchain or\\other commitments}
+		& \subtab[l]{\scalebox{1}{Sequence of transactions}\\\scalebox{1.0}{(and secret keys that}\\\scalebox{1.0}{establish ownership)}}\\
+\hline \bfseries 4
+		& \bfseries \scaleTitle{\subtab[l]{Chessboard\\configuration}}
+		& \subtab[l]{This $<$configuration$>$\\can be reached}
+		& \subtab[l]{(The rules of Chess)}
+		& \subtab[l]{A sequence of valid\\chess moves}\\
+\hline \bfseries 5
+		& \bfseries \scaleTitle{\subtab[l]{Theorem\\validity}}
+		& \subtab[l]{This $<$expression$>$\\is a theorem}  %(provable\\in $<n$ steps)
+		& \subtab[l]{(A set of axioms,\\and the logical \\rules of inference)}   
+		& \subtab[l]{A sequence of logical\\implications}\\
+\hline 
+\end{tabular}
+%}%end of resizebox
+
+\vspace{.25em}\begin{minipage}{1\textwidth}{\footnotesize Legend: CA = certification authority}\end{minipage}
+\end{table}

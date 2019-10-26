@@ -5,7 +5,15 @@
 	This document considers types of statements defined by a relation $R$ between instances $x$ and witnesses $w$.
 	The relation $R$ specifies which pairs $(x,w)$ are considered related to each other, and which are not related to each other.
 	The relation defines a matching language $L$ consisting of instances $x$ that have a witness $w$ in $R$.
-	A statement is a claim $x \in L$, which can be true or false.
+
+	\revblock[rev:pok:types-of-statement]{\ref{it:pok:types-of-statement}}
+	A \emph{statement} is either a \emph{membership} claim of the form ``$x \in L$'', 
+or a \emph{knowledge} claim of the form ``In the scope of relation $R$, I know a witness for instance $x$.''
+	For some cases, the \emph{knowledge} and \emph{membership} types of statement can be informally considered interchangeable, but formally there are technical reasons to distinguish between the two notions.
+	In particular, there are scenarios where a statement of knowledge cannot be converted into a statement of membership, and vice-versa (as exemplified in Section 1.4).
+	The examples in this document are often based on statements of knowledge.
+	
+
  
 	The relation $R$ can for instance be specified as a program (e.g. in C or Java), which given inputs $x$ and $w$ decides to accept, meaning $(x,w) \in R$, or reject, meaning $w$ is not a witness to $x \in L$. 
 	Examples of such specifications of the relation are detailed in the \hyperref[chap:apps]{Applications track}.

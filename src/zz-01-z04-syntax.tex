@@ -9,6 +9,7 @@ The algorithms Prove and Verify may be probabilistic and may keep internal state
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection[Prove]{\textbf{Prove}$(state, m) \rightarrow (state, p)$}
+\label{security:syntax:prove}
 
 The Prove algorithm in a given state receiving message $m$, updates its state and returns a message $p$.\loosen
 
@@ -22,6 +23,7 @@ The Prove algorithm in a given state receiving message $m$, updates its state an
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection[Verify]{\textbf{Verify}$(state, p)$ $\rightarrow (state, m)$}
+\label{security:syntax:verify}
 
 The Verify algorithm in a given state receiving message $p$, updates its state and returns a message $m$.\loosen
 
@@ -50,6 +52,7 @@ or in the case of designated verifier proofs that setup$_P$ and setup$_V$ are co
 variable containing the ``parameters'', and using \emph{aux} (in math mode) instead of ``auxiliary output''. 
 Notice that \emph{aux} is anyway used from \refsec{sec:security:defs-props:completeness} onward.} 
 $\rightarrow$ (\setR, \setP, \setV, auxiliary output)}
+\label{security:syntax:setup}
 
 The setup algorithm may take input parameters, which could for instance be computational or statistical security parameters indicating the desired security level of the proof system, or size parameters specifying the size of the statements the proof system should work for, or choices of cryptographic primitives e.g. the SHA-256 hash function or an elliptic curve.
 

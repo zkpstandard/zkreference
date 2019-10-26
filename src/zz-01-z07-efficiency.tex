@@ -18,6 +18,70 @@ Readers of a proof system specification may differ in the granularity they need 
 
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\tmpTitle{Characterization of security properties}
+\subsection[\tmpTitle]{\tmpTitle\revblock[rev:comp-sec-par:bench:characterize-properties]{\ref{it:comp-sec-par:bench:characterize-properties}}}
+\label{security:efficiency:characterize-properties}
+	The benchmarking of a technique should clarify the distinct security levels achieved/conjectured for different security properties, e.g., soundness vs.\ zero-knowledge.
+	In each case, the security type should also be clarified with respect to being unconditional, statistical or computational.
+	When considering computational security, it should be clarified to what extent pre-computations may affect the security level, and whether/how known attacks may be parallelizable.
+	All security claims/assertions should be qualified clearly with respect to whether they are based on proven security reductions or on heuristic conjectures. 
+    In either case the security analysis should make clear which computational assumptions and implementation requirements are needed. 
+    It should be made explicit whether (and how) the security levels relate to classical or quantum adversaries. 
+    When applicable, the benchmarking should characterize the security (including possible unsuitability) of the technique against quantum adversaries.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\tmpTitle{Computational security levels for benchmarking}
+\subsection[\tmpTitle]{\tmpTitle\revblock[rev:comp-sec-par:bench:security-levels]{\ref{it:comp-sec-par:bench:security-levels}}}
+\label{security:efficiency:comp-sec-levels}
+
+	The benchmarks for each technique \shall\ include at least one parameterization 
+for achieving a conjectured computational security level $\kappa$ approximately equal to, or greater than, 128 bits.
+	Each technique \should\ also be benchmarked for at least one 
+additional higher computational security level, such as 192 or 256 bits.
+    (If only one, the latter is preferred.)
+    The benchmarking at more than one level aids with the understanding of how
+the efficiency varies with the security level.
+    The interest in a security level as high as 256 bits can be considered a 
+precautious (and heuristic) safety margin, compared for example with intended 128 bits.
+    This is intended to handle the possibility that the conjectured level of security is later found to have been over-estimated.
+	The evaluation at computational security below 128 bits may be justified for the purpose 
+of clarifying how the execution complexity or time varies with the security parameter, 
+but should not be construed as a recommendation for practical security.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{An exception allowing lower computational security parameter.}\revblock[rev:comp-sec:exception-lower-levels]{\ref{it:sec-par:exception-lower-levels}}
+	With utmost care, a computational security level may be justified below 128 bits,
+including for benchmarking.
+	The following text describes as exception.
+	In some interactive ZKPs (see Section 2.2), there may be cryptographic properties that only need to be held during a portion of a protocol execution, which in turn may be required to take less than a fixed amount of time, say, one minute.
+	For example, a commitment scheme used to enable temporary hiding during a 
+coin-flipping protocol may only need to hold until the other party reveals a secret value.
+	In such case the property may be implemented with less than 128 bits of security, 
+under special care (namely with respect to composition in a concurrent setting)
+and if the difference in efficiency is substantial.
+	Such decreased security level of a component of a protocol may also be 
+useful for example to enable properties of deniability (non-transferability).
+
+    Depending on the application, other exceptions may be acceptable, upon careful analysis, when the witness whose knowledge is being proven is itself discoverable from the ZK instance with less computational resources than those corresponding to 128 bits of security. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \paragraph{List of references:}\pdfbookmark[1]{List of references}{pdfbkm:security:list-refs}
 \cite{2013:tcc:snargs-via-LIPs},
 \cite{2016:tcc:IOPs},

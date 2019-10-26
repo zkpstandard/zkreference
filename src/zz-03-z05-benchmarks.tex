@@ -42,14 +42,17 @@ Computational benchmarks should be run on a consistent and commercially availabl
 \end{itemize}
 
 
-We recommend that most runs are executed on a single-threaded machine, with parallelizability being an optional metric to measure. The benchmarks should be run at approximately \textbf{120}-bit security or larger. The conjectured security level, and whether it is in a post-quantum or classical setting, should be clearly stated.
+We recommend that most runs are executed on a single-threaded machine, with parallelizability being an optional metric to measure. 
+	The benchmarks should be\revblock[rev:sec-par-bench-refer-to-section]{\ref{it:explain-parameter-kappa}}
+	obtained preferably for more than one security level, following the recommendations stated in Sections \ref{it:comp-sec-par:bench:characterize-properties} and \ref{security:efficiency:comp-sec-levels}.
+
 
 In order to enable better comparisons we recommend that the metrics of other proof systems\slash implementations are also run on the same machine and reported. The onus is on the library developer to provide a simple way to run any instance on which a benchmark is reported.   This will additionally aid the reproducibility of results. Links to implementations will be gathered at zkp.science and library developers are encouraged to ensure that their library is properly referenced. Further we encourage scientific publishing venues to require the submission of source code if an implementation is reported. Ideally these venues even test the reproducibility and indicate whether results could be reproduced.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{What benchmarks to run}
-We propose a set of benchmarks that is informed by current applications of zero-knowledge proofs, as well as by differences in proving systems. This list in no way complete and should be amended and updated as new applications emerge and new systems with novel properties are developed. Zero-knowledge proof systems can be used in a black-box manner on an existing application, but often designing the application with a proof system in mind can yield large efficiency gains. To cover both scenarios we suggest a set of benchmarks that include commonly used primitives (e.g. SHA-256) and one where only the functionality is specified but not the primitives (e.g. a collision-resistant hash function at 120-bit classical security). 
+We propose a set of benchmarks that is informed by current applications of zero-knowledge proofs, as well as by differences in proving systems. This list in no way complete and should be amended and updated as new applications emerge and new systems with novel properties are developed. Zero-knowledge proof systems can be used in a black-box manner on an existing application, but often designing the application with a proof system in mind can yield large efficiency gains. To cover both scenarios we suggest a set of benchmarks that include commonly used primitives (e.g. SHA-256) and one where only the functionality is specified but not the primitives (e.g. a collision-resistant hash function at 128-bit\revblock[rev:comp-sec-par:120-to-128-a]{\ref{it:comp-sec-par:120-to-128}} classical security). 
 
 
 \paragraph{Commonly used primitives.}
@@ -87,7 +90,7 @@ The above relations, parallelized by putting $n$ copies in parallel.
 
 The following are examples of cryptographic functionalities that are especially interesting to application developers. The realization of the primitive may be secondary, as long as it achieves the security properties. It is helpful to provide benchmarks for a constraint-system implementation of a realization of these primitives that is tailored for the NIZK backend.
 
-In all of the following, the primitive should be given at a level of 120 bits or higher and match the security of the NIZK proof system.
+In all of the following, the primitive underlying\revblock[rev:comp-sec-par:120-to-128-b]{\ref{it:comp-sec-par:120-to-128}} the ZKP statement should be given at a level of 128 bits or higher and match the security of the NIZK proof system.
 \begin{itemize}
     \item Asymmetric cryptography
 				\begin{itemize}[label={- }]
@@ -113,11 +116,4 @@ In all of the following, the primitive should be given at a level of 120 bits or
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Security}
-When benchmarking it is important to compare the claimed and achieved security of different proof systems. To aid this benchmarks should make it clear which security level (Definition see theory track\luissug{Revise ``Security'' vs. ``Theory''?} document) is being used. 
-In particular the benchmark should clearly state under which assumptions the claimed security is achieved. 
-If the security is conjectured then benchmarks should display both the conjectured as well as the proven performance. 
-Benchmarks should be run with at least 120-bit security. 
-If the proof system claims to be quantum-resistant it should be clearly stated whether the benchmarks are in the classical or quantum setting. 
-Further if the quantum setting is benchmarked, the benchmarked primitives should be adjusted as well.
+

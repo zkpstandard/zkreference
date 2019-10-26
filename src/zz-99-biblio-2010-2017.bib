@@ -57,10 +57,47 @@ year="2012",
 publisher="Springer Berlin Heidelberg",
 address="Berlin, Heidelberg",
 pages="151--168",
-abstract="We revisit the question of Zero-Knowledge PCPs, studied by Kilian, Petrank, and Tardos (STOC�'97). A ZK-PCP is defined similarly to a standard PCP, except that the view of any (possibly malicious) verifier can be efficiently simulated up to a small statistical distance. Kilian et al.obtained a ZK-PCP for NEXP in which the proof oracle is in EXPNP. They also obtained a ZK-PCP for NP in which the proof oracle is computable in polynomial-time, but this ZK-PCP is only zero-knowledge against bounded-query verifiers who make at most an a priori fixed polynomial number of queries. The existence of ZK-PCPs for NP with efficient oracles and arbitrary polynomial-time malicious verifiers was left open. This question is motivated by the recent line of work on cryptography using tamper-proof hardware tokens: an efficient ZK-PCP (for any language) is equivalent to a statistical zero-knowledge proof using only a single stateless token sent to the verifier.",
+abstract="We revisit the question of Zero-Knowledge PCPs, studied by Kilian, Petrank, and Tardos (STOC '97). A ZK-PCP is defined similarly to a standard PCP, except that the view of any (possibly malicious) verifier can be efficiently simulated up to a small statistical distance. Kilian et al.obtained a ZK-PCP for NEXP in which the proof oracle is in EXPNP. They also obtained a ZK-PCP for NP in which the proof oracle is computable in polynomial-time, but this ZK-PCP is only zero-knowledge against bounded-query verifiers who make at most an a priori fixed polynomial number of queries. The existence of ZK-PCPs for NP with efficient oracles and arbitrary polynomial-time malicious verifiers was left open. This question is motivated by the recent line of work on cryptography using tamper-proof hardware tokens: an efficient ZK-PCP (for any language) is equivalent to a statistical zero-knowledge proof using only a single stateless token sent to the verifier.",
 isbn="978-3-642-28914-9",
 doi={10.1007/978-3-642-28914-9_9}
 }
+
+
+%Goldreich13
+@incollection{2013:CISS:a-short-tutorial-on-zero-knowledge,
+  author    = {Oded Goldreich},
+  title     = {A Short Tutorial of Zero-Knowledge},
+  booktitle = {Secure Multi-Party Computation},
+	series    = {Cryptology and Information Security Series},
+	volume    = {10},
+  pages     = {28--60},
+  year      = {2013},
+	editor    = {Manoj M. Prabhakaran and Amit Sahai},
+  url       = {https://doi.org/10.3233/978-1-61499-169-4-28},
+  doi       = {10.3233/978-1-61499-169-4-28},
+}
+
+
+%BCGT13
+%ben2013concrete
+%Ben-Sasson:2013:CEP:2488608.2488681
+@inproceedings{2013:STOC:concrete-efficiency-PCPs,
+ author = {Ben-Sasson, Eli and Chiesa, Alessandro and Genkin, Daniel and Tromer, Eran},
+ title = {On the Concrete Efficiency of Probabilistically-checkable Proofs},
+ booktitle = {Proceedings of the Forty-fifth Annual ACM Symposium on Theory of Computing},
+ series = {STOC '13},
+ year = {2013},
+ isbn = {978-1-4503-2029-0},
+ location = {Palo Alto, California, USA},
+ pages = {585--594},
+ numpages = {10},
+ doi = {10.1145/2488608.2488681},
+ acmid = {2488681},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ keywords = {PCPs, low-degree tests, reed-solomon code},
+} 
+
 
 
 
@@ -373,7 +410,7 @@ year="2017",
 publisher="Springer International Publishing",
 address="Cham",
 pages="247--277",
-abstract="Succinct non-interactive arguments (SNARGs) enable verifying {\$}{\$}{\{}{\{}{\backslash}mathsf {\{}NP{\}}{\}}{\}}{\$}{\$}computations with substantially lower complexity than that required for classical {\$}{\$}{\{}{\{}{\backslash}mathsf {\{}NP{\}}{\}}{\}}{\$}{\$}verification. In this work, we give the first lattice-based SNARG candidate with quasi-optimal succinctness (where the argument size is quasilinear in the security parameter). Further extension of our methods yields the first SNARG (from any assumption) that is quasi-optimal in terms of both prover overhead (polylogarithmic in the security parameter) as well as succinctness. Moreover, because our constructions are lattice-based, they plausibly resist quantum attacks. Central to our construction is a new notion of linear-only vector encryption which is a generalization of the notion of linear-only encryption introduced by Bitansky�et�al.�(TCC 2013). We conjecture that variants of Regev encryption satisfy our new linear-only definition. Then, together with new information-theoretic approaches for building statistically-sound linear PCPs over small finite fields, we obtain the first quasi-optimal SNARGs.",
+abstract="Succinct non-interactive arguments (SNARGs) enable verifying {\$}{\$}{\{}{\{}{\backslash}mathsf {\{}NP{\}}{\}}{\}}{\$}{\$}computations with substantially lower complexity than that required for classical {\$}{\$}{\{}{\{}{\backslash}mathsf {\{}NP{\}}{\}}{\}}{\$}{\$}verification. In this work, we give the first lattice-based SNARG candidate with quasi-optimal succinctness (where the argument size is quasilinear in the security parameter). Further extension of our methods yields the first SNARG (from any assumption) that is quasi-optimal in terms of both prover overhead (polylogarithmic in the security parameter) as well as succinctness. Moreover, because our constructions are lattice-based, they plausibly resist quantum attacks. Central to our construction is a new notion of linear-only vector encryption which is a generalization of the notion of linear-only encryption introduced by Bitansky et al. (TCC 2013). We conjecture that variants of Regev encryption satisfy our new linear-only definition. Then, together with new information-theoretic approaches for building statistically-sound linear PCPs over small finite fields, we obtain the first quasi-optimal SNARGs.",
 isbn="978-3-319-56617-7",
 doi={10.1007/978-3-319-56617-7_9},
 addendum={\eprintiacr{2017}{240}},
@@ -505,7 +542,7 @@ day="01",
 volume="79",
 number="4",
 pages="1102--1160",
-abstract="Non-interactive zero-knowledge proofs of knowledge for general NP statements are a powerful cryptographic primitive, both in theory and in practical applications. Recently, much research has focused on achieving an additional property, succinctness, requiring the proof to be very short and easy to verify. Such proof systems are known as zero-knowledge succinct non-interactive arguments of knowledge (zk-SNARKs), and are desired when communication is expensive, or the verifier is computationally weak. Existing zk-SNARK implementations have severe scalability limitations, in terms of space complexity as a function of the size of the computation being proved (e.g., running time of the NP statement's decision program). First, the size of the proving key is quasilinear in the upper bound on the computation size. Second, producing a proof requires ``writing down'' all intermediate values of the entire computation, and then conducting global operations such as FFTs. The bootstrapping technique of Bitansky et al. (STOC '13), following Valiant (TCC '08), offers an approach to scalability, by recursively composing proofs: proving statements about acceptance of the proof system's own verifier (and correctness of the program's latest step). Alas, recursive composition of known zk-SNARKs has never been realized in practice, due to enormous computational cost. Using new elliptic-curve cryptographic techniques, and methods for exploiting the proof systems' field structure and nondeterminism, we achieve the first zk-SNARK implementation that practically achieves recursive proof composition. Our zk-SNARK implementation runs random-access machine programs and produces proofs of their correct execution, on today's hardware, for any program running time. It takes constant time to generate the keys that support all computation sizes. Subsequently, the proving process only incurs a constant multiplicative overhead compared to the original computation's time, and an essentially-constant additive overhead in memory. Thus, our zk-SNARK implementation is the first to have a well-defined, albeit low, clock rate of ``verified instructions per second''.",
+abstract="Non-interactive zero-knowledge proofs of knowledge for general NP statements are a powerful cryptographic primitive, both in theory and in practical applications. Recently, much research has focused on achieving an additional property, succinctness, requiring the proof to be very short and easy to verify. Such proof systems are known as zero-knowledge succinct non-interactive arguments of knowledge (zk-SNARKs), and are desired when communication is expensive, or the verifier is computationally weak. Existing zk-SNARK implementations have severe scalability limitations, in terms of space complexity as a function of the size of the computation being proved (e.g., running time of the NP statement's decision program). First, the size of the proving key is quasilinear in the upper bound on the computation size. Second, producing a proof requires ``writing down'' all intermediate values of the entire computation, and then conducting global operations such as FFTs. The bootstrapping technique of Bitansky et al. (STOCÂ '13), following Valiant (TCCÂ '08), offers an approach to scalability, by recursively composing proofs: proving statements about acceptance of the proof system's own verifier (and correctness of the program's latest step). Alas, recursive composition of known zk-SNARKs has never been realized in practice, due to enormous computational cost. Using new elliptic-curve cryptographic techniques, and methods for exploiting the proof systems' field structure and nondeterminism, we achieve the first zk-SNARK implementation that practically achieves recursive proof composition. Our zk-SNARK implementation runs random-access machine programs and produces proofs of their correct execution, on today's hardware, for any program running time. It takes constant time to generate the keys that support all computation sizes. Subsequently, the proving process only incurs a constant multiplicative overhead compared to the original computation's time, and an essentially-constant additive overhead in memory. Thus, our zk-SNARK implementation is the first to have a well-defined, albeit low, clock rate of ``verified instructions per second''.",
 issn="1432-0541",
 doi="10.1007/s00453-016-0221-0",
 url="https://doi.org/10.1007/s00453-016-0221-0"

@@ -8,6 +8,7 @@ In this section we explore the requirements for making the implementation of the
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Considerations}
+\label{implem:correctness:considerations}
 
 
 \paragraph{Design of high-level protocol and statement.}
@@ -89,6 +90,7 @@ A proof system implementation can support testing by providing access, for test 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{SRS Generation}
+\label{implem:correctness:SRS-gen}
 
 A prominent trust issue arises in proving systems which require a parameter setup process (structured reference string) that involves secret randomness. 
 These may have to deal with scenarios where the process is vulnerable or expensive to perform security. 
@@ -168,6 +170,8 @@ There are cases where the verifier is a known-in-advance single entity. There ar
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Contingency plans}
+\label{implem:correctness:contingency}
+
 We would like to explore in future workshops the notion of contingency plans. For example, how do we cope:
 \begin{itemize}[label={- }]
     \item With our proof system being compromised? 

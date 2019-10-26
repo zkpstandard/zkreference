@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section[Taxonomy of Constructions]{Taxonomy of Constructions{\normalsize\revblock[rev:move-taxonomy-to-new-chapter]{\ref{it:move-taxonomy-to-new-chapter}}}}
-\label{security:taxonomy} 
+\label{paradigms:taxonomy} 
  
 There are many different types of zero-knowledge proof systems in the literature that offer different tradeoffs between communication cost, computational cost, and underlying cryptographic assumptions. 
 Most of these proofs can be decomposed into an “information-theoretic” zero-knowledge proof system, sometimes referred to as a zero-knowledge \emph{probabilistically checkable proof} (PCP), and a \emph{cryptographic compiler}, or crypto compiler for short, that compiles such a PCP into a zero-knowledge proof.
@@ -97,8 +97,8 @@ takes as input a vector $q \in \field^k$ and returns the matrix-vector product $
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-%\paragraph{i) Proof Systems}
 \subsection{Proof Systems}
+\label{paradigms:taxonomy:proof-systems} 
 
 \emph{Note:} For all of the applications we consider, the prover must run in polynomial time, given a statement-witness pair, and the verifier must run in (possibly randomized) polynomial time.\loosen
 
@@ -133,12 +133,12 @@ takes as input a vector $q \in \field^k$ and returns the matrix-vector product $
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\textbf{ii) Compilers: Cryptographic}
 \subsection{Compilers: Cryptographic}
+\label{paradigms:taxonomy:compilers-crypto} 
 	
 	\begin{enumerate}[label=\alph*.]
   
-	%\item \underline{Cramer-Damgård:} 
+
 	\item \underline{Cramer-Damgård \cite{1998:crypto:zkps-for-finite-field-arithmetic}:} 
 	Compiles an NP proof into a zero-knowledge proof. 
 	The prover evaluates the circuit $C$ recognizing the relation on its statement-witness pair $(x,w)$. 
@@ -181,8 +181,8 @@ takes as input a vector $q \in \field^k$ and returns the matrix-vector product $
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\paragraph{iii) Compilers: Information-theoretic}
 \subsection{Compilers: Information-theoretic}
+\label{paradigms:taxonomy:compilers-IT} 
 	
 	\begin{enumerate}[label=\alph*.]
   

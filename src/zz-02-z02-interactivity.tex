@@ -93,6 +93,64 @@ are greatly mitigated for non-interactive protocols \cite{2006:eurocrypt:perfect
 
 \end{enumerate}
 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Nuances on transferability vs. interactivity}
 \label{section:transferability-deniability-interactivity}
-{\color{red} Insert NIST-PEC proposed paragraph on Nuances on transferability vs. interactivity.}\revblock[rev:deniability-transferability]{\ref{it:transferability-with-auth-channels}, \ref{it:deniability}}
+{\color{red} Insert NIST-PEC proposed paragraph on Nuances on transferability vs. interactivity.}\revblock[rev:deniability-transferability]{\ref{it:transferability-with-auth-channels}}
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{(Non)-Transferability/Deniability of Zero-Knowledge Proofs} \revblock[rev:deniability]{\ref{it:deniability}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Off-line non-transferability (deniability) of ZK proofs.}
+Zero-knowledge proofs are in general interactive. 
+Interaction is inherent without a setup. Indeed, Goldreich and Oren showed that for non-trivial languages zero-knowledge proofs require at least 3 rounds. 
+
+The zero-knowledge property in absence of setup guarantees\footnote{A verifier could always compute an equivalent transcript by running the simulator.}
+a property called off-line non-transferability, also known as deniability. 
+This property means that the verifier gets no evidence of having received an accepting proof from a prover and thus has no advantage in transferring the received proof to others.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{On-line non-transferability of ZK proofs.}
+The situation is more complicated in case of on-line non-transferability.
+Indeed, in this case a malicious verifier plays with a honest prover in a zero-knowledge proof system and at the same time the malicious verifier plays with others in the attempt of transferring the proof that he his receiving from the prover. 
+Non-transferability is therefore a form of security against man-in-the-middle attacks. 
+Security against such attacks is typically referred to as non-malleability when the same zero-knowledge proof system is used by the adversary to try to transfer the proof to a honest verifier. 
+When instead different protocols are involved as part of the activities of the adversary, some stronger notions are required to model security under such attacks (e.g., universal composability).
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Transferability of a NIZK proof: publicly verifiable ZK.}
+The transferability of a zero-knowledge proof could become unavoidable when some forms of setups are considered and the zero-knowledge proof makes some crucial use of it. 
+Indeed, notice that both in the common reference string model and in the programmable random oracle model one can construct non-interactive zero-knowledge proofs. 
+Such proofs cannot be simulated by the verifier with the same setup or the same instantiation of the random oracle. 
+More specifically, non-interactive zero-knowledge proofs are constructed without the contribution of any verifier, therefore they are publicly verifiable proofs that can naturally be transferred among verifiers.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Designated-verifier NIZK proofs.}
+With more sophisticated setups other options become possible. 
+Consider for instance a verifier possessing a public identity implemented through a public key. 
+In this case the prover can compute a non-interactive zero-knowledge proof that makes crucially use of the public key of the verifier at the point that the verifier using the corresponding secret key could compute an indistinguishable proof. 
+In this case we have that the proof is a non-interactive designated-verifier zero-knowledge proof and is non-transferable since the verifier that receives the proof could have computed an equivalent proof by herself, therefore there is no evidence to share with others about the fact that the proof comes from a honest prover. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Transferability of interactive ZK proofs.} 
+The use of identities implemented through public keys can also have impact in the interactive case. 
+Consider the case where there is no trusted setup. 
+In this case one can design an interactive zero-knowledge proof system that can have a transferability flavor by exploiting the public keys of prover and verifier. 
+Indeed, if the prover signs the transcript, then the proof is transferable by the verifier to whoever believes that the prover is honest.

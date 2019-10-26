@@ -160,6 +160,29 @@ These include security under concurrent composition and nonmalleability to guard
 \underline{Universal composability.} The UC framework defines a protocol to be secure if it realizes an ideal functionality in an arbitrary environment. We can think of an ideal zero-knowledge functionality as taking an input $(x,w)$ from the prover and if and only if $(x,w) \in R$ it sends the message$ (x, \tt accept)$ to the verifier. The ideal functionality is perfectly sound, since no statement without valid witness will be accepted, and perfectly zero knowledge, since the proof is just the message accept. A proof system is then UC secure, if the real life execution of the system is `security-equivalent’ to the execution of the ideal proof system functionality. Usually it takes more work to demonstrate a proof system is UC secure, but on the other hand the framework offers strong security guarantees when the proof system is composed with other cryptographic protocols.
 
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\tmpTitle{Transferability vs. deniability}
+\subsection[\tmpTitle]{\tmpTitle\revblock[rev:]{}}
+\label{sec:security:defs-props:transferability-deniability}
+
+	\revblock[rev:introduce-deniability-transferability]{\ref{it:transferability-vs-interactivity-elaborate}}
+	In the traditional notion of zero-knowledge, a ZKP system prevents the verifier from even being able to convincingly advertise having interacted in a legitimate proof execution.
+	In other words, the verifier cannot transfer onto others the confidence gained about the proven statement.
+	This property is sometimes called \emph{deniability} or \emph{non-transferability}, since a prover that has interacted as a legitimate prover in a proof is later able to \emph{plausibly deny} having done so, even if the original verifier releases the transcript publicly.
+
+	Despite \emph{deniability} being often a desired property, the dual property of \emph{transferability} can also be considered a feature, and such a setting is also of interest in this document. 
+	\emph{Transferability} means that the verifier in a legitimate proof execution becomes able to convince an external party that the corresponding statement is true. 
+	In the case of a statement of knowledge, this means being convinced that some prover did indeed have the claimed knowledge.
+	In some cases this can be done by simply sending the transcript (the verifier's view) of the interaction (messages exchanged and the internal state of the verifier).
+
+	For a proper security analysis of an application, it is important to characterize whether deniability of transferability (or a nuanced version of them) is intended.
+	This may be an important aspect of composability with other applications.
+
+
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Examples of setup and trust}
 \label{sec:security:defs-props:examples-of-setup-and-trust}

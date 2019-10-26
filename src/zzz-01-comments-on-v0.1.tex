@@ -323,34 +323,34 @@ Preamble
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newIssue{issue:transferability}{Discuss transferability and deniability} %C6
 %%%%%%%%%%%%%%%%%%%%%%%%
-\incItem[it:transferability-with-auth-channels]
+\incItem[it:transferability-vs-interactivity-elaborate]
 Chapter 1 ("Security/Theory")
 \newcol \propContrib\ Elaborate more on the concept of transferability. For example, in an interactive protocol over the Internet, how do regular authenticated channels vs. ``ideally'' authenticated channels affect transferability? Would a non-transferable protocol become transferable when the prover signs all sent messages and the verifier uses the output of a cryptographic hash function to select random challenges? 
 				\contributors\ Luís Brandão
 \newcol \githubissue{6}, \ref{it:deniability}
 \newcol \ccontext\ Proposed in the "NIST comments on the initial ZKProof documentation" (April 06, 2019) --- item C9.
 				\Chan\ ...
-\newcol \ref{rev:deniability-transferability}
+\newcol \ref{rev:introduce-deniability-transferability}, \ref{rev:deniability-transferability-nuances}
 \rowendL
 %%%%%%%%%%%%%%%%%%%%%%%%
 \incItem[it:transferability-vs-interactivity-incorrect]
-Section 3.2.
+Old Section 3.2.
 \newcol \propContrib\ In Section 3.2, revise the incorrect assertion in item 1: ``Only non-interactive ZK (NIZK) can actually hold this property'' [being publicly verifiable / transferable?]. For example, if transferability is a design goal then there are settings where it is possible to design interactive protocols for which the view (transcript) of the original verifier (interacting with the original prover) can later serve as a transferable proof for other verifiers.
 				\contributors\ Luís Brandão, 
 \newcol \githubissue{6}
 \newcol \ccontext\ Proposed in the "NIST comments on the initial ZKProof documentation" (April 06, 2019) --- item C14.
-				\Chan\ ...
-\newcol %\ref{...}
+				\Chan\ Removed sentence
+\newcol \ref{rev:remove-incorrection-on-transferability}
 \rowendL
 %%%%%%%%%%%%%%%%%%%%%%%%
 \incItem[it:deniability]
 ...
 \newcol \propContrib\ Elaborate more on the concept of deniability.
 				\contributors\ Ivan Visconti
-\newcol \githubissue{6}, \ref{it:transferability-with-auth-channels}
+\newcol \githubissue{6}, \ref{it:transferability-vs-interactivity-elaborate}
 \newcol \ccontext\ The ``deniability'' item was identified in the breakout session on ``Interactive Zero Knowledge'' in the 2nd ZKProof workshop.
 				\Chan\ ...
-\newcol \ref{rev:deniability-transferability}
+\newcol \ref{rev:deniability}
 \rowendL
 
 

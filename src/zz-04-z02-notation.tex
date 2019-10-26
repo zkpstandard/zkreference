@@ -7,7 +7,9 @@ See \hyperref[chap:security]{Security} and \hyperref[chap:implem]{Implementation
 
 When designing ZK based applications, one needs to keep in mind which of the following three models (that define the functionality of the ZKP) is needed:
 \begin{enumerate}
-    \item Publicly verifiable as a requirement: a scheme / use-case where the proofs are transferable, where such property is actually a requirement of the system. Only non-interactive ZK (NIZK) can actually hold this property.\luiscom{Consider revising this assertion, since if transferability is a design goal, it can still be obtained with an interactive protocol.}
+    \item Publicly verifiable as a requirement: a scheme / use-case where the proofs are transferable, where such property is actually a requirement of the system. 
+		\revblock[rev:remove-incorrection-on-transferability]{\ref{it:transferability-vs-interactivity-incorrect}}
+		%%%Only non-interactive ZK (NIZK) can actually hold this property.\luiscom{Consider revising this assertion, since if transferability is a design goal, it can still be obtained with an interactive protocol.}
     \item Designated verifier as a security feature: only the intended receiver of the proof can verify it, making the proof non-transferable.This property can apply to both interactive and non-interactive ZK.
     \item The final model is one where neither of the above is needed: a ZK where there is no need to be able to transfer but also no non-transferability requirement. Again, this model can apply both in the interactive and non-interactive model.
 \end{enumerate}

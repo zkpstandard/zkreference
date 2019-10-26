@@ -9,7 +9,7 @@
 	\revblock[rev:pok:types-of-statement]{\ref{it:pok:types-of-statement}}
 	A \emph{statement} is either a \emph{membership} claim of the form ``$x \in L$'', 
 or a \emph{knowledge} claim of the form ``In the scope of relation $R$, I know a witness for instance $x$.''
-	For some cases, the \emph{knowledge} and \emph{membership} types of statement can be informally considered interchangeable, but formally there are technical reasons to distinguish between the two notions.
+	For some cases, the \emph{knowledge} and \emph{membership} types of statement can be informally considered interchangeable, but formally there are technical reasons to distinguish between the two notions. 
 	In particular, there are scenarios where a statement of knowledge cannot be converted into a statement of membership, and vice-versa (as exemplified in Section 1.4).
 	The examples in this document are often based on statements of knowledge.
 	
@@ -18,7 +18,7 @@ or a \emph{knowledge} claim of the form ``In the scope of relation $R$, I know a
 	The relation $R$ can for instance be specified as a program (e.g. in C or Java), which given inputs $x$ and $w$ decides to accept, meaning $(x,w) \in R$, or reject, meaning $w$ is not a witness to $x \in L$. 
 	Examples of such specifications of the relation are detailed in the \hyperref[chap:apps]{Applications track}.
 	In the academic literature, relations are often specified either as 
-random access memory\luised{Introduced the extended expression of the acronym} (RAM)
+random access memory (RAM)
 programs or through %boolean 
 Boolean
 and arithmetic circuits, which we describe below.
@@ -28,11 +28,7 @@ and arithmetic circuits, which we describe below.
 \begin{itemize}
 \item Nodes with in-degree 0 are referred to as the \textbf{input nodes}\luissug{Consider adjusting all items to become of the form \textbf{<new term>}: <description>.} and are labeled with some constant (e.g., $0, 1, \ldots$) or with input variable names (e.g., $v_1, v_2, \ldots$)
 \item There is a single node with out-degree 0 that is referred to as the \textbf{output node}.
-\item Internal nodes\luised{``will be'' --> ``are'', consistent with the text in the first bullet} %will be 
-are 
-referred to as \textbf{gate nodes} and %will 
-describe a computation %to be 
-performed at the node.\loosen
+\item Internal nodes are referred to as \textbf{gate nodes} and describe a computation performed at the node.\loosen
 \end{itemize}
 
 
@@ -53,7 +49,7 @@ truth values for the remaining input variables, such that when evaluating the ci
 
  
 \textbf{Special purpose relations:} Circuit satisfiability is 
-a complete problem within the non-deterministic polynomial\luised{introduced the extended form of NP} (NP) class,
+a complete problem within the non-deterministic polynomial (NP) class,
 i.e., it it NP-complete,
 but a relation does not have to be that. 
 	Examples of statements that appear in cryptographic usage include that a committed value falls in a certain range $[A;B]$ or belongs to a set $S$, that a ciphertext has plaintext 0 or that two ciphertexts encrypt the same value, that the prover has a secret key associated with a set of public verification keys for a signature scheme, etc.
@@ -64,6 +60,6 @@ Sometimes it is convenient to let the relation $R$ take an additional input setu
 for arithmetic circuit satisfiability maybe the same finite field and circuit is used many times, 
 so we let $\textmd{setup}_R = (F, C)$ and $x = (v_1,...,v_{n_x})$.
 	The input setup$_R$ can also be used to capture trusted input the relation does not check, 
-e.g., a trusted Rivest--Shamir--Adleman\luised{Introduced the extended form of the acronym.} (RSA)
+e.g., a trusted Rivest--Shamir--Adleman (RSA)
 modulus.
 

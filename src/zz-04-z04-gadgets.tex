@@ -35,6 +35,7 @@ Example of ring signature: \textbf{Zk \{ (sig):  VerifySignature(P1, sig) or Ver
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\mytablecap[tab:list-of-gadgets]{List of gadgets}
 \begin{table}[H]
+\revblock[rev:gadgets-table-fill]{\ref{it:gadgets-table}}
 \mytabcap{List of gadgets}{List of gadgets}\label{tab:list-gadgets}
 \begin{center}
 \begin{edtable}{tabular}{|>{\begmin{.04}\centering}c<{\myendmini}|>{\begmin{.23}}l<{\myendmini}||>{\begmin{.48}}l<{\myendmini}|>{\begmin{.13}\centering}c<{}|}
@@ -122,10 +123,11 @@ Example of ring signature: \textbf{Zk \{ (sig):  VerifySignature(P1, sig) or Ver
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{table}[H]
+\revblock[rev:gadget:sig:update]{\ref{it:gadgets-table}}
 \mytabcap{Signature gadget}{Signature gadget (\ref{gad:signatures}; signature authorization letter)}\label{tab:gadget-signature}
 \begin{gadgettabular}{.21}{.21}{.21}{.21}{.21}{.1}
 			Secret valid signature over commonly known message
-		& Knowledge of a secret signature $\sigma$ on a commonly known message $M$\luissug{Consider differentiating more explicitly the secret vs.\ public info. For example: ``Knowledge of a secret signature of a public message'' or ``Knowledge of a secret signature of a commonly known message''}
+		& Knowledge of a secret signature $\sigma$ on a commonly known message $M$
     & Signature $\sigma$
     & Verification key $VK$, message $M$
     & Verify$(VK, M, \sigma) = \tt True$
@@ -133,8 +135,8 @@ Example of ring signature: \textbf{Zk \{ (sig):  VerifySignature(P1, sig) or Ver
 \hline 
 			Secret valid signature over committed message
 		  %\textbf{\red{propose: blind, ring, group, homom.}}\luistodo{Unclear in the original document if this row is to be within the signature gadget. I just assumed yes, as in blind signature, ring signature, ...}
-		& Knowledge of a secret signature $\sigma$ on a commonly known commitment $C$ of a secret message $M$\luissug{Consider differentiating more explicitly the secret vs.\ public info. For example: ``Knowledge of a secret signature on a publicized commitment of a known secret message [and knowledge of its opening]'' (maybe the suggestion fails by stretching the sentence too much, but the current statement seems somewhat dubious about what is secret.)}
-		& Message $M$\luissug{It appears that an opening O should also be included here. An alternative (more contrived) scenario is the prover only knowing a transferable NIZK that C is a correct commitment of M, and proving possessing such NIZK :-) ...}, signature $\sigma$
+		& Knowledge of a secret signature $\sigma$ on a commonly known commitment $C$ of a secret message $M$
+		& Opening $O$, signature $\sigma$
 		& Verification key $VK$, committed value $C$
 		& $C = Comm(M)$ and Verify$(VK, M, \sigma) = \tt True$
     & \rowend
@@ -145,6 +147,7 @@ Example of ring signature: \textbf{Zk \{ (sig):  VerifySignature(P1, sig) or Ver
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{table}[H]
+\revblock[rev:gadget:enc:update]{\ref{it:gadgets-table}}
 \mytabcap{Encryption gadget}{Encryption gadget (\ref{gad:encryption}; envelope with a receiver stamp)}\label{tab:gadget-encryption}
 \begin{gadgettabular}{.21}{.21}{.21}{.21}{.21}{.1}
 			The output plaintext(s) correspond to the public ciphertext(s).
@@ -161,7 +164,9 @@ Example of ring signature: \textbf{Zk \{ (sig):  VerifySignature(P1, sig) or Ver
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{table}[H]
+\revblock[rev:gadget:dist-enc:update]{\ref{it:gadgets-table}}
 \mytabcap{Distributed-decryption gadget}{Distributed-decryption gadget (\ref{gad:dist-decryption}; envelope with a receiver stamp that requires multiple people to open)}\label{tab:gadget-dist-decryption}
+\vspace{-.4em} %adjustment \vspa
 \begin{gadgettabular}{.21}{.21}{.21}{.21}{.21}{.1}
 			The output plaintext(s) correspond to the public ciphertext(s).
      & Knowledge of a secret plaintext $M$
@@ -192,7 +197,8 @@ Example of ring signature: \textbf{Zk \{ (sig):  VerifySignature(P1, sig) or Ver
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{table}[H]
-	\mytabcap{Set-membership gadget}{Set-membership gadget (\ref{gad:set-membership}; whitelist/blacklist)}\label{tab:gadget-set-membership}
+\revblock[rev:gadget:set-memb:update]{\ref{it:gadgets-table}}
+\mytabcap{Set-membership gadget}{Set-membership gadget (\ref{gad:set-membership}; whitelist/blacklist)}\label{tab:gadget-set-membership}
 \vspace{-.4em} %adjustment \vspace to revise ... temporarily here to enable 3 tables to fit within 1 page
 \begin{gadgettabular}{.21}{.21}{.21}{.21}{.21}{.1}
 			Accumulator

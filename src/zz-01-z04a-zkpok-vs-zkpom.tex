@@ -46,15 +46,24 @@ that the expression/configuration belongs respectively to the language of valid 
 \subsection{Example: ZKP of knowledge of a hash pre-image}
 \label{security:zkp-knowledge-vs-membership:ZKPoK-hash-pre-image}
 
-	\revblock[rev:pok:example-ZKPoK-pre-image]{\ref{it:pok:example-ZKPoK-pre-image}}
 	Consider a cryptographic hash function $H: \left\{0,1\right\}^{512} \rightarrow \left\{0,1\right\}^{256}$, restricted to binary inputs of length 512. 
-	For many (possibly all) 256-bit instances in the co-domain $\left\{0,1\right\}^{256}$ of $H$ there are many pre-images in $\left\{0,1\right\}^{256}$.
-	Let $w$ be a witness (hash pre-image) know by the prover (and unpredictable to the verifier), for some instance $x=H(w)$ known by the verifier.
-	Since a cryptographic hash function is one-way, it makes sense to give a ZKPoK of a pre-image, corresponding to proving knowledge of a witness in the relation $R = \left\{(x,w): H(w)=x\right\}$.
-	Such proof also constitutes directly a proof of membership, i.e., that the instance $x$ does in fact belong to the co-domain of $H$.
-	However, interestingly, membership in the co-domain of $H$ is a problem that might or might not make sense depending on the known properties of the hash function $H$.
-	If $H$ is known to have as a co-domain the set of all bit-strings of length 256, then membership is self-evident.
-	Otherwise it may be that an element $x$ uniformly selected from the range $\left\{0,1\right\}^{256}$ is in fact not in the co-domain of $H$, case in which a proof of membership makes sense.
+	In this definition of $H$, the set of all 256-bit strings is the \emph{co-domain}, which might be a 
+super-set of the \emph{image} $L = \left\{H(x):x\in\left\{0,1\right\}^{512}\right\}$ (a.k.a.\ \emph{range}) of $H$.
+	Let $w$ be a witness (hash pre-image), known by the prover and unpredictable to the verifier, for some instance $x=H(w)$ that the prover presents to the verifier.
+	Since a cryptographic hash function is one-way, there is significance in providing a ZKPoK of a pre-image, which proves knowledge of a witness in the relation $R = \left\{(x,w): H(w)=x\right\}$.
+	Such proof also constitutes directly a proof of membership in the language $L$, i.e., that the instance $x$ is a member of the image of $H$.
+	However, interestingly depending on the known properties of $H$, this membership predicate might or might not be self-evident from the instance $x$.
+\loosen
+	
+	\begin{itemize}
+	\item If $H$ is known to have as image the set of all bit-strings of length 256 (i.e., if $L = \left\{0,1\right\}^{256}$), then membership is self-evident.
+	In this case a ZKP of membership is superfluous, since it is trivial to verify the property of a bit-string having 256 bits.
+	
+	\item $H$ may instead have the property that an element $x$ uniformly selected from the co-domain $\left\{0,1\right\}^{256}$ is not 
+in the image of $H$, with some noticeable probability (e.g., $\approx$0.368, if $H$ is modeled as a random function), and with the membership predicate being difficult to determine.
+	In this setting it can be useful to have the ability to perform a ZKP of membership.
+	\end{itemize}
+
 
 
 

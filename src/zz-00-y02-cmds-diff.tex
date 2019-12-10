@@ -21,24 +21,16 @@
 \newcounter{cntRev}\renewcommand{\thecntRev}{E\arabic{cntRev}}
 
 
-%\revblock[label]{refs}
-\newcommand{\revblock}[2][]{\marginnote{\resizebox{.85in}{!}{{\color[rgb]{1,0,0}%
+\newcommandtwoopt{\revblock}[3][][0pt]{\marginnote{\hspace*{#2}\resizebox{.85in}{!}{{\color[rgb]{1,0,0}%
 			\begin{minipage}{1.1in}\vspace{0em}\refstepcounter{cntRev}%
 				\ifNotEmpty{#1}{\label{#1}} %adds a labels to the review edit
-				\thecntRev\ifNotEmptyPrepend{#2}{: }
+				\thecntRev\ifNotEmptyPrepend{#3}{: }
 			\end{minipage}}}}}
-\newcommand{\revblockmini}[2][]{{\scriptsize\revblock[#1]{#2}}}
+\newcommandtwoopt{\revblockmini}[3][][]{{\scriptsize\revblock[#1][#2]{#3}}}
 %\renewcommand{\revblock}[2][]{}   % Uncomment this line to get ride of all margin notes
 
 
-%\revblockRight[label]{refs}{rightShiftSpace}
-\newcommand{\revblockRight}[3][]{\marginnote{\hspace*{#3}\resizebox{.85in}{!}{{\color[rgb]{1,0,0}%
-			\begin{minipage}{1.1in}\vspace{0em}\refstepcounter{cntRev}%
-				\ifNotEmpty{#1}{\label{#1}} %adds a labels to the review edit
-				\thecntRev\ifNotEmptyPrepend{#2}{: }
-			\end{minipage}}}}}
-
-
+%\newcommand{\revblockRight}[3][]{\revblock[#1][#3]{#2}}  %%% to delete in favor of using \revblock with the second optional argument
 
 
 \providecommand{\blue}[1]{{\color[rgb]{0,0,1}#1}}
@@ -51,15 +43,18 @@
 \definecolor{darkgreen}{rgb}{0,0.5,0}
 
 
-\newcommand{\Note}{{\textcolor{blue}{\textbf{-- \textsc{Note:} }}}}
-\newcommand{\Chan}{\newline\textcolor{mycoral}{{{\bfseries-- {\scshape Changed:} }}}}
+%%% \Note, \Chan, and \NoChan are useful prefix commands for the descriptive comments in the column ``Context and Changes''
+\newsetbool{boolNeedNewLineBeforeChan}{false} %boolNeedNewLineBeforeChan: true after using \Note; becomes false when using \rowendL
+\newcommand{\Note}{\ifbool{boolNeedNewLineBeforeChan}{\newline}{}{\textcolor{blue}{\textbf{-- \textsc{Note:} }}}\setbool{boolNeedNewLineBeforeChan}{true}}
+\newcommand{\Chan}{\ifbool{boolNeedNewLineBeforeChan}{\newline}{}\textcolor{mycoral}{{{\bfseries-- {\scshape Changed:} }}}\setbool{boolNeedNewLineBeforeChan}{true}}
 \newcommand{\NoChan}{\Chan\ No change.}
 
-\newcommand{\propContrib}{{\bfseries\textcolor{blue}{-- Proposed contribution:} }}
-\newcommand{\contributors}{\newline{\bfseries\textcolor{darkgreen}{-- Proposed contributors:} }}
+
+\newcommand{\propContrib}{{\ifbool{boolNeedNewLineBeforeChan}{\newline}{}\bfseries\textcolor{blue}{-- Proposed contribution:} }}
+\newcommand{\contributors}{\ifbool{boolNeedNewLineBeforeChan}{\newline}{}{\bfseries\textcolor{darkgreen}{-- Contributors:} }\setbool{boolNeedNewLineBeforeChan}{true}}
 \newcommand{\submit}{\newline{\bfseries\textcolor{brown}{-- Submission mode:} }}
 
-\newcommand{\ccontext}{{\bfseries\textcolor{blue}{-- Context:} }}
+\newcommand{\ccontext}{{\ifbool{boolNeedNewLineBeforeChan}{\newline}{}\bfseries\textcolor{blue}{-- Context:} }\setbool{boolNeedNewLineBeforeChan}{true}}
 
 
 \newcommand{\newcol}{&}
@@ -73,9 +68,16 @@
 \newcounter{cntItB}[cntIssue] %counts the item inside the Issue: A1, A2, .., A7, B1, ..., 
 % \inc... % increment some counter(s)
 
-%\incItem: the optional argument (#1) is a label
+%\incItem[label][pdf-bookmark-caption]
 \renewcommand{\thecntItB}{\thecntIssue.\arabic{cntItB}}
-\newcommand{\incItem}[1][]{\refstepcounter{cntItA}\ifNotEmpty{#1}{\label{it:#1}}\thecntItA \newcol \refstepcounter{cntItB}\ifNotEmpty{#1}{\label{#1}}\pdfbookmark[3]{\thecntItB}{pdfbkm:\thecntItB}\thecntItB \newcol } %incremment comment number
+\newcommandtwoopt{\incItem}[2][][]{%
+	\refstepcounter{cntItA}\ifNotEmpty{#1}{\label{it:#1}}\thecntItA \newcol 
+	\refstepcounter{cntItB}\ifNotEmpty{#1}{\label{#1}}
+	\ifNotEmptyElse{#2}{\def\itemPdfBkmExt{: #2}}{\def\itemPdfBkmExt{}}
+	\pdfbookmark[3]{\thecntItB\itemPdfBkmExt}{pdfbkm:\thecntItB}\thecntItB \newcol } %incremment comment number
+
+	
+	
 
 \newcommand{\rowIssueName}{Issue title}
 \newcommand{\needscontributors}{\red{needs contributors}}
@@ -125,38 +127,21 @@
 \newcommand{\githubissue}[1]{\href{https://github.com/zkpstandard/zkreference/issues/#1}{GI#1}}
 
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%% TO GENERATE A LIST OF COMMENTS/CONTRIBUTIONS
 % contentslines added on each example or examples
 
-
 \newcommand\listcontributionname{List of Contributions}
-%%%\newlistof[hwithini]{hentryi}{hexti}{hlistofnamei}, from package tocloft
 \newlistof[chapter]{contribution}{loc}{\listcontributionname}
 %creates the file name zkproof-community-reference.contribs with the index of contribution issues/items
 
 
-%%%\makeatletter
-%%%\newcommand\listofcontributions{%
-%%%  \section*{\listcontributionname}\@starttoc{contribs}}
-%%%	%creates the file name zkproof-community-reference.contribs with the index of contribution issues/items
-%%%\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Each `issue' is a longtable (can break pages) of comment/contribution items. 
+%%% Each `issue' starts with \newIssue and ends with \myendIssue
+%%% Besides the automatic header, each row of the table will be an `item' introduced by command \incItem
 
-
-\newcommand{\incIssue}[1][]{\refstepcounter{cntIssue}\ifNotEmpty{#1}{\label{#1}}} %increment the issue number
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% \newIssue[label]{issue title}
 \newcommand{\newIssue}[2]{%
-	%\ifthenelse{\equal{\arabic{cntIssue}}{0}}{}{\end{longtable}\pagebreak} %if it is not the first Issue, then makes a page break
-	\ifthenelse{\equal{\arabic{cntIssue}}{0}}{%
-		\let\firstIssue\newIssue
-		\renewcommand{\newIssue}{\end{longtable}
-		%\pagebreak
-		
-		\firstIssue} %the \end{longtable}\pagebreak will only be applied in the subsequent times
-		}{}
-	%%%\incIssue[#1]% increments the counter cntIssue
 	\refstepcounter{cntIssue}\label{#1}
 	\addcontentsline{loc}{subsection}{Contribution \thecntIssue\ --- #2}
 	\renewcommand{\rowIssueName}{#2}
@@ -168,3 +153,5 @@
 			\rowcolor{LLgray}\headerForIssue\rowend\hline\hline%
 		\endhead%ensures that all lines above this one will repeat as a header
 }
+
+\newcommand{\myendIssue}{\end{longtable}}

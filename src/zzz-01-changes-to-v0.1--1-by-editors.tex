@@ -1,0 +1,122 @@
+%%%%%% Description of relevant commands:
+%%% \newIssue{label}{issue title}  % starts a new longtable (can break across pages) of comments
+%%% \incItem[optional-label][optional-pdf-bookmark]  % starts a new row (`item') related to an issue
+%%% \newcol                        % starts a new column --- see below a description of the columns
+%%% \rowend                        % ends a row (`item')
+%%% \myendIssue                    % ends a longtable associated to an `issue'
+
+%%%For each new item (started with \incItem[...][...] and ended with \rowend), these are the columns:
+	%[ the following initial columns are automatic: \#, ref]
+	% Location   % before the first \newcol
+	% Proposed contribution (\propContrib) and Contributors (\contributors)
+	% Related
+	% `Context' (\ccontext) and `Changed' (\Chan)
+	% Edit id (References of the edits made along the document)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Structural changes}
+%\addcontentsline{toc}{section}{Structural changes}
+\pdfbookmark[1]{Structural changes}{pdfbkm:structural-changes}
+\label{sec:comments:structural-changes}
+
+%%% Inherently related to the editorial development of the reference document
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newIssue{issue:editorial-structural}{Implement editorial structural changes} %C16
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:editorial-structural][Structural changes]
+All document
+\newcol \ccontext\ Inherently related to the editorial development of the reference document. 
+				\propContrib\ Implement editorial structural changes to the document (e.g., new chapters, 
+				sections, subsections, etc.) , as useful based on the overall set of contributions.
+\newcol \githubissue{16}
+\newcol \contributors\ The editors (Daniel Benarroch, Luís Brandão, Eran Tromer)
+				\Chan\ See items below.
+\newcol 
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:new-chapter-2][]
+New chapter 2
+\newcol 
+\newcol \githubissue{16}
+\newcol \Chan\ Create new chapter ``2. Construction paradigms'' to contain explanations 
+	of different protocol paradigms for zero-knowledge proofs. 
+\newcol \ref{rev:new-chapter-2-paradigms}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:move-taxonomy-to-new-chapter][]
+All document
+\newcol 
+\newcol \githubissue{16}, \ref{issue:interactivity}
+\newcol \Chan\ Move the old section 1.8 (``taxonomy of constructions'') 
+	to be the first section in the new paradigms chapter.
+\newcol \ref{rev:move-taxonomy-to-new-chapter}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:list-possible-paradigms][]
+All document
+\newcol 
+\newcol \githubissue{16}, \githubissue{17}
+\newcol \Chan\ List several possible ZKP protocol paradigms, each of which may later 
+	become its own section with a detailed explanation of the paradigm.
+\newcol \ref{rev:list-other-paradigms}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:editorial:add-abstract][]
+Front matter, after the cover
+\newcol 
+\newcol \githubissue{16}
+\newcol \Chan\ \todo{Add an abstract}
+\newcol \ref{rev:add-abstract}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:editorial:add-editors-note][]
+Front matter
+\newcol 
+\newcol \githubissue{16}
+\newcol \Chan\ \todo{Add a version history section, explaining the versions of the document}
+\newcol \ref{rev:add-editorial-note}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:editorial:add-acks][]
+Front matter
+\newcol 
+\newcol \githubissue{16}
+\newcol \Chan\ \todo{Add acknowledgments consistent with all the contributions}
+\newcol \ref{rev:add-acks}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:editorial:charter][]
+Preamble
+\newcol 
+\newcol \githubissue{16}, \ref{issue:intellectual-property}
+\newcol \Chan\ Improve the placement and context of the ZKProof Charter within the document:
+				\begin{itemize}
+				\item Moved the original ``\hyperref[sec:prelim:charter]{ZKProof Charter}'' to before the \hyperref[prelim:contents]{Table of Contents}, and placed it within a framing box (\ref{rev:charter:box-the-original}).
+				\item Corrected a typo: ``standardardization'' $\rightarrow$ ``standardization'' (\ref{rev:charter:typo:standardardization}).
+				\item Added an editorial note explaining that the scope of the creative commons license is widened to incorporate the community reference (\ref{rev:charter:widen-scope-creative-commons}).
+				\item Removed the ZKProof Code of Conducts (since it is tailored to events, rather than to documents), \todo{while still leaving a reference to it in the ``Editorial note'' section.}
+				\end{itemize}
+\newcol \ref{rev:charter:box-the-original}, \ref{rev:charter:typo:standardardization}, \ref{rev:charter:widen-scope-creative-commons}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:editorial:remove-zcon0-notes][]
+Old chapter 4 ZCon0
+\newcol 
+\newcol \githubissue{16}
+\newcol \Chan\ Remove the ZCon0 notes (old chapter 4). \Note\ Based on the editorial process, 
+				the workshop notes are separated from the community reference.
+\newcol 
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:editorial:address-popup-annotations][]
+All document
+\newcol 
+\newcol \githubissue{16}
+\newcol \Chan\ \todo{Address and remove all popup pdf-annotations from the draft version 0.1.}
+\newcol 
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\myendIssue

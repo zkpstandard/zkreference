@@ -4,7 +4,8 @@
 \newcommand{\ifoddeven}[2]{\ifthenelse{\isodd{\value{page}}}{#1}{#2}}
 
 
-\providecommand{\ifNotEmpty}[2]{\ifthenelse{\equal{#1}{}}{}{#2}}
+\providecommand{\ifNotEmpty}[2]{\ifthenelse{\equal{#1}{}}{}{\protect #2}}
+\providecommand{\ifNotEmptyElse}[3]{\ifthenelse{\equal{#1}{}}{\protect #3}{\protect #2}}
 \providecommand{\ifNotEmptyPrepend}[2]{\ifthenelse{\equal{#1}{}}{}{#2#1}}
 \providecommand{\ifNotEmptyAppend}[2]{\ifthenelse{\equal{#1}{}}{}{#1#2}}
 
@@ -102,6 +103,7 @@
 
 \newcommand{\XOR}{\texttt{XOR}}
 \newcommand{\AND}{\texttt{AND}}
+\newcommand{\NOT}{\texttt{NOT}}
 
 \newcommand{\privsetP}{\tops{\ensuremath{\textmd{PrivateSetup}_{\prov}}}{PrivateSetup\_\prov}}
 \newcommand{\privsetV}{\tops{\ensuremath{\textmd{PrivateSetup}_{\veri}}}{PrivateSetup\_\veri}}
@@ -120,3 +122,7 @@
 \newcommand{\can}{{\ttfamily can}}
 \newcommand{\neednot}{{\ttfamily need not}}
 
+
+\newcommandtwoopt{\minip}[3][\textwidth][\textwidth]{\nolinenumbers\resizebox{#1}{!}{\begin{minipage}{#2}\begin{internallinenumbers}#3\end{internallinenumbers}\end{minipage}}\vskip0pt\linenumbers}
+
+\newcommand{\todo}[1]{\red{[To-do: #1]}}

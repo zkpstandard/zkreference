@@ -1,0 +1,416 @@
+%%%%%% Description of relevant commands:
+%%% \newIssue{label}{issue title}  % starts a new longtable (can break across pages) of comments
+%%% \incItem[optional-label][optional-pdf-bookmark]  % starts a new row (`item') related to an issue
+%%% \newcol                        % starts a new column --- see below a description of the columns
+%%% \rowend                        % ends a row (`item')
+%%% \myendIssue                    % ends a longtable associated to an `issue'
+
+%%%For each new item (started with \incItem[...][...] and ended with \rowend), these are the columns:
+	%[ the following initial columns are automatic: \#, ref]
+	% Location   % before the first \newcol
+	% Proposed contribution (\propContrib) and Contributors (\contributors)
+	% Related
+	% `Context' (\ccontext) and `Changed' (\Chan)
+	% Edit id (References of the edits made along the document)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{New or adapted content}
+%\addcontentsline{toc}{section}{New or adapted content}
+\pdfbookmark[1]{New or adapted content}{pdfbkm:contributed-content}
+\label{sec:comments:contributed-content}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newIssue{issue:exec-summ}{Add an executive summary} %C1
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:exec-summ:add]
+Preamble of the document, before the table of contents
+\newcol \ccontext NIST comments C5, D1-D5 %%% RELATED
+				\propContrib\ Include an "executive summary" describing at a high level the structure and content of the overall "ZKProof community reference" document; the new text may also allude to the purpose, aim, scope and format of the document.
+				
+\newcol \githubissue{1}
+\newcol \contributors\ NIST-PEC team (Luís Brandão, René Peralta, Angela Robinson)
+				\Chan\ Added an executive summary
+\newcol \ref{rev:new-exec-summ}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\myendIssue
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newIssue{issue:clarify-pok}{Clarify proofs of knowledge} %C2
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:pok:describe] 
+Sections 1.1 and 1.5.3
+\newcol \ccontext NIST comments C7
+				\propContrib\ Make a clearer distinction of ZK proofs of membership vs. ZK proofs of knowledge, including by means of examples and definitions; clarify how the formalism can adequately model proofs of knowledge; may also include a definition of ``extractability'' property/game.
+				
+\newcol \githubissue{2}
+\newcol \contributors\ NIST-PEC team (Luís Brandão, René Peralta, Angela Robinson).
+				\Note\ See several separate items below
+\newcol 
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:pok:zkp-acronym] 
+Sections 1.1
+\newcol \newcol \newcol Introduce acronym ZKP
+\newcol \ref{rev:acronym-ZKP}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:pok:meaning-secrecy-for-prover] 
+Sections 1.1
+\newcol \newcol \newcol Clarify the meaning of ``secrecy'' of the ``information'' held by the prover.
+\newcol \ref{rev:ZKP:clarify-secret-info}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:pok:list-basic-examples] 
+Sections 1.1
+\newcol \newcol \newcol Enumerate the basic examples, including two new ones (chess and theorem)
+\newcol \ref{rev:ZKP:basic-examples}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:pok:need-instance] 
+Sections 1.1
+\newcol \newcol \newcol Allude to the need of an \emph{instance}
+\newcol \ref{rev:ZKP:need-instance}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:ZKP:proof-vs-argument] 
+Sections 1.1
+\newcol \newcol \newcol Mention proof vs.\ argument
+\newcol \ref{rev:ZKP:proof-vs-argument}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:ZKP:enhance-table-of-examples] 
+Sections 1.2
+\newcol \newcol \newcol Enhance the table of basic examples
+\newcol \ref{rev:ZKP:enhance-table-of-examples}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:pok:types-of-statement] 
+Sections 1.3
+\newcol \newcol \newcol Distinguish types of statement: of knowledge vs.\ of membership
+\newcol \ref{rev:pok:types-of-statement}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:pok:ZKPoK-vs-ZKPoM] 
+(New) Sections 1.4
+\newcol \newcol \newcol Distinguish types of proof: of knowledge vs.\ of membership
+\newcol \ref{rev:pok:ZKPoK-vs-ZKPoM}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:pok:example-ZKPoK-DL] 
+(New) Sections 1.4.1
+\newcol \newcol \newcol Add example of ZKPoK of DL
+\newcol \ref{rev:pok:example-ZKPoK-DL}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:pok:example-ZKPoK-pre-image] 
+(New) Sections 1.4.2
+\newcol \newcol \newcol Add example of ZKPoK of hash pre-image
+\newcol \ref{rev:pok:example-ZKPoK-pre-image}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:pok:example-ZKPoM-GNI] 
+(New) Sections 1.4.3
+\newcol \newcol \newcol Add example of ZKP of graph non-isomorphism
+\newcol \ref{rev:pok:example-ZKPoM-GNI}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:pok:suggest-ZKPoK-game] 
+Section 1.5
+\newcol \newcol \newcol Add suggestion to define ZKPoK game
+\newcol \ref{rev:pok:suggest-ZKPoK-game}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\myendIssue
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newIssue{issue:explain-parameter-kappa}{Explain the computational security parameter} %C3
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:explain-parameter-kappa]
+Chapter 2 ("Implementation"), mostly in Section 2.5.
+\newcol \ccontext\ Proposed in the "NIST comments on the initial ZKProof documentation" (April 06, 2019) --- item C18.
+				\propContrib\ Add text about possible computational security parameters, and the different security properties they may apply to (e.g., soundness, ZK, short-term vs. long-term, ...). In section 2.5, replace occurrences of "120" by "128".
+\newcol \githubissue{3}
+\newcol \contributors\ The NIST-PEC team (Luís Brandão, René Peralta, Angela Robinson).
+				\Chan\ See items below.
+\newcol \ref{rev:sec-par-bench-refer-to-section}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:comp-sec-par:120-to-128] 
+Section 1.5
+\newcol \newcol \newcol Wrt to required (approximate) level of security, change 120 to 128
+\newcol \ref{rev:comp-sec-par:120-to-128-a}, \ref{rev:comp-sec-par:120-to-128-b}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:comp-sec-par:bench:characterize-properties] 
+Section 1.7.1
+\newcol \newcol \newcol In benchmarks, characterize different security properties
+\newcol \ref{rev:comp-sec-par:bench:characterize-properties}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:comp-sec-par:bench:security-levels] 
+Section 1.7.2
+\newcol \newcol \newcol Computational security levels for benchmarks
+\newcol \ref{rev:comp-sec-par:bench:security-levels}, \ref{rev:comp-sec-par:exception-lower-levels}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\myendIssue
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newIssue{issue:clarify-C-in-CRS}{Clarify the public vs. non-public aspect of ``common'' in CRS enhancement} %C4
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:clarify-C-in-CRS]\label{it:syntax-setup}
+Mostly in Chapter 1, starting in section 1.2; will also check for other applicable cases across the document.
+\newcol \ccontext\ proposed in the "NIST comments on the initial ZKProof documentation" (April 06, 2019) --- item C11.
+				\propContrib\ Clarify the distinction between common (as in shared between prover and verifier) and public knowledge (as in known externally). The lack of distinction was noticed in several parts of the document, when thinking of a comparison between transferable vs. non-transferable ZK proofs. CRS is sometimes being defined as public, although in practice it could be obtained as common to the intervening parties, yet private to a particular interaction. For example, line 177 says ``common public input'' when first talking of a "common reference string", but the ``public'' aspect is arguable – being public vs. common-but-not-public may make the difference between transferability vs. non-transferability.
+\newcol \githubissue{4}
+\newcol \contributors\ NIST-PEC team (Luís Brandão, René Peralta, Angela Robinson).
+				\Chan\ In Section 1.2, Syntax of setup --- common and private components
+\newcol \ref{rev:syntax-setup}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\myendIssue
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newIssue{issue:intellectual-property}{Mention intellectual property} %C5
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:intellectual-property]
+Preamble
+\newcol \ccontext\ Proposed in the ``NIST comments on the initial ZKProof documentation'' (April 06, 2019) --- item C22.
+				\propContrib\ Present (in one or two paragraphs), in a non-legalese way, several remarks about intellectual property (IP). A main goal is to raise awareness about the role that IP may take or might not take in the adoption of recommendations and requirements in the community reference document. We are aware this is a delicate topic, so a goal of the contribution is to also motivate future constructive discussion/consideration by the ZKProof community, e.g., about open-source, IP rights, reasonable and non-discriminatory IP terms, etc.
+\newcol \githubissue{5}
+\newcol \contributors\ NIST-PEC team (Luís Brandão, René Peralta, Angela Robinson).
+				\Chan\ Added a new section entitled ``Expectations on disclosure and licensing of intellectual property''
+\newcol \ref{rev:intellectual-property}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:intellectual-property:minor-tweak]
+Preamble
+\newcol \propContrib\ As part of requesting feedback to the Steering committee, Hugo proposed 
+clarifying that the disclosure of patent claims should include both ``your own or held by others.''
+\newcol \githubissue{5}
+\newcol \contributors\ Suggested by Hugo Krawczyk.
+				\Chan\ (Editors:) Added the parenthetical note ``(their own and those from others)''
+\newcol \ref{rev:intellectual-property:clarify-whose-claims-are-in-scope}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\myendIssue
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newIssue{issue:transferability}{Discuss transferability and deniability} %C6
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:transferability-vs-interactivity-elaborate]
+Chapter 1 ("Security/Theory")
+\newcol \ccontext\ Proposed in the "NIST comments on the initial ZKProof documentation" (April 06, 2019) --- item C9.
+				\propContrib\ Elaborate more on the concept of transferability. For example, in an interactive protocol over the Internet, how do regular authenticated channels vs. ``ideally'' authenticated channels affect transferability? Would a non-transferable protocol become transferable when the prover signs all sent messages and the verifier uses the output of a cryptographic hash function to select random challenges? 
+\newcol \githubissue{6}, \ref{it:deniability}
+\newcol \contributors\ Luís Brandão
+				\Chan\ ...
+\newcol \ref{rev:introduce-deniability-transferability}, \ref{rev:deniability-transferability-nuances}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:deniability]
+...
+\newcol \ccontext\ The ``deniability'' item was identified in the breakout session on ``Interactive Zero Knowledge'' in the 2nd ZKProof workshop.
+				\propContrib\ Elaborate more on the concept of deniability.
+\newcol \githubissue{6}, \ref{it:transferability-vs-interactivity-elaborate}
+\newcol \contributors\ Ivan Visconti
+				\Chan\ ...
+\newcol \ref{rev:deniability}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:transferability-vs-interactivity-incorrect]
+Old Section 3.2.
+\newcol \ccontext\ Proposed in the "NIST comments on the initial ZKProof documentation" (April 06, 2019) --- item C14.
+				\propContrib\ In Section 3.2, revise the incorrect assertion in item 1: ``Only non-interactive ZK (NIZK) can actually hold this property'' [being publicly verifiable / transferable?]. For example, if transferability is a design goal then there are settings where it is possible to design interactive protocols for which the view (transcript) of the original verifier (interacting with the original prover) can later serve as a transferable proof for other verifiers.
+\newcol \githubissue{6}
+\newcol \contributors\ Luís Brandão, 
+				\Chan\ Remove sentence
+\newcol \ref{rev:remove-incorrection-on-transferability}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\myendIssue
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newIssue{issue:explain-parameter-stat-security}{Explain the statistical security parameter} %C10
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:stat-sec-par:bench:security-levels]
+Old sections 1.2, 1.4.3 and 2.5
+\newcol \ccontext\ proposed in the "NIST comments on the initial ZKProof documentation" (April 06, 2019) --- item C19. Also discussed in the breakout session on "Interactive Zero Knowledge".
+				\propContrib\ Discuss various examples of acceptable values of statistical security parameter, e.g., 40 bits. Explore how interactive to non-interactive transformations may affect the requirements on the statistical security parameter, e.g., making it become a computational parameter when applying Fiat-Shamir.
+				
+\newcol \githubissue{10}
+\newcol \contributors\ Luís Brandão.
+				\Chan\ ...
+\newcol \ref{rev:stat-sec-par:bench:security-levels}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\myendIssue
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newIssue{issue:clarify-scope-use-cases}{Clarify the (implicit) scope of some use-cases} %C12
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:clarify-scope-use-cases]
+Section 3.2
+\newcol \ccontext\ Proposed in the "NIST comments on the initial ZKProof documentation" (April 06, 2019) --- item C15.
+				\propContrib\ The last paragraph in section 2.2 says ``digital money based applications belong to the first model'' [public verifiable as a requirement]. This assertion appears implicitly scoped in a too narrow subset of conceivable applications about digital money. Conversely, one could consider a scenario where Alice wants to convince Bob, in a non-transferable way, that Alice bought something from Charlie. Consider clarifying better the scope of examples vs. the scope of areas of application.
+\newcol \githubissue{12}
+\newcol \contributors\ ``\href{https://github.com/DecentrilizedMan}{DecentrilizedMan}''  %%%, \needscontributors
+				\Chan\ ...
+\newcol %\ref{...}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\myendIssue
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newIssue{issue:circuits-vs-R1CS}{Compare circuits vs. R1CS} %C13
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:circuits-vs-R1CS]
+Chapters 1 (security/theory) and 2 (implementation)
+\newcol \ccontext\ Proposed in the "NIST comments on the initial ZKProof documentation" (April 06, 2019) --- item C10.
+				\propContrib\ The ``security/theory'' track is mentioning Boolean circuits but not R1CS. The ``implementation'' track is focused on R1CS without explaining why/when it is preferable to a circuit representation. Consider explaining better (in the ``security'' track) what is R1CS. Consider introducing and exemplifying a circuit-to-R1CS translation and/or vice-versa. Consider clarifying better in the ``implementation'' track why the focus is on R1CS, for example compared with circuits.
+\newcol \githubissue{13}
+\newcol \Chan\ See items below
+\newcol 
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:circuits-vs-R1CS:new-subsections]
+\refsec{security:spec-statements-ZK}
+\newcol 
+\newcol \githubissue{13}
+\newcol \contributors\ Editors
+				\Chan\ Split the content across indexed subsections, for better referenciability, as follows:
+				\begin{itemize}
+				\item New subsection \ref{security:spec-statements-ZK:circuit-representation} for the existing content about circuits. 
+				\item New subsection \ref{security:spec-statements-ZK:R1CS-representation} for the new contributed introductory content on R1CS representation.
+				\item New subsection \ref{security:spec-statements-ZK:types-of-relations} for the existing content about types of statements.
+				\end{itemize}
+\newcol \ref{rev:chap-security:circuits-vs-R1cs:new-subsection:circuit-representation}, \ref{rev:chap-security:circuits-vs-R1cs:new-subsection:R1CS-representation}, \ref{rev:chap-security:circuits-vs-R1cs:new-subsection:types-of-relations}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:circuits-vs-R1CS:description-of-R1CS]
+Chapters 1 (security) and 2 (implementation)
+\newcol \propContrib\ 
+\newcol \githubissue{13}
+\newcol \contributors\ Yu Hang \href{https://github.com/DecentrilizedMan}{DecentrilizedMan}
+				\submit\ Email
+				\Chan\ Add new introductory content about R1CS
+\newcol \ref{rev:chap-security:circuits-vs-R1cs:new-subsection:R1CS-representation}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\myendIssue
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newIssue{issue:interactivity}{Introduction to interactive zero-knowledge proofs } %C18
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:interactivity:intro] 
+Security section
+\newcol \ccontext\ Discussed during the "Interactive Zero Knowledge" brekout session in the 2nd ZKProof Workshop
+				\propContrib\ An introduction to advantages and disadvantages of interactive zero-knowledge proofs relative to non-interactive ones, and a discussion of scenarios and applications where interactive protocols may be particularly suitable or relevant.
+				
+\newcol \githubissue{18}, \ref{it:new-chapter-2}
+\newcol \contributors\ Justin Thaler and Yael Kalai (and further contributors \red{...fill in...})
+				\Chan\ New entire \refsec{paradigms:interactivity} on Interactivity.
+\newcol \ref{rev:interactivity-paradigm}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\myendIssue
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newIssue{issue:improve-description-apps-and-predicates}{Improve description of applications and predicates} %C20
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:improve-description-apps-and-predicates]
+Chapter (applications)
+\newcol \ccontext\ discussed during the breakout session about the ZKProof Community Reference document
+				\propContrib\ Improve the accessibility of the Applications section to meet or exceed that of Security and Implementation. This includes the following: formally expand on the existing applications for correctness and ensure that the notion of ``predicates'' is well understood.
+\newcol \githubissue{20}
+\newcol \contributors\ Angela Robinson and Daniel Benarroch
+				\Chan\ ...
+\newcol %\ref{...}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\myendIssue
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newIssue{issue:improve-motivation-apps}{Improve motivation in application chapter} %C22
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:improve-motivation-apps]
+Old section 3.1
+\newcol \ccontext\ Breakout session: ZKProof Community Reference
+				\propContrib\ Motivation for ZKPs must be improved in order to allow users to understand how ZKPs can be used to solve practical problems. In particular: Include some missing items as for example recursive composition and proof-carrying-data.
+\newcol \githubissue{22}
+\newcol \contributors\ Eduardo Morais
+				\submit\ GitHub pull request
+				\Chan\ Included a paragraph to explain motivation for Proof Carrying Data (PCD).	
+\newcol \ref{rev:app:intro:motivate}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\myendIssue
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newIssue{issue:gadgets-table}{Complete Gadgets Table} %C23
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:gadgets-table]
+Old section 3.4
+\newcol \ccontext\ Breakout session: ZKProof Community Reference
+				\propContrib\ Different gadgets were mentioned during the workshops. Some are already described in the document, but it is necessary to review and complete this tables.
+\newcol \githubissue{23}
+\newcol \contributors\ Eduardo Morais
+				\submit\ GitHub pull request
+				\Chan\ Updated the \hyperref[tab:list-gadgets]{gadgets table} by filling in missing elements and making a few corrections.
+				Also updated the specific tables for the following gadgets: \hyperref[tab:gadget-signature]{signature}, \hyperref[tab:gadget-encryption]{encryption}, \hyperref[tab:gadget-dist-decryption]{Distributed-decryption} and \hyperref[tab:gadget-set-membership]{set membership}				
+\newcol \ref{rev:gadgets-table-fill}, \ref{rev:gadget:sig:update}, \ref{rev:gadget:enc:update}, \ref{rev:gadget:dist-enc:update}, \ref{rev:gadget:set-memb:update}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\myendIssue
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newIssue{issue:refs-in-chapter-apps}{Include references in Application chapter} %C24
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:refs-in-chapter-apps]
+References
+\newcol \ccontext\ Breakout session: ZKProof Community Reference
+				\propContrib\ Some important references are missing. It is necessary to reference papers whenever relevant. See comments in version 0.1.
+\newcol \githubissue{24}   %, \ref{it:legacy-tech}
+\newcol \contributors\ Eduardo Morais
+				\submit\ GitHub pull request
+				\Chan\ Added 3 references to the new paragraph (\ref{rev:app:intro:motivate}) in the introduction of the ``Applications'' chapter
+\newcol \ref{rev:app:intro:new-refs}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\myendIssue
+
+
+

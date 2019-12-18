@@ -7,6 +7,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Overview}
+\label{sec:apps:id-framework:overview}
 
 %\setlength{\parindent}{2em}
 %\setlength{\parskip}{0pt}
@@ -16,12 +17,12 @@ In this section we describe identity management solutions using zero knowledge p
 
 After attestation it is possible to use this information, hereby called a credential, to generate a claim about those attributes. Namely, consider the case where Alice wants to show that she is over 18 and lives in a country that belongs to the European Union. If two issuers were responsible for the attestation of Alice`s age and residence country, then we have that Alice could use zero knowledge proofs in order to show that she possesses those attributes, for instance she can use zero knowledge range proofs to show that her age is over 18, and zero knowledge set membership to prove that she lives in a country that belongs to the European Union. This proof can be presented to a Verifier that must validate such proof to authorize Alice to use some service. Hence there are three parties involved: (i) the credential holder; (ii) the credential issuer; (iii) and the verifier.  
 
-
-We are going to focus our description on a specific use case: accredited investors. In this scenario the credential holder will be able to show that she is accredited without revealing more information than necessary to prove such a claim.   
+  
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Motivation for Identity and Zero Knowledge}
+\label{sec:apps:id-framework:motivation}
 
 Digital identity has been a problem of interest to both academics and industry practitioners since the creation of the internet. Specifically, it is the problem of allowing an individual, a company, or an asset to be identified online without having to generate a physical identification for it, such as an ID card, a signed document, a license, etc. Digitizing Identity comes with some unique risks, loss of privacy and consequent exposure to Identity theft, surveillance, social engineering and other damaging efforts. Indeed, this is something that has been solved partially, with the help of cryptographic tools to achieve moderate privacy (password encryption, public key certificates, internet protocols like TLS\luiscom{Add citation. Capitalized it.} and several others). Yet, these solutions are sometimes not enough to meet the privacy needs to the users / identities online. Cryptographic zero knowledge proofs can further enhance the ability to interact digitally and gain both privacy and the assurance of legitimacy required for the correctness of a process.
  
@@ -30,11 +31,11 @@ The following is an overview of the generalized version of the identity scheme. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Terminology / Definitions}
+\label{sec:apps:id-framework:terminology}
 
 In this protocol we use several different data structures to represent the information being transferred or exchanged between the parties. We have tried to generalize the definitions as much as possible, while adapting to the existing Identity standards and previous ZKP works.
 
-\mbox{}\\
-\textbf{Attribute.} The most fundamental information about a holder in the system (e.g.: age, nationality, univ. Degree, pending debt, etc.). These are the properties that are factual and from which specific authorizations can be derived.
+\paragraph{Attribute.} The most fundamental information about a holder in the system (e.g.: age, nationality, univ. Degree, pending debt, etc.). These are the properties that are factual and from which specific authorizations can be derived.
 
 \textbf{(Confidential and Anonymous) Credential.} The data structure that contains attribute(s) about a holder in the system (e.g.: credit card statement, marital status, age, address, etc). Since it contains private data, a credential is not shareable. 
 
@@ -43,7 +44,7 @@ In this protocol we use several different data structures to represent the infor
 
 \textbf{Proof of Credential.} The zero knowledge proof that is used to verify the claim attested by the credential. Given that the credential is kept confidential, the proof derived from it is presented as a way to prove the claim in question.
 
-\mbox{}\\
+\vspace{1em}
 \noindent The following are the different parties present in the protocol:
 
 \textbf{Holder.} The party whose attributes will be attested to. The holder holds the credentials that contain his / her attributes and generates Zero Knowledge Proofs to prove some claim about these. We say that the holder presents a proof of credential for some claim.
@@ -52,12 +53,13 @@ In this protocol we use several different data structures to represent the infor
 
 \textbf{Verifier.} The party that verifies some claim about a holder by verifying the zero knowledge proof of credential to the claim.
 
-\mbox{}\\
+\vspace{1em}
 \noindent\underline{Remark:} The main difference between this protocol and a non-ZK based Identity protocol is the fact that in the latter, the holder presents the credentials themselves as the proof for the claim / authorization, whereas in this protocol, the holder presents a zero knowledge proof that was computed from the credentials.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{The Protocol Description}
+\label{sec:apps:id-framework:protocol-description}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -102,7 +104,7 @@ the different ways that these requirements can be achieved and what are the trad
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% NEW TABLE
 
 \newcommand{\begminB}[1]{\begmin{#1}\setlist[itemize]{leftmargin=1.5ex}\renewcommand{\labelitemi}{-}}
-\newenvironment{funcprivtabular}[5]{\begin{center}\footnotesize\begin{longtable}{|>{\begminB{#1}}l<{\myendmini}|>{\begminB{#2}}l<{\myendmini}|>{\begminB{#3}}l<{\myendmini}|>{\begminB{#4}}l<{\myendmini}|>{\begmin{#5}}l|}\hline }{\end{longtable}\vspace{1em}\end{center}}
+\newenvironment{funcprivtabular}[4]{\begin{center}\footnotesize\begin{longtable}{|>{\begminB{#1}}l<{\myendmini}|>{\begminB{#2}}l<{\myendmini}|>{\begminB{#3}}l<{\myendmini}|>{\begminB{#4}}l|}\hline }{\end{longtable}\vspace{1em}\end{center}}
 
 \afterpage{%
     \clearpage% 
@@ -112,12 +114,12 @@ the different ways that these requirements can be achieved and what are the trad
 \def\tmptabtitle{Functionalities vs.\ privacy and robustness requirements}
 {\mytabcap{\tmptabtitle}{\tmptabtitle\luistodo{Consider breaking this into 4 tables, each with only 3 columns}}\label{tab:apps:functionality-vs-privacy-requirements}}
 \vspace{-1.5em}
-\begin{funcprivtabular}{.1827}{.3027}{.3027}{.3027}{.1}
+\begin{funcprivtabular}{.1927}{.3327}{.3327}{.3327}
 \rowcolor{colorRowHead}\textbf{Functionality / Problem}
      & \textbf{Instantiation Method}
 		 & \textbf{Proof Details}
 		 & \textbf{Privacy / Robustness}
-		 & \textbf{Reference} \rowend
+		\rowend
 %%%%%%%%%%%%
 \hline
     \textbf{Holder identification:} how  to identify a holder of credentials
@@ -131,9 +133,9 @@ the different ways that these requirements can be achieved and what are the trad
     \item Issuers can collude to link different credentials by the same holder. 
     \item An entity can have only one identity in the system 
 		\end{itemize}
-	& \rowend
+	\rowend
 %%%%%%%%%%%%
-\cline{2-5}
+\cline{2-4}
 	& Single identifier in the self-sovereign realm: PRF based Public Key (idPK) self derived by the entity.
 	& \begin{itemize}	
     \item Any proof of credential must show the holder knows the preimage of the idPK and that the credential was issued to the idPK in question
@@ -143,9 +145,9 @@ the different ways that these requirements can be achieved and what are the trad
 		\item Issuers can collude to link different credentials by the same holder
 		\item An entity can have several identities and conveniently forget any of them upon issuance of a “negative credential”
 		\end{itemize}
-	& \rowend
+	\rowend
 %%%%%%%%%%%%
-\cline{2-5}
+\cline{2-4}
 	& Multiple identifiers: Pairwise identification through identifiers. For each new interaction the holder generates a new identifier. 
   & \begin{itemize}	
 		\item Every time a holder needs to connect to a previous issuer, it must prove a connection of the new and old identifiers in ZK
@@ -156,7 +158,7 @@ the different ways that these requirements can be achieved and what are the trad
     \item Issuers cannot collude to\luiscom{Editorial: issuers can always collude; the question is what capabilities they can gain therefrom. Consider: "A set of colluding issuers cannot ..."} link the credentials by the same holder
     \item An entity can have several identities and conveniently forget any of them upon issuance of a “negative credential”\luiscom{Consider clarifying the meaning of negative credential.}
 		\end{itemize}
-	& \rowend
+	\rowend
 %%%%%%%%%%%%
 \hline
 	  \textbf{Issuer identification}
@@ -168,9 +170,9 @@ the different ways that these requirements can be achieved and what are the trad
 	& \begin{itemize}
     \item The verifier / public would not know who the issuer of the credential is but would know it is approved.
 		\end{itemize}
-	& \rowend
+	\rowend
 %%%%%%%%%%%%
-\cline{2-5}
+\cline{2-4}
 	& Free permissions: anyone can become an issuer, which use identifiers:
 		\begin{itemize}
     \item Public identifier: type 1 is the issuer whose signature verification key is publicly available
@@ -184,7 +186,7 @@ the different ways that these requirements can be achieved and what are the trad
     \item If ring signatures are used, the type one issuer identifiers would not imply that the identity of the issuer can be linked to a credential, it would only mean that “Key K\_a belongs to company A”
     \item Otherwise, only the type two issuers would be anonymous and unlinkable to credentials
 		\end{itemize}
-	& \rowend
+	\rowend
 %%%%%%%%%%%%
 \hline
 		\textbf{Credential Issuance}
@@ -200,9 +202,9 @@ the different ways that these requirements can be achieved and what are the trad
     \item Issuer’s signatures on credentials add limited legitimacy: a holder could add specific values / attributes that are not real and the issuer would not know
     \item An Issuer can collude with a holder to produce blind signatures without the issuer being blamed
 		\end{itemize}
-	& \rowend
+	\rowend
 %%%%%%%%%%%%
-\cline{2-5}
+\cline{2-4}
 	& In the clear signatures: the issuer generates the attestation, signing the commitment and sending the credential in the clear to the holder 
 	& \begin{itemize}
 		\item The proof of credential must not be accepted if the signature of the credential was
@@ -212,7 +214,7 @@ the different ways that these requirements can be achieved and what are the trad
     \item Issuer must be trusted, since she can see the Holder’s data and could share it with others
     \item The signature of the issuer can be trusted and blame could be allocated to the issuer
 		\end{itemize}
-	& \rowend
+	\rowend
 %%%%%%%%%%%%
 \hline
 		\textbf{Credential Revocation}
@@ -225,9 +227,9 @@ the different ways that these requirements can be achieved and what are the trad
 		\item If the accumulator is maintained by a central authority, then only the authority can link the revocation to the original issuance, avoiding timing attacks by general parties (join-revoke linkability)
 		\item If the accumulator is maintained through a public state, then there can be linkability of revocation with issuance since one can track the added values and test its membership
 		\end{itemize}
-  & \cite{2017:ccs:Practical-UC-Secure-Delegatable-Credentials-with-attributes} \rowend
+	\rowend
 %%%%%%%%%%%%
-\cline{2-5}
+\cline{2-4}
 	& Negative accumulator revocation: the issuer revokes by adding an element to an accumulator
 	& \begin{itemize}
 		\item The holder must prove set membership of a credential to prove it was issued
@@ -239,7 +241,7 @@ the different ways that these requirements can be achieved and what are the trad
 	& \begin{itemize}
 		\item Even when the accumulator is maintained through a public state, the revocation cannot be linked to the issuance since the two events are independent of each other
 		\end{itemize}
-	& \rowend
+	\rowend
 %%%%%%%%%%%%
 \hline
 \end{funcprivtabular}
@@ -291,6 +293,12 @@ Each of the methods for instantiating the different functionalities use some of 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
 \subsection{A use-case example of credential aggregation}
+\label{sec:apps:id-framework:use-case-credential-aggregation}
+
+
+\revblock[rev:apps:identity-framework:move-paragraph-focus-accredited-investors]{it:apps:identity-framework:move-paragraph-focus-accredited-investors}
+We are going to focus our description on a specific use case: accredited investors. 
+In this scenario the credential holder will be able to show that she is accredited without revealing more information than necessary to prove such a claim. 
 
 
 \paragraph{Use-case description.}

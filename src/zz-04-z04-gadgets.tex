@@ -4,8 +4,20 @@
 \label{apps:gadgets-within-predicates}
 
 
-Formalizing the security of these protocols is a very difficult task, especially since there is no predetermined set of requirements, making it an ad-hoc process. 
-Here we outline a set of initial gadgets to be taken into account.%
+	Formalizing the security of these protocols is a very difficult task, especially since there is no predetermined set of requirements, making it an ad-hoc process.
+	\revblock[rev:applications:gadgets-within-predicates:new-paragraphs]{\ref{it:applications:gadgets-within-predicates:new-paragraphs}}
+	Use-cases must be sure to distinguish between privacy requirements and security guarantees.
+	We discuss the use-case case of privacy-preserving asset transfer to illustrate the difference.
+
+	Secure asset transfer is possible at several financial institutions, provided that the institution has knowledge of the identities of the sender, recipient, asset, and amount.
+	In a privacy-preserving asset transfer, the identities of sender and recipient may be concealed even from the entity administering the transfer.
+	It is important to note that a successful transfer must meet privacy requirements as well as provide security guarantees.
+
+	Privacy requirements might include the anonymity of sender and recipient, concealment of asset type and asset amount.
+	Security guarantees might include the inability of anyone besides the sender to initiate a transfer on the sender's behalf or the inability of a sender to execute a transfer of asset type without sufficient holdings of the asset. 
+
+
+	Here we outline a set of initial gadgets to be taken into account.%
 \luised{Created one table containing only the gadget names and the description in English; then included one table for each gadget. 
 This enables shorter tables, not breaking the page, and allows easier indexing of each gadget (e.g., now showing in the initial List of Tables).} 
 See \reftab{tab:list-gadgets} for a simple list of gadgets --- this list should be expanded continuously and on a case by case basis.

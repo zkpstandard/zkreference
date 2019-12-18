@@ -31,9 +31,64 @@ All document
 \newcol \ccontext\ Inherently related to the editorial development of the reference document. 
 				\propContrib\ Implement editorial structural changes to the document (e.g., new chapters, 
 				sections, subsections, etc.) , as useful based on the overall set of contributions.
-\newcol \githubissue{16}
+\newcol \githubissue{16}, \ref{it:interactivity:intro}, \ref{it:transferability-vs-interactivity-elaborate}, \ref{it:deniability}
 \newcol \contributors\ The editors (Daniel Benarroch, Luís Brandão, Eran Tromer)
 				\Chan\ See items below.
+\newcol 
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:editorial:add-abstract][]
+Front matter, after the cover
+\newcol 
+\newcol \githubissue{16}
+\newcol \Chan\ Add an abstract
+\newcol \ref{rev:add-abstract}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:editorial:open-to-contributions][]
+Front matter
+\newcol 
+\newcol \githubissue{16}
+\newcol \Chan\ In the preamble of the document, add a section ``\hyperref[sec:prelim:open-to-contributions]{Open to Contributions}'' providing context for the intended development process of the document.
+\newcol \ref{rev:add-open-to-contributions}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:editorial:add-change-log][]
+Front matter
+\newcol 
+\newcol \githubissue{16}
+\newcol \Chan\ Add a \hyperref[sec:prelim:change-log]{change-log} section, with a summarized description of the sequence of main versions of the document.
+\newcol \ref{rev:editorial:add-change-log}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:editorial:add-acks][]
+Front matter
+\newcol 
+\newcol \githubissue{16}
+\newcol \Chan\ Add an \hyperref[sec:prelim:acknowledgments]{acknowledgments} section consistent with the contributions provided to the document.
+\newcol \ref{rev:add-acks}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:editorial:charter][]
+Front matter
+\newcol 
+\newcol \githubissue{16}, \ref{issue:intellectual-property}
+\newcol \Chan\ Improve the placement and context of the ZKProof Charter within the document:
+				\begin{itemize}
+				\item Moved the original ``\hyperref[sec:prelim:charter]{ZKProof Charter}'' to before the \hyperref[prelim:contents]{Table of Contents}, and placed it within a framing box (\ref{rev:charter:box-the-original}).
+				\item Corrected a typo: ``standardardization'' $\rightarrow$ ``standardization'' (\ref{rev:charter:typo:standardardization}).
+				\item Added an editorial note explaining that the scope of the creative commons license is widened to incorporate the community reference (\ref{rev:charter:widen-scope-creative-commons}).
+				\item Removed the ZKProof Code of Conducts (since it is tailored to events, rather than to documents).
+				\end{itemize}
+\newcol \ref{rev:charter:box-the-original}, \ref{rev:charter:typo:standardardization}, \ref{rev:charter:widen-scope-creative-commons}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:editorial:remove-zcon0-notes][]
+Old chapter 4 ZCon0
+\newcol 
+\newcol \githubissue{16}
+\newcol \Chan\ Remove the ZCon0 notes (old chapter 4). \Note\ Based on the editorial process, 
+				the workshop notes are separated from the community reference.
 \newcol 
 \rowendL
 %%%%%%%%%%%%%%%%%%%%%%%%
@@ -41,7 +96,7 @@ All document
 New chapter 2
 \newcol 
 \newcol \githubissue{16}
-\newcol \Chan\ Create new chapter ``2. Construction paradigms'' to contain explanations 
+\newcol \Chan\ Create structure to fit a new chapter ``2. Construction paradigms'' to contain explanations 
 	of different protocol paradigms for zero-knowledge proofs. 
 \newcol \ref{rev:new-chapter-2-paradigms}
 \rowendL
@@ -64,72 +119,16 @@ All document
 \newcol \ref{rev:list-other-paradigms}
 \rowendL
 %%%%%%%%%%%%%%%%%%%%%%%%
-\incItem[it:editorial:add-abstract][]
-Front matter, after the cover
-\newcol 
-\newcol \githubissue{16}
-\newcol \Chan\ \todo{Add an abstract}
-\newcol \ref{rev:add-abstract}
-\rowendL
-%%%%%%%%%%%%%%%%%%%%%%%%
-\incItem[it:editorial:add-editors-note][]
-Front matter
-\newcol 
-\newcol \githubissue{16}
-\newcol \Chan\ \todo{Add a version history section, explaining the versions of the document}
-\newcol \ref{rev:add-editorial-note}
-\rowendL
-%%%%%%%%%%%%%%%%%%%%%%%%
-\incItem[it:editorial:add-acks][]
-Front matter
-\newcol 
-\newcol \githubissue{16}
-\newcol \Chan\ \todo{Add acknowledgments consistent with all the contributions}
-\newcol \ref{rev:add-acks}
-\rowendL
-%%%%%%%%%%%%%%%%%%%%%%%%
-\incItem[it:editorial:charter][]
-Preamble
-\newcol 
-\newcol \githubissue{16}, \ref{issue:intellectual-property}
-\newcol \Chan\ Improve the placement and context of the ZKProof Charter within the document:
-				\begin{itemize}
-				\item Moved the original ``\hyperref[sec:prelim:charter]{ZKProof Charter}'' to before the \hyperref[prelim:contents]{Table of Contents}, and placed it within a framing box (\ref{rev:charter:box-the-original}).
-				\item Corrected a typo: ``standardardization'' $\rightarrow$ ``standardization'' (\ref{rev:charter:typo:standardardization}).
-				\item Added an editorial note explaining that the scope of the creative commons license is widened to incorporate the community reference (\ref{rev:charter:widen-scope-creative-commons}).
-				\item Removed the ZKProof Code of Conducts (since it is tailored to events, rather than to documents), \todo{while still leaving a reference to it in the ``Editorial note'' section.}
-				\end{itemize}
-\newcol \ref{rev:charter:box-the-original}, \ref{rev:charter:typo:standardardization}, \ref{rev:charter:widen-scope-creative-commons}
-\rowendL
-%%%%%%%%%%%%%%%%%%%%%%%%
-\incItem[it:editorial:remove-zcon0-notes][]
-Old chapter 4 ZCon0
-\newcol 
-\newcol \githubissue{16}
-\newcol \Chan\ Remove the ZCon0 notes (old chapter 4). \Note\ Based on the editorial process, 
-				the workshop notes are separated from the community reference.
-\newcol 
-\rowendL
-%%%%%%%%%%%%%%%%%%%%%%%%
 \incItem[it:editorial:applications-move-notation][]
 Old section 3.2 (``Notation and terminology'') in chapter ``Applications''
 \newcol 
 \newcol \ref{it:applications:define-predicate-and-gadgets}
-\newcol \Note\ This was a placeholder section without enough content.
-				\Chan\ Dispersed some content proposed in this section to more-suitable adjacent sections.
-\newcol \ref{rev:applications:define-predicate-and-gadgets}, \ref{rev:applications:move-mention-to-syntax}
+\newcol \Note\ This was a placeholder section without enough related content.
+				\Chan\ Moved all content from old section ``Notation and Terminology'' to \refsec{apps:intro}.
+				The moved content includes: newly proposed definition of gadget and predicate (see \ref{it:applications:define-predicate-and-gadgets};
+				list of verifiability types, placing them within a new paragraph header and adding a header label for each type, along with minor editorial adjustments.
+\newcol \ref{rev:applications:define-predicate-and-gadgets}, \ref{rev:applications:move-mention-to-syntax}, \ref{rev:editorial:applications:verifiability-type}
 \rowendL
-%%%%%%%%%%%%%%%%%%%%%%%%
-\incItem[it:editorial:applications:verifiability-type][]
-\refsec{apps:previous-works}
-\newcol 
-\newcol \ref{it:editorial:applications-move-notation}
-\newcol \Chan\ Move from old section ``Notation and Terminology'' to \refsec{apps:intro} 
-the list of verifiability types, placing them within a new paragraph header; 
-add a header label for each type; make minor editorial adjustments.
-\newcol \ref{rev:editorial:applications:verifiability-type}
-\rowendL
-
 %%%%%%%%%%%%%%%%%%%%%%%%
 \incItem[it:editorial:address-popup-annotations][]
 All document

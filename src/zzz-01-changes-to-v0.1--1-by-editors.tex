@@ -37,8 +37,16 @@ All document
 \newcol 
 \rowendL
 %%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:editorial:clarify-this-version][]
+Front matter
+\newcol 
+\newcol \githubissue{16}
+\newcol \Chan\ Add an \hyperref[sec:prelim:msg-editors]{editorial note} clarifying the context of the current version; add a proposed citation format for this version.
+\newcol \ref{rev:clarify-this-version}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
 \incItem[it:editorial:add-abstract][]
-Front matter, after the cover
+Front matter
 \newcol 
 \newcol \githubissue{16}
 \newcol \Chan\ Add an abstract
@@ -75,25 +83,16 @@ Front matter
 \newcol \githubissue{16}, \ref{issue:intellectual-property}
 \newcol \Chan\ Improve the placement and context of the ZKProof Charter within the document:
 				\begin{itemize}
-				\item Moved the original ``\hyperref[sec:prelim:charter]{ZKProof Charter}'' to before the \hyperref[prelim:contents]{Table of Contents}, and placed it within a framing box (\ref{rev:charter:box-the-original}).
-				\item Corrected a typo: ``standardardization'' $\rightarrow$ ``standardization'' (\ref{rev:charter:typo:standardardization}).
-				\item Added an editorial note explaining that the scope of the creative commons license is widened to incorporate the community reference (\ref{rev:charter:widen-scope-creative-commons}).
-				\item Removed the ZKProof Code of Conducts (since it is tailored to events, rather than to documents).
+				\item Move the original ``\hyperref[sec:prelim:charter]{ZKProof Charter}'' to before the \hyperref[prelim:contents]{Table of Contents}, and frame it within a box (\ref{rev:charter:box-the-original}).
+				\item Correct typo: ``standardardization'' $\rightarrow$ ``standardization'' (\ref{rev:charter:typo:standardardization}).
+				\item Add editorial footnote explaining that the scope of the creative commons license is widened to incorporate the community reference (\ref{rev:charter:widen-scope-creative-commons}).
+				\item Remove the ZKProof Code of Conducts (since it is tailored to events, rather than to documents).
 				\end{itemize}
 \newcol \ref{rev:charter:box-the-original}, \ref{rev:charter:typo:standardardization}, \ref{rev:charter:widen-scope-creative-commons}
 \rowendL
 %%%%%%%%%%%%%%%%%%%%%%%%
-\incItem[it:editorial:remove-zcon0-notes][]
-Old chapter 4 ZCon0
-\newcol 
-\newcol \githubissue{16}
-\newcol \Chan\ Remove the ZCon0 notes (old chapter 4). \Note\ Based on the editorial process, 
-				the workshop notes are separated from the community reference.
-\newcol 
-\rowendL
-%%%%%%%%%%%%%%%%%%%%%%%%
 \incItem[it:new-chapter-2][]
-New chapter 2
+New \refchap{chap:paradigms}
 \newcol 
 \newcol \githubissue{16}
 \newcol \Chan\ Create structure to fit a new chapter ``2. Construction paradigms'' to contain explanations 
@@ -102,7 +101,7 @@ New chapter 2
 \rowendL
 %%%%%%%%%%%%%%%%%%%%%%%%
 \incItem[it:move-taxonomy-to-new-chapter][]
-All document
+Old chapter 1; new \refsec{paradigms:taxonomy}
 \newcol 
 \newcol \githubissue{16}, \ref{issue:interactivity}
 \newcol \Chan\ Move the old section 1.8 (``taxonomy of constructions'') 
@@ -111,7 +110,7 @@ All document
 \rowendL
 %%%%%%%%%%%%%%%%%%%%%%%%
 \incItem[it:list-possible-paradigms][]
-All document
+\refsec{paradigms:others}
 \newcol 
 \newcol \githubissue{16}, \githubissue{17}
 \newcol \Chan\ List several possible ZKP protocol paradigms, each of which may later 
@@ -122,19 +121,53 @@ All document
 \incItem[it:editorial:applications-move-notation][]
 Old section 3.2 (``Notation and terminology'') in chapter ``Applications''
 \newcol 
-\newcol \ref{it:applications:define-predicate-and-gadgets}
-\newcol \Note\ This was a placeholder section without enough related content.
-				\Chan\ Moved all content from old section ``Notation and Terminology'' to \refsec{apps:intro}.
-				The moved content includes: newly proposed definition of gadget and predicate (see \ref{it:applications:define-predicate-and-gadgets};
-				list of verifiability types, placing them within a new paragraph header and adding a header label for each type, along with minor editorial adjustments.
+\newcol \ref{it:applications:define-predicate-and-gadgets}, \ref{it:scope-use-cases-new-content}
+\newcol \Note\ The section title ``Notation and terminology'' was inadequate and its content was focused on distinguishing three types of verifiability requirements.
+				\Chan\ Moved some newly proposed definitions of gadget and predicate (see \ref{it:applications:define-predicate-and-gadgets}) to the previous introductory section (\refsec{apps:intro}).
+				Change the section title to ``Types of verifiability'', added a header label for each enumerated type, along with minor editorial adjustments.
+				Edited proposed content about the scope of use-cases related to the designated verifier case (see \ref{it:scope-use-cases-new-content}),
 \newcol \ref{rev:applications:define-predicate-and-gadgets}, \ref{rev:applications:move-mention-to-syntax}, \ref{rev:editorial:applications:verifiability-type}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:editorial:tables-gadgets-portrait][]
+\refsec{apps:gadgets-within-predicates}
+\newcol 
+\newcol \ref{it:applications:define-predicate-and-gadgets}
+\newcol \Note\ Tables of individual gadgets were in pages with landscape orientation.
+				\Chan\ Remove unused column ``API'' and adapt column lengths for better fit in pages with portrait orientation. A text text edits inside the cells.
+\newcol \ref{rev:editorial:tables-gadgets-portrait}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:editorial:tables-functionalities-portrait][]
+\refsec{sec:apps:id-framework:protocol-description}
+\newcol 
+\newcol 
+\newcol \Note\ In the old single table of functionalities, across three landscape pages, the first column ``Functionality/problem'' spanned a large vertical space, with a short label.
+				\Chan\ Converted each row defined by a ``functionality/problem'' into its own table, thus reducing the horizontal width and allowing a better fit in portrait mode.
+\newcol \ref{rev:editorial:tables-functionalities-portrait}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:editorial:remove-zcon0-notes][]
+Old chapter 4 ZCon0
+\newcol 
+\newcol \githubissue{16}
+\newcol \Chan\ Remove the ZCon0 notes (old chapter 4). \Note\ The current editorial process separates the workshop notes from the community reference.
+\newcol 
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:editorial:remove-list-refs-in-chapters][]
+End of each old chapter
+\newcol 
+\newcol Consolidate the list of used references.
+\newcol \Chan\ Remove the redundant lists of references that were remaining in the end of each chapter.
+\newcol \ref{rev:editorial:remove-list-refs-in-chapter-theory}, \ref{rev:editorial:remove-list-refs-in-chapter-implementation}, \ref{rev:editorial:remove-list-refs-in-chapter-applications}
 \rowendL
 %%%%%%%%%%%%%%%%%%%%%%%%
 \incItem[it:editorial:address-popup-annotations][]
 All document
 \newcol 
 \newcol \githubissue{16}
-\newcol \Chan\ \todo{Address and remove all popup pdf-annotations from the draft version 0.1.}
+\newcol \Chan\ \todo{Address/remove all popup pdf-annotations from the draft version 0.1.}
 \newcol 
 \rowendL
 %%%%%%%%%%%%%%%%%%%%%%%%

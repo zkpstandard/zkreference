@@ -31,6 +31,7 @@ that the expression/configuration belongs respectively to the language of valid 
 \label{security:zkp-knowledge-vs-membership:ZKPoK-DL}
 
 	\revblock[rev:pok:example-ZKPoK-DL]{\ref{it:pok:example-ZKPoK-DL}}
+	Consider the classical example of proving knowledge of a discrete-log \cite{1990:eurocrypt-89:schnorr}.
 	Let $p$ be a large prime (e.g., with 4096 bits) of the form $p=2q+1$, where $q$ is also a prime.
 	Let $g$ be a generator of the group $\mathbb{Z}^{\ast}_p = \{1,...,p-1\} = \left\{g^i:i=1,...,p-1\right\}$ under multiplication modulo $p$.
 	Assume that it is computationally infeasible to compute discrete-logs in this group, and that the primality of $p$ and $q$ has been verified by both prover and verifier.
@@ -40,6 +41,7 @@ that the expression/configuration belongs respectively to the language of valid 
     In that sense, a proof of membership does not make sense (or can be trivially considered accomplished with even an empty bit string).
 	Conversely, whether or not the prover knows a witness is a non-trivial matter, since the current publicly-known state of the art does not provide a way to compute discrete-logs in time polynomial in the size of the prime modulus (except if with a quantum computer).
 	In summary, this is a case where a ZKPoK makes sense but a ZKP of membership does not.
+	
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -75,7 +77,7 @@ in the image of $H$, with some noticeable probability (e.g., $\approx$0.368, if 
 	\revblock[rev:pok:example-ZKPoM-GNI]{\ref{it:pok:example-ZKPoM-GNI}}
 	In the theoretical context of provers with super-polynomial computation ability (e.g., unbounded), one can conceive a proof of membership without the notion of witness.
 Therefore, in this case the dual notion of a ZKP of knowledge does not apply.
-	A classical example uses the language of pairs of non-isomorphic graphs,  %%% add reference here
+	A classical example uses the language of pairs of non-isomorphic graphs \cite{1991:JACM:proofs-that-yield-nothing-but-their-validity},
 for which the proof is about convincing a verifier that two graphs are not isomorphic.
 	The classical example uses an interactive proof that does not follow from a witness, but rather from a super-ability, by the prover, in deciding isomorphism between graphs.
 	The verifier challenges the prover to detect which of the two graphs is isomorphic to a random permutation of one of the two original graphs.

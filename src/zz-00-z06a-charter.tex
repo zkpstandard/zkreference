@@ -5,6 +5,7 @@
 \nolinenumbers
 \begingroup\setlength{\fboxsep}{.75em}
 \nolinenumbers\revblock[rev:charter:box-the-original]{\ref{it:editorial:charter}}  %%%LB to-do: remove line numnber from marginnote
+\renewcommand{\thelinenumber}{\arabic{linenumber}\hspace*{1.8em}}
 \fbox{\resizebox{\textwidth-2\fboxsep-2\fboxrule}{!}{\begin{minipage}{1.05\textwidth}
 \begin{internallinenumbers}
 \textbf{ZKProof Charter (Boston, May 10th and 11th 2018).}
@@ -14,7 +15,7 @@ The goal of the ZKProof Standardization\revblock[rev:charter:typo:standardardiza
  effort is to advance the use of Zero Knowledge Proof technology by bringing together experts from industry and academia. 
 To further the goals of the effort, we set the following guiding principles:
 
-\begin{itemize}
+\begin{itemize}[itemsep=0ex]
 \item The initiative is aimed at producing documents that are open for all and free to use.
 	\begin{itemize}[label={$\circ$}]
 	\item As an open initiative, all content issued from the ZKProof Standards Workshop is
@@ -27,7 +28,7 @@ inclusive manner.
 views where consensus was not reached.
 \item As an open initiative, we wish to communicate our results to the industry, the media
 and to the general public, with a goal of making all voices in the event heard.
-	\begin{itemize}[label={$\circ$}]
+	\begin{itemize}[label={$\circ$},itemsep=0ex]
 	\item Participants in the event might be photographed or filmed.
 	\item We encourage you to tweet, blog and share with the hashtag \#ZKProof. 
 				Our official twitter handle is @ZKProof.
@@ -44,6 +45,7 @@ For further information, please refer to \myemail{contact@zkproof.org}
 \linenumbers
 
 \minip[\textwidth][1.27\textwidth]{%
+	\renewcommand\thelinenumber{\arabic{linenumber}\hspace*{.6em}}
 	\textbf{Editors note:}\revblock[rev:charter:widen-scope-creative-commons][11em]{\ref{it:editorial:charter}}
 	The requirement of a Creative Commons license was initially within the scope of the 1\textsuperscript{st}~ZKProof workshop.
 	The section below (about intellectual property expectations) widens the scope to cover this Community reference and beyond.

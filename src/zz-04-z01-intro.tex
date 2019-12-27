@@ -1,9 +1,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Introduction and Motivation}
+\section{Introduction}  % and Motivation %%% uniformizing the title of the intro section of each chapter
 \label{apps:intro}
  
-In this track we aim to overview existing techniques for building ZKP-based applications, including designing the protocols to meet best-practice security requirements.\revblock[rev:applications:review-intro-about-applications]{\ref{it:applications:review-intro-about-applications}}
+This chapter aims to overview existing techniques for building ZKP-based applications, including designing the protocols to meet best-practice security requirements.\revblock[rev:applications:review-intro-about-applications]{\ref{it:applications:review-intro-about-applications}}
 We distinguish between high-level and low-level applications, where the former are the protocols designed for specific use-cases and the latter are the necessary underlying operations or sub-protocols.
 Each use case admits a circuit, and we discuss the sub-circuits needed to ensure security and functionality of the protocol.
 We refer to the circuits as \emph{predicates} and the sub-circuits as \emph{gadgets}:
@@ -22,41 +22,14 @@ In some cases, a gadget can be interpreted as a security requirement
 \end{itemize}
 
 
-Recall from \refsec{security:syntax}\revblock[rev:applications:move-mention-to-syntax]{\ref{it:editorial:applications-move-notation}}
+	Recall from \refsec{security:syntax}\revblock[rev:applications:move-mention-to-syntax]{\ref{it:editorial:applications-move-notation}}
 the syntax of a proof system between a prover and verifier.
-As we will see, the protocols can be abstracted and generalized to admit several use-cases; 
+	As we will see, the protocols can be abstracted and generalized to admit several use-cases; 
 similarly, there exist compilers that will generate the necessary gadgets from commonly used programming languages. 
-Creating the constraint systems is a fundamental part of the applications of ZKP, which is the reason why there is a large variety of front-end software options available.
-
-In this document, we present three ZKP use-cases: identity framework, asset transfer and regulation compliance and emphasize the incorporation of suitable gadgets to ensure security of these protocols.  
+	Creating the constraint systems is a fundamental part of the applications of ZKP, which is the reason why there is a large variety of front-end software options available.
 
 
 
-\paragraph{Verifiability type.}\revblock[rev:editorial:applications:verifiability-type]{\ref{it:editorial:applications-move-notation}}
-
-When designing ZK based applications, one needs to keep in mind which of the following three models (that define the functionality of the ZKP) is needed:
-
-\begin{enumerate}
-
-    \item \textbf{Public.}
-		Publicly verifiable as a requirement: a scheme / use-case where 
-	there is a system requirement that
-	the proofs are transferable. %%%, where such property is actually a requirement of the system. 
-		\revblock[rev:remove-incorrection-on-transferability]{\ref{it:transferability-vs-interactivity-incorrect}}
-		%%%Only non-interactive ZK (NIZK) can actually hold this property.\luiscom{Consider revising this assertion, since if transferability is a design goal, it can still be obtained with an interactive protocol.}
-		
-    \item \textbf{Designated.} 
-		Designated verifier as a security feature: only the intended receiver of the proof can verify it, making the proof non-transferable. 
-		This property can apply to both interactive and non-interactive ZK.
-		
-    \item \textbf{Optional.} %The final model is one where neither of the above is needed: a ZK where 
-		There is no need to be able to transfer but also no non-transferability requirement. %Again, 
-		This property %model 
-	can apply both in the interactive and non-interactive model.
-
-\end{enumerate}
-
-For example, digital money based applications belong to the first model,\luiscom{Unclear why. Seems reasonable to devise use-cases where one wants to perform a non-transferable ZKP about something that happened with digital money.} compliance for regulation lives in the second model (albeit depending on the use-case). In general, the credential system can be in both of the last two models, given the extra constraints that would make it belong to the second model.
 
 
 
@@ -97,3 +70,17 @@ allows obtaining %to obtain
 % \item A show of preference for some use-cases or others
 %\end{itemize}
 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Organization.}
+\refsec{apps:scope-use-cases} mentions different types of verifiability properties of interest to applications.
+\refsec{apps:previous-works} enumerates some prior works.
+\refsec{apps:gadgets-within-predicates} describes possible gadgets useful for diverse applications.
+The subsequent three sections present three ZKP use-cases:
+%In this document, we present three ZKP use-cases: 
+%identity framework, asset transfer and regulation compliance and emphasize the incorporation of suitable gadgets to ensure security of these protocols.  
+\refsec{apps:id-framework} describes a use-case related to \emph{identity management};
+\refsec{apps:asset-transfer} examines an application context related to \emph{asset transfer};
+\refsec{apps:regulation-compliance} exemplifies one use-case related to \emph{regulation compliance}.

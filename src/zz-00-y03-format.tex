@@ -10,7 +10,16 @@
 \titlespacing{\subsubsection}{0pt}{1em}{0em}
 
 
-\newcommand{\presection}[2][section]{\phantomsection\section*{\centering #2}\addcontentsline{toc}{#1}{#2}}
+%%% \presection: prints a centered and unnumbered section header, and adds the header to the table of contents
+% 2nd optional argument has default value `section'
+% e.g., \presection[short-section-name]{my-very-long-section-name}
+% e.g., \presection[short-subsection-name][subsection]{my-very-long-subsection-name}
+%\newcommandtwoopt{\presection}[3][][section]{\phantomsection\section*{\centering #3}\addcontentsline{toc}{#2}{\ifEmptyElse{#2}{#3}{#2}}}
+
+\newcommandtwoopt{\presection}[3][][section]{\phantomsection\section*{\centering #3}\ifEmptyElse{#1}{\addcontentsline{toc}{#2}{#3}}{\addcontentsline{toc}{#2}{#1}}}
+
+%\newcommand{\presection}[2][section]{\phantomsection\section*{\centering #2}\addcontentsline{toc}{#1}{#2}}
+%\newcommand{\presection}[2][section]{\phantomsection\section*{\centering #2}\addcontentsline{toc}{#1}{#2}}
 
 
 \renewcommand{\headrulewidth}{0pt}
@@ -21,21 +30,26 @@
 \setcounter{tocdepth}{1} %needs package rocloft
 \renewcommand\cftchapafterpnum{\vskip0pt} %spacing between items in toc
 \renewcommand\cftsecafterpnum{\vskip0pt} %spacing between items in toc
-\setlist[itemize]{noitemsep, topsep=0pt}
-\setlength{\parskip}{1em}
+\setlist[itemize]{itemsep=.5ex, topsep=0pt}
+\setlist[enumerate]{itemsep=.5ex, topsep=0pt}
+\setlength{\parskip}{.75em}
 \setlength{\parindent}{0pt}
 
 \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
 \renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
 
 
-\hypersetup{linktocpage,bookmarksnumbered,bookmarksopen,bookmarksdepth=3,bookmarksopenlevel=1}
 \hypersetup{
-		pdfdisplaydoctitle=true,
-		pdfstartview={FitH},    % fits the width of the page to the window
-		breaklinks=true,
-		colorlinks=true,
-		allcolors=darkblue,
+	linktocpage,
+	bookmarksnumbered,
+	bookmarksopen,
+	bookmarksdepth=3,
+	bookmarksopenlevel=1,
+	pdfdisplaydoctitle=true,
+	pdfstartview={FitH},    % fits the width of the page to the window
+	breaklinks=true,
+	colorlinks=true,
+	allcolors=darkblue,
 }
 \urlstyle{rm}
 
@@ -82,3 +96,37 @@
 		\renewcommand{\bibname}{\pdfbookmark[1]{References}{pdfbkm:refs}References}
 	}
 \makeatother
+
+
+\DeclareListWrapperFormat{publisher}{Pub.\ by \mkbibemph{#1}}
+%\DeclareListWrapperFormat{organization}{\mkbibemph{#1}}
+
+
+%%%\newcommand{\myciton}{cited on}
+%%%\newcommand{\mybibstring}{}
+%%%\DeclareListFormat{list:citon}{%
+%%%    \ifnumless{\value{listcount}}{\value{liststop}}
+%%%    {\ifdefstring{\titlepagename}{#1}{\myciton\ppspace\listbreak}{}}
+%%%    {\ifdefstring{\titlepagename}{#1}{\myciton}{\mybibstring}\ppspace}}
+%%%\renewbibmacro*{pageref}{\iflistundef{pageref}{}
+%%%    {\printtext[parens]{%
+%%%       \ifnumgreater{\value{pageref}}{1}
+%%%         {\renewcommand{\mybibstring}{\bibstring{backrefpages}}}
+%%%         {\renewcommand{\mybibstring}{\bibstring{backrefpage}}}%
+%%%       \printlist[list:citon]{pageref}
+%%%       \printlist[pageref][-\value{listtotal}]{pageref}}}}
+			
+
+%%% https://tex.stackexchange.com/questions/149009/biblatex-pagebackref-reference-in-the-flush-right-margin
+\renewbibmacro*{pageref}{%
+   \iflistundef{pageref}
+     {\renewcommand{\finentrypunct}{\addperiod}}
+     {\renewcommand{\finentrypunct}{\addspace}%
+      \printtext{\addperiod\hfill\rlap{\hskip15pt\colorbox{blue!5}{\scriptsize\printlist[pageref][-\value{listtotal}]{pageref}}}}}}
+
+
+\newcommand\twodigits[1]{\ifnum#1<10 0#1\else #1\fi}
+\def\todayext{\ifcase\month\or
+  January\or February\or March\or April\or May\or June\or
+  July\or August\or September\or October\or November\or December\fi
+  \space\twodigits{\number\day}, \number\year}

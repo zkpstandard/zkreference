@@ -23,19 +23,26 @@ Additional examples of such scenarios include:
 The use of Zero knowledge proofs can then allow the generation of a proof that demonstrate the correctness of the aggregate result. The idea is to show something like the following statement: There is a commitment (possibly on a blockchain) to records that show that the result is correct. 
 
 \textbf{Trusting data fed into the computation: }
-In order for a computation on hidden data to prove valuable, the data that is fed in must be grounded as well. Otherwise, proving the correctness of the computation would be meaningless. To make this point concrete: A credit score that was computed from some hidden data can be correctly computed from some financial records, but when these records are not exposed to the recipient of the proof, how can the recipient trust that they are not fabricated? 
+In order for a computation on hidden data to prove valuable, the data that is fed in must be grounded as well. 
+Otherwise, proving the correctness of the computation would be meaningless. 
+To make this point concrete: A credit score that was computed from some hidden data can be correctly computed from some financial records, but when these records are not exposed to the recipient of the proof, how can the recipient trust that they are not fabricated? 
 
-Data that is used for proofs should then generally be committed to by parties that are separate from the prover, and that are not likely to be colluding with the prover. To continue our example from before: an individual can prove that she has a high credit score based on data commitments that were produced by her previous lenders (one might wonder if we can indeed trust previous lenders to accurately report in this manner, but this is in fact an assumption implicitly made in traditional credit scoring as well).   
+Data that is used for proofs should then generally be committed to by parties that are separate from the prover, and that are not likely to be colluding with the prover. 
+To continue our example from before: 
+an individual can prove that she has a high credit score based on data commitments that were produced by her previous lenders (one might wonder if we can indeed trust previous lenders to accurately report in this manner, but this is in fact an assumption implicitly made in traditional credit scoring as well).   
 
-The need to accumulate commitments regarding the operation and management of the processes that are later audited using zero-knowledge often fits well together with blockchain systems, in which commitments can be placed in an irreversible manner. Since commitments are hiding, such publicly shared data does not breach privacy, but can be used to anchor trust in the veracity of the data. 
+The need to accumulate commitments regarding the operation and management of the processes that are later audited using zero-knowledge often fits well together with blockchain systems, in which commitments can be placed in an irreversible manner. 
+Since commitments are hiding, such publicly shared data does not breach privacy, but can be used to anchor trust in the veracity of the data. 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{An example in depth: Proof of compliance for aircraft}
 \label{apps:regulation-compliance:example-compliance-aircraft}
 
-An operator is flying an aircraft, and holds a log of maintenance operations on the aircraft.  These records are on different parts that might be produced by different companies.
-Maintenance and flight records are attested to by engineers at various locations around the world (who we assume do not collude with the operator). \newline
+An operator is flying an aircraft, and holds a log of maintenance operations on the aircraft.  
+These records are on different parts that might be produced by different companies.
+Maintenance and flight records are attested to by engineers at various locations around the world (who we assume do not collude with the operator). 
+
 The regulator wants to know that the aircraft is allowed to fly according to a certain set of rules.
 (Think of the Volkswagen emissions cheating story.)
 

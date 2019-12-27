@@ -71,6 +71,7 @@
 \patchcmd{\thebibliography}{\chapter*}{\section*}{}{} %will prevent the bibliography from breaking the page
 
 \usepackage[style=alphabetic,
+						backref=true,
 						giveninits=true,
 						isbn=false,url=false,
 						minbibnames=4,minalphanames=4,mincitenames=4,  %minnames=4,
@@ -124,6 +125,8 @@
 
 %https://stackoverflow.com/questions/2640111/url-latex-linebreak
 \PassOptionsToPackage{hyphens}{url}
+
+
 \usepackage{hyperref}
 
 \usepackage[all]{hypcap}

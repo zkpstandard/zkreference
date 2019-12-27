@@ -205,6 +205,16 @@ clarifying that the disclosure of patent claims should include both ``your own o
 \newcol \ref{rev:intellectual-property:clarify-whose-claims-are-in-scope}
 \rowendL
 %%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:intellectual-property:cc-license-expectation]
+Preamble
+\newcol \propContrib\ As part of requesting feedback to the Steering committee, Hugo proposed 
+clarifying that the disclosure of patent claims should include both ``your own or held by others.''
+\newcol \githubissue{5}
+\newcol \contributors\ Editors team.
+				\Chan\ Add to the proposed intellectual property text a note about the expected creative commons licensing for published documents.
+\newcol \ref{rev:intellectual-property:extend-cc-license-expectation}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
 \myendIssue
 
 
@@ -213,22 +223,24 @@ clarifying that the disclosure of patent claims should include both ``your own o
 \newIssue{issue:transferability}{Discuss transferability and deniability} %C6
 %%%%%%%%%%%%%%%%%%%%%%%%
 \incItem[it:transferability-vs-interactivity-elaborate]
-Chapter 1 ("Security/Theory")
+\refsec{sec:security:defs-props:transferability-deniability}
+\refsec{section:transferability-deniability-interactivity}
 \newcol \ccontext\ Proposed in the "NIST comments on the initial ZKProof documentation" (April 06, 2019) --- item C9.
 				\propContrib\ Elaborate more on the concept of transferability. For example, in an interactive protocol over the Internet, how do regular authenticated channels vs. ``ideally'' authenticated channels affect transferability? Would a non-transferable protocol become transferable when the prover signs all sent messages and the verifier uses the output of a cryptographic hash function to select random challenges? 
 \newcol \githubissue{6}, \ref{it:deniability}
 \newcol \contributors\ Luís Brandão
-				\Chan\ ...
+				\Chan\ Add subsection~\ref{sec:security:defs-props:transferability-deniability} with introductory distinction between transferability and deniability.
+				Add paragraphs in \refsec{section:transferability-deniability-interactivity} with nuances on trnasferability vs.\ interactivity.				
 \newcol \ref{rev:introduce-deniability-transferability}, \ref{rev:deniability-transferability-nuances}
 \rowendL
 %%%%%%%%%%%%%%%%%%%%%%%%
 \incItem[it:deniability]
-...
+\refsec{section:transferability-deniability-interactivity}
 \newcol \ccontext\ The ``deniability'' item was identified in the breakout session on ``Interactive Zero Knowledge'' in the 2nd ZKProof workshop.
 				\propContrib\ Elaborate more on the concept of deniability.
 \newcol \githubissue{6}, \ref{it:transferability-vs-interactivity-elaborate}
 \newcol \contributors\ Ivan Visconti
-				\Chan\ ...
+				\Chan\ Add several paragraphs about off-line / on-line non-transferability, designated verifier, and transferable proofs
 \newcol \ref{rev:deniability}
 \rowendL
 %%%%%%%%%%%%%%%%%%%%%%%%
@@ -258,7 +270,7 @@ Old sections 1.2, 1.4.3 and 2.5
 				
 \newcol \githubissue{10}
 \newcol \contributors\ Luís Brandão.
-				\Chan\ ...
+				\Chan\ Add paragraphs in new subsection~\ref{security:efficiency:stat-sec-levels}, proposing statistical security parameters for benchmarking.
 \newcol \ref{rev:stat-sec-par:bench:security-levels}
 \rowendL
 %%%%%%%%%%%%%%%%%%%%%%%%
@@ -270,13 +282,36 @@ Old sections 1.2, 1.4.3 and 2.5
 \newIssue{issue:clarify-scope-use-cases}{Clarify the (implicit) scope of some use-cases} %C12
 %%%%%%%%%%%%%%%%%%%%%%%%
 \incItem[it:clarify-scope-use-cases]
-Section 3.2
+\refsec{apps:scope-use-cases}
 \newcol \ccontext\ Proposed in the "NIST comments on the initial ZKProof documentation" (April 06, 2019) --- item C15.
-				\propContrib\ The last paragraph in section 2.2 says ``digital money based applications belong to the first model'' [public verifiable as a requirement]. This assertion appears implicitly scoped in a too narrow subset of conceivable applications about digital money. Conversely, one could consider a scenario where Alice wants to convince Bob, in a non-transferable way, that Alice bought something from Charlie. Consider clarifying better the scope of examples vs. the scope of areas of application.
+				\propContrib\ The last paragraph in Section 3.2 [old section number in version 0.1] says ``digital money based applications belong to the first model'' [public verifiable as a requirement]. This assertion appears implicitly scoped in a too narrow subset of conceivable applications about digital money. Conversely, one could consider a scenario where Alice wants to convince Bob, in a non-transferable way, that Alice bought something from Charlie. Consider clarifying better the scope of examples vs. the scope of areas of application.
+\newcol \githubissue{12}, \ref{it:transferability-vs-interactivity-incorrect}
+\newcol \Chan\ See items below.
+\newcol 
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:apps:verifiability:new-content-preamble]
+\refsec{apps:scope-use-cases}
+\newcol 
 \newcol \githubissue{12}
-\newcol \contributors\ ``\href{https://github.com/DecentrilizedMan}{DecentrilizedMan}''  %%%, \needscontributors
-				\Chan\ ...
-\newcol %\ref{...}
+\newcol \contributors\ Editors
+				\Chan\ Edit some text after the enumeration of verifiability types, 
+				setting some relation to application use-cases, including revising
+				content preliminary to the next contribution \ref{it:scope-use-cases-new-content}.
+\newcol \ref{rev:scope-use-cases-new-content}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:scope-use-cases-new-content]
+\refsec{apps:scope-use-cases}
+\newcol 
+\newcol \githubissue{12}
+\newcol \contributors\ Yu Hang
+				\submit\ Email to editors
+				\Chan\ Provided some content, based on \cite{1996:eurocrypt:designated-verifier-proofs}, 
+				about use-cases of designated-verifier use-cases. 
+					Substantially edited by the editors, including to remove parts redundant with the new 
+				content in \refsec{paradigms:interactivity}.
+\newcol \ref{rev:scope-use-cases-new-content}
 \rowendL
 %%%%%%%%%%%%%%%%%%%%%%%%
 \myendIssue
@@ -313,7 +348,7 @@ Chapters 1 (security/theory) and 2 (implementation)
 Chapters 1 (security) and 2 (implementation)
 \newcol \propContrib\ 
 \newcol \githubissue{13}
-\newcol \contributors\ Yu Hang \href{https://github.com/DecentrilizedMan}{DecentrilizedMan}
+\newcol \contributors\ Yu Hang
 				\submit\ Email
 				\Chan\ Add new introductory content about R1CS
 \newcol \ref{rev:chap-security:circuits-vs-R1cs:new-subsection:R1CS-representation}
@@ -328,11 +363,12 @@ Chapters 1 (security) and 2 (implementation)
 %%%%%%%%%%%%%%%%%%%%%%%%
 \incItem[it:interactivity:intro] 
 Security section
-\newcol \ccontext\ Discussed during the "Interactive Zero Knowledge" brekout session in the 2nd ZKProof Workshop
+\newcol \ccontext\ Discussed during the "Interactive Zero Knowledge" breakout session in the 2nd ZKProof Workshop
 				\propContrib\ An introduction to advantages and disadvantages of interactive zero-knowledge proofs relative to non-interactive ones, and a discussion of scenarios and applications where interactive protocols may be particularly suitable or relevant.
 				
 \newcol \githubissue{18}, \ref{it:new-chapter-2}
-\newcol \contributors\ Justin Thaler and Yael Kalai (and further contributors \red{...fill in...})
+\newcol \contributors\ Justin Thaler, Riad Wahby, Yupeng Zhang
+				\submit\ Email to editors
 				\Chan\ New entire \refsec{paradigms:interactivity} on Interactivity.
 \newcol \ref{rev:interactivity-paradigm}
 \rowendL

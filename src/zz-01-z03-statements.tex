@@ -19,7 +19,7 @@ or a \emph{knowledge} claim of the form ``In the scope of relation $R$, I know a
 	The relation $R$ can for instance be specified as a program (e.g. in C or Java), which given inputs $x$ and $w$ decides to accept, meaning $(x,w) \in R$, or reject, meaning $w$ is not a witness to $x \in L$. 
 	Examples of such specifications of the relation are detailed in the \hyperref[chap:apps]{Applications track}.
 	In the academic literature, relations are often specified either as 
-random access memory (RAM) programs or through Boolean and arithmetic circuits, which we describe below.
+random access memory (RAM) programs or through Boolean and arithmetic circuits, described below.
 
 
 
@@ -141,10 +141,10 @@ but a relation does not have to be that.
 
 
 \textbf{Setup-dependent relations:} 
-Sometimes it is convenient to let the relation $R$ take an additional input setup$_R$, i.e., let the relation contain triples $(\textmd{setup}_R, x, w)$. 
-	The input setup$_R$ can be used to specify persistent information, e.g., 
-for arithmetic circuit satisfiability maybe the same finite field and circuit is used many times, 
-so we let $\textmd{setup}_R = (F, C)$ and $x = (v_1,...,v_{n_x})$.
+	Sometimes it is convenient to let the relation $R$ take an additional input setup$_R$, i.e., let the relation contain triples $(\textmd{setup}_R, x, w)$. 
+	The input setup$_R$ can be used to specify persistent information.
+	For example, for arithmetic circuit satisfiability, if the same finite field $\mathbb{F}$ and circuit $C$ are used many times, 
+then $\textmd{setup}_R = (\mathbb{F}, C)$ and $x = (v_1,...,v_{n_x})$.
 	The input setup$_R$ can also be used to capture trusted input the relation does not check, 
 e.g., a trusted Rivest--Shamir--Adleman (RSA) modulus.
 

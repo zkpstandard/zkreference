@@ -76,8 +76,6 @@
 	\ifNotEmptyElse{#2}{\def\itemPdfBkmExt{: #2}}{\def\itemPdfBkmExt{}}
 	\pdfbookmark[3]{\thecntItB\itemPdfBkmExt}{pdfbkm:\thecntItB}\thecntItB \newcol } %incremment comment number
 
-	
-	
 
 \newcommand{\rowIssueName}{Issue title}
 \newcommand{\needscontributors}{\red{needs contributors}}
@@ -93,21 +91,17 @@
 
 
 %%% 
-\newcommand{\beginlongtab}{%
+%\newcommandtwoopt[2][.320][.320]{\beginlongtabIssue}{%
+\newcommand{\beginlongtabIssue}{%
 \begin{longtable}{%
-|>{\begmin{.025}\centering}c<{\myendmini}%               #
-|>{\begmin{.035}\centering}c<{\myendmini}%               Ref
-|>{\begmin{.080}}c<{\myendmini}%                         Old location
-|>{\begmin{.320}}c<{\myendmini}%                         Comment / Issue
-|>{\begmin{.060}\centering}c<{\myendmini}%               Related
-%|>{\collectcell\funcCellTemp}{c}<{\endcollectcell}%
-%|>{\funcCellTemp}{c}<{}%
-|>{\begmin{.320}}c<{\myendmini}%                         Reply notes / Notes about changes
-%%%\rule[raise]{width}{height}
-|>{\begmin{.050}\centering}c<{}|%                        Rev [in main document]
-%this will be ended explicitly with \rowend, which contains a \end{minipage}
-%this one is not within a minipage because it would be harder to escape from it, since there will be no
-%|>{\rule[0pt]{0pt}{2.75ex}}c|%   %this one is not within a minipage because it would be harder to escape from it, since there will be no \endcol
+|>{\begmin{.025}\centering}c<{\myendmini}%  #
+|>{\begmin{.035}\centering}c<{\myendmini}%  Ref
+|>{\begmin{.080}}c<{\myendmini}%            Old location
+|>{\begmin{.320}}c<{\myendmini}%              Comment / Issue
+|>{\begmin{.060}\centering}c<{\myendmini}%  Related
+|>{\begmin{.320}}c<{\myendmini}%              Reply notes / Notes about changes
+|>{\begmin{.050}\centering}c<{}|%           Rev [in main document]
+% The last column needs to be ended explicitly with \rowend, which contains a \end{minipage} followed by \\
 }%
 }
 
@@ -145,7 +139,7 @@
 	\refstepcounter{cntIssue}\label{#1}
 	\addcontentsline{loc}{subsection}{Contribution \thecntIssue\ --- #2}
 	\renewcommand{\rowIssueName}{#2}
-	\noindent\beginlongtab\hline%
+	\noindent\beginlongtabIssue\hline%
 			\rowcolor{LLyellow} %must be the first command in the cell, namely before pdfbookmark
 			\pdfbookmark[2]{\thecntIssue: \rowIssueName{}}{pdfbkm:\thecntIssue}% adds a pdf bookmark if this is the first header for this Issue	
 			\headerForIssue\rowend\hline\hline%

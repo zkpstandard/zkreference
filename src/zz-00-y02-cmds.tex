@@ -4,6 +4,8 @@
 \newcommand{\ifoddeven}[2]{\ifthenelse{\isodd{\value{page}}}{#1}{#2}}
 
 
+\providecommand{\ifEmpty}[2]{\ifthenelse{\equal{#1}{}}{\protect #2}{}}
+\providecommand{\ifEmptyElse}[3]{\ifthenelse{\equal{#1}{}}{\protect #2}{\protect #3}}
 \providecommand{\ifNotEmpty}[2]{\ifthenelse{\equal{#1}{}}{}{\protect #2}}
 \providecommand{\ifNotEmptyElse}[3]{\ifthenelse{\equal{#1}{}}{\protect #3}{\protect #2}}
 \providecommand{\ifNotEmptyPrepend}[2]{\ifthenelse{\equal{#1}{}}{}{#2#1}}
@@ -59,15 +61,13 @@
   % does not require the `table' environment, but can be inside of it
   % Enables correct line numbers and it also creates a pdfbookmark
   % 1st arg is the text for the listoffigures (lot); 2nd arg is the main text of the caption
-\newcommand{\mytabcap}[2]{%
+\newcommand{\mytabcap}[3][]{%
 	%\addtocounter{table}{1}\hypertarget{ht:table:\thetable}{}\addtocounter{table}{-1}
-	\internallinenumbers\refstepcounter{table}\centering{\bfseries \hypertarget{ht:table:\thetable}{Table}~\thetable{}:} %intentional space before comment %
-				\addcontentsline{lot}{table}{Table~\thetable{}: #1}%  %%%\protect\ifthenelse{\equal{#1}{}}{#2}{#1}
-				#2 %next there is an intentional empty line
+	{\normalsize\centering\internallinenumbers\refstepcounter{table}\label{#1}\bfseries\hypertarget{ht:table:\thetable}{Table}~\thetable{}: %intentional space before comment %
+				\addcontentsline{lot}{table}{Table~\thetable{}: #2}%  %%%\protect\ifthenelse{\equal{#1}{}}{#2}{#1}
+				#3} %next there is an intentional empty line
 
-	\nolinenumbers
-	{
-														\bookmarksetup{color=\colorbkmtab}%,bold=true
+	\nolinenumbers{\bookmarksetup{color=\colorbkmtab}%,bold=true
 	\ifthenelse{\equal{\arabic{section}}{0}}{\bookmarksetup{level=1}}{\ifthenelse{\equal{\arabic{subsection}}{0}}{\bookmarksetup{level=2}}{\ifthenelse{\equal{\arabic{subsubsection}}{0}}{\bookmarksetup{level=3}}{\bookmarksetup{level=4}}}}%
 	%in the line above, change the last bookmarksetup-level to 3 is wanting the pdf-bookmark to go inside the subsection
 	\bookmark[dest=ht:table:\thetable]{Table~\thetable}%
@@ -88,6 +88,7 @@
 
 \newcommand{\loosen}{\looseness=-1}
 
+\newcommand{\refchap}[1]{Chapter~\ref{#1}}
 \newcommand{\refsec}[1]{Section~\ref{#1}}
 \newcommand{\reftab}[1]{Table~\ref{#1}}
 \newcommand{\reffig}[1]{Figure~\ref{#1}}
@@ -96,6 +97,8 @@
 \newcommand{\refGad}[1]{Gadget~\ref{#1}}
 \newcommand{\refgad}[1]{gadget~\ref{#1}}
 
+
+\newcommand{\Comm}{\textmd{Comm}}  %%% \ensuremath{\mathcal{C}}
 
 
 \newcommand{\prov}{\tops{\ensuremath{P}}{P}}
@@ -123,7 +126,7 @@
 \newcommand{\neednot}{{\ttfamily need not}}
 
 
-\newcommandtwoopt{\minip}[3][\textwidth][\textwidth]{\nolinenumbers\resizebox{#1}{!}{\begin{minipage}{#2}\begin{internallinenumbers}#3\end{internallinenumbers}\end{minipage}}\vskip0pt\linenumbers}
+\newcommandtwoopt{\minip}[3][\textwidth][\textwidth]{\nolinenumbers\resizebox{#1}{!}{\begin{minipage}[t]{#2}\begin{internallinenumbers}#3\end{internallinenumbers}\end{minipage}}\vskip0pt\linenumbers}
 
 \newcommand{\todo}[1]{\red{[To-do: #1]}}
 

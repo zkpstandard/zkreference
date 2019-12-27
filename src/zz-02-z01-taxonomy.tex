@@ -22,7 +22,7 @@ The efficiency and security features of the resulting zero-knowledge proofs depe
 
 \begin{table}[H]
 \begin{center}
-\mytabcap{Different types of PCPs}{Different types of PCPs}\label{tab:different-types-of-PCP}
+\mytabcap[tab:different-types-of-PCP]{Different types of PCPs}{Different types of PCPs}
 
 \newcommand{\murii}[1]{\multirow{2}{*}{\subtabL{#1}}}
 \newcommand{\muriii}[1]{\multirow{3}{*}{\subtabL{#1}}}
@@ -54,7 +54,7 @@ The efficiency and security features of the resulting zero-knowledge proofs depe
 			& & & vSQL
 			& \ref{subfeat:succinct:depth} \\
 	\cline{4-5}
-			& & & vRAM
+			& & & vRAM \cite{2018:SP:vRAM}
 			& \ref{subfeat:succinct:polylog} \\
 \hline \murii{\hyperref[proof-system:ILC]{ILC}} & \murii{Yes} & \murii{Matrix-vector\\Queries}
 			& \subtabL{Bootle 16,18\\} 
@@ -132,6 +132,13 @@ takes as input a vector $q \in \field^k$ and returns the matrix-vector product $
 	\end{enumerate}
 
 
+
+\revblock[rev:editorial:remove-list-refs-in-chapter-theory]{\ref{it:editorial:remove-list-refs-in-chapters}}
+\paragraph{References from old list, but not in the remaining text:}\pdfbookmark[1]{List of references}{pdfbkm:security:list-refs}
+\cite{2018:asiacrypt:arya-nearly-linear-time-zkps-for-correct},
+\cite{2010:asiacrypt:short-NIZKPs}.
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Compilers: Cryptographic}
 \label{paradigms:taxonomy:compilers-crypto} 
@@ -198,4 +205,3 @@ takes as input a vector $q \in \field^k$ and returns the matrix-vector product $
 	They also give an example instantiation of the ILC proof that yields an IOP proof system with square-root complexity.
 	
 	\end{enumerate}
-

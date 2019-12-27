@@ -13,11 +13,11 @@ The benchmark standardisation is meant to document best practices, not hard requ
 We recommend that as the primary metrics the \textbf{running time (single-threaded)} and the \textbf{communication complexity} (proof size, in the case of non-interactive proof systems) of all components should be measured and reported for any benchmark. The measured components should at least include the \textbf{prover} and the \textbf{verifier}. If the setup is significant then this should also be measured, further system components like parameter loading and number of rounds (for interactive proof systems) are suggested.
 
 The following metrics are additionally suggested:
-\begin{itemize}[label={- }]
+\begin{itemize}
 \item Parallelizability
 \item Batching
 \item Memory consumption (either as a precise measurement or as an upper bound)
-\item Operation counts (e.g. number of field operations, multi-exponentiations, FFTs and their sizes)
+\item Operation counts (e.g., number of field operations, multi-exponentiations, FFTs and their sizes)
 \item Disk usage/Storage requirement
 \item Crossover point: point where verifying is faster than running the computation
 \item Largest instance that can be handled on a given system
@@ -33,7 +33,7 @@ Benchmarks can be both of analytical and computational nature. Depending on the 
 
 Computational benchmarks should be run on a consistent and commercially available machine. The use of cloud providers is encouraged, as this allows for cheap reproducibility. The machine specification should be reported along with additional restrictions that are put on it (e.g. throttling, number of threads, memory supplied). Benchmarking machines should generally fall into one of the following categories and the machine description should indicate the category. If the software implementation makes certain architectural assumptions (such as use of special hardware instructions) then this should be clearly indicated.
 
-\begin{itemize}[label={- }]
+\begin{itemize}
     \item Battery powered mobile devices
     \item Personal computers such as laptops
     \item Server style machines with many cores and large memories
@@ -59,14 +59,16 @@ We propose a set of benchmarks that is informed by current applications of zero-
 
 Here we list a set of primitives that both serve as microbenchmarks and are of separate interest. Library developers are free to choose how their library runs a given primitive, but we will aid the process by providing circuit descriptions in commonly used file formats (e.g. R1CS). 
 
-Recommended
-\begin{itemize}[label={- }]
+
+\textbf{Recommended:}
+\begin{enumerate}
     \item SHA-256
     \item AES
     \item A simple vector or matrix product at different sizes
-\end{itemize}
-Further suggestions
-\begin{itemize}[label={- }]
+\end{enumerate}
+
+\textbf{Further suggestions:}
+\begin{enumerate}[label={- }]
     \item Zcash Sapling “spend” relation
     \item RC4 (for RAM memory access)
     \item Scrypt
@@ -77,18 +79,20 @@ Further suggestions
         \item Big fields
         \item Pattern matching
 		\end{itemize}
+\end{enumerate}
+
+
+\textbf{Repetition:}
+\begin{itemize}
+\item The above relations, parallelized by putting $n$ copies in parallel.
 \end{itemize}
-
-
-Repetition
-
-The above relations, parallelized by putting $n$ copies in parallel.
-
 
 
 \paragraph{Functionalities.}
 
-The following are examples of cryptographic functionalities that are especially interesting to application developers. The realization of the primitive may be secondary, as long as it achieves the security properties. It is helpful to provide benchmarks for a constraint-system implementation of a realization of these primitives that is tailored for the NIZK backend.
+The following are examples of cryptographic functionalities that are especially interesting to application developers. 
+The realization of the primitive may be secondary, as long as it achieves the security properties. 
+It is helpful to provide benchmarks for a constraint-system implementation of a realization of these primitives that is tailored for the NIZK backend.
 
 In all of the following, the primitive underlying\revblock[rev:comp-sec-par:120-to-128-b]{\ref{it:comp-sec-par:120-to-128}} the ZKP statement should be given at a level of 128 bits or higher and match the security of the NIZK proof system.
 \begin{itemize}

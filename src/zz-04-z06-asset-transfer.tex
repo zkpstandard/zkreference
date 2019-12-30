@@ -47,7 +47,7 @@ In this section, we describe a simple ZK proof system for privacy-preserving tra
 
 \emph{\textbf{Setup scenario:}}  This system is essentially a simplified version of Zcash proof system, modified for indivisible assets.  Each asset is represented by a unique AssetID, and for simplicity we assume that the entire set of assets has been distributed, and no assets are ever created or destroyed.
 
-At any given time, the public state of the system consists of a collection of “asset notes”.  These notes are stored as leaves in a Merkle Tree, and each leaf represents a single indivisible asset represented by unique assetID.  In more detail, a “note” is a commitment to { Nullifier, publicKey, assetID }, indicating that publicKey “owns” assetID.
+At any given time, the public state of the system consists of a collection of “asset notes”.  These notes are stored as leaves in a Merkle Tree, and each leaf represents a single indivisible asset represented by unique assetID.  In more detail, a “note” is a commitment to \{Nullifier, publicKey, assetID\}, indicating that publicKey “owns” assetID.
 
 
 \paragraph{Main transaction type:} 

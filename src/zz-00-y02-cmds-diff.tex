@@ -1,38 +1,44 @@
 %%% This file: defines counters and commands useful for cross-referencing feedback notes and corresponding changes
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%% Commands
-%%% Define here new personalized commands for leaving comments
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% COMMANDS FOR LEAVING PDF COMMENTS (e.g., POPUP ANNOTATIONS)
+
+\renewcommand{\pdfcomment}[2][]{}  %%% Disabling popup annotations, rendering ineffective some commands below
+%%% Editorial note: All pop-up commands (introduced in version 0.1 as part of porting 
+  % content to LaTeX) were disabled when finalizing version draft 0.2; will later 
+	% address/collect these notes as suggestions for an upcoming revised version
 
 \newcommand{\popupColor}[3][blue]{\pdfcomment[color=#1,opacity=0.5,author={#2}]{#3}}
 \newcommand{\suggest}[2][]{\popupColor[blue]{#1}{Suggestion: #2}}
 \newcommand{\edited}[2][]{\popupColor[green]{#1}{Edited: #2}}
 \newcommand{\smttodo}[2][]{\popupColor[red]{#1}{To-do: #2}}
 
-\newcommand{\luis}[1]{\popupColor[blue]{Lu{\'i}s B.}{#1}}
+\def\luisb{Lu{\'i}s B.}
+\newcommand{\luis}[1]{\popupColor[blue]{\luisb}{#1}}
 \let\luiscom\luis
-\newcommand{\luissug}[1]{\suggest[Lu{\'i}s B.]{#1}}
-\newcommand{\luised}[1]{\edited[Lu{\'i}s B.]{#1}}
-\newcommand{\luistodo}[1]{\smttodo[Lu{\'i}s B.]{#1}}
-\newcommand{\luisin}[1]{\red{[[Lu{\'i}s B.: #1]]}}
+\newcommand{\luissug}[1]{\suggest[\luisb]{#1}}
+\newcommand{\luised}[1]{\edited[\luisb]{#1}}
+\newcommand{\luistodo}[1]{\smttodo[\luisb]{#1}}
+\newcommand{\luisin}[1]{\red{[[\luisb: #1]]}}
 
 
-%%%%% Mark revision blocks
-\newcounter{cntRev}\renewcommand{\thecntRev}{E\arabic{cntRev}}
-
-
-\newcommandtwoopt{\revblock}[3][][0pt]{\marginnote{\hspace*{#2}\resizebox{.85in}{!}{{\color[rgb]{1,0,0}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% MARK EDIT/REVISION BLOCKS
+\def\letterEditBlock{E}   % E for edit; could also have been R for revision
+\newcounter{cntRev}\renewcommand{\thecntRev}{\letterEditBlock\arabic{cntRev}}
+\providecommandtwoopt{\revblock}[3][][0pt]{\marginnote{\hspace*{#2}\resizebox{.85in}{!}{{\normalsize\normalfont\color[rgb]{1,0,0}%
 			\begin{minipage}{1.1in}\vspace{0em}\refstepcounter{cntRev}%
 				\ifNotEmpty{#1}{\label{#1}} %adds a labels to the review edit
 				\thecntRev\ifNotEmptyPrepend{#3}{: }
 			\end{minipage}}}}}
-\newcommandtwoopt{\revblockmini}[3][][]{{\scriptsize\revblock[#1][#2]{#3}}}
+\providecommandtwoopt{\revblockmini}[3][][]{{\scriptsize\revblock[#1][#2]{#3}}}
 %\renewcommand{\revblock}[2][]{}   % Uncomment this line to get ride of all margin notes
-
-
 %\newcommand{\revblockRight}[3][]{\revblock[#1][#3]{#2}}  %%% to delete in favor of using \revblock with the second optional argument
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% Colors
 \providecommand{\blue}[1]{{\color[rgb]{0,0,1}#1}}
 \providecommand{\red}[1]{{\color[rgb]{1,0,0}#1}}
 \providecommand{\dgreen}[1]{{\color[rgb]{0,.33,0}#1}}
@@ -43,33 +49,41 @@
 \definecolor{darkgreen}{rgb}{0,0.5,0}
 
 
-%%% \Note, \Chan, and \NoChan are useful prefix commands for the descriptive comments in the column ``Context and Changes''
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% Abbreviation commands that show some color-highlighted header within an item
+%%% \Note, \Chan, \NoChan, etc. are useful prefix commands for the descriptive comments in the column ``Context and Changes''
 \newsetbool{boolNeedNewLineBeforeChan}{false} %boolNeedNewLineBeforeChan: true after using \Note; becomes false when using \rowendL
-\newcommand{\Note}{\ifbool{boolNeedNewLineBeforeChan}{\newline}{}{\textcolor{blue}{\textbf{-- \textsc{Note:} }}}\setbool{boolNeedNewLineBeforeChan}{true}}
-\newcommand{\Chan}{\ifbool{boolNeedNewLineBeforeChan}{\newline}{}\textcolor{mycoral}{{{\bfseries-- {\scshape Changed:} }}}\setbool{boolNeedNewLineBeforeChan}{true}}
+\newcommand{\Note}{\ifbool{boolNeedNewLineBeforeChan}{\newline}{}{\bfseries\textcolor{blue}{-- Note: }}\setbool{boolNeedNewLineBeforeChan}{true}}
+\newcommand{\Chan}{\ifbool{boolNeedNewLineBeforeChan}{\newline}{}{\bfseries\textcolor{mycoral}{-- Changed: }}\setbool{boolNeedNewLineBeforeChan}{true}}
 \newcommand{\NoChan}{\Chan\ No change.}
-
-
-\newcommand{\propContrib}{{\ifbool{boolNeedNewLineBeforeChan}{\newline}{}\bfseries\textcolor{blue}{-- Proposed contribution:} }}
+\newcommand{\propContrib}{\ifbool{boolNeedNewLineBeforeChan}{\newline}{}{\bfseries\textcolor{blue}{-- Proposed contribution:} }}
 \newcommand{\contributors}{\ifbool{boolNeedNewLineBeforeChan}{\newline}{}{\bfseries\textcolor{darkgreen}{-- Contributors:} }\setbool{boolNeedNewLineBeforeChan}{true}}
 \newcommand{\submit}{\newline{\bfseries\textcolor{brown}{-- Submission mode:} }}
-
 \newcommand{\ccontext}{{\ifbool{boolNeedNewLineBeforeChan}{\newline}{}\bfseries\textcolor{blue}{-- Context:} }\setbool{boolNeedNewLineBeforeChan}{true}}
+\newcommand{\needscontributors}{\red{needs contributors}}
 
+
+
+
+%\newcommand{\singlebullet}[1]{\protect\begin{itemize}\item #1 \protect\end{itemize}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newcommand{\newcol}{&}
 \newcommand{\rowendL}{\end{minipage}\\\hline}  %%%NEED TO COORDINATE WITH DEFINITION OF LAST COLUMN, currently using a minipage
 
-\newcommand{\singlebullet}[1]{\protect\begin{itemize}\item #1 \protect\end{itemize}}
-
+\def\colNamePropContrib{Contribution \textbf{d}escription}
+\def\letterIndexPropContrib{D}
+\def\rowIssueName{\emph{short description}}
 
 \newcounter{cntItA} %counts the items sequentially: 1, 2, ..., 210
-\newcounter{cntIssue}\renewcommand{\thecntIssue}{D\arabic{cntIssue}} %counts the reviewer: A, B, ..., L
-\newcounter{cntItB}[cntIssue] %counts the item inside the Issue: A1, A2, .., A7, B1, ..., 
-% \inc... % increment some counter(s)
+\newcounter{cntContrib}\renewcommand{\thecntContrib}{\letterIndexPropContrib\arabic{cntContrib}} %Counts the contribution topic: D1, D2, ..., D7 ...
+\newcounter{cntItB}[cntContrib] %counts the item inside the Contribution: D1.1, D1.2, D1.3, D2.1, D2.2, .., D7.1, D7.2, ...
+\renewcommand{\thecntItB}{\thecntContrib.\arabic{cntItB}}
 
-%\incItem[label][pdf-bookmark-caption]
-\renewcommand{\thecntItB}{\thecntIssue.\arabic{cntItB}}
+
+% \inc... % increment some counter(s)
 \newcommandtwoopt{\incItem}[2][][]{%
 	\refstepcounter{cntItA}\ifNotEmpty{#1}{\label{it:#1}}\thecntItA \newcol 
 	\refstepcounter{cntItB}\ifNotEmpty{#1}{\label{#1}}
@@ -77,8 +91,6 @@
 	\pdfbookmark[3]{\thecntItB\itemPdfBkmExt}{pdfbkm:\thecntItB}\thecntItB \newcol } %incremment comment number
 
 
-\newcommand{\rowIssueName}{Issue title}
-\newcommand{\needscontributors}{\red{needs contributors}}
 
 %\newcommand{\tabhead}{\rowColorHeader\# & Ref & \centering \scalebox{.75}{\mycol{Location in\\initial draft}} & \centering Comment received & \scalebox{.75}{\mycol{Related\\items}} & \centering Reply notes & \begmin{.04}\scalebox{.8}{\mycol{Revie-\\wed?}}\myendmini}
 \setlength{\tabcolsep}{1ex}
@@ -87,7 +99,7 @@
 %Use of commands defined with optionla arguments inside cells can break the workings of tabular
 %See complicated solution in https://tex.stackexchange.com/questions/277140/optional-argument-breaks-command-with-multicolumn
 %As a temporary solution, I'll just define all commands as mandatory
-%\newcommand{\headreviewer}[2]{\rowcolor{LLyellow}\incIssue[#1]\pdfbookmark[2]{\thecntIssue\ --- #2}{pdfbkm:\thecntIssue}\textbf{\thecntIssue} & Location & Comments from #2 & & & \rowend}
+%\newcommand{\headreviewer}[2]{\rowcolor{LLyellow}\incIssue[#1]\pdfbookmark[2]{\thecntContrib\ --- #2}{pdfbkm:\thecntContrib}\textbf{\thecntContrib} & Location & Comments from #2 & & & \rowend}
 
 
 %%% 
@@ -106,14 +118,15 @@
 }
 
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\headerForIssue}{%
 	  \centering \#
 	& \centering \scalebox{.7}{Item id}
 	& \centering Location %Old location
-	& \centering \textbf{Contribution \thecntIssue}: \rowIssueName{}
+	& \centering \textbf{\colNamePropContrib\ \thecntContrib}:\\\rowIssueName{}
 	& \centering Related %\scalebox{.75}{\mycol{Related\\items}}
-	& \centering Context and changes
+	& \centering Incorporated changes
 	& \centering Edit id
 }
 
@@ -123,25 +136,27 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%% TO GENERATE A LIST OF COMMENTS/CONTRIBUTIONS
-% contentslines added on each example or examples
 
-\newcommand\listcontributionname{List of Contributions}
-\newlistof[chapter]{contribution}{loc}{\listcontributionname}
-%creates the file name zkproof-community-reference.contribs with the index of contribution issues/items
+%creates the file name zkproof-community-reference.loc with the index of contribution issues/items
+\newcommand\listcontributionname{List of Contribution Descriptions}
+\newlistof{contribution}{loc}{\listcontributionname}  %%%[section]
+\newlistof{contributions}{loc2}{\listcontributionname}  % Duplicate on purpose
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Each `issue' is a longtable (can break pages) of comment/contribution items. 
+%%% Each `issue' is a `longtable' (which can break pages) of comment/contribution items. 
 %%% Each `issue' starts with \newIssue and ends with \myendIssue
 %%% Besides the automatic header, each row of the table will be an `item' introduced by command \incItem
 
 \newcommand{\newIssue}[2]{%
-	\refstepcounter{cntIssue}\label{#1}
-	\addcontentsline{loc}{subsection}{Contribution \thecntIssue\ --- #2}
+	\refstepcounter{cntContrib}\label{#1}
+	\addcontentsline{loc}{contribution}{\thecntContrib: #2}  %%% \colNamePropContrib\ 
+	\addcontentsline{loc2}{contributions}{\thecntContrib: #2}
 	\renewcommand{\rowIssueName}{#2}
 	\noindent\beginlongtabIssue\hline%
 			\rowcolor{LLyellow} %must be the first command in the cell, namely before pdfbookmark
-			\pdfbookmark[2]{\thecntIssue: \rowIssueName{}}{pdfbkm:\thecntIssue}% adds a pdf bookmark if this is the first header for this Issue	
+			\pdfbookmark[2]{\thecntContrib: \rowIssueName{}}{pdfbkm:\thecntContrib}% adds a pdf bookmark if this is the first header for this Issue	
 			\headerForIssue\rowend\hline\hline%
 		\endfirsthead\hline%
 			\rowcolor{LLgray}\headerForIssue\rowend\hline\hline%

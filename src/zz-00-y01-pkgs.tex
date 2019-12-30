@@ -115,7 +115,9 @@
 	\setitemize{itemsep=0em}
 
 \usepackage{diagbox} %allows command \diagbox to indicate the label for rows and columns in a single cell
+%\usepackage[edtable,longtable]{lineno}\linenumbers
 \usepackage[edtable,longtable]{lineno}\linenumbers
+\usepackage{edtable}
 \renewcommand\linenumberfont{\normalfont\tiny\rmfamily}
 
 \usepackage{colortbl} %allows coloring of rows (using \rowcolor) and columns in tabular
@@ -144,6 +146,7 @@
 			%option normalem makes the \emph{} command remain untouched. Needed to get correctly formatted refs
 \usepackage{theorem}  %allows simple definition of new theorem-like environments, e.g., 'remark'
 \usepackage{tocloft} %command \setcounter{tocdepth}{1}, also allows creating other lists
+\usepackage{shorttoc}
 \usepackage{float} %allows option H for floats, e.g., \begin{table}[H], which is stronger than \begin{table}{!h}
 \usepackage{multirow}
 

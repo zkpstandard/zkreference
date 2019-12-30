@@ -78,14 +78,14 @@ Special strong notions of soundness includes statistical soundness (aka uncondit
 
  Intuitively, a proof system is a proof of knowledge if it is not just sound, but that the ability to convince an honest verifier implies that the prover must “know” a witness. 
 To “know” a witness can be defined as it being possible to extract a witness from a successful prover. 
-If a proof system is claimed to be a proof of knowledge, then the full specification \textbf{must} include a precise definition of knowledge soundness that captures this intuition, but we do not define proofs of knowledge here.\luissug{Consider explaining better the meaning of ZKPoK, and presenting the definition / game for extractability. It's unclear why the document makes the option to not proceed with this discussion.}
+If a proof system is claimed to be a proof of knowledge, then the full specification \textbf{must} include a precise definition of knowledge soundness that captures this intuition, but we do not define proofs of knowledge here.\luissug{Consider explaining better the meaning of ZKPoK, and presenting the definition / game for extractability. It is unclear why the document makes the option to not proceed with this discussion.}
 
 
-[[{\bfseries To improve.} \revblock[rev:pok:suggest-ZKPoK-game]{\ref{it:pok:suggest-ZKPoK-game}}
-	\red{Consider adding, in a future version of this document draft, a game definition for the extractor required by the formal notion of proof of knowledge.
+\textbf{To improve.}\revblock[rev:pok:suggest-ZKPoK-game]{\ref{it:pok:suggest-ZKPoK-game}}
+	A future version of this document should include here a game definition for the extractor required by the formal notion of proof of knowledge.
 	This security property also arises naturally in the ideal/real simulation 
 paradigm, in the context of an \emph{ideal ZKP functionality} that, 
-in the ideal world, receives the witness directly from the prover.}]]
+in the ideal world, receives the witness directly from the prover.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -163,10 +163,10 @@ These include security under concurrent composition and nonmalleability to guard
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \def\tmpTitle{Transferability vs. deniability}
-\subsection[\tmpTitle]{\tmpTitle\revblock[rev:introduce-deniability-transferability]{\ref{it:transferability-vs-interactivity-elaborate}}}
+\subsection[\tmpTitle]{\tmpTitle}
 \label{sec:security:defs-props:transferability-deniability}
 
-
+	\revblock[rev:introduce-deniability-transferability]{\ref{it:transferability-vs-interactivity-elaborate}}
 	In the traditional notion of zero-knowledge, a ZKP system prevents the verifier from even being able to convincingly advertise having interacted in a legitimate proof execution.
 	In other words, the verifier cannot transfer onto others the confidence gained about the proven statement.
 	This property is sometimes called \emph{deniability} or \emph{non-transferability}, since a prover that has interacted as a legitimate prover in a proof is later able to \emph{plausibly deny} having done so, even if the original verifier releases the transcript publicly.
@@ -208,7 +208,7 @@ The security definitions assume a trusted setup. There are several variations of
 	Here the setup is generated as part of the key generation process, and the recipient can be trusted to do this honestly because it is the recipient’s own interest to make the encryption scheme secure.
     
 	\item \underline{Random oracle model.}
-	The common setup describes a cryptographic hash function, e.g. SHA256. 
+	The common setup describes a cryptographic hash function, e.g., SHA256. 
 	In the random oracle model, the hash function is heuristically assumed to act like a random oracle that returns a random value whenever it is queried on an input not seen before. 
 	There are theoretical examples where the random oracle model fails, exploiting the fact that in real life the hash function is a deterministic function, but in practice the heuristic gives good efficiency and currently no weaknesses are known for ‘natural’ proof systems.
     

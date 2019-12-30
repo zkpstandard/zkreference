@@ -56,54 +56,48 @@ of a concrete ZKP protocol execution, they are often distinguished in their own 
 \reftab{tab:example-scenarios-zkps} exemplifies at a high level a differentiation between the \emph{statement}, the \emph{instance} and the \emph{witness} elements for the initial examples mentioned in \refsec{security:intro:what-is-a-ZK}.
 
 
-\begin{table}[H]\centering
+\vspace{.5em}\begin{table}[H]\centering\newcommand{\scaleTitle}[1]{\scalebox{.95}{#1}}
 \def\tmpCapTab{Example scenarios for zero-knowledge proofs}
-\newcommand{\scaleTitle}[1]{\scalebox{.95}{#1}}
-%%%{\renewcommand{\thelinenumber}{\arabic{linenumber}\hspace*{.545\paperwidth}}
-\mytabcap[tab:example-scenarios-zkps]{\tmpCapTab}{\tmpCapTab\revblock[rev:ZKP:enhance-table-of-examples]{\ref{it:ZKP:enhance-table-of-examples}}}
-\small
-%\begin{longtable}{|l|l||l||l||>{\begin{minipage}{.24\textwidth}\internallinenumbers}l|}
-\renewcommand{\rowend}{\\}
-\internallinenumbers
-\begin{edtable}{tabular}{|l|l||l||l||l|}
-%%%%%\multicolumn{5}{c}{}\\[1em]
+\mytabcap[tab:example-scenarios-zkps]{\tmpCapTab}{\tmpCapTab}\revblock[rev:ZKP:enhance-table-of-examples]{\ref{it:ZKP:enhance-table-of-examples}}
+
+\internallinenumbers\small\begin{edtable}{tabular}{|l|l||l||l||l|}
 \hline \rowcolor{colorRowHead}
 			\bfseries \scalebox{.85}{\#}
 		& \diagbox{\small \bfseries \makebox[2.25em]{\hspace{1em}\scalebox{.8}{Scenarios}}}{\small \bfseries \makebox[0pt]{\hspace*{-2.75em}\scalebox{.8}{Elements}}}
 		& \subtab[l]{{\bfseries Statement}\\being proven}
 		& \subtab[l]{{{\bfseries Instance}}\\used as substrate}
 		& \subtab[l]{{\bfseries Witness}\\treated as confidential}
-		\rowend
+		\\
 \hline \bfseries 1 
 		& \bfseries \scaleTitle{\subtab[l]{Legal age for\\purchase}}
 		& I am an adult 
 		& \subtab[l]{Tamper-resistant\\identification chip}
 		& \subtab[l]{Birthdate and personal\\data (signed by a cer-\\tification authority)}
-		\rowend
+		\\
 \hline \bfseries 2 
 		&	\bfseries \scaleTitle{\subtab[l]{Hedge fund\\solvency}}
 		& \subtab[l]{We are not bankrupt}
 		& \subtab[l]{Encrypted \& certified\\bank records}
 		& \subtab[l]{Portfolio data and\\decryption key}
-		\rowend
+		\\
 \hline \bfseries 3
 		&	\bfseries \scaleTitle{\subtab[l]{Asset\\transfer}}
 		& I own this $<$asset$>$
 		& \subtab[l]{A blockchain or\\other commitments}
 		& \subtab[l]{\scalebox{1}{Sequence of transactions}\\\scalebox{1.0}{(and secret keys that}\\\scalebox{1.0}{establish ownership)}}
-		\rowend
+		\\
 \hline \bfseries 4
 		& \bfseries \scaleTitle{\subtab[l]{Chessboard\\configuration}}
 		& \subtab[l]{This $<$configuration$>$\\can be reached}
 		& \subtab[l]{(The rules of Chess)}
 		& \subtab[l]{A sequence of valid\\chess moves}
-		\rowend
+		\\
 \hline \bfseries 5
 		& \bfseries \scaleTitle{\subtab[l]{Theorem\\validity}}
 		& \subtab[l]{This $<$expression$>$\\is a theorem}  %(provable\\in $<n$ steps)
 		& \subtab[l]{(A set of axioms,\\and the logical \\rules of inference)}   
 		& \subtab[l]{A sequence of logical\\implications}
-		\rowend
+		\\
 \hline 
 \end{edtable}
 \end{table}

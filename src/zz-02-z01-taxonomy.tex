@@ -133,8 +133,8 @@ takes as input a vector $q \in \field^k$ and returns the matrix-vector product $
 
 
 
-\revblock[rev:editorial:remove-list-refs-in-chapter-theory]{\ref{it:editorial:remove-list-refs-in-chapters}}
 \paragraph{References from old list, but not in the remaining text:}\pdfbookmark[1]{List of references}{pdfbkm:security:list-refs}
+\revblock[rev:editorial:remove-list-refs-in-chapter-theory]{\ref{it:editorial:remove-list-refs-in-chapters}}
 \cite{2018:asiacrypt:arya-nearly-linear-time-zkps-for-correct},
 \cite{2010:asiacrypt:short-NIZKPs}.
 
@@ -194,7 +194,8 @@ takes as input a vector $q \in \field^k$ and returns the matrix-vector product $
 	\begin{enumerate}[label=\alph*.]
   
 	\item \underline{MPC-in-the-Head (IKOS \cite{2007:stoc:ZK-from-SMPC}, ZKboo \cite{2016:Sec:ZKBoo}, Ligero \cite{2017:ccs:ligero}):} 
-	Compiles secure multi-party computation protocols into either (zero-knowledge) PCPs or IOPs.
+	Compiles secure \sloppy %to avoid overfull box
+	multi-party computation protocols into either (zero-knowledge) PCPs or IOPs.
   
 	\item \underline{BCIOP \cite{2013:tcc:snargs-via-LIPs}:} 
 	Compiles quadratic arithmetic programs (QAPs) or quadratic span programs (QSPs) into linear PCPs such that resulting linear PCP has a degree-two decision predicate. 

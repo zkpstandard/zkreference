@@ -44,7 +44,7 @@ Computational benchmarks should be run on a consistent and commercially availabl
 
 We recommend that most runs are executed on a single-threaded machine, with parallelizability being an optional metric to measure. 
 	The benchmarks should be\revblock[rev:sec-par-bench-refer-to-section]{\ref{it:explain-parameter-kappa}}
-	obtained preferably for more than one security level, following the recommendations stated in Sections \ref{it:comp-sec-par:bench:characterize-properties} and \ref{security:efficiency:comp-sec-levels}.
+	obtained preferably for more than one security level, following the recommendations stated in Sections \ref{security:efficiency:comp-sec-levels} and \ref{security:efficiency:stat-sec-levels}.
 
 
 In order to enable better comparisons we recommend that the metrics of other proof systems\slash implementations are also run on the same machine and reported. The onus is on the library developer to provide a simple way to run any instance on which a benchmark is reported.   This will additionally aid the reproducibility of results. Links to implementations will be gathered at zkp.science and library developers are encouraged to ensure that their library is properly referenced. Further we encourage scientific publishing venues to require the submission of source code if an implementation is reported. Ideally these venues even test the reproducibility and indicate whether results could be reproduced.
@@ -73,12 +73,12 @@ Here we list a set of primitives that both serve as microbenchmarks and are of s
     \item RC4 (for RAM memory access)
     \item Scrypt
     \item TinyRAM running for n steps with memory size s 
-    \item Number theoretic transform (coefficients to points)
-		\begin{itemize}[label={- }]
-        \item Small fields 
-        \item Big fields
-        \item Pattern matching
-		\end{itemize}
+    \item Number theoretic transform (coefficients to points):
+		%\begin{itemize}[label={- }]
+        Small fields;
+        Big fields;
+        Pattern matching.
+		%\end{itemize}
 \end{enumerate}
 
 

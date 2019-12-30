@@ -16,10 +16,46 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section*{New or adapted content}
-%\addcontentsline{toc}{section}{New or adapted content}
-\pdfbookmark[1]{New or adapted content}{pdfbkm:contributed-content}
+\def\tmpTitle{Proposed changes in content}
+\section*{\pdfbookmark[1]{\tmpTitle}{pdfbkm:contributed-content}\tmpTitle}
 \label{sec:comments:contributed-content}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newIssue{issue:intellectual-property}{Set expectations on intellectual property disclosure} %C5
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:intellectual-property]
+Preamble
+\newcol \ccontext\ Proposed in the ``NIST comments on the initial ZKProof documentation'' (April 06, 2019) --- item C22.
+				\propContrib\ Present (in one or two paragraphs), in a non-legalese way, several remarks about intellectual property (IP). A main goal is to raise awareness about the role that IP may take or might not take in the adoption of recommendations and requirements in the community reference document. We are aware this is a delicate topic, so a goal of the contribution is to also motivate future constructive discussion/consideration by the ZKProof community, e.g., about open-source, IP rights, reasonable and non-discriminatory IP terms, etc.
+\newcol \githubissue{5}
+\newcol \contributors\ NIST-PEC team (Luís Brandão, René Peralta, Angela Robinson).
+				\Chan\ Added a new section entitled ``Expectations on disclosure and licensing of intellectual property''
+\newcol \ref{rev:intellectual-property}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:intellectual-property:minor-tweak]
+Preamble
+\newcol \propContrib\ After requesting feedback to the Steering committee, Hugo proposed 
+that the disclosure of patent claims applies to both ``your own or held by others.''
+\newcol \githubissue{5}
+\newcol \contributors\ Suggested by Hugo Krawczyk.
+				\Chan\ (Editors:) Added the parenthetical note ``(their own and those from others)''
+\newcol \ref{rev:intellectual-property:clarify-whose-claims-are-in-scope}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:intellectual-property:cc-license-expectation]
+Preamble
+\newcol \propContrib\ As part of requesting feedback to the Steering committee, Hugo proposed 
+clarifying that the disclosure of patent claims should include both ``your own or held by others.''
+\newcol \githubissue{5}
+\newcol \contributors\ Editors team.
+				\Chan\ Add to the proposed intellectual property text a note about the expected creative commons licensing for published documents.
+\newcol \ref{rev:intellectual-property:extend-cc-license-expectation}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\myendIssue
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -182,42 +218,6 @@ Mostly in Chapter 1, starting in section 1.2; will also check for other applicab
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newIssue{issue:intellectual-property}{Mention intellectual property} %C5
-%%%%%%%%%%%%%%%%%%%%%%%%
-\incItem[it:intellectual-property]
-Preamble
-\newcol \ccontext\ Proposed in the ``NIST comments on the initial ZKProof documentation'' (April 06, 2019) --- item C22.
-				\propContrib\ Present (in one or two paragraphs), in a non-legalese way, several remarks about intellectual property (IP). A main goal is to raise awareness about the role that IP may take or might not take in the adoption of recommendations and requirements in the community reference document. We are aware this is a delicate topic, so a goal of the contribution is to also motivate future constructive discussion/consideration by the ZKProof community, e.g., about open-source, IP rights, reasonable and non-discriminatory IP terms, etc.
-\newcol \githubissue{5}
-\newcol \contributors\ NIST-PEC team (Luís Brandão, René Peralta, Angela Robinson).
-				\Chan\ Added a new section entitled ``Expectations on disclosure and licensing of intellectual property''
-\newcol \ref{rev:intellectual-property}
-\rowendL
-%%%%%%%%%%%%%%%%%%%%%%%%
-\incItem[it:intellectual-property:minor-tweak]
-Preamble
-\newcol \propContrib\ As part of requesting feedback to the Steering committee, Hugo proposed 
-clarifying that the disclosure of patent claims should include both ``your own or held by others.''
-\newcol \githubissue{5}
-\newcol \contributors\ Suggested by Hugo Krawczyk.
-				\Chan\ (Editors:) Added the parenthetical note ``(their own and those from others)''
-\newcol \ref{rev:intellectual-property:clarify-whose-claims-are-in-scope}
-\rowendL
-%%%%%%%%%%%%%%%%%%%%%%%%
-\incItem[it:intellectual-property:cc-license-expectation]
-Preamble
-\newcol \propContrib\ As part of requesting feedback to the Steering committee, Hugo proposed 
-clarifying that the disclosure of patent claims should include both ``your own or held by others.''
-\newcol \githubissue{5}
-\newcol \contributors\ Editors team.
-				\Chan\ Add to the proposed intellectual property text a note about the expected creative commons licensing for published documents.
-\newcol \ref{rev:intellectual-property:extend-cc-license-expectation}
-\rowendL
-%%%%%%%%%%%%%%%%%%%%%%%%
-\myendIssue
-
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newIssue{issue:transferability}{Discuss transferability and deniability} %C6
@@ -296,8 +296,8 @@ Old sections 1.2, 1.4.3 and 2.5
 \newcol \githubissue{12}
 \newcol \contributors\ Editors
 				\Chan\ Edit some text after the enumeration of verifiability types, 
-				setting some relation to application use-cases, including revising
-				content preliminary to the next contribution \ref{it:scope-use-cases-new-content}.
+				setting some relation to application use-cases, including revising the 
+				content proposed to in item \ref{it:scope-use-cases-new-content}.
 \newcol \ref{rev:scope-use-cases-new-content}
 \rowendL
 %%%%%%%%%%%%%%%%%%%%%%%%
@@ -305,7 +305,7 @@ Old sections 1.2, 1.4.3 and 2.5
 \refsec{apps:scope-use-cases}
 \newcol 
 \newcol \githubissue{12}
-\newcol \contributors\ Yu Hang
+\newcol \contributors\ Yu Hang to editors
 				\submit\ Email to editors
 				\Chan\ Provided some content, based on \cite{1996:eurocrypt:designated-verifier-proofs}, 
 				about use-cases of designated-verifier use-cases. 
@@ -346,11 +346,11 @@ Chapters 1 (security/theory) and 2 (implementation)
 %%%%%%%%%%%%%%%%%%%%%%%%
 \incItem[it:circuits-vs-R1CS:description-of-R1CS]
 Chapters 1 (security) and 2 (implementation)
-\newcol \propContrib\ 
+\newcol 
 \newcol \githubissue{13}
 \newcol \contributors\ Yu Hang
 				\submit\ Email
-				\Chan\ Add new introductory content about R1CS
+				\Chan\ Add new introductory content about R1CS. (Revised by editors.)
 \newcol \ref{rev:chap-security:circuits-vs-R1cs:new-subsection:R1CS-representation}
 \rowendL
 %%%%%%%%%%%%%%%%%%%%%%%%
@@ -359,7 +359,7 @@ Chapters 1 (security) and 2 (implementation)
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newIssue{issue:interactivity}{Introduction to interactive zero-knowledge proofs } %C18
+\newIssue{issue:interactivity}{Add introduction to interactive zero-knowledge proofs } %C18
 %%%%%%%%%%%%%%%%%%%%%%%%
 \incItem[it:interactivity:intro] 
 Security section
@@ -413,7 +413,7 @@ Chapter (applications)
 \refsec{apps:intro}
 \newcol
 \newcol \ref{it:editorial:applications-move-notation}
-\newcol \Chan\ Remove the ``What this document is NOT about'' items
+\newcol \Chan\ Define terms ``predicate'' and ``gadgets''
 \newcol \ref{rev:applications:define-predicate-and-gadgets}
 \rowendL
 %%%%%%%%%%%%%%%%%%%%%%%%
@@ -448,7 +448,7 @@ Chapter (applications)
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newIssue{issue:improve-motivation-apps}{Improve motivation in application chapter} %C22
+\newIssue{issue:improve-motivation-apps}{Improve motivation in the application chapter} %C22
 %%%%%%%%%%%%%%%%%%%%%%%%
 \incItem[it:improve-motivation-apps]
 Old section 3.1
@@ -466,7 +466,7 @@ Old section 3.1
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newIssue{issue:gadgets-table}{Complete Gadgets Table} %C23
+\newIssue{issue:gadgets-table}{Improve the table of gadgets} %C23
 %%%%%%%%%%%%%%%%%%%%%%%%
 \incItem[it:gadgets-table]
 Old section 3.4
@@ -476,7 +476,7 @@ Old section 3.4
 \newcol \contributors\ Eduardo Morais
 				\submit\ GitHub pull request
 				\Chan\ Updated the \hyperref[tab:list-gadgets]{gadgets table} by filling in missing elements and making a few corrections.
-				Also updated the specific tables for the following gadgets: \hyperref[tab:gadget-signature]{signature}, \hyperref[tab:gadget-encryption]{encryption}, \hyperref[tab:gadget-dist-decryption]{Distributed-decryption} and \hyperref[tab:gadget-set-membership]{set membership}				
+				Also updated the specific tables for the following gadgets: \hyperref[tab:gadget-signature]{signature}, \hyperref[tab:gadget-encryption]{encryption}, \hyperref[tab:gadget-dist-decryption]{Distributed-decryption} and \hyperref[tab:gadget-set-membership]{set membership}.
 \newcol \ref{rev:gadgets-table-fill}, \ref{rev:gadget:sig:update}, \ref{rev:gadget:enc:update}, \ref{rev:gadget:dist-enc:update}, \ref{rev:gadget:set-memb:update}
 \rowendL
 %%%%%%%%%%%%%%%%%%%%%%%%
@@ -493,7 +493,7 @@ References
 \newcol \githubissue{24}   %, \ref{it:legacy-tech}
 \newcol \contributors\ Eduardo Morais
 				\submit\ GitHub pull request
-				\Chan\ Added 3 references to the new paragraph (\ref{rev:app:intro:motivate}) in the introduction of the ``Applications'' chapter
+				\Chan\ Added 3 references to the new paragraph (\ref{rev:app:intro:motivate}) in the introduction of the ``Applications'' chapter.
 \newcol \ref{rev:app:intro:new-refs}
 \rowendL
 %%%%%%%%%%%%%%%%%%%%%%%%

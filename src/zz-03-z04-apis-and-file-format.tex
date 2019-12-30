@@ -24,17 +24,15 @@ depicted in \reffig{fig:abstract-parties-and-objects-in-NIZK}.
 
 
 
-\begin{figure}[H]\def\tmpfigcap{Abstract parties and objects in a NIZK}
-\begin{center}
+\begin{figure}[H]\centering
+\def\tmpfigcap{Abstract parties and objects in a NIZK}
 \refstepcounter{figure}\label{fig:abstract-parties-and-objects-in-NIZK}%
 \hypertarget{ht:figure:\thefigure}{}
 \addcontentsline{lof}{figure}{Figure~\thefigure{}: \tmpfigcap}
-{
+\internallinenumbers
 \bookmarksetup{level=3,color=\colorbkmfig}
 \bookmark[dest=ht:figure:\thefigure]{Figure~\thefigure}%
-\internallinenumbers
-{
-\nolinenumbers
+\begingroup\nolinenumbers
 \def\figlang{\hyperlink{def:language}{\scalebox{.75}{Language}}}
 \def\figgen{Gen}
 \def\figpp{pp}
@@ -43,14 +41,11 @@ depicted in \reffig{fig:abstract-parties-and-objects-in-NIZK}.
 \def\figprover{Prover}
 \def\figproof{Proof}
 \def\svgwidth{.99\textwidth}
-\input{figs/implem--api-diagram.pdf_tex}
-}
-}
-%\includegraphics[width=\textwidth]{figs/implem--api-diagram.png}
+\vspace{.5em}\input{figs/implem--api-diagram.pdf_tex}
 \pdfcomment[author={Aur{\'e}lien Nicolas}]{the Verifier could appear here. \textCR\textCR PP, Instance, and Proof go into the Verifier box.}
+\endgroup
 
-{\centering \textbf{Figure \thefigure. }\tmpfigcap}
-\end{center}
+\vspace{.5em}\textbf{Figure \thefigure. }\tmpfigcap
 \end{figure}
 
 
@@ -59,28 +54,36 @@ We did not complete a generic API design for proving systems, but we did survey 
 We separate the APIs and interfaces between the universal and non-universal NIZK setting. In the universal setting, the NIZK's CRS generation is independent of the relation (i.e., one CRS enables proving any NP statement). In the non-universal settings, the CRS generation depends on the relation (represented as a constraint system), and a given CRS enables proving the statements corresponding to any instance with respect to the specific relation.
 
 
-\vspace{.5em}
+
+\begin{center}
 \def\tmptabtitle{APIs and interfaces by types of universality and preprocessing}
-{\mytabcap{\tmptabtitle}{\tmptabtitle}\label{tab:apps:APIS-and-interfaces-by-univ-and-preproc}}
-\vspace{-1.5em}
-\begin{longtable}{|>{\begmin{.30}}l<{\myendmini}|>{\begmin{.30}}l<{\myendmini}|>{\begmin{.30}}l|} %%%the last column ends with \rowend, which closes the minipage and adds \\
+%\centerline{\mytabcap{\tmptabtitle}{\tmptabtitle}\label{tab:apps:APIS-and-interfaces-by-univ-and-preproc}}
+
+\begingroup\renewcommand{\vertspaceintabcap}{}\setlength{\LTpre}{0pt}
+\mytabcap{\tmptabtitle}{\tmptabtitle}\label{tab:apps:APIS-and-interfaces-by-univ-and-preproc}
+\nolinenumbers\begin{longtable}{|>{\begmin{.27}\setlinenumbermargin{2em}\internallinenumbers}l<{\myendmini}|>{\begmin{.30}}l<{\myendmini}|>{\begmin{.34}}l|} 
+%%%the last column ends with \rowend, which closes the minipage and adds \\
+%\begin{longtable}{|p{.27\textwidth}|p{.30\textwidth}|p{.34\textwidth}|}
 \hline 
-	   & \textbf{Preprocessing} \\ (Generate has superpolylogarithmic runtime / output size as function of constraint system size)
-		 & \textbf{Non-preprocessing} \\ (Generate runtime and output size is fast and CRS is at most polylogarithmic in constraint system size) \rowend
+	   & \setlinenumbermargin{1.05\textwidth}\internallinenumbers\textbf{Preprocessing} \\ 
+			 (\textsc{Generate} has superpolylogarithmic runtime / output size as function of constraint system size)
+		 & \textbf{Non-preprocessing} \\ (\textsc{Generate} runtime and output size is fast and CRS is at most polylogarithmic in constraint system size) \rowend
 %%%%%%
-\hline \textbf{Non-universal} \\ (Generate needs constraint system as input)
-     & QAP-based \\ \cite{2013:SP:Pinocchio}, \cite{2013:Eurocrypt:quadratic-span-programs-and-succinct-NIZKs-without-PCPs}, \cite{2013:crypto:SNARKs-for-C}
+\hline \textbf{Non-universal} \\ (\textsc{Generate} needs constraint system as input)
+     & QAP-based \cite{2013:SP:Pinocchio}, \cite{2013:Eurocrypt:quadratic-span-programs-and-succinct-NIZKs-without-PCPs}, \cite{2013:crypto:SNARKs-for-C}
 		 & ? \rowend
 %%%%%%
-\hline {\textbf{Universal}} \\ (Generate needs just a size bound)
-     & vnTinyRAM \\ vRAM \\ Bulletproofs (with explicit CRH)
+\hline {\textbf{Universal}} \\ (\textsc{Generate} needs just a size bound)
+     & vnTinyRAM, vRAM, Bulletproofs (with explicit CRH)
 		 & Bulletproofs (with PRG-based CRH generation) \rowend
 %%%%%%
-\hline \textbf{Universal and scalable}\\ (Generate needs nothing but security parameter)
+\hline \textbf{Universal and scalable}\\ (\textsc{Generate} needs nothing but security parameter)
 		 & (impossible)
 		 & ``Fully scalable'' SNARKs based on PCD (recursive composition) \rowend
 \hline
 \end{longtable}
+\endgroup
+\end{center}
 
 In any case, we identified several capabilities that proving systems may need to express via a generic interface:
 

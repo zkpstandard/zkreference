@@ -3,14 +3,12 @@
 
 \newcommand{\ifoddeven}[2]{\ifthenelse{\isodd{\value{page}}}{#1}{#2}}
 
-
 \providecommand{\ifEmpty}[2]{\ifthenelse{\equal{#1}{}}{\protect #2}{}}
 \providecommand{\ifEmptyElse}[3]{\ifthenelse{\equal{#1}{}}{\protect #2}{\protect #3}}
 \providecommand{\ifNotEmpty}[2]{\ifthenelse{\equal{#1}{}}{}{\protect #2}}
 \providecommand{\ifNotEmptyElse}[3]{\ifthenelse{\equal{#1}{}}{\protect #3}{\protect #2}}
 \providecommand{\ifNotEmptyPrepend}[2]{\ifthenelse{\equal{#1}{}}{}{#2#1}}
 \providecommand{\ifNotEmptyAppend}[2]{\ifthenelse{\equal{#1}{}}{}{#1#2}}
-
 
 
 %%%%%%%%%%%% Commands
@@ -34,9 +32,6 @@
 
 \newcommand{\myemail}[1]{\href{mailto:#1}{#1}}
 
-\newcommand{\red}[1]{{\color[rgb]{1,0,0}#1}}
-\newcommand{\blue}[1]{{\color[rgb]{0,0,1}#1}}
-
 
 %%%%%%%%%%%% Auxi commands for longtable
 \newcommand{\begmin}[2][t]{\begin{minipage}[#1]{#2\textwidth}\vspace{0pt}} %-1.5ex need to coordinate with the space in last column
@@ -46,12 +41,10 @@
 
 \newcommand{\restoline}[1]{\resizebox{\linewidth}{!}{#1}}
 
-\newcommand\cleartooddpage{\clearpage\ifodd\value{page}\else\null\clearpage\fi}
-
-\newcommand{\shortleftarrow}{\ensuremath{\scalebox{1}{\ensuremath{\leftarrow}}}}
-
 
 %LB: colors for bookmarks of table and Figures
+\newcommand{\red}[1]{{\color[rgb]{1,0,0}#1}}
+\newcommand{\blue}[1]{{\color[rgb]{0,0,1}#1}}
 \newcommand{\colorbkmtab}{brown}
 \newcommand{\colorbkmfig}{blue}
 
@@ -61,19 +54,26 @@
   % does not require the `table' environment, but can be inside of it
   % Enables correct line numbers and it also creates a pdfbookmark
   % 1st arg is the text for the listoffigures (lot); 2nd arg is the main text of the caption
-\newcommand{\mytabcap}[3][]{%
-	%\addtocounter{table}{1}\hypertarget{ht:table:\thetable}{}\addtocounter{table}{-1}
-	{\normalsize\centering\internallinenumbers\refstepcounter{table}\label{#1}\bfseries\hypertarget{ht:table:\thetable}{Table}~\thetable{}: %intentional space before comment %
-				\addcontentsline{lot}{table}{Table~\thetable{}: #2}%  %%%\protect\ifthenelse{\equal{#1}{}}{#2}{#1}
-				#3} %next there is an intentional empty line
+\newcommand{\vertspaceintabcap}{\vspace{.5em}}  %may be locally redefined 
+\newcommand{\setlinenumbermargin}[1]{\renewcommand{\thelinenumber}{\arabic{linenumber}\hspace*{#1}}} %to be used inside local context, e.g., within \begingroup...\endgroup
+\newcommand{\setlinenumberintable}{}  %%% if boolShowFeedback, it will be redefined to force disappearance of line numbers
 
-	\nolinenumbers{\bookmarksetup{color=\colorbkmtab}%,bold=true
+
+\newcommand{\mytabcap}[3][]{%
+	\begin{internallinenumbers}\begingroup\normalsize\centering{\refstepcounter{table}\label{#1}\bfseries\hypertarget{ht:table:\thetable}{Table}~\thetable{}:} %intentional space before comment %
+				\addcontentsline{lot}{table}{Table~\thetable{}: #2}#3\endgroup
+	\end{internallinenumbers}
+
+	\vertspaceintabcap\setlinenumberintable%
+				{\bookmarksetup{color=\colorbkmtab}%
 	\ifthenelse{\equal{\arabic{section}}{0}}{\bookmarksetup{level=1}}{\ifthenelse{\equal{\arabic{subsection}}{0}}{\bookmarksetup{level=2}}{\ifthenelse{\equal{\arabic{subsubsection}}{0}}{\bookmarksetup{level=3}}{\bookmarksetup{level=4}}}}%
-	%in the line above, change the last bookmarksetup-level to 3 is wanting the pdf-bookmark to go inside the subsection
+	%if wanting the pdf-bookmark to go inside the subsection, then in the line above change the last bookmarksetup-level to 3 
 	\bookmark[dest=ht:table:\thetable]{Table~\thetable}%
-	\bookmarksetup{color=black}%,bold=false
+	\bookmarksetup{color=black}%
 	}
 }
+
+\newcommandtwoopt{\minip}[3][\textwidth][\textwidth]{\nolinenumbers\resizebox{#1}{!}{\begin{minipage}[t]{#2}\begin{internallinenumbers}#3\end{internallinenumbers}\end{minipage}}\vskip0pt\linenumbers}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% Caption for Figure, adding special pdf bookmark
 
@@ -85,8 +85,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% Commands
 
 \def\fillindesc{\red{$<$fill with description$>$}}
+\newcommand{\todo}[1]{\red{[To-do: #1]}}
+
 
 \newcommand{\loosen}{\looseness=-1}
+\newcommand{\pslabel}{\phantomsection\label}
+\newcommand{\emphbrkt}[1]{\ensuremath{\left\langle\emph{#1}\right\rangle}}
+
 
 \newcommand{\refchap}[1]{Chapter~\ref{#1}}
 \newcommand{\refsec}[1]{Section~\ref{#1}}
@@ -98,8 +103,11 @@
 \newcommand{\refgad}[1]{gadget~\ref{#1}}
 
 
-\newcommand{\Comm}{\textmd{Comm}}  %%% \ensuremath{\mathcal{C}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% Symbols and abbreviations
 
+\newcommand{\shortleftarrow}{\ensuremath{\scalebox{1}{\ensuremath{\leftarrow}}}}
+
+\newcommand{\Comm}{\textmd{Comm}}  %%% \ensuremath{\mathcal{C}} %commitment
 
 \newcommand{\prov}{\tops{\ensuremath{P}}{P}}
 \newcommand{\veri}{\tops{\ensuremath{V}}{V}}
@@ -115,19 +123,9 @@
 \newcommand{\setR}{\tops{\ensuremath{\textmd{setup}_{R}}}{setup\_R}}
 \newcommand{\params}{\textit{parameters}}  %LB: consider using params
 
-\newcommand{\pslabel}{\phantomsection\label}
-
 \newcommand{\field}{\ensuremath{\mathbb{F}}}  %needs package amssymb
-
 
 \newcommand{\shall}{{\ttfamily shall}}
 \newcommand{\should}{{\ttfamily should}}
 \newcommand{\can}{{\ttfamily can}}
 \newcommand{\neednot}{{\ttfamily need not}}
-
-
-\newcommandtwoopt{\minip}[3][\textwidth][\textwidth]{\nolinenumbers\resizebox{#1}{!}{\begin{minipage}[t]{#2}\begin{internallinenumbers}#3\end{internallinenumbers}\end{minipage}}\vskip0pt\linenumbers}
-
-\newcommand{\todo}[1]{\red{[To-do: #1]}}
-
-\newcommand{\emphbrkt}[1]{\ensuremath{\left\langle\emph{#1}\right\rangle}}

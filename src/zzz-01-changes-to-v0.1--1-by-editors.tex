@@ -16,9 +16,8 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section*{Structural changes}
-%\addcontentsline{toc}{section}{Structural changes}
-\pdfbookmark[1]{Structural changes}{pdfbkm:structural-changes}
+\def\tmpTitle{Structural changes by the editors}
+\section*{\pdfbookmark[1]{\tmpTitle}{pdfbkm:structural-changes}\tmpTitle}
 \label{sec:comments:structural-changes}
 
 %%% Inherently related to the editorial development of the reference document
@@ -37,7 +36,15 @@ All document
 \newcol 
 \rowendL
 %%%%%%%%%%%%%%%%%%%%%%%%
-\incItem[it:editorial:clarify-this-version][]
+\incItem[it:editorial:cover-page][Cover page]
+Front matter
+\newcol 
+\newcol \githubissue{16}
+\newcol \Chan\ Update cover with new version number, date, and link to latest version.
+\newcol \ref{rev:update-cover-version-and-date}, \ref{rev:update-cover-link}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:editorial:clarify-this-version][About this version]
 Front matter
 \newcol 
 \newcol \githubissue{16}
@@ -45,7 +52,15 @@ Front matter
 \newcol \ref{rev:clarify-this-version}
 \rowendL
 %%%%%%%%%%%%%%%%%%%%%%%%
-\incItem[it:editorial:add-abstract][]
+\incItem[it:editorial:propose-citation-format][Citation format]
+Front matter
+\newcol 
+\newcol \githubissue{16}
+\newcol \Chan\ Add a \hyperref[how-to-cite-this-version]{proposed citation format} for this version.
+\newcol \ref{rev:propose-citation-format}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:editorial:add-abstract][Abstract]
 Front matter
 \newcol 
 \newcol \githubissue{16}
@@ -53,7 +68,7 @@ Front matter
 \newcol \ref{rev:add-abstract}
 \rowendL
 %%%%%%%%%%%%%%%%%%%%%%%%
-\incItem[it:editorial:open-to-contributions][]
+\incItem[it:editorial:open-to-contributions][Open to contributions]
 Front matter
 \newcol 
 \newcol \githubissue{16}
@@ -61,15 +76,15 @@ Front matter
 \newcol \ref{rev:add-open-to-contributions}
 \rowendL
 %%%%%%%%%%%%%%%%%%%%%%%%
-\incItem[it:editorial:add-change-log][]
+\incItem[it:editorial:add-change-log][Version history]
 Front matter
 \newcol 
 \newcol \githubissue{16}
-\newcol \Chan\ Add a \hyperref[sec:prelim:change-log]{change-log} section, with a summarized description of the sequence of main versions of the document.
+\newcol \Chan\ Add a \hyperref[sec:prelim:change-log]{Version history} section, with a summarized description of the sequence of main versions of the document.
 \newcol \ref{rev:editorial:add-change-log}
 \rowendL
 %%%%%%%%%%%%%%%%%%%%%%%%
-\incItem[it:editorial:add-acks][]
+\incItem[it:editorial:add-acks][Acknowledgments]
 Front matter
 \newcol 
 \newcol \githubissue{16}
@@ -77,39 +92,53 @@ Front matter
 \newcol \ref{rev:add-acks}
 \rowendL
 %%%%%%%%%%%%%%%%%%%%%%%%
-\incItem[it:editorial:charter][]
+\incItem[it:editorial:charter][Charter]
 Front matter
 \newcol 
-\newcol \githubissue{16}, \ref{issue:intellectual-property}
+\newcol \githubissue{16}
 \newcol \Chan\ Improve the placement and context of the ZKProof Charter within the document:
 				\begin{itemize}
 				\item Move the original ``\hyperref[sec:prelim:charter]{ZKProof Charter}'' to before the \hyperref[prelim:contents]{Table of Contents}, and frame it within a box (\ref{rev:charter:box-the-original}).
 				\item Correct typo: ``standardardization'' $\rightarrow$ ``standardization'' (\ref{rev:charter:typo:standardardization}).
-				\item Add editorial footnote explaining that the scope of the creative commons license is widened to incorporate the community reference (\ref{rev:charter:widen-scope-creative-commons}).
-				\item Remove the ZKProof Code of Conducts (since it is tailored to events, rather than to documents).
 				\end{itemize}
-\newcol \ref{rev:charter:box-the-original}, \ref{rev:charter:typo:standardardization}, \ref{rev:charter:widen-scope-creative-commons}
+\newcol \ref{rev:charter:box-the-original}, \ref{rev:charter:typo:standardardization}
 \rowendL
 %%%%%%%%%%%%%%%%%%%%%%%%
-\incItem[it:new-chapter-2][]
+\incItem[it:editorial:charter-footnote-scope-cc-license][CC license]
+Front matter
+\newcol 
+\newcol \githubissue{16}, \ref{issue:intellectual-property}
+\newcol \Chan\ Add editorial footnote explaining that the scope of the creative commons license is widened to incorporate the community reference (\ref{rev:charter:widen-scope-creative-commons}).
+\newcol \ref{rev:charter:widen-scope-creative-commons}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:editorial:code-conduct][Intellectual property]
+Front matter
+\newcol 
+\newcol \githubissue{16}, \ref{issue:intellectual-property}
+\newcol \Chan\ Remove the ZKProof Code of Conducts (since it is tailored to events, rather than to documents).
+\newcol 
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:new-chapter-2][New chapter construction paradigms]
 New \refchap{chap:paradigms}
 \newcol 
-\newcol \githubissue{16}
+\newcol \githubissue{16}, \githubissue{17}, \ref{issue:interactivity}
 \newcol \Chan\ Create structure to fit a new chapter ``2. Construction paradigms'' to contain explanations 
 	of different protocol paradigms for zero-knowledge proofs. 
 \newcol \ref{rev:new-chapter-2-paradigms}
 \rowendL
 %%%%%%%%%%%%%%%%%%%%%%%%
-\incItem[it:move-taxonomy-to-new-chapter][]
+\incItem[it:move-taxonomy-to-new-chapter][Move taxonomy to new chapter]
 Old chapter 1; new \refsec{paradigms:taxonomy}
 \newcol 
-\newcol \githubissue{16}, \ref{issue:interactivity}
+\newcol \githubissue{16}
 \newcol \Chan\ Move the old section 1.8 (``taxonomy of constructions'') 
 	to be the first section in the new paradigms chapter.
 \newcol \ref{rev:move-taxonomy-to-new-chapter}
 \rowendL
 %%%%%%%%%%%%%%%%%%%%%%%%
-\incItem[it:list-possible-paradigms][]
+\incItem[it:list-possible-paradigms][List of paradigms]
 \refsec{paradigms:others}
 \newcol 
 \newcol \githubissue{16}, \githubissue{17}
@@ -118,18 +147,18 @@ Old chapter 1; new \refsec{paradigms:taxonomy}
 \newcol \ref{rev:list-other-paradigms}
 \rowendL
 %%%%%%%%%%%%%%%%%%%%%%%%
-\incItem[it:editorial:applications-move-notation][]
+\incItem[it:editorial:applications-move-notation][Types of verifiability]
 Old section 3.2 (``Notation and terminology'') in chapter ``Applications''
 \newcol 
 \newcol \ref{it:applications:define-predicate-and-gadgets}, \ref{it:scope-use-cases-new-content}
-\newcol \Note\ The section title ``Notation and terminology'' was inadequate and its content was focused on distinguishing three types of verifiability requirements.
-				\Chan\ Moved some newly proposed definitions of gadget and predicate (see \ref{it:applications:define-predicate-and-gadgets}) to the previous introductory section (\refsec{apps:intro}).
-				Change the section title to ``Types of verifiability'', added a header label for each enumerated type, along with minor editorial adjustments.
-				Edited proposed content about the scope of use-cases related to the designated verifier case (see \ref{it:scope-use-cases-new-content}),
+\newcol \Note\ The section ``Notation and terminology'' was only focused on distinguishing three types of verifiability requirements.
+				\Chan\ Change the section title to ``Types of verifiability'', added a header label for each enumerated type, along with minor editorial adjustments.
+				Move some newly proposed definitions of gadget and predicate (see \ref{it:applications:define-predicate-and-gadgets}) to the previous introductory section (\refsec{apps:intro}).
+				Edit proposed content about the scope of use-cases related to the designated verifier case (see \ref{it:scope-use-cases-new-content}).
 \newcol \ref{rev:applications:define-predicate-and-gadgets}, \ref{rev:applications:move-mention-to-syntax}, \ref{rev:editorial:applications:verifiability-type}
 \rowendL
 %%%%%%%%%%%%%%%%%%%%%%%%
-\incItem[it:editorial:tables-gadgets-portrait][]
+\incItem[it:editorial:tables-gadgets-portrait][Tables of gadgets]
 \refsec{apps:gadgets-within-predicates}
 \newcol 
 \newcol \ref{it:applications:define-predicate-and-gadgets}
@@ -138,7 +167,7 @@ Old section 3.2 (``Notation and terminology'') in chapter ``Applications''
 \newcol \ref{rev:editorial:tables-gadgets-portrait}
 \rowendL
 %%%%%%%%%%%%%%%%%%%%%%%%
-\incItem[it:editorial:tables-functionalities-portrait][]
+\incItem[it:editorial:tables-functionalities-portrait][Tables of functionality]
 \refsec{sec:apps:id-framework:protocol-description}
 \newcol 
 \newcol 
@@ -147,7 +176,16 @@ Old section 3.2 (``Notation and terminology'') in chapter ``Applications''
 \newcol \ref{rev:editorial:tables-functionalities-portrait}
 \rowendL
 %%%%%%%%%%%%%%%%%%%%%%%%
-\incItem[it:editorial:remove-zcon0-notes][]
+\incItem[it:editorial:remove-list-refs-in-chapters][List of used references]
+End of each old chapter
+\newcol Consolidate the list of used references
+\newcol 
+\newcol \Chan\ Remove the redundant lists of references that were remaining in the end of each chapter.
+				(They are now consolidated in a single ``\hyperref[references]{References}'' section.)
+\newcol \ref{rev:editorial:remove-list-refs-in-chapter-theory}, \ref{rev:editorial:remove-list-refs-in-chapter-implementation}, \ref{rev:editorial:remove-list-refs-in-chapter-applications}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:editorial:remove-zcon0-notes][ZCon notes (removed)]
 Old chapter 4 ZCon0
 \newcol 
 \newcol \githubissue{16}
@@ -155,19 +193,13 @@ Old chapter 4 ZCon0
 \newcol 
 \rowendL
 %%%%%%%%%%%%%%%%%%%%%%%%
-\incItem[it:editorial:remove-list-refs-in-chapters][]
-End of each old chapter
-\newcol 
-\newcol Consolidate the list of used references.
-\newcol \Chan\ Remove the redundant lists of references that were remaining in the end of each chapter.
-\newcol \ref{rev:editorial:remove-list-refs-in-chapter-theory}, \ref{rev:editorial:remove-list-refs-in-chapter-implementation}, \ref{rev:editorial:remove-list-refs-in-chapter-applications}
-\rowendL
-%%%%%%%%%%%%%%%%%%%%%%%%
-\incItem[it:editorial:address-popup-annotations][]
+\incItem[it:editorial:address-popup-annotations][PDF popup annotations]
 All document
 \newcol 
 \newcol \githubissue{16}
-\newcol \Chan\ \todo{Address/remove all popup pdf-annotations from the draft version 0.1.}
+\newcol \Chan\ Remove all popup pdf-annotations (done by simply clearing the definition 
+				of the calling LaTeX command \textbackslash{}pdfcomment --- the comments remain 
+				in the LaTeX code for future address).
 \newcol 
 \rowendL
 %%%%%%%%%%%%%%%%%%%%%%%%

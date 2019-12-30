@@ -1,18 +1,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \appendix
-\phantomsection\chapter{Acronyms and glossary} %VII
+\phantomsection\chapter{Acronyms and glossary} 
 \label{security:abbreviations}
-%\addcontentsline{toc}{chapter}{Abbreviations}
-%\setcounter{section}{1}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \section{Acronyms}
 \label{app:acronyms}
 
-\begin{multicols}{2}
+\begin{multicols}{2}\small
 \begin{itemize}
 \item 3SAT: 3-satisfiability
 \item AND: AND gate (Boolean gate)
@@ -49,47 +46,46 @@
 \end{multicols}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section[Glossary]{Glossary\luiscom{Consider listing all technical terms and providing
 corresponding links to where each term is defined, exemplified, and used in the document}~~~\luised{The first three entries were originally in the glossary of the Security track. Removed the CRS entry because it is superseded by another entry further below, originally in the glossary of the Implementations track.}~~~
 \luissug{Several of these definitions are given ipsis verbis elsewhere, e.g., in \refsec{security:terminology}. Consider removing the redundancy, by simply providing the page (with a hyperlink) and section where the definition is given.
 }}
 \label{app:glossary}
 
-\begin{itemize}
+\begin{itemize}[leftmargin=1em]
 %\item CRS: Common Reference String %%%superseeded by explanation in glossary from Implementations track
  
-\item 
-NIZK: Non-Interactive Zero-Knowledge. Proof system, where the prover sends a single message to the verifier, who then decides to accept or reject. Usually set in the common reference string model, although it is also possible to have designated verifier NIZK proofs.
+\item \textbf{NIZK:} 
+Non-Interactive Zero-Knowledge. Proof system, where the prover sends a single message to the verifier, who then decides to accept or reject. Usually set in the common reference string model, although it is also possible to have designated verifier NIZK proofs.
  
-\item SNARK: Succinct Non-interactive ARgument of Knowledge. A special type of non-interactive proof system where the proof size is small and verification is fast.
+\item \textbf{SNARK:} 
+Succinct Non-interactive ARgument of Knowledge. A special type of non-interactive proof system where the proof size is small and verification is fast.
  
-\item zk-SNARK: Zero-Knowledge SNARK.
-\end{itemize}
+%%%\item \textbf{zk-SNARK:} Zero-Knowledge SNARK.  %% obvious from the list of acronyms
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\section[Glossary 2]{Glossary 2\luis{Originally in the Implementations track}}
-
-%The following extends the Security Track’s glossary.  %% LB: removed when merging the glossaries
-
-%%%\subsection*{Glossary 2\luis{Originally in the Implementations track. Several of these definitions are given ipsis verbis elsewhere, e.g., in \refsec{security:terminology}. 
-
-\begin{itemize}
-
-    \item \textbf{Instance}: Public input that is known to both prover and verifier. Sometimes scientific articles use instance and statement interchangeably, but we will distinguish between the two. Notation: $x$.
-    \item \textbf{Witness}: Private input to the prover. Others may or may not know something about the witness. Notation: $w$.
+		%%% Some of the following is redundant with chapter 1. Consider finding a way to reducee the redundancy.
+    \item \textbf{Instance}: Public input that is known to both prover and verifier. Notation: $x$.
+		(Some scientific articles use ``instance'' and ``statement'' interchangeably, but we distinguish between the two.)
+		%Sometimes scientific articles use instance and statement interchangeably, but we will distinguish between the two. 
+    
+		\item \textbf{Witness}: Private input to the prover. Others may or may not know something about the witness. Notation: $w$.
     \item \textbf{Application Inputs:} Parts of the witness interpreted as inputs to an application, coming from an external data source. The complete witness and the instance can be computed by the prover from application inputs.
     \item \textbf{Relation}: Specification of relationship between instances and witness. A relation can be viewed as a set of permissible pairs (instance, witness). Notation: $R$.
     \item \textbf{Language}: Set of instances that have a witness in R. Notation: $L$.
     \item \textbf{Statement}: Defined by instance and relation. Claims the instance has a witness in the relation, which is either true or false. Notation: $x \in L$.
     \item \textbf{Constraint System:} a language for specifying relations.
+
+
     \item \textbf{Proof System:} A zero-knowledge proof system is a specification of how a prover and verifier can interact for the prover to convince the verifier that the statement is true. The proof system must be complete, sound and zero-knowledge.
-			\begin{itemize}
+			\begin{itemize}[leftmargin=1em]
 				\item \emph{Complete}: If the statement is true and both prover and verifier follow the protocol; the verifier will accept.
 				\item \emph{Sound}: If the statement is false, and the verifier follows the protocol; he will not be convinced.
 				\item \emph{Zero-knowledge}: If the statement is true and the prover follows the protocol; the verifier will not learn any confidential information from the interaction with the prover but the fact the statement is true.
 			\end{itemize}
+
+
     \item \textbf{Backend:} an implementation of ZK proof’ system’s low-level cryptographic protocol.
     \item \textbf{Frontend:} means to express ZK statements in a convenient language and to prove such statements in zero knowledge by compiling them into a low-level representation and invoking a suitable ZK backend.
     \item \textbf{Instance reduction:} conversion of the instance in a high-level statement to an instance for a low-level statement (suitable for consumption by the backend), by a frontend.
@@ -98,8 +94,10 @@ NIZK: Non-Interactive Zero-Knowledge. Proof system, where the prover sends a sin
     \item \textbf{QAP (Quadratic Arithmetic Program)}: An NP-complete language for specifying relations via a quadratic system in polynomials, defined in [PHGR13]. See R1CS for an equivalent formulation.
 		\end{itemize}
 
+
+
 \textbf{\underline{Reference strings:}}
-\begin{itemize}
+\begin{itemize}[leftmargin=1em]
     \item \textbf{CRS (Common Reference String)}: A string output by the NIZK’s Generator algorithm, and available to both the prover and verifier. Consists of proving parameters and verification parameters. May be a URS or an SRS.
     \item \textbf{URS (Uniform Random String)}: A common reference string created by uniformly sampling from some space, and in particular involving no secrets in its creation. (Also called Common Random String in prior literature; we avoid this term due to the acronym clash with Common Reference String).
     \item \textbf{SRS (Structured Reference String)}: A common reference string created by sampling from some complex distribution, often involving a sampling algorithm with internal randomness that must not be revealed, since it would create a trapdoor that enables creation of convincing proofs for false statements. The SRS may be non-universal (depend on the specific relation) or universal (independent of the relation, i.e., serve for proving all of NP).

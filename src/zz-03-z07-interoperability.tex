@@ -55,7 +55,7 @@ Another desired goal is interoperability between provers and verifiers that come
 
 This is especially pertinent in applications where proofs are posted publicly, such as in the context of blockchains (see the Applications Track document), and multiple independent implementations are desired for both provers and verifiers.
 
-To achieve such interoperability between provers and verifiers, they must agree on all of the following:
+To achieve such interoperability, provers and verifiers must agree on all of the following: %made small tweak to prevent line break
 \begin{itemize}
     \item ZK proof system (including fixing all degrees of freedom, such as choice of finite fields and elliptic curves)
     \item Instance and witness formats (see above subsection)
@@ -70,5 +70,6 @@ Alternatively: a precise high-level specification along with a precisely-specifi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Common reference strings}
-There is also a need for standardization regarding Common Reference String (CRS), i.e., prover parameters and verifier parameters. First, interoperability is needed for streaming formats (communication and storage), and would allow application developers to easily switch between different implementations, with different security and performance properties, to suit their need. Moreover, for Structured Reference Strings (SRS), there are nontrivial semantics that depend on the ZK proof system and its concrete realization by backends, as well as potential for partial reuse of SRS across different circuits in some schemes (e.g., the Powers of Tau protocol). 
-
+There is also a need for standardization regarding Common Reference String (CRS), i.e., prover parameters and verifier parameters. 
+First, interoperability is needed for streaming formats (communication and storage), and would allow application developers to easily switch between different implementations, with different security and performance properties, to suit their need.
+Moreover, for Structured Reference Strings (SRS), there are nontrivial semantics that depend on the ZK proof system and its concrete realization by backends, as well as potential for partial reuse of SRS across different circuits in some schemes (e.g., the Powers of Tau protocol). 

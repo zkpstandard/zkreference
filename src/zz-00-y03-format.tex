@@ -27,7 +27,7 @@
 
 %%%%%%%%%%%% Formatting
 \theorembodyfont{\rm}\newtheorem{remark}{Remark} %needs package theorem
-\setcounter{tocdepth}{1} %needs package rocloft
+\setcounter{tocdepth}{3} % depth at which to show contents in the table of contents % needs package tocloft
 \renewcommand\cftchapafterpnum{\vskip0pt} %spacing between items in toc
 \renewcommand\cftsecafterpnum{\vskip0pt} %spacing between items in toc
 \setlist[itemize]{itemsep=.5ex, topsep=0pt}
@@ -75,6 +75,18 @@
 		\rhead{\ifoddeven{}{Section \nouppercase{\rightmark}}}
 		\cfoot{\thepage}
 }
+
+\def\intentiallyblank{\smash{\raisebox{-3.5em}{\scalebox{1.5}{\color[rgb]{0.85,0.85,0.85}Page intentionally blank}}}}
+\fancypagestyle{intentionallyblank}{\fancyhead{}\chead{\intentiallyblank}\cfoot{}}
+
+
+\fancypagestyle{blankpagewithnumber}{\fancyhead{}\chead{\intentiallyblank}\cfoot{\thepage}} %to avoid
+
+\newcommand\cleartooddpage{\clearpage\ifodd\value{page}\else
+	%avoid the \rightmark of the `mainmatter' page style, but still include a page number
+	\null\thispagestyle{blankpagewithnumber}\clearpage\fi}
+
+\fancypagestyle{empty}{\fancyhead{}\cfoot{}}
 
 
 %%% Same font size as section header ?

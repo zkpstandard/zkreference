@@ -45,11 +45,9 @@ Example of ring signature: \textbf{Zk \{ (sig):  VerifySignature(P1, sig) or Ver
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\mytablecap[tab:list-of-gadgets]{List of gadgets}
 \begin{table}[H]\centering
 \revblock[rev:gadgets-table-fill]{\ref{it:gadgets-table}}
 \mytabcap[tab:list-gadgets]{List of gadgets}{List of gadgets}
-\begin{center}
 \begin{edtable}{tabular}{|>{\begmin{.04}\centering}c<{\myendmini}|>{\begmin{.23}}l<{\myendmini}||>{\begmin{.48}}l<{\myendmini}|>{\begmin{.13}\centering}c<{}|}
 \hline \rowcolor{colorRowHead} \bfseries \raisebox{-3ex}{\#}
 			& \centering \bfseries \raisebox{-3ex}{Gadget name}
@@ -74,7 +72,6 @@ Example of ring signature: \textbf{Zk \{ (sig):  VerifySignature(P1, sig) or Ver
 				& General calculations & \reftab{tab:gadget-general-computation} \rowend
 \hline
 \end{edtable}\vspace{1em}
-\end{center}
 \end{table}
 
 
@@ -89,8 +86,8 @@ Example of ring signature: \textbf{Zk \{ (sig):  VerifySignature(P1, sig) or Ver
 
 %the six arguments are factors for the width of the 6 columns
 \newenvironment{gadgettabular}[5]{%
-	\begin{center}\footnotesize\begin{edtable}{tabular}{%
-		|>{\begmin{#1}}l<{\myendmini}|%
+	\begin{center}\renewcommand{\thelinenumber}{}\footnotesize\begin{edtable}{tabular}{%
+		|>{\begmin{#1}\setlinenumbermargin{1em}\internallinenumbers}l<{\myendmini}|%
 		>{\begmin{#2}}l<{\myendmini}|%
 		>{\begmin{#3}}l<{\myendmini}|%
 		>{\begmin{#4}}l<{\myendmini}|%
@@ -110,7 +107,7 @@ Example of ring signature: \textbf{Zk \{ (sig):  VerifySignature(P1, sig) or Ver
 \begin{table}[H]\centering
 \mytabcap[tab:gadget-commitment-envelope]{Commitment gadget}{Commitment gadget (\ref{gad:commitment}; envelope)}
 \revblock[rev:editorial:tables-gadgets-portrait]{\ref{it:editorial:tables-gadgets-portrait}}\luiscom{Should each row have its own index, e.g., G1a, G1b, G1c, G1d?}
-\begin{gadgettabular}{.26}{.16}{.17}{.12}{.18}  %make it sum to .89
+\nolinenumbers\begin{gadgettabular}{.26}{.16}{.17}{.12}{.18}  %make it sum to .89
 			I know the value hidden inside this envelope, even though I cannot change it
 		& Knowledge of committed value(s) (openings)
     & Opening $O = (v,r)$ containing a value and randomness

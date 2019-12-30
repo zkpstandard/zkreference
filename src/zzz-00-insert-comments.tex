@@ -1,6 +1,6 @@
 %%% Luis B: ADD-ON TO INITIATE PART WITH TABLES OF NOTES, IN THE SAME DOCUMENT, 
-%%% (CHANGED TO LANDSCAPE) TO CROSS-REFERENC FEEDBACK NOTES AND CORRESPONDING CHANGES
-%%% It's appearance vs. not-appearing is controlled with the bit flag boolShowFeedbackNotes
+%%% (CHANGED TO LANDSCAPE) TO CROSS-REFERENCE FEEDBACK NOTES AND CORRESPONDING CHANGES
+%%% Appearing vs. not-appearing is controlled with the bit flag boolShowFeedbackNotes in the main file
 
 %%% CHANGE PAGE FORMAT MID-DOCUMENT
 \KOMAoption{paper}{landscape}%
@@ -9,23 +9,21 @@
 \newgeometry{margin=.65in,footskip=.25in}
 
 
-\def\mytextfooter{Table of proposed/implemented contributions}
+\def\mytextfooter{Table of contribution descriptions}
 \fancypagestyle{lscapetablecontribs}{
 	\fancyhf{}\lfoot{\mytextfooter}\rfoot{\thepage}
 }
 
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%		
-	%\clearpage\newpage
 	\pagebreak
 	\thispagestyle{lscapetablecontribs}%
 	\pagestyle{lscapetablecontribs}%
-	
 
-	\def\tempTitle{Table of comments and contributions v0.1 \tops{$\rightarrow$}{\textrightarrow} 0.2}
-	\phantomsection%\section*{\tempTitle}
+
+	\def\tempTitle{Table of contribution descriptions v0.1 \tops{$\rightarrow$}{\textrightarrow} v0.2}
+	\phantomsection\pdfbookmark[0]{\tempTitle}{pdfbkm:table-of-comments}\label{app:table-comments}
 	~\hfill\scalebox{2}{\textbf{\tempTitle}}\hfill~
-	\pdfbookmark[0]{\tempTitle}{pdfbkm:table-of-comments}
-	%%%\addcontentsline{toc}{chapter}{\tempTitle}
+
 
 	\vspace{1em}
 	The following pages describe contributions integrated in the process of upgrading the draft reference 
@@ -34,7 +32,7 @@ document from version 0.1 (dated 2019-04-11, available during the 2nd ZKProof Wo
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \def\tmpSecTitle{Explanation of the tables of contributions}
-\section*{\tmpSecTitle}\pdfbookmark[2]{\tmpSecTitle}{pdfbkm:explain-table-contributions}
+\section*{\pdfbookmark[2]{\tmpSecTitle}{pdfbkm:explain-table-contributions}\tmpSecTitle}
 
 Each table describes proposed contributions and corresponding changes/edits 
 made to the baseline version 0.1, in order to achieve version 0.2.
@@ -46,13 +44,11 @@ see \myurl{https://github.com/zkpstandard/zkreference/issues}.
 for the purpose of enabling a better cross-referencing to the edits made in the document.
 	Each table has a header as follows:
 
-{
+\begingroup
 \vspace{-1em}
-\renewcommand{\thecntIssue}{D$x$}
-\renewcommand{\rowIssueName}{\emph{issue title}}
+\renewcommand{\thecntContrib}{\letterIndexPropContrib$x$}
 \beginlongtabIssue\hline\rowcolor{LLyellow}\headerForIssue\rowend\hline\end{longtable}
-%\renewcommand{\thecntIssue}{D\arabic{cntIssue}}
-}
+\endgroup
 
 From left to right, the columns represent:
 
@@ -61,25 +57,23 @@ From left to right, the columns represent:
 \item \bm{\#}:
 	A consecutive positive integer, used to count all described items of contribution
 
-\item \textbf{Item id} 
+\item \textbf{Item id:} 
 	An index of the contribution item, with a numbering subordinate to the table index. 
-	For example, D1.3 would be the third item (row) of contribution (table) D1.
-%	Each row shows D$x$.$z$ as the item id, where $z$ is an integer 
-%and D.$x$ is the identification of the table.
+	For example, \hyperref[it:editorial:add-abstract]{D1.3} is the third item (row) of contribution (table) \hyperref[issue:editorial-structural]{D1}.
 	
 \item \textbf{Location:} 
-	A hint about the location (typically in the old document) of the edits.
+	A hint about the location (e.g., section number) of the edits, either in the old or in the new document.
 
-\item \textbf{Contribution D$x$: \emph{issue title}}: 
-	An identifier \textbf{D$x$} (with integer $x$) of the contribution 
+\item \textbf{\colNamePropContrib\ \letterIndexPropContrib$x$: \emph{issue title}}: 
+	An identifier \textbf{\letterIndexPropContrib$x$} (with integer $x$) of the contribution 
 \textbf{d}escription, and a title of the issue / contributions.
 
 \item \textbf{Related}: Related references, 
 such as references (GI$x$) to GitHub issues, 
 and/or ids of other contribution items.
 
-\item \textbf{Context and changes}: 
-	Column to fill-in with contextual information about the proposed contribution,
+\item \textbf{Changes made}: 
+	Contextual information about the proposed contribution,
 as well as a high level description of the changes in the document.
 
 \item \textbf{Edit id}:
@@ -93,19 +87,16 @@ i.e., to an explanation of why the change was made.
 \end{itemize}
 
 %%% LIST OF CONTRIBUTIONS
-\clearpage
-\phantomsection%%\addcontentsline{toc}{section}{\listcontributionname}
+\clearpage\phantomsection
 \pdfbookmark[1]{\listcontributionname}{pdfbkm:list-of-contributions}
-
 
 {
 \setlength{\cftbeforeloctitleskip}{2em}
 \setlength{\cftsecindent}{0em}
 \setlength{\cftsecnumwidth}{0em}
+}
 \renewcommand\cftloctitlefont{\bfseries\LARGE}
 \addtocontents{loc}{\vspace*{-3em}}
-\listofcontribution
-}
-
-%%%\newcommand{\itemlinerev}[2]{\item \ref{#1} --- #2 \hspace{.5em}\dotfill\hspace{.5em}\pageref{#1}}
+\addtocontents{loc2}{\vspace*{-3em}}
+\listofcontributions
 

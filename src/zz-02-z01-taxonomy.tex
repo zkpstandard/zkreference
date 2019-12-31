@@ -39,7 +39,7 @@ The efficiency and security features of the resulting zero-knowledge proofs depe
 			& Kilian, Micali, IMS 
 			& \ref{feat:plain},\ref{feat:symm-key},\ref{subfeat:succinct:polylog} \\
 \hline \hyperref[proof-system:linear-PCP]{Linear PCP} & No & Inner-product Queries 
-			& \subtabL{IKO,Groth10,GGPR,BCIOP}
+			& \subtabL{IKO,\cite{2010:asiacrypt:short-NIZKPs},GGPR,BCIOP}
 			& \ref{subfeat:succinct:fully} \\
 \hline \murii{\hyperref[proof-system:IOP]{IOP}} & \murii{Yes} & \murii{Point Queries}
 			& BCS16+ZKStarks
@@ -57,7 +57,7 @@ The efficiency and security features of the resulting zero-knowledge proofs depe
 			& & & vRAM \cite{2018:SP:vRAM}
 			& \ref{subfeat:succinct:polylog} \\
 \hline \murii{\hyperref[proof-system:ILC]{ILC}} & \murii{Yes} & \murii{Matrix-vector\\Queries}
-			& \subtabL{Bootle 16,18\\} 
+			& \subtabL{Bootle 16,\cite{2018:asiacrypt:arya-nearly-linear-time-zkps-for-correct}\\} 
 			& \ref{feat:plain},\ref{subfeat:succinct:polylog} \\
 	\cline{4-5}
 			& & & Bootle 17
@@ -132,11 +132,9 @@ takes as input a vector $q \in \field^k$ and returns the matrix-vector product $
 	\end{enumerate}
 
 
-
-\paragraph{References from old list, but not in the remaining text:}\pdfbookmark[1]{List of references}{pdfbkm:security:list-refs}
 \revblock[rev:editorial:remove-list-refs-in-chapter-theory]{\ref{it:editorial:remove-list-refs-in-chapters}}
-\cite{2018:asiacrypt:arya-nearly-linear-time-zkps-for-correct},
-\cite{2010:asiacrypt:short-NIZKPs}.
+%The ones that were not otherwise cited with the \cite command were meanwhile moved to the preceding table where they were cited without the \cite command.
+%To do: change all citations to use the \cite command.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

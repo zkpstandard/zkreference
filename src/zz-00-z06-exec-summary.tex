@@ -2,22 +2,21 @@
 \label{sec:prelim:executive-summary}
 
 \revblock[rev:new-exec-summ]{\ref{it:exec-summ:add}}
-Zero-knowledge proofs (ZKPs) are an important privacy-enhancing tool from cryptography. 
-They preserve confidentiality of data, while proving the veracity of statements about the data. %%% statements of membership
-They can also be used to prove knowledge of such data without having to disclose it. %%% Statements of knowledge
-    ZKPs can have a positive impact in industries, agencies, and for personal use, 
-by allowing privacy-preserving applications where designated private data
-can be made useful to third parties, despite not being disclosed to them.
-	The development of this ``ZKProof Community Reference'' is a step towards enabling wider 
-adoption of interoperable ZKP technology, possibly preceding the establishment of future standards.
+	
 
-
-    ZKPs were developed by the academic community in the 1980s, and have seen tremendous improvements since then.
+	Zero-knowledge proofs (ZKPs) are an important privacy-enhancing tool from cryptography. 
+	They allow proving the veracity of a statement, related to confidential data, without revealing any information beyond the validity of the statement.
+	%%% They preserve confidentiality of data, while proving the veracity of statements about the data. %%% statements of membership
+	%%% They can also be used to prove knowledge of such data without having to disclose it. %%% Statements of knowledge
+  ZKPs were initially developed by the academic community in the 1980s, and have seen tremendous improvements since then.
 	They are now of practical feasibility in multiple domains of interest to the industry, and to a large community of developers and researchers.  
-	This document aims to be a community-built reference for understanding and aiding the development of ZKP systems in a secure, practical and interoperable manner.
-	It is not a substitution for research papers, technical books, or standards. It is intended to 
-serve as a reference handbook of introductory concepts, basic techniques, implementation suggestions and application use-cases. 
-	This aims to serve the broader community, particularly those interested in understanding ZKP systems, making an impact in their advancement, and using related products.
+  ZKPs can have a positive impact in industries, agencies, and for personal use, by allowing privacy-preserving applications where designated private data can be made useful to third parties, despite not being disclosed to them.
+
+
+	The development of this reference document aims to serve the broader community, particularly those interested in understanding ZKP systems, making an impact in their advancement, and using related products.
+	This is a step towards enabling wider adoption of ZKP technology, which may precede the establishment of future standards.
+	However, this document is not a substitution for research papers, technical books, or standards. 
+	It is intended to serve as a reference handbook of introductory concepts, basic techniques, implementation suggestions and application use-cases. 
 
 
 	ZKP systems involve at least two parties: a prover and a verifier.  
@@ -29,9 +28,8 @@ serve as a reference handbook of introductory concepts, basic techniques, implem
 
 	This document describes important aspects of the current state of the art in ZKP security, implementation, and applications.
 	There are several use-cases and applications where ZKPs can add value.
-	However, this requires benchmarking implementations under several metrics, evaluating tradeoffs between security and efficiency, and developing a basis for interoperability.
-    The security of a proof system is paramount for the system users, but system efficiency is also essential for user experience.
-\loosen
+	To better assess this it is useful to benchmark implementations under several metrics, evaluate tradeoffs between security and efficiency, and develop an interoperability basis.
+    The security of a proof system is paramount for the system users, but efficiency is also essential for user experience.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -77,7 +75,8 @@ or {\tt Y$_2$=Y$_1$+18 }$\wedge${ \tt M$_2$=M$_1$ }$\wedge${ \tt D$_2$}$\geq${\t
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%% CONCLUDING PARAGRAPH
-	The interplay between security concepts and implementation guidelines must be balanced to enable the development of secure, practical, and interoperable ZKP applications.
+	The interplay between security concepts and implementation guidelines must be balanced in %to enable 
+the development of secure, practical, and interoperable ZKP applications.
 	Solutions provided by ZKP technology must be ensured by careful security practices and realistic assumptions.
 	This document aims to summarize security properties and implementation techniques that help achieve these goals.
 		

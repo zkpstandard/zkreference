@@ -30,14 +30,14 @@ When designing ZK based applications, one needs to keep in mind which of the fol
 \revblock[rev:apps:verifiability:new-content-preamble]{\ref{it:apps:verifiability:new-content-preamble}}
 which is strongly related to aspects of public verifiability vs.\ designated verifiability,
 both in the interactive and in the non-interactive settings.
-	As a use-case example, consider some application related to block-chain currency, where aspects of user-privacy and regulatory-control are relevant.
+	As a use-case example, consider some application related to blockchain currency, where aspects of user-privacy and regulatory-control are relevant.
 	
 	
-	Publicly-verifiable ZKPs can be appropriate when a transaction should be public 
+	Publicly-verifiable ZKPs can be appropriate when the validity of a transaction should be public 
 (e.g., so that everyone knows that some asset changed owner), while some supporting data needs to remain private 
-(e.g., the secret key of a block-chain address, controlling the ownership of the asset).
+(e.g., the secret key of a blockchain address, controlling the ownership of the asset).
 	However, sometimes even the statement being proven should remain private beyond the scope of the verifier, and therefore a non-transferable proof	should be used.
-	This may apply for example to a proof of having enough funds available for a purchase, or also of knowing the secret key of a certain block-chain address.
+	This may apply for example to a proof of having enough funds available for a purchase, or also of knowing the secret key of a certain blockchain address.
 	Alice wants to prevent Bob from using the received proof to convince Charley of the claims made by Alice.
 	For that purpose, Alice can perform a deniability interactive proof with Bob.
 	Alternatively, Alice can send to Bob a (non-interactive) proof transcript built for Bob as a \emph{designated verifier}.

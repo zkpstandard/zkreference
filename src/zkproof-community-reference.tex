@@ -3,13 +3,22 @@
 %%% This is the main compilation file
 
 \documentclass[11pt,letterpaper,oneside]{report}    
-%using option `oneside' instead of `twoside' makes some definitions easier, although the fancyhdr options then use conditionals to define different headers between odd and even pages
+%using option `oneside' instead of `twoside' makes some definitions easier
 
-\usepackage{ifthen,etoolbox,twoopt} %allows command \ifthenelse{}{}{}, \newcommandtwoopt allows commands with two optional arguments
-\newcommand{\newsetbool}[2]{\newbool{#1}\setbool{#1}{#2}}
-\newsetbool{boolShowFeedback}{false} % Use true to show the table of proposed contributions and changes
-\ifbool{boolShowFeedback}{}{\newcommandtwoopt{\revblock}[3][][]{}} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% DEFINE WHICH VERSION TO COMPILE: Clean, ShowFeedback, Diff
 
+%allows \ifthenelse{}{}{}; allows \newcommandtwoopt to define commands with two optional arguments
+\usepackage{ifthen,etoolbox,twoopt}
+\newcommand{\providesetbool}[2]{\providebool{#1}\setbool{#1}{#2}}
+% boolShowFeedback: set to `true' to show the table of proposed contributions and changes
+\providesetbool{boolShowFeedback}{false}
+% booldiff: set to `true' to prepare this for diffing with a previous version; 
+\providesetbool{boolDiff}{false} % if true, it forces boolShowFeedback to true
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% LOAD PRELIMINARY DEFINITIONS
 
 \input{zz-00-y01-pkgs.tex}
 \input{zz-00-y02-cmds.tex}
@@ -28,12 +37,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 
-\ifbool{boolShowFeedback}{\input{zzz-00-cover-annotated-changes.tex}}%
-{\nolinenumbers\renewcommand{\linenumbers}{}\renewcommand{\internallinenumbers}{}\renewcommand{\setlinenumberintable}{\renewcommand{\thelinenumber}{}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%% FRONT MATTER
+\ignoreDiff{\ifbool{boolDiff}{\input{zz-00-z00-precover-diff.tex}}{\ifbool{boolShowFeedback}{\input{zz-00-z00-precover-ref-changes.tex}}{}}}
+
+\ifbool{boolShowFeedback}{}{\nolinenumbers\renewcommand{\linenumbers}{}\renewcommand{\internallinenumbers}{}\renewcommand{\setlinenumberintable}{\renewcommand{\thelinenumber}{}}}
 
 \input{zz-00-frontmatter}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%% MAIN MATTER
 \renewcommand{\thesection}{\thechapter.\arabic{mysec}}
 
 \cleartooddpage\pagenumbering{arabic}\setcounter{page}{1}
@@ -44,32 +55,33 @@
 \cleartooddpage\input{zz-03-implem.tex}
 \cleartooddpage\input{zz-04-apps.tex}
 
+\cleartooddpage\input{zz-91-acks.tex}
 
 \cleartooddpage\pagestyle{references}\thispagestyle{references}
 \phantomsection\chapter*{References}\addcontentsline{toc}{chapter}{References}
 \label{references}{\small\printbibliography[heading=none]}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%% BACK MATTER
 \cleartooddpage\pagestyle{appendix}\thispagestyle{appendix}
 
 \appendix
 \begingroup\setstretch{.94} %temporary tweak to allow ending in even page
 \input{zz-A-abbrevs.tex}\endgroup
 
+\clearpage\input{zz-B-version-history.tex}
+
 \cleartooddpage\thispagestyle{empty} 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%
-\ifbool{boolShowFeedback}{
-	%%% IF DECIDING TO INSERT THE TABLE OF COMMENTS
-	\nolinenumbers %disables line numbering
+%%%%%%%%%%%%%%%%%%%%%%%%%% TABLE OF CHANGES/CONTRIBUTIONS
+\ifbool{boolShowFeedback}{\ignoreDiff{
+	\nolinenumbers %disable line numbering
 	\input{zzz-00-insert-comments.tex}
 
 	%Insert here the tables of review comments to be cross-referenced with the introduced changes
 	\input{zzz-01-changes-to-v0.1--1-by-editors.tex}
 	\input{zzz-01-changes-to-v0.1--2-by-contributors.tex}
-}{}
-
+}{}}
 
 \end{document}

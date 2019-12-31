@@ -37,10 +37,10 @@ All document
 \rowendL
 %%%%%%%%%%%%%%%%%%%%%%%%
 \incItem[it:editorial:cover-page][Cover page]
-Front matter
+\hyperref[prelim:cover]{Cover}
 \newcol 
 \newcol \githubissue{16}
-\newcol \Chan\ Update cover with new version number, date, and link to latest version.
+\newcol \Chan\ Update the version number; update the version date; add a link to find the latest version; add a ZKProof logo.
 \newcol \ref{rev:update-cover-version-and-date}, \ref{rev:update-cover-link}
 \rowendL
 %%%%%%%%%%%%%%%%%%%%%%%%
@@ -48,7 +48,7 @@ Front matter
 Front matter
 \newcol 
 \newcol \githubissue{16}
-\newcol \Chan\ Add an \hyperref[sec:prelim:msg-editors]{editorial note} clarifying the context of the current version; add a proposed citation format for this version.
+\newcol \Chan\ Add a note ``\hyperref[sec:prelim:msg-editors]{about this version}'' clarifying the context of the current version; add a proposed citation format for this version.
 \newcol \ref{rev:clarify-this-version}
 \rowendL
 %%%%%%%%%%%%%%%%%%%%%%%%
@@ -64,32 +64,18 @@ Front matter
 Front matter
 \newcol 
 \newcol \githubissue{16}
-\newcol \Chan\ Add an abstract
+\newcol \Chan\ Add an abstract and a list of keywords
 \newcol \ref{rev:add-abstract}
 \rowendL
 %%%%%%%%%%%%%%%%%%%%%%%%
-\incItem[it:editorial:open-to-contributions][Open to contributions]
+\incItem[it:editorial:about-this-community-reference][About this community reference]
 Front matter
-\newcol 
+\newcol \ccontext\ A significant portion of the text in this section 
+is based on the ``Towards a reference document'' section of the 
+``NIST comments on the initial ZKProof documentation'' (April 06, 2019).
 \newcol \githubissue{16}
-\newcol \Chan\ In the preamble of the document, add a section ``\hyperref[sec:prelim:open-to-contributions]{Open to Contributions}'' providing context for the intended development process of the document.
-\newcol \ref{rev:add-open-to-contributions}
-\rowendL
-%%%%%%%%%%%%%%%%%%%%%%%%
-\incItem[it:editorial:add-change-log][Version history]
-Front matter
-\newcol 
-\newcol \githubissue{16}
-\newcol \Chan\ Add a \hyperref[sec:prelim:change-log]{Version history} section, with a summarized description of the sequence of main versions of the document.
-\newcol \ref{rev:editorial:add-change-log}
-\rowendL
-%%%%%%%%%%%%%%%%%%%%%%%%
-\incItem[it:editorial:add-acks][Acknowledgments]
-Front matter
-\newcol 
-\newcol \githubissue{16}
-\newcol \Chan\ Add an \hyperref[sec:prelim:acknowledgments]{acknowledgments} section consistent with the contributions provided to the document.
-\newcol \ref{rev:add-acks}
+\newcol \Chan\ In the preamble of the document, add a section ``\hyperref[sec:prelim:about-this-community-reference]{About this community reference}'' providing context about the intended development process of the document.
+\newcol \ref{rev:prelim:explain-context-of-community-reference}
 \rowendL
 %%%%%%%%%%%%%%%%%%%%%%%%
 \incItem[it:editorial:charter][Charter]
@@ -117,6 +103,14 @@ Front matter
 \newcol 
 \newcol \githubissue{16}, \ref{issue:intellectual-property}
 \newcol \Chan\ Remove the ZKProof Code of Conducts (since it is tailored to events, rather than to documents).
+\newcol 
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:editorial:toc-depth][Depth of table of contents]
+Front matter
+\newcol 
+\newcol \githubissue{16}, \ref{rev:table-of-contents-depth-to-subsections}
+\newcol \Chan\ Increase the depth of the table of contents to also show subsections
 \newcol 
 \rowendL
 %%%%%%%%%%%%%%%%%%%%%%%%
@@ -181,7 +175,8 @@ End of each old chapter
 \newcol Consolidate the list of used references
 \newcol 
 \newcol \Chan\ Remove the redundant lists of references that were remaining in the end of each chapter.
-				(They are now consolidated in a single ``\hyperref[references]{References}'' section.)
+				A few of the listed references were not cited elsewhere and where thus placed were suitable.
+				(The list of all references is now consolidated in a single ``\hyperref[references]{References}'' section.)
 \newcol \ref{rev:editorial:remove-list-refs-in-chapter-theory}, \ref{rev:editorial:remove-list-refs-in-chapter-implementation}, \ref{rev:editorial:remove-list-refs-in-chapter-applications}
 \rowendL
 %%%%%%%%%%%%%%%%%%%%%%%%
@@ -201,6 +196,22 @@ All document
 				of the calling LaTeX command \textbackslash{}pdfcomment --- the comments remain 
 				in the LaTeX code for future address).
 \newcol 
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:editorial:add-acks][Acknowledgments]
+Before the references
+\newcol 
+\newcol \githubissue{16}
+\newcol \Chan\ Add an \hyperref[app:acknowledgments]{acknowledgments} section consistent with the contributions provided to the document.
+\newcol \ref{rev:add-acks}
+\rowendL
+%%%%%%%%%%%%%%%%%%%%%%%%
+\incItem[it:editorial:add-version-history][Version history]
+Front matter
+\newcol 
+\newcol \githubissue{16}
+\newcol \Chan\ Add a \hyperref[app:version-history]{Version history} section, with a summarized description of the sequence of main versions of the document.
+\newcol \ref{rev:editorial:add-version-history}
 \rowendL
 %%%%%%%%%%%%%%%%%%%%%%%%
 \myendIssue

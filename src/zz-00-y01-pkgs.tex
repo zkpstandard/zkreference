@@ -83,8 +83,6 @@
 \newcommand{\eprintiacr}[2]{IACR Cryptology Eprint Archive: \href{https://eprint.iacr.org/#1/#2}{ia.cr/#1/#2}}
 
 
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
 
@@ -115,21 +113,18 @@
 	\setitemize{itemsep=0em}
 
 \usepackage{diagbox} %allows command \diagbox to indicate the label for rows and columns in a single cell
-%\usepackage[edtable,longtable]{lineno}\linenumbers
 \usepackage[edtable,longtable]{lineno}\linenumbers
 \usepackage{edtable}
 \renewcommand\linenumberfont{\normalfont\tiny\rmfamily}
 
 \usepackage{colortbl} %allows coloring of rows (using \rowcolor) and columns in tabular
 \usepackage{pdfcomment}
-\let\oldpdfcomment\pdfcomment
+
 
 \usepackage{enumitem} %allows command \setlist, e.g., \setlist[itemize]{leftmargin=1em}
 
-
 %https://stackoverflow.com/questions/2640111/url-latex-linebreak
 \PassOptionsToPackage{hyphens}{url}
-
 
 \usepackage{hyperref}
 
@@ -168,8 +163,10 @@
 \usepackage{fancyhdr}\renewcommand{\headrulewidth}{0pt}
 
 %https://tex.stackexchange.com/questions/59785/how-to-execute-command-on-every-table-column
-\usepackage{collcell} %command \collectcell\function and \endcollectcell to apply a function to a cell
+%\usepackage{collcell} %command \collectcell\function and \endcollectcell to apply a function to a cell
 
-\usepackage{twoopt} %\newcommandtwoopt{cmdname}[num][default1][default2]{actions}
+
+\usepackage{twoopt} %allows \newcommandtwoopt to define commands with two optional arguments
+%\newcommandtwoopt{cmdname}[num][default1][default2]{actions}
 \usepackage{setspace} %\setstretch{1}, %\setstretch{1.25}
 \usepackage{attachfile2}

@@ -9,7 +9,7 @@
 \newgeometry{margin=.65in,footskip=.25in}
 
 
-\def\mytextfooter{Table of contribution descriptions}
+\def\mytextfooter{Tables of contribution descriptions}
 \fancypagestyle{lscapetablecontribs}{
 	\fancyhf{}\lfoot{\mytextfooter}\rfoot{\thepage}
 }
@@ -20,7 +20,7 @@
 	\pagestyle{lscapetablecontribs}%
 
 
-	\def\tempTitle{Table of contribution descriptions v0.1 \tops{$\rightarrow$}{\textrightarrow} v0.2}
+	\def\tempTitle{Tables of contribution descriptions v0.1 \tops{$\rightarrow$}{\textrightarrow} v0.2}
 	\phantomsection\pdfbookmark[0]{\tempTitle}{pdfbkm:table-of-comments}\label{app:table-comments}
 	~\hfill\scalebox{2}{\textbf{\tempTitle}}\hfill~
 
@@ -34,14 +34,14 @@ document from version 0.1 (dated 2019-04-11, available during the 2nd ZKProof Wo
 \def\tmpSecTitle{Explanation of the tables of contributions}
 \section*{\pdfbookmark[2]{\tmpSecTitle}{pdfbkm:explain-table-contributions}\tmpSecTitle}
 
-Each table describes proposed contributions and corresponding changes/edits 
-made to the baseline version 0.1, in order to achieve version 0.2.
-Each table, indexed as D$x$ (where $x$ is an integer), corresponds to 
-a \href{https://github.com/zkpstandard/zkreference/issues}{GitHub issue} 
+	Each table describes proposed contributions and corresponding edits 
+in comparison with the baseline version 0.1, in order to achieve version 0.2.
+	Each table, indexed as \letterIndexPropContrib$x$ (where $x$ is an integer), 
+corresponds to a \href{https://github.com/zkpstandard/zkreference/issues}{GitHub issue} 
 (GI$y$, where $y$ is an integer) describing proposed contributions --- 
 see \myurl{https://github.com/zkpstandard/zkreference/issues}.
-	However, compared with GitHub, the description here can be adjusted and better detailed
-for the purpose of enabling a better cross-referencing to the edits made in the document.
+	However, compared with GitHub, the description here may have been adjusted for 
+a better explanation and cross-referencing of the actual edits made in the document.
 	Each table has a header as follows:
 
 \begingroup
@@ -58,13 +58,13 @@ From left to right, the columns represent:
 	A consecutive positive integer, used to count all described items of contribution
 
 \item \textbf{Item id:} 
-	An index of the contribution item, with a numbering subordinate to the table index. 
-	For example, \hyperref[it:editorial:add-abstract]{D1.3} is the third item (row) of contribution (table) \hyperref[issue:editorial-structural]{D1}.
+	An index (e.g., \ref{it:editorial:add-abstract}) of the contribution item, with a numbering 
+subordinate to index (e.g., \hyperref{issue:editorial-structural}) the table where it belongs.
 	
 \item \textbf{Location:} 
 	A hint about the location (e.g., section number) of the edits, either in the old or in the new document.
 
-\item \textbf{\colNamePropContrib\ \letterIndexPropContrib$x$: \emph{issue title}}: 
+\item \textbf{\colNamePropContrib\ \letterIndexPropContrib$x$: \emph{short title}}: 
 	An identifier \textbf{\letterIndexPropContrib$x$} (with integer $x$) of the contribution 
 \textbf{d}escription, and a title of the issue / contributions.
 

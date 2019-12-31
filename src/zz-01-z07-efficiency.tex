@@ -37,13 +37,10 @@ Readers of a proof system specification may differ in the granularity they need 
 \subsection[\tmpTitle]{\tmpTitle\revblock[rev:comp-sec-par:bench:security-levels]{\ref{it:comp-sec-par:bench:security-levels}}}
 \label{security:efficiency:comp-sec-levels}
 
-	The benchmarks for each technique \shall\ include at least one parameterization 
-for achieving a conjectured computational security level $\kappa$ approximately equal to, or greater than, 128 bits.
-	Each technique \should\ also be benchmarked for at least one 
-additional higher computational security level, such as 192 or 256 bits.
+	The benchmarks for each technique \shall\ include at least one parametrization achieving a conjectured computational security level $\kappa$ approximately equal to, or greater than, 128 bits.
+	Each technique \should\ also be benchmarked for at least one additional higher computational security level, such as 192 or 256 bits.
     (If only one, the latter is preferred.)
-    The benchmarking at more than one level aids with the understanding of how
-the efficiency varies with the security level.
+    The benchmarking at more than one level aids the understanding of how the efficiency varies with the security level.
     The interest in a security level as high as 256 bits can be considered a 
 precautious (and heuristic) safety margin, compared for example with intended 128 bits.
     This is intended to handle the possibility that the conjectured level of security is later found to have been over-estimated.
@@ -75,9 +72,9 @@ but should not be construed as a recommendation for practical security.
 
 	The soundness security of certain interactive ZKP systems may be based on the ability of the verifier(s) to validate-or-trust the freshness and entropy of a challenge (e.g., a nonce produced by a verifier, or randomness obtained by a trusted randomness Beacon).
 	In some of those cases, a statistical security parameter $\sigma$ (e.g., 40 or 64 bits) may be used to refer to the error probability (e.g., $2^{-40}$ or $2^{-64}$, respectively) of a protocol with ``one-shot'' security, i.e., when the ability of a malicious prover to succeed without knowledge of a valid witness requires guessing in advance what the challenge would be.
-	In those cases, a low statistical security parameter may be suitable if there is a mechanism capable of detecting and preventing a repetition of failed proof attempts.
+	A lower statistical security parameter may be suitable if there is a mechanism capable of detecting and preventing a repetition of failed proof attempts.
 
-	While an appropriate minimal parameter may depend on the application scenario, benchmarking \shall\ be done with statistical security of at least 64 bits.
+	While an appropriate minimal parameter may depend on the application scenario, benchmarking \shall\ be done with at least one parametrization achieving a conjectured statistical security level of at least 64 bits.
 	Whenever the efficiency variation is substantial across variations of statistical security parameter, it is recommended that more than one security level be benchmarked. 
     The cases of 40, 64, 80 and 128 bits are suggested.
 

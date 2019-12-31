@@ -2,22 +2,23 @@
 \label{sec:prelim:msg-editors}
 \revblock[rev:clarify-this-version]{\ref{it:editorial:clarify-this-version}}
 	This is the version 0.2 of the ZKProof Community Reference.
-	It results from the help of many contributors, as described in 
-the \hyperref[app:acknowledgments]{acknowledgments} section, 
-the \hyperref[app:version-history]{version history} appendix, and 
-the documentation of previous ZKProof workshops.
+	It results from the help of many contributors, as described 
+in the \hyperref[app:acknowledgments]{Acknowledgments}, 
+in the \hyperref[app:version-history]{Version history}, and 
+in the documentation of previous ZKProof workshops.
 	At a 0.$x$ version, this document should be considered as being in an incomplete state, serving as a basis for further development.
 	Reaching a future stable version requires additional revision and substantial contributions.
 
 
+\def\owncitetag{2019:zkproof:community-reference-0.2}
 \def\ownciteauthor{ZKProof}
 \def\owncitetitle{ZKProof Community Reference}
 \def\ownciteversion{Version 0.2}
 %%% Not using field `version' because it prints after the authors, and in non-italic
 \def\owncitepublisher{zkproof.org}
-\def\owncitenote{Updated versions at https://zkproof.org/}
+\def\owncitenote{Updated versions at https://zkproof.org}
 
-\def\owncitebibtexcode{@report\{2019:zkproof:community-reference-0.2,\textCR
+\def\owncitebibtexcode{@report\{\owncitetag,\textCR
 	author = \{\ownciteauthor\},\textCR
 	title = \{\owncitetitle\},\textCR
 	subtitle = \{\ownciteversion\},\textCR
@@ -33,9 +34,9 @@ the documentation of previous ZKProof workshops.
 
 \vspace{1.5em}
 	\revblock[rev:propose-citation-format]{\ref{it:editorial:propose-citation-format}}
-%\cite{2019:zkproof:community-reference-0.2}
-\minip[\textwidth][1.08\textwidth]{\textbf{Citing this version:}\pslabel{how-to-cite-this-version}
-	\oldpdfcomment[color=blue,opacity=0.5,author=Bibtex code,disable=false]{\owncitebibtexcode}
+\minip[\textwidth][1.08\textwidth]{\textbf{Citing this version:}
+\pslabel{how-to-cite-this-version} %\cite{\owncitetag}
+	\pdfcomment[color=blue,opacity=0.5,author=Bibtex code,disable=false]{\owncitebibtexcode}
 	\ownciteauthor. \emph{\owncitetitle. \ownciteversion}.
 	Ed.\ by D.\ Benarroch, L.~T.~A.~N.\ Brandão, E.\ Tromer. 
 	Pub.\ by \owncitepublisher. Dec.\ 2019. \owncitenote}

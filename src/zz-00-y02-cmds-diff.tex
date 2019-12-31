@@ -78,8 +78,8 @@
 \newcommand{\newcol}{&}
 \newcommand{\rowendL}{\end{minipage}\\\hline}  %%%NEED TO COORDINATE WITH DEFINITION OF LAST COLUMN, currently using a minipage
 
-\def\colNamePropContrib{Contribution \textbf{d}escription}
-\def\letterIndexPropContrib{D}
+\def\colNamePropContrib{Contribution topic}
+\def\letterIndexPropContrib{C}
 \def\rowIssueName{\emph{short description}}
 
 \newcounter{cntItA} %counts the items sequentially: 1, 2, ..., 210
@@ -129,7 +129,7 @@
 	  \centering \#
 	& \centering \scalebox{.7}{Item id}
 	& \centering Location %Old location
-	& \centering \textbf{\colNamePropContrib\ \thecntContrib}:\\\rowIssueName{}
+	& \centering \textbf{\colNamePropContrib\ \thecntContrib}: \rowIssueName{}
 	& \centering Related %\scalebox{.75}{\mycol{Related\\items}}
 	& \centering Incorporated changes
 	& \centering Edit id
@@ -143,7 +143,7 @@
 %%%%%%%%%%% TO GENERATE A LIST OF COMMENTS/CONTRIBUTIONS
 
 %creates the file name zkproof-community-reference.loc with the index of contribution issues/items
-\newcommand\listcontributionname{List of Contribution Descriptions}
+\newcommand\listcontributionname{List of Contributions}
 \newlistof{contribution}{loc}{\listcontributionname}  %%%[section]
 \newlistof{contributions}{loc2}{\listcontributionname}  % Duplicate on purpose
 

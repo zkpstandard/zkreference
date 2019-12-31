@@ -1,17 +1,22 @@
 %%%%%% Description of relevant commands:
-%%% \newIssue{label}{issue title}  % starts a new longtable (can break across pages) of comments
-%%% \incItem[optional-label][optional-pdf-bookmark]  % starts a new row (`item') related to an issue
-%%% \newcol                        % starts a new column --- see below a description of the columns
-%%% \rowend                        % ends a row (`item')
-%%% \myendIssue                    % ends a longtable associated to an `issue'
+%%% \newIssue{label}{issue title}  % starts a new longtable (which can break across pages)
+%%% \incItem[optional-label][optional-pdf-bookmark]  % starts a new row (`item') related to a contribution
+%%% \newcol        % starts a new column --- see below a description of the columns
+%%% \rowend        % ends a row (`item')
+%%% \myendIssue    % ends a longtable associated to an `issue'
 
-%%%For each new item (started with \incItem[...][...] and ended with \rowend), these are the columns:
+%%%For each new item (row, started with \incItem[...][...] and ended with \rowend), these are the columns:
 	%[ the following initial columns are automatic: \#, ref]
 	% Location   % before the first \newcol
-	% Proposed contribution (\propContrib) and Contributors (\contributors)
-	% Related
-	% `Context' (\ccontext) and `Changed' (\Chan)
+	% Contribution topic Cx: [\ccontext, \propContrib, ]
+	% Related [\githubissue{x}, ...]
+	% Incorporated changes [\contributors, \Chan, ...]
 	% Edit id (References of the edits made along the document)
+
+
+\def\NISTcomments{``NIST comments on the initial ZKProof documentation'' (April 06, 2019)}
+\newcommand{\itemXofNISTcomments}[1]{item #1 of the \NISTcomments}
+\newcommand{\itemXXofNISTcomments}[1]{items #1 of the \NISTcomments}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -70,9 +75,8 @@ Front matter
 %%%%%%%%%%%%%%%%%%%%%%%%
 \incItem[it:editorial:about-this-community-reference][About this community reference]
 Front matter
-\newcol \ccontext\ A significant portion of the text in this section 
-is based on the ``Towards a reference document'' section of the 
-``NIST comments on the initial ZKProof documentation'' (April 06, 2019).
+\newcol \ccontext\ A significant portion of the incorporated text 
+is based on the ``Towards a reference document'' section of the \NISTcomments.
 \newcol \githubissue{16}
 \newcol \Chan\ In the preamble of the document, add a section ``\hyperref[sec:prelim:about-this-community-reference]{About this community reference}'' providing context about the intended development process of the document.
 \newcol \ref{rev:prelim:explain-context-of-community-reference}

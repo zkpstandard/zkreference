@@ -22,7 +22,7 @@ compilers to yield argument systems that may or may not be interactive, dependin
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Advantages of Interactive Proof and Argument Systems}
-\label{advantagesofinteraction}
+\label{sec:paradigms:interactivity:advantages}
 \begin{enumerate}[label=\alph*.]
 \item \underline{Efficiency and Simplicity.} 
 Interactive proof systems can be simpler or more efficient than non-interactive ones.
@@ -54,7 +54,7 @@ hash families \cite{1995:crypto:Improved-Efficient-Arguments}, but this is not t
 
 \item \underline{Non-transferability.} 
 In some applications, it is essential that proofs be deniable or \emph{non-transferable} (i.e., it must be impossible for a verifier to convince a third party of the validity of the statement --- see Sections~\ref{sec:security:defs-props:transferability-deniability}). 
-While these properties are not unique to interactive protocols, interaction offers a natural way to make proofs non-transferable (for details, see  \refsec{section:transferability-deniability-interactivity}). %%% LB: Check if the referred section is providing sufficient explanation
+While these properties are not unique to interactive protocols, interaction offers a natural way to make proofs non-transferable (for details, see  \refsec{sec:paradigms:interactivity:transferability-deniability}). %%% LB: Check if the referred section is providing sufficient explanation
 
 
 \item  \underline{Interactivity May Limit Adversaries' Abilities.}  
@@ -77,7 +77,7 @@ If an application is inherently interactive, it may be reasonable to leverage th
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Disadvantages of Interactive Proof and Argument Systems}
-\label{disadvantagesofinteraction}
+\label{sec:paradigms:interactivity:disadvantages}
 \begin{enumerate}
 
 \item \underline{Interactive protocols must occur online.} In an interactive protocol, the proof cannot simply be published or posted and checked later at the verifier's convenience, as can be done with non-interactive protocols.
@@ -88,7 +88,7 @@ may be difficult to achieve for interactive protocols. This is because soundness
 protocols relies on the prover being unable to predict the next challenge it will receive in the protocol. Unless there is a publicly trusted source of unpredictable
 randomness (e.g., a randomness beacon) and a way for provers to timestamp messages, it is not clear how any party other than
 the one sending the challenges can be convinced that the challenges were properly generated, and the prover replied to challenge $i$ before learning challenge $i+1$.
-See Section \ref{section:transferability-deniability-interactivity} below for further details.
+See Section \ref{sec:paradigms:interactivity:transferability-deniability} below for further details.
 
 \item \underline{Network latency can make interactive protocols slow.} If an interactive protocol consists of many messages sent over a network,
 network latency may contribute significantly to the total execution time of the protocol.
@@ -111,7 +111,7 @@ are greatly mitigated for non-interactive protocols \cite{2006:eurocrypt:perfect
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Nuances on transferability vs. interactivity}
-\label{section:transferability-deniability-interactivity}
+\label{sec:paradigms:interactivity:transferability-deniability}
 
 
 	\revblock[rev:deniability-transferability-nuances]{\ref{it:transferability-vs-interactivity-elaborate}}
@@ -158,6 +158,7 @@ are greatly mitigated for non-interactive protocols \cite{2006:eurocrypt:perfect
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{(Non)-Transferability/Deniability of Zero-Knowledge Proofs}  %%% Contribution by I. Visconti
+\label{paradigms:interactivity:deniability:online-offline}
 \revblock[rev:deniability]{\ref{it:deniability}}
 %%% LB: Need to explain in advance the meaning of online and offline
 

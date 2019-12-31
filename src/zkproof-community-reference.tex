@@ -8,8 +8,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%% DEFINE WHICH VERSION TO COMPILE: Clean, ShowFeedback, Diff
 
-%allows \ifthenelse{}{}{}; allows \newcommandtwoopt to define commands with two optional arguments
-\usepackage{ifthen,etoolbox,twoopt}
+%allows \ifthenelse{}{}{}; 
+\usepackage{ifthen,etoolbox}
 \newcommand{\providesetbool}[2]{\providebool{#1}\setbool{#1}{#2}}
 % boolShowFeedback: set to `true' to show the table of proposed contributions and changes
 \providesetbool{boolShowFeedback}{false}

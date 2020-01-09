@@ -3,7 +3,7 @@ The official repository hosting the ZKProof Community Reference document and the
 knowledge-proof technology that is secure, practical and interoperable. The document intends to be accessible to a large audience, including the general public, the media, the industry, developers and cryptographers.
 
 ## Latest Version
-We have just published [version 0.2 of the document](zkproof.org/reference.pdf), and we thank all the received contributions. You can see the specific changes in the "diff" file in this repo. To finalize this cycle of development of the ZKProof Community Reference, and prepare for the next one, we are opening a call for feedback on the current version.
+We have just published [version 0.2 of the document](https://zkproof.org/reference.pdf), and we thank all the received contributions. You can see the specific changes in the "diff" file in this repo. To finalize this cycle of development of the ZKProof Community Reference, and prepare for the next one, we are opening a call for feedback on the current version.
 
 ### Higlights of the new version
 
@@ -14,7 +14,7 @@ We have just published [version 0.2 of the document](zkproof.org/reference.pdf),
 
 ## Call for Feedback 
   
-The period **Jan 01 to Mar 31 (2019)** is open for public feedback on all aspects of the Community Reference. The feedback will be helpful to prepare topics of discussion at the [3rd ZKProof workshop (April 04–06)](zkproof.org/workshop3), which will kick-off a new cycle open to contributions. Please send your feedback by email to editors@zkproof.org. (The [ZKProof community forum](community.zkproof.org) also remains as a resource for community discussion.)
+The period **Jan 01 to Mar 31 (2019)** is open for public feedback on all aspects of the Community Reference. The feedback will be helpful to prepare topics of discussion at the [3rd ZKProof workshop (April 04–06)](https://zkproof.org/workshop3), which will kick-off a new cycle open to contributions. Please send your feedback by email to editors@zkproof.org. (The [ZKProof community forum](https://community.zkproof.org) also remains as a resource for community discussion.)
 
 **Here is a list of examples of feedback we are looking for**
 

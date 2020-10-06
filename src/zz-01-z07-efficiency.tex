@@ -19,8 +19,7 @@ Readers of a proof system specification may differ in the granularity they need 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\def\tmpTitle{Characterization of security properties}
-\subsection[\tmpTitle]{\tmpTitle\revblock[rev:comp-sec-par:bench:characterize-properties]{\ref{it:comp-sec-par:bench:characterize-properties}}}
+\subsection{Characterization of security properties}
 \label{security:efficiency:characterize-properties}
 	The benchmarking of a technique should clarify the distinct security levels achieved/conjectured for different security properties, e.g., soundness vs.\ zero-knowledge.
 	In each case, the security type should also be clarified with respect to being unconditional, statistical or computational.
@@ -33,8 +32,7 @@ Readers of a proof system specification may differ in the granularity they need 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\def\tmpTitle{Computational security levels for benchmarking}
-\subsection[\tmpTitle]{\tmpTitle\revblock[rev:comp-sec-par:bench:security-levels]{\ref{it:comp-sec-par:bench:security-levels}}}
+\subsection{Computational security levels for benchmarking}
 \label{security:efficiency:comp-sec-levels}
 
 	The benchmarks for each technique \shall\ include at least one parametrization achieving a conjectured computational security level $\kappa$ approximately equal to, or greater than, 128 bits.
@@ -52,7 +50,7 @@ but should not be construed as a recommendation for practical security.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \paragraph{An exception allowing lower computational security parameter.}
 \label{par:security:efficiency:comp-sec-levels:exception}
-\revblock[rev:comp-sec-par:exception-lower-levels]{\ref{it:comp-sec-par:bench:security-levels}}
+
 	With utmost care, a computational security level may be justified below 128 bits, including for benchmarking.
 	The following text describes as exception.
 	In some interactive ZKPs (see Section 2.2), there may be cryptographic properties that only need to be held during a portion of a protocol execution, which in turn may be required to take less than a fixed amount of time, say, one minute.
@@ -65,8 +63,7 @@ but should not be construed as a recommendation for practical security.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\def\tmpTitle{Statistical security levels for benchmarking}
-\subsection[\tmpTitle]{\tmpTitle\revblock[rev:stat-sec-par:bench:security-levels]{\ref{it:stat-sec-par:bench:security-levels}}}
+\subsection{Statistical security levels for benchmarking}
 \label{security:efficiency:stat-sec-levels}
 
 

@@ -7,7 +7,7 @@
 	The relation defines a matching language $L$ consisting of instances $x$ that have a witness $w$ in $R$.
 
 
-	\revblock[rev:pok:types-of-statement]{\ref{it:pok:types-of-statement}}
+	
 	A \emph{statement} is either a \emph{membership} claim of the form ``$x \in L$'', 
 or a \emph{knowledge} claim of the form ``In the scope of relation $R$, I know a witness for instance $x$.''
 	For some cases, the \emph{knowledge} and \emph{membership} types of statement can be informally considered interchangeable, but formally there are technical reasons to distinguish between the two notions. 
@@ -27,7 +27,7 @@ random access memory (RAM) programs or through Boolean and arithmetic circuits, 
 \subsection{Circuit representation}
 \label{security:spec-statements-ZK:circuit-representation}
 
-\revblock[rev:chap-security:circuits-vs-R1cs:new-subsection:circuit-representation]{\ref{it:circuits-vs-R1CS:new-subsections}}
+
 A circuit is a directed acyclic graph (DAG) comprised of nodes and labels for nodes, which satisfy the following constraints:
 \begin{itemize}
 \item Nodes with in-degree 0 are referred to as the \textbf{input nodes}\luissug{Consider adjusting all items to become of the form \textbf{<new term>}: <description>.} and are labeled with some constant (e.g., $0, 1, \ldots$) or with input variable names (e.g., $v_1, v_2, \ldots$)
@@ -59,7 +59,7 @@ truth values for the remaining input variables, such that when evaluating the ci
 
 \newcommand{\brkt}[1]{\ensuremath{\left\langle #1\right\rangle}}
 
-\revblock[rev:chap-security:circuits-vs-R1cs:new-subsection:R1CS-representation]{\ref{it:circuits-vs-R1CS:new-subsections}}
+
 
 	A rank-1 constraint system (R1CS) is a system of equations represented by a 
 list of triplets $(\vec{a}, \vec{b}, \vec{c})$ of vectors of elements of some field.
@@ -131,7 +131,7 @@ and to represent addition and multiplication-by-constants.
 \subsection{Types of relations}
 \label{security:spec-statements-ZK:types-of-relations}
 
-\revblock[rev:chap-security:circuits-vs-R1cs:new-subsection:types-of-relations]{\ref{it:circuits-vs-R1CS:new-subsections}}
+
  
 \textbf{Special purpose relations:} Circuit satisfiability is 
 a complete problem within the non-deter\-min\-istic polynomial (NP) class,

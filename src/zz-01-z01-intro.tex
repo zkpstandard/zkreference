@@ -7,13 +7,13 @@
 \label{security:intro:what-is-a-ZK}
 
 
-	A zero-knowledge proof (ZKP)\revblock[rev:acronym-ZKP]{\ref{it:pok:describe}} makes it possible to prove a statement is true while preserving confidentiality of secret information \cite{1989:SJC:the-knowledge-complexity-of-interactive-proof-systems}.
-	\revblock[rev:ZKP:clarify-secret-info]{\ref{it:pok:meaning-secrecy-for-prover}}
+	A zero-knowledge proof (ZKP) makes it possible to prove a statement is true while preserving confidentiality of secret information \cite{1989:SJC:the-knowledge-complexity-of-interactive-proof-systems}.
+	
 	This makes sense when the veracity of the statement is not obvious on its own, but the prover knows relevant secret information (or has a skill, like super-computation ability) that enables producing a proof.
 	The notion of secrecy is used here in the sense of prohibited leakage, but a ZKP makes sense even if the `secret' (or any portion of it) is known apriori by the verifier(s).
 
 
-	\revblock[rev:ZKP:basic-examples]{\ref{it:pok:list-basic-examples}}
+	
 	There are numerous uses of ZKPs, useful for proving claims about confidential data, such as:
 \begin{enumerate}
 \item adulthood, without revealing the birth date;
@@ -24,7 +24,7 @@
 \end{enumerate}
 
 
-	\revblock[rev:ZKP:need-instance]{\ref{it:pok:need-instance}}
+	
 	Some of these claims (commonly known by the prover and verifier, and here described as informal \emph{statements}) require a substrate (called \emph{instance}, also commonly known by the prover and verifier) to support an association with the confidential information (called \emph{witness}, known by the prover and to not be leaked during the proof process).
 	For example, the proof of solvency (the statement) may rely on encrypted and certified bank records (the instance), and with the verifier knowing the corresponding decryption key and plaintext (the witness) as secrets that cannot be leaked.
 	\reftab{tab:example-scenarios-zkps} in \refsec{security:terminology} differentiates these elements across several examples.
@@ -41,7 +41,7 @@ can interact for the prover to convince the verifier that the statement is true.
 \end{itemize}
 
 
-\paragraph{Proofs vs.\ arguments.}\revblock[rev:ZKP:proof-vs-argument]{\ref{it:ZKP:proof-vs-argument}}
+\paragraph{Proofs vs.\ arguments.}
 	The theory of ZKPs distinguishes between \emph{proofs} and \emph{arguments}, 
 as related to the computational power of the prover and verifier.
 	\emph{Proofs} need to be sound even against computationally unbounded provers, 

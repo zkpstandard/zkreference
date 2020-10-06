@@ -3,7 +3,7 @@
 \section{ZKPs of knowledge vs.\ ZKPs of membership}
 \label{security:zkp-knowledge-vs-membership}
 
-\revblock[rev:pok:ZKPoK-vs-ZKPoM]{\ref{it:pok:ZKPoK-vs-ZKPoM}}
+
 	The theory of ZKPs distinguishes between two types of proofs, based on the type of statement (and also on the type of security properties --- see Sections \ref{sec:security:defs-props:soundness} and \ref{sec:security:defs-props:proof-of-knowledge}):
 	
 \begin{itemize}
@@ -30,7 +30,7 @@ that the expression/configuration belongs respectively to the language of valid 
 \subsection{Example: ZKP of knowledge of a discrete logarithm (discrete-log)}
 \label{security:zkp-knowledge-vs-membership:ZKPoK-DL}
 
-	\revblock[rev:pok:example-ZKPoK-DL]{\ref{it:pok:example-ZKPoK-DL}}
+	
 	Consider the classical example of proving knowledge of a discrete-log \cite{1990:eurocrypt-89:schnorr}.
 	Let $p$ be a large prime (e.g., with 4096 bits) of the form $p=2q+1$, where $q$ is also a prime.
 	Let $g$ be a generator of the group $\mathbb{Z}^{\ast}_p = \{1,...,p-1\} = \left\{g^i:i=1,...,p-1\right\}$ under multiplication modulo $p$.
@@ -48,7 +48,7 @@ that the expression/configuration belongs respectively to the language of valid 
 \subsection{Example: ZKP of knowledge of a hash pre-image}
 \label{security:zkp-knowledge-vs-membership:ZKPoK-hash-pre-image}
 
-	\revblock[rev:pok:example-ZKPoK-pre-image]{\ref{it:pok:example-ZKPoK-pre-image}}
+	
 	Consider a cryptographic hash function $H: \left\{0,1\right\}^{512} \rightarrow \left\{0,1\right\}^{256}$, restricted to binary inputs of length 512. 
 	In this definition of $H$, the set of all 256-bit strings is the \emph{co-domain}, which might be a 
 super-set of the \emph{image} $L = \left\{H(x):x\in\left\{0,1\right\}^{512}\right\}$ (a.k.a.\ \emph{range}) of $H$.
@@ -74,7 +74,7 @@ in the image of $H$, with some noticeable probability (e.g., $\approx$0.368, if 
 \subsection{Example: ZKP of membership for graph non-isomorphism}
 \label{security:zkp-knowledge-vs-membership:ZKPoM-GNI}
 
-	\revblock[rev:pok:example-ZKPoM-GNI]{\ref{it:pok:example-ZKPoM-GNI}}
+	
 	In the theoretical context of provers with super-polynomial computation ability (e.g., unbounded), one can conceive a proof of membership without the notion of witness.
 Therefore, in this case the dual notion of a ZKP of knowledge does not apply.
 	A classical example uses the language of pairs of non-isomorphic graphs \cite{1991:JACM:proofs-that-yield-nothing-but-their-validity},

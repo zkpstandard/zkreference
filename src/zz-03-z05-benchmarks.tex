@@ -43,7 +43,7 @@ Computational benchmarks should be run on a consistent and commercially availabl
 
 
 We recommend that most runs are executed on a single-threaded machine, with parallelizability being an optional metric to measure. 
-	The benchmarks should be\revblock[rev:sec-par-bench-refer-to-section]{\ref{it:explain-parameter-kappa}}
+	The benchmarks should be
 	obtained preferably for more than one security level, following the recommendations stated in Sections \ref{security:efficiency:comp-sec-levels} and \ref{security:efficiency:stat-sec-levels}.
 
 
@@ -52,7 +52,7 @@ In order to enable better comparisons we recommend that the metrics of other pro
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{What benchmarks to run}
-We propose a set of benchmarks that is informed by current applications of zero-knowledge proofs, as well as by differences in proving systems. This list in no way complete and should be amended and updated as new applications emerge and new systems with novel properties are developed. Zero-knowledge proof systems can be used in a black-box manner on an existing application, but often designing the application with a proof system in mind can yield large efficiency gains. To cover both scenarios we suggest a set of benchmarks that include commonly used primitives (e.g. SHA-256) and one where only the functionality is specified but not the primitives (e.g. a collision-resistant hash function at 128-bit\revblock[rev:comp-sec-par:120-to-128-a]{\ref{it:comp-sec-par:120-to-128}} classical security). 
+We propose a set of benchmarks that is informed by current applications of zero-knowledge proofs, as well as by differences in proving systems. This list in no way complete and should be amended and updated as new applications emerge and new systems with novel properties are developed. Zero-knowledge proof systems can be used in a black-box manner on an existing application, but often designing the application with a proof system in mind can yield large efficiency gains. To cover both scenarios we suggest a set of benchmarks that include commonly used primitives (e.g. SHA-256) and one where only the functionality is specified but not the primitives (e.g. a collision-resistant hash function at 128-bit classical security). 
 
 
 \paragraph{Commonly used primitives.}
@@ -94,7 +94,7 @@ The following are examples of cryptographic functionalities that are especially 
 The realization of the primitive may be secondary, as long as it achieves the security properties. 
 It is helpful to provide benchmarks for a constraint-system implementation of a realization of these primitives that is tailored for the NIZK backend.
 
-In all of the following, the primitive underlying\revblock[rev:comp-sec-par:120-to-128-b]{\ref{it:comp-sec-par:120-to-128}} the ZKP statement should be given at a level of 128 bits or higher and match the security of the NIZK proof system.
+In all of the following, the primitive underlying the ZKP statement should be given at a level of 128 bits or higher and match the security of the NIZK proof system.
 \begin{itemize}
     \item Asymmetric cryptography
 				\begin{itemize}[label={- }]

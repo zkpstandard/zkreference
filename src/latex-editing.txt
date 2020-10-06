@@ -1,59 +1,104 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Project context: ZKProof Community Reference
+% Licence: Creative Commons Attribution 4.0 International (CC BY 4.0)
 
-%%% Notes since 2019-04-01, Luís Brandão:
-  % Latest update of this file: 2019-07-26
-  % This LaTeX project is open for collaboration under the ZKProof.org terms.
-  % The main file for compilation is zkproof-community-reference.tex
+
+%%%%%%%%%%%% This file:
+% Latest update: 2020-07-30
+% Initial version: 2019-04-01 (Luís Brandão)
+% This file explains the folder structure, and how to compile the PDF file
+% Modifications: Please do not edit prior to talking with the ZKProof editors
+% This LaTeX project is open for collaboration under the ZKProof.org terms
+
+
+%%%%%%%%%%%% VERSIONS
+
+
+%%%%%% LOCAL COMPILATION:
+% The main file for compilation is zkproof-community-reference.tex
+% The bibliography is using biblatex and biber
+% Check that 'biber' is set as the processor working with biblatex
+% A Diff PDF file is compiled using latexpand and latexdiff
   
-  %%%%%%%%%%%%
-  % SUMMARY:
-  % The initial LaTeX version 0.1 (2019-04-01) was a porting to LaTeX of the
-  % ZKProof docs downloaded in Mar-2019 from https://zkproof.org/documents.html
-  % The porting included editorial adjustments for indexation, consistency, etc.
-  % The underlying content was authored by the ZKProof team/collaborators.
+
+%%%%%% VERSION 0.1
+% Version 0.1 (2019-04-11) was a porting to LaTeX of the ZKProof docs
+% downloaded in Mar-2019 from https://zkproof.org/documents.html
+% The porting included editorial adjustments for indexation, consistency, etc.
+% The underlying content was authored by the ZKProof team/collaborators.
+
   
-  %%%%%%%%%%%%
-  % FILE STRUCTURE
-  % (let <d> and <e> be integers 1, 2, ...; let `L' be a letter A, B, ...)
-  %
-  % "zkproof-community-reference.tex": file for compilation
-  %
-  % "zz-00-y01-pkgs": loads LaTeX packages 
-  % "zz-00-y02-cmds": custom commands with global applicability
-  % "zz-00-y02-cmds-diff": commands related to diff and cross-references
-  % "zz-00-y03-format": formatting configurations
-  %
-  % "zz-00-frontmatter.tex": loads the input files with content for the preamble
-  % "zz-00-z0<d>-....tex": content for some section of the preamble
-  %
-  % "zz-0<d>-<words>.tex": loads the input files with content for chapter 0<d>
-  % "zz-0<d>-z<ee>-<words>.tex": content of section <d>.<ee>
-  %
-  % "zz-99-biblio-0<d>-<word>.bib": bibliographic references used in chapter 0<d>
-  %                      (may later be consolidated into a single file)
-  %
-  % "zz-A-<word>.tex and "zz-B-<word>.tex": content for appendices A and B, respectively
-  %
-  % "zzz-00-insert-comments.tex": preamble of the appendix with review comments
-  % "zzz-01-comments-on-v0.1.tex": tables of descriptions of comments/contributions
-  %
-  % subfolder ./figs/: contains graphic files (.pdf, .svg)
+%%%%%%% VERSION 0.2
+% Version 0.2 (2019-12-31) resulted from a more structured editorial process
+% It followed the PEC comments about version 0.1, the topics discussed in the 
+% 2nd ZKProof workshop, and the creation of GitHub issues  
+
+%%%%%%% Developing a new VERSION <v1>.<v2>.x
+% Version 0.2.x, where "x" is literal, is used to designate any compilation
+% of a version in progress after version 0.2 and before 0.3
+
+
+%%%%%%% DIFF
+% Each new version may include commands \revblock[...][...]{...} or 
+% \revblock[...]{...} to mark where a change has been made. These commands are
+% should be cleaned out of the LaTeX source at each new phase of contributions.
+% Their use can be found using the following regex (with recursion):
+% \\revblock((\[(?:[^][]+|(?1))*+\])*)(\{(?:[^}{]+|(?3))*+\})
+
+% The Booleans boolShowFeedback and boolDiff in the compilation file are used 
+% to say whether to print out the table of comments, and whether or not to 
+% prepare the document for diffing. The later one will control the definition 
+% of commands as \revblock and others
   
-  %%%%%%%%%%%%
-  % ADDING NEW CONTENT:
-  % (let <d> be an integer 1, 2, ...; let `L' be a letter A, B, ...)
-  % - Load new packages by adding \usepackage{...} inside "zz-00-y01-pkgs.tex"
-  % - New commands with global applicability: define inside zz-00-y02-cmds.tex
-  % - New content in the preamble: create or fit into existing file "zz-00-z0<d>-....tex"
-  % - New non-appendix chapter: create a file with name zz-0<d>-<word>.tex
-  % - New section in non-appendix chapter: create a file with name zz-0<d>-z<ee>-<word>.tex
-  % - New appendix chapter: create a file with name zz-0<L>-<tttt>.tex
-  % - New section in appendix: create a file with name zz-0<L>-z<ee>-<word>.tex
-  % - Files with externally-generated figures: upload inside the subfolder ./figs/
-  % - New bibliographic reference: include a bibtex entry inside one of the .bib files
   
-  %%%%%%%%%%%%
-  % LOCAL COMPILATION:
-  % - compile with pdfLaTeX (will later also make it compatible with LuaLaTeX)
-  % - the bibliography is using biblatex and biber
-  % - check that 'biber' is set as the processor working with biblatex
+%%%%%%%%%%%% FILE STRUCTURE
+% (let <d> and <e> be integers 1, 2, ...; let `L' be a letter A, B, ...)
+%
+% "zkproof-community-reference.tex": file for compilation
+%
+% "zz-00-y01-pkgs": loads LaTeX packages 
+% "zz-00-y02-cmds": custom commands with global applicability
+% "zz-00-y02-cmds-diff": commands related to diff and cross-references
+% "zz-00-y03-format": formatting configurations
+% "zz-00-y04-metadata.tex": file with metadata, e.g., title, names, version #
+%
+% "zz-00-frontmatter.tex": loads the input files with content for the preamble
+% "zz-00-z0<d>-....tex": content for some section of the preamble
+%
+% "zz-0<d>-<words>.tex": loads the input files with content for chapter 0<d>
+% "zz-0<d>-z<ee>-<words>.tex": content of section <d>.<ee>
+%
+% "zz-99-biblio-<yearRange>.bib": bibliographic references with a date within
+%  the corresponding year rage. The range can be expressed as an interval,
+%  (e.g., 2010-2017) or with a wild card (e.g., "19xx" meaning "1900-1999")
+%
+% "zz-<L>-<word>.tex: content for appendix <L> (e.g., A or B)
+%
+% "zzz-00-insert-comments.tex": preamble of the appendix with review comments
+% "zzz-01-comments-on-v<version>.tex": tables describing the received comments
+%        and/or contributions
+%
+% subfolder ./figs/: contains graphic files (.pdf, .svg)
+
+
+%%%%%%%%%%%% WHERE TO ADD NEW CONTENT:
+% (let <d> be an integer 1, 2, ...; let `L' be a letter A, B, ...)
+% - Load new packages: 
+%   "zz-00-y01-pkgs.tex" ... using \usepackage{...} 
+% - New commands with global applicability: 
+%   zz-00-y02-cmds.tex
+% - New content in the preamble: 
+%   create new file or fit into existing  "zz-00-z0<d>-....tex"
+% - New non-appendix chapter: 
+%   create new file with name zz-0<d>-<word>.tex
+% - New section in non-appendix chapter: 
+%   create new file with name zz-0<d>-z<ee>-<word>.tex
+% - New appendix chapter: 
+%   create new file with name zz-0<L>-<tttt>.tex
+% - New section in appendix <L>: 
+%   create new file with name zz-0<L>-z<ee>-<word>.tex
+% - Files with externally-generated figures: 
+%   upload filies inside the subfolder ./figs/
+% - New bibliographic reference: 
+%   include a bibtex entry inside one of the .bib files
+

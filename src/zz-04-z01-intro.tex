@@ -3,7 +3,7 @@
 \section{Introduction}  % and Motivation %%% uniformizing the title of the intro section of each chapter
 \label{apps:intro}
  
-This chapter aims to overview existing techniques for building ZKP-based applications, including designing the protocols to meet best-practice security requirements.\revblock[rev:applications:review-intro-about-applications]{\ref{it:applications:review-intro-about-applications}}
+This chapter aims to overview existing techniques for building ZKP-based applications, including designing the protocols to meet best-practice security requirements.
 We distinguish between high-level and low-level applications, where the former are the protocols designed for specific use-cases and the latter are the necessary underlying operations or sub-protocols.
 Each use case admits a circuit, and we discuss the sub-circuits needed to ensure security and functionality of the protocol.
 We refer to the circuits as \emph{predicates} and the sub-circuits as \emph{gadgets}:
@@ -13,8 +13,8 @@ We refer to the circuits as \emph{predicates} and the sub-circuits as \emph{gadg
 The relation or condition that the statement and witness must satisfy.
 Can be represented as a circuit.
 
-\item \revblock[rev:applications:define-predicate-and-gadgets]{\ref{it:editorial:applications-move-notation}}
-\textbf{\hypertarget{def:gadget}{Gadget}:} The underlying tools needed to construct the predicate.  
+\item \textbf{\hypertarget{def:gadget}{Gadget}:} 
+The underlying tools needed to construct the predicate.  
 In some cases, a gadget can be interpreted as a security requirement 
 (e.g., using the commitment verification gadget is equivalent to ensuring the privacy of underlying data).
 \loosen
@@ -22,7 +22,7 @@ In some cases, a gadget can be interpreted as a security requirement
 \end{itemize}
 
 
-	Recall from \refsec{security:syntax}\revblock[rev:applications:move-mention-to-syntax]{\ref{it:editorial:applications-move-notation}}
+	Recall from \refsec{security:syntax}
 the syntax of a proof system between a prover and verifier.
 	As we will see, the protocols can be abstracted and generalized to admit several use-cases; 
 similarly, there exist compilers that will generate the necessary gadgets from commonly used programming languages. 
@@ -35,7 +35,7 @@ similarly, there exist compilers that will generate the necessary gadgets from c
 
 %%% NOTE LB: Contains minor editorial changes
 \paragraph{Functionality vs.\ performance.}\pslabel{par:apps:intro:functionality-vs-performance}
-\revblock[rev:app:intro:motivate]{\ref{it:improve-motivation-apps}}
+
 	The design of ZKPs is subject to the tradeoff between functionality and performance. 
 	Users would like to have powerful ZKPs, in the sense that the system permits constructing %to construct 
 proofs for any predicate, which %what 
@@ -51,7 +51,7 @@ ZKP, while items (ii) and (iii) are related to performance.
 universal ZKPs with very efficient verifiers. 
 	However, many proposals %%% LB editorial: changed ``most'' (which is very contextual to a moment in time) to ``many''
 depend upon an expensive preprocessing, which makes such systems hard to scale for some use-cases. 
-	A technique called \textit{Proof-Carrying Data} (PCD), originally proposed in Ref.~\cite{2010:ICS:proof-carrying-data},\revblock[rev:app:intro:new-refs]{\ref{it:refs-in-chapter-apps}} 
+	A technique called \textit{Proof-Carrying Data} (PCD), originally proposed in Ref.~\cite{2010:ICS:proof-carrying-data}, 
 allows obtaining %to obtain 
 \textit{recursive composition} for existing ZKPs in a modular way. %, which
 	This means that zk-SNARKs can be used as a building block to construct scalable and non-preprocessing solutions.
@@ -61,7 +61,7 @@ allows obtaining %to obtain
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\revblock[rev:applications:remove-paragraph-not-about]{\ref{it:applications:remove-paragraph-not-about}}
+
 %\paragraph{What this document is NOT about:}
 %\begin{itemize}
 % \item A unique explanation of how to build ZKP applications

@@ -1,69 +1,44 @@
 # zkreference
-The official repository hosting the ZKProof Community Reference document and the submitted Community Proposals. The ZKProof Community Reference is a live document that is developed and written in a collaborative manner within the ZKProof Standardization effort. Its purpose is to provide a reference for the development of zero-
-knowledge-proof technology that is secure, practical and interoperable. The document intends to be accessible to a large audience, including the general public, the media, the industry, developers and cryptographers.
+This is the official repository of the ZKProof Community Reference (ZkpComRef) and of the Community Proposals submitted to ZKProof. The ZkpComRef is a live document that is developed and written in a collaborative manner within the ZKProof Standardization effort. Its purpose is to provide a reference for the development of zero-knowledge-proof technology that is secure, practical and interoperable. The document intends to be accessible to a large audience, including the general public, the media, the industry, developers and cryptographers.
 
 ## Latest Version
-We have published [version 0.2 of the document](https://docs.zkproof.org/reference.pdf), dated December 31, 2019. We thank all the received contributions. You can see the specific changes in the "[diff](https://github.com/zkpstandard/zkreference/raw/master/diff-v0.2-from-v0.1.pdf)" file in this repo. To finalize this cycle of development of the ZKProof Community Reference, and prepare for the next one, we are opening a call for feedback on the current version.
-
-### Higlights of the new version
-
+The [version 0.2 of the ZkpComRef](https://docs.zkproof.org/reference.pdf) is dated December 31, 2019. We thank all the received contributions. You can see the specific changes in the "[diff](https://github.com/zkpstandard/zkreference/raw/master/diff-v0.2-from-v0.1.pdf)" file in this repo. Highlights:
 - A consolidated preamble: new abstract, new context “About this community reference”, new IP expectations; more detailed “Table of contents”; new “Executive summary”.
 - A “Version history” section and an “Acknowledgments” section after the main chapters.
 - A new chapter on “Construction paradigms”, encompassing the previous section on “Taxonomy” of constructions, and including a new section on “Interactivity”.
 - Several portions of revised text and content, for example on proofs of knowledge vs. membership, benchmark parameters, gadgets, and applications.
 
-## Call for Feedback 
-  
-The period **Jan 01 to Mar 31 (2019)** is open for public feedback on all aspects of the ZKProof Community Reference version 0.2. The feedback will be helpful to prepare topics of discussion at the [3rd ZKProof workshop (April 20 – May 21)](https://zkproof.org/events/workshop3), which will kick-off a new cycle open to contributions. Please send your feedback by email to editors@zkproof.org. When commenting on specific portions of text, please refer to the line numbers in the ["annotated changes" version](https://github.com/zkpstandard/zkreference/raw/master/changes-v0.2-from-v0.1.pdf) in this repo. (The [ZKProof community forum](https://community.zkproof.org) also remains as a resource for community discussion.)
+## Editorial Process
+The initial ZkpComRef version was based on the [proceedings](https://docs.zkproof.org/reference#version-history) of the 1st ZKProof workshop. Subsequent contributions were based on [feedback](https://csrc.nist.gov/CSRC/media/Projects/pec/documents/20190406-nist-pec-comments-on-zkproof-docs.pdf) and [discussions](https://community.zkproof.org/t/breakout-session-zkproof-proceedings-and-community-reference/152) held at the [2nd ZKProof Workshop](https://community.zkproof.org/t/2nd-zkproof-standards-workshop-in-berkeley-april-10-12/60/2). Thereafter, the ZkpComRef has evolved with a flexible editorial  process, focused on contributions from the community and moderated by a [team of editors](https://docs.zkproof.org/reference/process). The incremental improvement is organized in [yearly cycles](https://docs.zkproof.org/reference/process), including calls for feedback and contributions. See further details in the [ZKProof website](https://docs.zkproof.org/reference/process).
 
-**Here is a list of examples of feedback we are looking for**
-
+**Feedback.** Here is a list of examples of feedback we are looking for
 - What portions of technical text can benefit from further clarification?
 - What basic concepts to further clarify, such as membership vs. knowledge, etc?
 - Each item in section 2.3 should be expanded into a new section — what to include?
 - What new pictorial examples (diagrams, etc.) to add?
 - What bibliographic references to add, to better support the claims and concepts?
 
-## Description
+Please send your feedback by email to editors@zkproof.org. When commenting on specific portions of text, please refer to the line numbers in the ["annotated changes" version](https://github.com/zkpstandard/zkreference/raw/master/changes-v0.2-from-v0.1.pdf) in this repo. (The [ZKProof community forum](https://community.zkproof.org) also remains as a resource for community discussion.)
 
-We have defined an editorial process to improve the [ZKProof Community Reference](https://docs.zkproof.org/reference.pdf) in a collaborative manner. Every year, after the annual ZKProof Workshop, a new cycle of editing will begin, starting from the discussions that take place at the workshop. The ZKProof Community Reference is based on the [ZKProof Proceedings](https://docs.zkproof.org/reference) from the 1st workshop) and the papers that are submitted yearly [ZKProof Community Proposals](https://docs.zkproof.org/standards/proposals).
+**Contributions.** 
+The latest call for contributions is dated [2020-Aug-14](https://github.com/zkpstandard/zkreference/raw/master/Call-2020-for-contribs-to-ZCRef.pdf).
+Here are notes/resources about potential contributions:
 
-### Cycle 2019
-You can find the notes from the discussions that took place in the “breakout” and “proposal” sessions at the [2nd ZKProof Workshop](https://zkproof.org/events/workshop2) in [the community forum](https://community.zkproof.org/t/2nd-zkproof-standards-workshop-in-berkeley-april-10-12/60/2?u=danib31).
+- GitHub issues: Various topics of needed contributions are identified as [GitHub issues](https://github.com/zkpstandard/zkreference/issues).
+- 2019: [Notes](https://community.zkproof.org/uploads/short-url/iOnBD0cnhxrRPIt4WNmYKEJBVHF.pdf) from “breakout” and “proposal” sessions at the [2nd ZKProof Workshop](https://zkproof.org/events/workshop2).
+- 2021: The editors are producing a new version of the "Paradigms" chapter to appear on ZkpComRef-0.3 --- collaboration is welcome
+- 2021-Apr-26: "Writathon" at the [4th ZKProof workshop](https://zkproof.org/events/workshop4/#schedule) --- gathering new material on selected topics seful for the ZkpComRef
 
-The complete and up-to-date list of contributions can be [found here](https://docs.google.com/spreadsheets/d/1QSSrz9IgcTDtzvwuufLuz19hE0y1FWwtrzNPZ9jVDU0/edit?usp=sharing). Each contribution is tagged as _suggested_, _confirmed_, _submitted_ and _integrated_ as per its current status, which allows the community to track the state of the contributions. Contributions may be of several types, such as: writing a new section or paragraph; creating or editing a table; upgrading the bibliography; editing typos, etc.
+You can submit your contribution by [email](editors@zkproof.org) or via a GitHub pull request. To help manage collaboration and concurrent work, please contact the editors in advance to inform you are producing a contribution on a topic. When submitting a contribution, please accompany it with an explanation, as follows:
+- **Title:** <_a title for the contribution; 3-10 words_>
+- **Proposed contribution:** <_brief description and motivation about the change; 20-50 words_>
+- **ZkpComRef locations:** <_ZkpComRef location (sections) where the contribution should be integrated_>
+- **Context references:** <_e.g.: GitHub issue number; related session in the ZKProof workshop_>
+- **Contributors:** <_who worked on the submitted contributions_>
 
-## Submission Process
+## References
 
-__Step 1 (by July 16th): Confirm intent to contribute and identify items of contribution__
-
-If your name appears in the list of contributors or you want to volunteer with a new suggestion, then, by June 22nd, please do:
-
-1. Send an email to contributors@zkproof.org confirming (or refuting) your contribution, including the details listed below; or
-2. Submit the initial explanation as a GitHub issue in the zkreference repository (see the existing issues as examples).
-
-If you confirmed your proposed contribution through email, or by default if you’ve volunteered earlier but do not confirm, the editors will create the GitHub Issue for the identified contribution (see the [existing issues](https://github.com/zkpstandard/zkreference/issues)).
-
-Each contribution should be accompanied by an explanation, which the editors will later use in a “diff” file (that will cross reference all changes with their explanations). The explanation should include:
-
-- __Issue title:__ _<a title for the contribution; 3-10 words>_
-- __Proposed contribution:__ _<brief description and motivation about the change; 20-50 words>_
-- __Related locations:__ _<location in the (Reference or Proposal) document where the contribution should be added>_
-- __Proposed contributors:__ _<who is proposing to do something>_
-- __Contribution context:__ _<e.g., which session in the ZKProof workshop motivated this>_
-
-__Step 2 (by September 10th): Submit the contributions__
-
-Choose any of these three official methods to submit your contribution:
-
-- __Email to contributors:__ send an email with your contribution and the (possibly revised) explanation to contributors@zkproof.org
-- __GitHub issues:__ submit the contribution to the GitHub issue previously created about the intended contribution.
-- __GitHub pull requests:__ you can also submit a GitHub pull request to the master branch of the zkreference repository with the contribution integrated into the LaTeX document.
-
-
-## Further References
-
-The table below shows a list of all current documents and content from the ZKProof effort.
+The table below shows a list of current documents and content from the ZKProof effort.
 
 | Name | Description | Related Event | Link | 
 |-------------|-------|------| ----|

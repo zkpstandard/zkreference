@@ -29,7 +29,7 @@ Here are notes/resources about potential contributions:
 - 2021: The editors are producing a new version of the "Paradigms" chapter to appear on ZkpComRef-0.3 --- collaboration is welcome
 - 2021-Apr-26: "Writathon" at the [4th ZKProof workshop](https://zkproof.org/events/workshop4/#schedule) --- gathering new material on selected topics seful for the ZkpComRef
 
-You can submit your contribution by [email](editors@zkproof.org) or via a GitHub pull request. To help manage collaboration and concurrent work, please contact the editors in advance to inform you are producing a contribution on a topic. When submitting a contribution, please accompany it with an explanation, as follows:
+You can submit your contribution by [email](mailto:editors@zkproof.org) or via a GitHub pull request. To help manage collaboration and concurrent work, please contact the editors in advance to inform you are producing a contribution on a topic. When submitting a contribution, please accompany it with an explanation, as follows:
 - **Title:** <_a title for the contribution; 3-10 words_>
 - **Proposed contribution:** <_brief description and motivation about the change; 20-50 words_>
 - **ZkpComRef locations:** <_ZkpComRef location (sections) where the contribution should be integrated_>
@@ -42,7 +42,7 @@ The table below shows a list of current documents and content from the ZKProof e
 
 | Name | Description | Related Event | Link | 
 |-------------|-------|------| ----|
-| ZKProof Community Reference | A document which serves as reference for the zero-knowledge field, built by the ZKProof community, in collaboration with NIST | 1st & 2nd ZKProof Workshops | [LINK](https://zkproof.org/ZKProofCommunityReference.pdf) |
+| ZKProof Community Reference | A document which serves as reference for the zero-knowledge field, built by the ZKProof community, in collaboration with NIST | 1st & 2nd ZKProof Workshops | [LINK](https://docs.zkproof.org/pages/reference/reference.pdf) |
 | ZKProof Community Proposals | A set of documents that were submitted as proposals to be discussed and standardized | 2nd ZKProof Workshop | [LINK](https://github.com/zkpstandard/zkreference) |
 | Workshop Notes | A set of topics in the community forum that include the notes of the breakout sessions from the 2nd ZKProof Workshop | 2nd ZKProof Workshop | [LINK](https://community.zkproof.org/c/zkproof-2019) |
 | Public ZKProof Documentation | Aside from this repository and the [website](https://ZKProof.org), we have this folder with all the public documents from the effort | 1st & 2nd ZKProof Workshops | [LINK](https://drive.google.com/drive/u/2/folders/1HWZYMH-6Mx8wcX8geium506L0KRxcgPe) |

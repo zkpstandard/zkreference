@@ -5,6 +5,9 @@
 \documentclass[11pt,letterpaper,oneside]{report}    
 %using option `oneside' instead of `twoside' makes some definitions easier
 
+\makeatletter\def\input@path{{.}{./figs/}{./zz-00-auxi-latex/}{./zz-00-frontmatter/}{./zz-01-baseline/}{./zz-02-paradigms/}{./zz-03-implementation/}{./zz-04-applications/}{./zz-99-biblio/}{./zz-AA-backmatter/}{./zz-ZZ-backmatter/}}\makeatother
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%% DEFINE WHICH VERSION TO COMPILE: Clean, ShowFeedback, Diff
 
@@ -28,11 +31,11 @@
 \graphicspath{{}{figs/}}
 
 %%% Define the files with bibliographic references
-\addbibresource{zz-99-biblio-19xx.bib}
-\addbibresource{zz-99-biblio-200x.bib}
-\addbibresource{zz-99-biblio-2010-2017.bib}
-\addbibresource{zz-99-biblio-2018-2020.bib}
-\addbibresource{zz-99-biblio-zkproof.bib}
+\addbibresource{zz-99-biblio/zz-99-biblio-19xx.bib}
+\addbibresource{zz-99-biblio/zz-99-biblio-200x.bib}
+\addbibresource{zz-99-biblio/zz-99-biblio-2010-2017.bib}
+\addbibresource{zz-99-biblio/zz-99-biblio-2018-2020.bib}
+\addbibresource{zz-99-biblio/zz-99-biblio-zkproof.bib}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

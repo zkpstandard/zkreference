@@ -1,25 +1,30 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Project context: ZKProof Community Reference
+% Project context: ZKProof Community Reference (ZkpComRef) @ zkproof.org
 % Licence: Creative Commons Attribution 4.0 International (CC BY 4.0)
 
 
-%%%%%%%%%%%% This file:
-% Latest update: 2020-07-30
-% Initial version: 2019-04-01 (Luís Brandão)
+%%%%%%%%%%%% THIS FILE:
+% Latest update: 2022-07-14
 % This file explains the folder structure, and how to compile the PDF file
 % Modifications: Please do not edit prior to talking with the ZKProof editors
 % This LaTeX project is open for collaboration under the ZKProof.org terms
 
 
-%%%%%%%%%%%% VERSIONS
-
-
 %%%%%% LOCAL COMPILATION:
-% The main file for compilation is zkproof-community-reference.tex
+% The main file for compilation is zkpcomref.tex
 % The bibliography is using biblatex and biber
 % Check that 'biber' is set as the processor working with biblatex
-% A Diff PDF file is compiled using latexpand and latexdiff
+% A Diff PDF file can be compiled using latexpand and latexdiff
+
+
+%%%%%%%%%%%% VERSIONS
+
   
+%%%%%% VERSION 0
+% Version 0 (2018-08-01) corresponds to documents in the proceedings of the
+% 1st ZKProof workshop, which included one document per workshop track
+% (security, implementation, applications) and the zkproof charter
+
 
 %%%%%% VERSION 0.1
 % Version 0.1 (2019-04-11) was a porting to LaTeX of the ZKProof docs
@@ -33,9 +38,15 @@
 % It followed the PEC comments about version 0.1, the topics discussed in the 
 % 2nd ZKProof workshop, and the creation of GitHub issues  
 
+
+%%%%%%% VERSION 0.3
+% Version 0.3 (2022-07-18) resulted from various additions, including a 
+% revision of the "Paradigms" chapter, with various new sections
+
+
 %%%%%%% Developing a new VERSION <v1>.<v2>.x
-% Version 0.2.x, where "x" is literal, is used to designate any compilation
-% of a version in progress after version 0.2 and before 0.3
+% Version 0.<v2>.x, where "x" is literal, is used to designate any compilation
+% of a version in progress after version 0.<v2> and before 0.<v2+1>
 
 
 %%%%%%% DIFF
@@ -54,51 +65,47 @@
 %%%%%%%%%%%% FILE STRUCTURE
 % (let <d> and <e> be integers 1, 2, ...; let `L' be a letter A, B, ...)
 %
-% "zkproof-community-reference.tex": file for compilation
+% File "zkpcomref.tex": file for compilation
 %
-% "zz-00-y01-pkgs": loads LaTeX packages 
-% "zz-00-y02-cmds": custom commands with global applicability
-% "zz-00-y02-cmds-diff": commands related to diff and cross-references
-% "zz-00-y03-format": formatting configurations
-% "zz-00-y04-metadata.tex": file with metadata, e.g., title, names, version #
+% Folder "zz-00-auxi-latex"
+%   File "zz-00-y01-pkgs": loads LaTeX packages 
+%   File "zz-00-y02-cmds": custom commands with global applicability
+%   File "zz-00-y02-cmds-diff": commands related to diff and cross-references
+%   File "zz-00-y03-format": formatting configurations
+%   File "zz-00-y04-metadata.tex": metadata, e.g., title, names, version #
 %
-% "zz-00-frontmatter.tex": loads the input files with content for the preamble
-% "zz-00-z0<d>-....tex": content for some section of the preamble
+% Folder "zz-00-frontmatter"
+%   File "zz-00-frontmatter.tex": loads the files with content for the preamble
+%   File "zz-00-z0<d>-....tex": content for some section of the preamble
 %
-% "zz-0<d>-<words>.tex": loads the input files with content for chapter 0<d>
-% "zz-0<d>-z<ee>-<words>.tex": content of section <d>.<ee>
+% Folders "zz-0<d>-<chapter-hint>", where <chapter-hint> can be from:
+%      "baseline", "paradigms", "implementation", "application"
+%   File "zz-0<d>-<chap-hint>.tex": loads the content files for chapter 0<d>
+%   File "zz-0<d>-z<ee>-<section-hint>.tex": content of section <d>.<ee>
 %
-% "zz-99-biblio-<yearRange>.bib": bibliographic references with a date within
-%  the corresponding year rage. The range can be expressed as an interval,
-%  (e.g., 2010-2017) or with a wild card (e.g., "19xx" meaning "1900-1999")
+% Folder "zz-99-biblio", contains various bib files
+%   File "zz-99-biblio-<yearRange>.bib": bibliographic references with a date 
+%   within the corresponding year range. The range is expressed as an interval,
+%   (e.g., 2010-2017) or using a wild card (e.g., "19xx" meaning "1900-1999")
 %
-% "zz-<L>-<word>.tex: content for appendix <L> (e.g., A or B)
+% Folder "zz-AA-backmatter": contains files for various appendices
+%   File "zz-91-acks.tex"
+%   File "zz-<L>-<word>.tex: content for appendix <L> (e.g., A or B)
 %
-% "zzz-00-insert-comments.tex": preamble of the appendix with review comments
-% "zzz-01-comments-on-v<version>.tex": tables describing the received comments
-%        and/or contributions
+% Folder "zz-ZZ-diff"
+%   File "zzz-00-insert-comments.tex": preamble to the review comments
+%   File "zzz-01-comments-on-v<version>.tex": tables explaining the changes
 %
-% subfolder ./figs/: contains graphic files (.pdf, .svg)
+% Folder "figs": contains files related to graphics/figures (pdf, svg, tex, png)
 
 
 %%%%%%%%%%%% WHERE TO ADD NEW CONTENT:
 % (let <d> be an integer 1, 2, ...; let `L' be a letter A, B, ...)
-% - Load new packages: 
-%   "zz-00-y01-pkgs.tex" ... using \usepackage{...} 
-% - New commands with global applicability: 
-%   zz-00-y02-cmds.tex
-% - New content in the preamble: 
-%   create new file or fit into existing  "zz-00-z0<d>-....tex"
-% - New non-appendix chapter: 
-%   create new file with name zz-0<d>-<word>.tex
-% - New section in non-appendix chapter: 
-%   create new file with name zz-0<d>-z<ee>-<word>.tex
-% - New appendix chapter: 
-%   create new file with name zz-0<L>-<tttt>.tex
-% - New section in appendix <L>: 
-%   create new file with name zz-0<L>-z<ee>-<word>.tex
-% - Files with externally-generated figures: 
-%   upload filies inside the subfolder ./figs/
-% - New bibliographic reference: 
-%   include a bibtex entry inside one of the .bib files
-
+% - Load new packages: "zz-00-y01-pkgs.tex" ... using \usepackage{...} 
+% - New commands with global applicability: zz-00-y02-cmds.tex
+% - New content in the preamble: new or existing "zz-00-z0<d>-....tex"
+% - New chapter: new folder "zz-0<d>-<word>" and file "zz-0<d>-<word>.tex"
+% - New section in non-appendix chapter: new file zz-0<d>-z<ee>-<word>.tex
+% - New appendix: new file name zz-0<L>-<tttt>.tex inside "zz-AA-backmatter"
+% - Files with externally-generated figures: upload files to subfolder ./figs/
+% - New bibliographic reference: bibtex entry inside one of the .bib files

@@ -1,20 +1,17 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
 \label{security:intro}
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{What is a zero-knowledge proof?}
 \label{security:intro:what-is-a-ZK}
 
-
-	A zero-knowledge proof (ZKP) makes it possible to prove a statement is true while preserving confidentiality of secret information \cite{1989:SJC:the-knowledge-complexity-of-interactive-proof-systems}.
-	
-	This makes sense when the veracity of the statement is not obvious on its own, but the prover knows relevant secret information (or has a skill, like super-computation ability) that enables producing a proof.
-	The notion of secrecy is used here in the sense of prohibited leakage, but a ZKP makes sense even if the `secret' (or any portion of it) is known apriori by the verifier(s).
+A zero-knowledge proof (ZKP) makes it possible to prove a statement is true while preserving confidentiality of secret information \cite{1985:GMR:STOC:the-knowledge-complexity-of-interactive-proof-systems}.
+This makes sense when the veracity of the statement is not obvious on its own, but the prover knows relevant secret information (or has a skill, like super-computation ability) that enables producing a proof.
+The notion of secrecy is used here in the sense of prohibited leakage, but a ZKP makes sense even if the `secret' (or any portion of it) is known apriori by the verifier(s).
 
 
-	
-	There are numerous uses of ZKPs, useful for proving claims about confidential data, such as:
+There are numerous uses of ZKPs, useful for proving claims about confidential data, such as:
 \begin{enumerate}
 \item adulthood, without revealing the birth date;
 \item solvency (not being bankrupt), without showing the portfolio composition;
@@ -23,52 +20,49 @@
 \item correctness (demonstrability) of a theorem, without revealing its mathematical proof.
 \end{enumerate}
 
+Some of these claims (commonly known by the prover and verifier, and here described as informal \emph{statements}) require a substrate (called \emph{instance}, also commonly known by the prover and verifier) to support an association with the confidential information (called \emph{witness}, known by the prover and to not be leaked during the proof process).
+For example, the proof of solvency (the statement) may rely on encrypted and certified bank records (the instance), and with the verifier knowing the corresponding decryption key and plaintext (the witness) as secrets that cannot be leaked.
+\reftab{tab:example-scenarios-zkps} in \refsec{security:terminology} differentiates these elements across several examples.
+In concrete instantiations, the exemplified ZKPs are specified by means of a more formal \emph{statement of knowledge} of a witness.
 
-	
-	Some of these claims (commonly known by the prover and verifier, and here described as informal \emph{statements}) require a substrate (called \emph{instance}, also commonly known by the prover and verifier) to support an association with the confidential information (called \emph{witness}, known by the prover and to not be leaked during the proof process).
-	For example, the proof of solvency (the statement) may rely on encrypted and certified bank records (the instance), and with the verifier knowing the corresponding decryption key and plaintext (the witness) as secrets that cannot be leaked.
-	\reftab{tab:example-scenarios-zkps} in \refsec{security:terminology} differentiates these elements across several examples.
-	In concrete instantiations, the exemplified ZKPs are specified by means of a more formal \emph{statement of knowledge} of a witness.
-	
-	
-	A zero-knowledge proof system is a specification of how a prover and verifier 
-can interact for the prover to convince the verifier that the statement is true.
-    The proof system must be complete, sound and zero-knowledge.
+
+\futfig[fig:prover-verifier-interaction]{Illustration of an interaction between prover and verifier, conveying the elements of the proof, including statement, instance, witness, message sending, and convincing}
+
+A ZKP system is a specification of how a prover and verifier can interact for the prover to convince the verifier that the statement is true.
+The proof system must be complete, sound and ZK.
+
+
 \begin{itemize}
+
 \item \textbf{Complete:} If the statement is true and both prover and verifier follow the protocol; the verifier will accept.
+
 \item \textbf{Sound:} If the statement is false, and the verifier follows the protocol; the verifier will not be convinced.
+
 \item \textbf{Zero-knowledge:} If the statement is true and the prover follows the protocol; the verifier will not learn any confidential information from the interaction with the prover but the fact the statement is true.
+
 \end{itemize}
 
 
-\paragraph{Proofs vs.\ arguments.}
-	The theory of ZKPs distinguishes between \emph{proofs} and \emph{arguments}, 
-as related to the computational power of the prover and verifier.
-	\emph{Proofs} need to be sound even against computationally unbounded provers, 
-whereas \emph{arguments} only need to preserve soundness against computationally bounded
-provers (often defined as probabilistic polynomial time algorithms).
-	For simplicity, ``proof'' is used hereafter to designate both 
-\emph{proofs} and \emph{arguments}, although there are theoretical 
-circumstances where the distinction can be relevant.
+\paragraph{Proofs vs.\ arguments}
+The theory of ZKPs distinguishes between \emph{proofs} and \emph{arguments}, as related to the computational power of the prover and verifier.
+\emph{Proofs} need to be sound even against computationally unbounded provers, whereas \emph{arguments} only need to preserve soundness against computationally bounded provers (often defined as probabilistic polynomial time algorithms).
+For simplicity, ``proof'' is used hereafter to designate both \emph{proofs} and \emph{arguments}, although there are theoretical circumstances where the distinction is relevant.
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection[Requirements for a ZK proof system specification]{Requirements for a zero-knowledge proof system specification}
 \label{security:intro:requirements-ZK}
 
-A full proof system specification MUST include:
+A full proof system specification \shall\ include:
+
 \begin{enumerate}
 \item Precise specification of the type of statements the proof system is designed to handle
-\item Construction including algorithms used by the prover and verifier
-\item If applicable, description of setup the prover and verifier use
-\item Precise definitions of security the proof system is intended to provide
-\item A security analysis that proves the zero-knowledge proof system satisfies the security definitions and a full list of any unproven assumptions that underpin security
+\item Construction details, including the algorithms used by the prover and verifier
+\item If applicable, a description of the setup used by the prover and verifier
+\item Precise definitions of the security the proof system is intended to provide
+\item A security analysis that proves the ZKP system satisfies the security goals, and a list of the unproven assumptions that underpin security
 \end{enumerate}
 
-Efficiency claims about a zero-knowledge proof system should include all relevant performance parameters for the intended usage.
-Efficiency claims must be reported fairly and accurately, and if a comparison is made to other zero-knowledge proof systems a best effort must be made to compare apples to apples.
-
-The remainder of the document will outline common approaches to specifying 
-a zero-knowledge proof system, outline some construction paradigms, and give guidelines for how to present efficiency claims.
-\loosen
-
+Efficiency claims about a ZKP system must be reported fairly and accurately:
+should include the relevant performance parameters for the intended usage;
+when compared with other ZKP systems, should be based on a best effort to compare \emph{apples to apples}.

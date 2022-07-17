@@ -1,3 +1,4 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Assumptions}
 \label{security:assumptions}
  
@@ -12,22 +13,35 @@ Advantage\_soundness(\params) $\leq$ 8 $\times$ Advantage\_collision(\params)
 Suppose the proof system is designed such that we can instantiate it with the SHA-256 hash function as part of the parameters.
 If we assume the risk of an attacker with a budget of \$1,000,000 finding a SHA-256 collision within 5 years is less than $2^{-128}$, then the reduction shows the risk of an adversary with similar power breaking soundness is less than $2^{-125}$.
  
-\textbf{Cryptographic assumptions:} Cryptographic assumptions, i.e. intractability assumptions, specify what the proof system designers believe a realistic attacker is incapable of computing.
+
+\inpar{Cryptographic assumptions} 
+Cryptographic assumptions, i.e. intractability assumptions, specify what the proof system designers believe a realistic attacker is incapable of computing.
 Sometimes a security property may rely on no cryptographic assumptions at all, in which case we say security of unconditional, i.e., we may for instance say a proof system has unconditional soundness or unconditional zero knowledge. Usually, either soundness or zero knowledge is based on an intractability assumption though.
 The choice of assumption depends on the risk appetite of the designers and the type of adversary they want to defend against.
  
-\underline{Plausibility.} At all costs, an intractability assumption that has been broken should not be used. We recommend designing flexible and modular proof systems such that they can be easily updated if an underpinning cryptographic assumption is shown to be false. 
+ 
+\inpar{Plausibility} 
+An intractability assumption that has been broken shall not be used. 
+We recommend designing flexible and modular proof systems such that they can be easily updated if an underpinning cryptographic assumption is shown to be false. 
 
 Sometimes, but not always, it is possible to establish an order of plausibility of assumptions. It is for instance known that if you can break the discrete logarithm problem in a particular group, then you can also break the computational Diffie-Hellman problem in the same group, but not necessarily the other way around. This means the discrete logarithm assumption is more plausible than the computational Diffie-Hellman assumption and therefore preferable from a security perspective.
- 
-\underline{Post-quantum resistance.} There is a chance that quantum computers will be developed within a few decades. Quantum computers are able to efficiently break some cryptographic assumptions, e.g., the discrete logarithm problem. If the expected lifetime of the proof system extends beyond the emergence of quantum computers, then it is necessary to rely on intractability assumptions that are believed to resist quantum computers.    	
+
+
+\inpar{Post-quantum resistance}
+There is a chance that quantum computers will be developed within a few decades. Quantum computers are able to efficiently break some cryptographic assumptions, e.g., the discrete logarithm problem. If the expected lifetime of the proof system extends beyond the emergence of quantum computers, then it is necessary to rely on intractability assumptions that are believed to resist quantum computers.    	
 Different security properties may require different lifetimes. For instance, it may be that proofs are verified immediately and hence post-quantum soundness is not required, while at the same time an attacker may collect and store proof transcripts and later try to learn something from them, so post-quantum zero knowledge is required.
- 
-\underline{Concrete parameters.} It is common in the cryptographic literature to use vague phrasing such as “the advantage of a polynomial time adversary is negligible” when describing the theory behind a proof system. However, concrete and precise security is needed for real-world deployment. A proof system should therefore come with concrete parameter recommendation and a statement about the level of security they are believed to provide.  
- 
-\textbf{System assumptions:} Besides cryptographic assumptions, a proof system may rely on assumptions about the equipment or environment it works in.
+
+
+\inpar{Concrete parameters}
+It is common in the cryptographic literature to use vague phrasing such as ``the advantage of a polynomial time adversary is negligible'' when describing the theory behind a proof system. However, concrete and precise security is needed for real-world deployment. A proof system should therefore come with concrete parameter recommendation and a statement about the level of security they are believed to provide.  
+
+
+\inpar{System assumptions}
+Besides cryptographic assumptions, a proof system may rely on assumptions about the equipment or environment it works in.
 As an example, if the proof system relies on a trusted setup it should be clearly stated what kind of trust is placed in.
 
-\textbf{Setup.} If the prover or verifier are probabilistic, they require an entropy source to generate randomness. 
+
+\inpar{Setup}
+If the prover or verifier are probabilistic, they require an entropy source to generate randomness. 
 Faulty pseudorandomness generation has caused vulnerabilities in other types of cryptographic systems, so a full specification of a proof system should make explicit any assumptions it makes about the nature or quality of its source of entropy.
 

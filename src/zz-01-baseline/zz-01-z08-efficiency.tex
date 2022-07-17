@@ -1,15 +1,18 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{-.5em}  %temporary
 \section{Efficiency}
 \label{security:Efficiency}
- 
+\vspace{-.35em}  %temporary
+
 A specification of a proof system may include claims about efficiency and if it does the units of measurement MUST be clearly stated. Relevant metrics may include:
 
 \begin{bulletize}
     \item \textbf{Round complexity:} Number of transmissions between prover and verifier. Usually measured in the number of moves, where a move is a message from one party to the other.
 An important special case is that of 1-move proof systems, aka non-interactive proof systems, where the verifier receives a proof from the prover and directly decides whether to accept or not. Non-interactive proofs may be transferable, i.e., they can be copied, forwarded and used to convince several verifiers.
-    \item \textbf{Communication:} Total size of communication between prover and verifier. Usually measured in bits.
+    \item \textbf{Communication:} Total number of bits transmitted between the prover and verifier.
     \item \textbf{Prover computation:} Computational effort the prover expends over the duration of the protocol. Sometimes measured as a count of the dominant cryptographic operations (to avoid system dependence) and sometimes measured in seconds on a particular system (when making concrete measurements).
     \item Depending on the intended usage, many other metrics may be important: memory consumption, energy consumption, entropy consumption, potential for parallelisation to reduce time, and offline/online computation trade-offs.
-    \item \textbf{Verifier computation:} Computational effort the verifier expends over the duration of the protocol.
+    \item \textbf{Verifier computation:} Computational effort of the verifier over the duration of the protocol.
     \item Setup \textbf{cost:} Size of setup parameters, e.g. a common reference string, and computational cost of creating the setup.
 \end{bulletize} 
 
@@ -17,66 +20,66 @@ Readers of a proof system specification may differ in the granularity they need 
 \loosen
 
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{-.5em}  %temporary
 \subsection{Characterization of security properties}
 \label{security:efficiency:characterize-properties}
-	The benchmarking of a technique should clarify the distinct security levels achieved/conjectured for different security properties, e.g., soundness vs.\ zero-knowledge.
-	In each case, the security type should also be clarified with respect to being unconditional, statistical or computational.
-	When considering computational security, it should be clarified to what extent pre-computations may affect the security level, and whether/how known attacks may be parallelizable.
-	All security claims/assertions should be qualified clearly with respect to whether they are based on proven security reductions or on heuristic conjectures. 
-    In either case the security analysis should make clear which computational assumptions and implementation requirements are needed. 
-    It should be made explicit whether (and how) the security levels relate to classical or quantum adversaries. 
-    When applicable, the benchmarking should characterize the security (including possible unsuitability) of the technique against quantum adversaries.
+
+\vspace{-.35em}  %temporary
+The benchmarking of a technique should clarify the distinct security levels achieved/conjectured for different security properties, e.g., soundness vs.\ zero-knowledge.
+In each case, the security type should also be clarified with respect to being unconditional, statistical or computational.
+When considering computational security, it should be clarified to what extent pre-computations may affect the security level, and whether/how known attacks may be parallelizable.
+All security claims/assertions should be qualified clearly with respect to whether they are based on proven security reductions or on heuristic conjectures. 
+In either case the security analysis should make clear which computational assumptions and implementation requirements are needed. 
+It should be made explicit whether (and how) the security levels relate to classical or quantum adversaries. 
+When applicable, the benchmarking should characterize the security (including possible unsuitability) of the technique against quantum adversaries.
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{-.5em}  %temporary
 \subsection{Computational security levels for benchmarking}
 \label{security:efficiency:comp-sec-levels}
 
-	The benchmarks for each technique \shall\ include at least one parametrization achieving a conjectured computational security level $\kappa$ approximately equal to, or greater than, 128 bits.
-	Each technique \should\ also be benchmarked for at least one additional higher computational security level, such as 192 or 256 bits.
-    (If only one, the latter is preferred.)
-    The benchmarking at more than one level aids the understanding of how the efficiency varies with the security level.
-    The interest in a security level as high as 256 bits can be considered a 
-precautious (and heuristic) safety margin, compared for example with intended 128 bits.
-    This is intended to handle the possibility that the conjectured level of security is later found to have been over-estimated.
-	The evaluation at computational security below 128 bits may be justified for the purpose 
-of clarifying how the execution complexity or time varies with the security parameter, 
-but should not be construed as a recommendation for practical security.
+\vspace{-.35em}  %temporary
+The benchmarks for each technique \shall\ include at least one parametrization achieving a conjectured computational security level $\kappa$ approximately equal to, or greater than, 128 bits.
+Each technique \should\ also be benchmarked for at least one additional higher computational security level, such as 192 or 256 bits.
+(If only one, the latter is preferred.)
+The benchmarking at more than one level aids the understanding of how the efficiency varies with the security level.
+The interest in a security level as high as 256 bits can be considered a cautious (and heuristic) safety margin, compared for example with intended 128 bits.
+This is intended to handle the possibility that the conjectured level of security is later found to have been over-estimated.
+The evaluation at computational security below 128 bits may be justified for the purpose of clarifying how the execution complexity or time varies with the security parameter, but should not be construed as a recommendation for practical security.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\paragraph{An exception allowing lower computational security parameter.}
+\inpar{An exception allowing a lower computational security parameter}
 \label{par:security:efficiency:comp-sec-levels:exception}
-
-	With utmost care, a computational security level may be justified below 128 bits, including for benchmarking.
-	The following text describes as exception.
-	In some interactive ZKPs (see Section 2.2), there may be cryptographic properties that only need to be held during a portion of a protocol execution, which in turn may be required to take less than a fixed amount of time, say, one minute.
-	For example, a commitment scheme used to enable temporary hiding during a coin-flipping protocol may only need to hold until the other party reveals a secret value.
-	In such case the property may be implemented with less than 128 bits of security, under special care (namely with respect to composition in a concurrent setting) and if the difference in efficiency is substantial.
-	Such decreased security level of a component of a protocol may also be useful for example to enable properties of deniability (non-transferability).
-
-    Depending on the application, other exceptions may be acceptable, upon careful analysis, when the witness whose knowledge is being proven is itself discoverable from the ZK instance with less computational resources than those corresponding to 128 bits of security. 
+With utmost care, a computational security level may be justified below 128 bits.
+The following text describes an exception.
+In some interactive ZKPs (see \refsec{paradigms:interactivity}), there may be cryptographic properties that only need to be held during a portion of a protocol execution, which in turn may be required to take less than a fixed amount of time, say, one minute.
+For example, a commitment scheme used to enable temporary hiding during a coin-flipping protocol may only need to hold until the other party reveals a secret value.
+In such case the property may be implemented with less than 128 bits of security, with special care (namely with respect to composition in a concurrent setting) and if the difference in efficiency is substantial.
+Such decreased security level of a component of a protocol may also be useful for example to enable properties of deniability (non-transferability).
+Depending on the application, other exceptions may be acceptable, upon careful analysis, when the witness whose knowledge is being proven is itself discoverable from the ZK instance with less computational resources than those corresponding to 128 bits of security. 
 
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{-.5em} %temporary 
 \subsection{Statistical security levels for benchmarking}
 \label{security:efficiency:stat-sec-levels}
 
+\vspace{-.35em} %temporary to prevent double page break 
+The soundness security of certain interactive ZKP systems may be based on the ability of the verifier(s) to validate-or-trust the freshness and entropy of a challenge (e.g., a nonce produced by a verifier, or randomness obtained by a trusted randomness Beacon).
+In some of those cases, a statistical security parameter $\sigma$ (e.g., 40 or 64 bits) may be used to refer to the error probability (e.g., $2^{-40}$ or $2^{-64}$, respectively) of a protocol with ``one-shot'' security, i.e., when the ability of a malicious prover to succeed without knowledge of a valid witness requires guessing in advance what the challenge would be.
+A lower statistical security parameter may be suitable if there is a mechanism capable to detect and prevent a repetition of failed proof attempts.
 
-	The soundness security of certain interactive ZKP systems may be based on the ability of the verifier(s) to validate-or-trust the freshness and entropy of a challenge (e.g., a nonce produced by a verifier, or randomness obtained by a trusted randomness Beacon).
-	In some of those cases, a statistical security parameter $\sigma$ (e.g., 40 or 64 bits) may be used to refer to the error probability (e.g., $2^{-40}$ or $2^{-64}$, respectively) of a protocol with ``one-shot'' security, i.e., when the ability of a malicious prover to succeed without knowledge of a valid witness requires guessing in advance what the challenge would be.
-	A lower statistical security parameter may be suitable if there is a mechanism capable of detecting and preventing a repetition of failed proof attempts.
+While an appropriate minimal parameter may depend on the application scenario, benchmarking \shall\ be done with at least one parametrization achieving a conjectured statistical security level of at least 64 bits.
+Whenever the efficiency variation is substantial across variations of statistical security parameter, it is recommended that more than one security level be benchmarked. 
+The cases of 40, 64, 80 and 128 bits are suggested.
 
-	While an appropriate minimal parameter may depend on the application scenario, benchmarking \shall\ be done with at least one parametrization achieving a conjectured statistical security level of at least 64 bits.
-	Whenever the efficiency variation is substantial across variations of statistical security parameter, it is recommended that more than one security level be benchmarked. 
-    The cases of 40, 64, 80 and 128 bits are suggested.
 
-	For interactive techniques where the efficiency upon using 64 bits of statistical security is similar to that of using a higher parameter similar to the computation security parameter (at least 128 bits), then the benchmark \should\ use at least one higher statistical parameter that enables retaining high computational security (at least 128 bits) even if the protocol is transformed into a non-interactive version via a Fiat-Shamir transformation or similar.
-	In the resulting non-interactive protocols, the prover is the sole generator of the proof, and so a malicious prover can rewind and restart an attempt to generate a forged proof
-whenever a non-interactively produced challenge is unsuitable to complete the forgery.
-	Computational security remains if the expected number of needed attempts is of the order of $2^{\kappa}$.
-	\loosen
+Many interactive protocols can be compiled into a non-interactive (NI) version, for example using a Fiat-Shamir transformation that non-interactively computes the challenge of an otherwise interactive commit-challenge-response protocol.
+In the resulting NI version, the prover is the sole generator of the proof, and so can retry many attempts until obtaining a challenge for which it can produce a response.
+If the computational cost of the original protocol is {\~O}${(\sigma)}$, i.e., not higher than linear in the statistical security parameter, then the benchmark \should\ include at least one statistical parameter that enables retaining the intended computational security (at least 128 bits) when the protocol is transformed into a NI version.
+Computational security remains if the expected number of needed attempts is of the order of $2^{\kappa}$.
+\loosen

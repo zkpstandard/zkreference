@@ -1,15 +1,14 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Backends: Cryptographic System Implementations}
 \label{implem:backends}
 
 The backend of a ZK proof implementation is the portion of the software that contains an implementation of the low-level cryptographic protocol. It proves statements where the instance and witness are expressed as variable assignments, and relations are expressed via low-level languages (such as arithmetic circuits, Boolean circuits, R1CS/QAP constraint systems or arithmetic constraint satisfaction problems).
 
-The backend typically consists of a concrete implementation of the ZK proof system(s) given as pseudocode in a corresponding publication (see the \hyperref[chap:security]{Security Track} document for extensive discussion of these), along with supporting code for the requisite arithmetic operations, serialization formats, tests, benchmarking etc.
+\futfig{add a figure with the different components of a backend in a ``table hierarchy''}
 
-There are numerous such backends, including implementations of many of the schemes discussed in the \hyperref[chap:security]{Security Track}. 
-Most have originated as academic research prototypes, and are available as open-source projects. 
-Since the offerings and features of backends evolve rapidly, we refer the reader to the curated taxonomy at https://zkp.science for the latest information.
+\xetexfontscale{.98}{The backend typically consists of a concrete implementation of a proposed ZK proof system(s) (often specified by pseudocode in a paper publication), along with supporting code for the required arithmetic operations, serialization formats, tests, benchmarking, etc.
+There are numerous backends, most originated as academic research prototypes and available as open-source projects. 
+The offerings and features of backends evolve rapidly, so it can be useful to consult a curated taxonomy \cite{url:ZKP-science}.}
 
 Considerations for the choice of backends include:
 
@@ -23,4 +22,3 @@ Considerations for the choice of backends include:
 \item Correctness and robustness of the implementation (as determined, e.g., by auditing and formal verification)
 \item Applications (as evidence of usability and scrutiny).
 \end{itemize}
-

@@ -1,56 +1,47 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Terminology}
 \label{security:terminology}
 
 
-{\bfseries \hypertarget{def:instance}{Instance}:} 
-	
-	Input commonly known to both prover (P) and verifier (V), and used to support the statement of what needs to be proven.
-	This common input may either be local to the prover--verifier interaction,
-or public in the sense of being known by external parties. Notation: $x$.
-	(Some scientific articles use ``instance'' and ``statement'' interchangeably, but we 
-distinguish between the two.)
+\inpar[:]{\hypertarget{def:instance}{Instance}} 
+Input commonly known to both prover (P) and verifier (V), and used to support the statement of what needs to be proven.
+This common input may either be local to the prover--verifier interaction, or public in the sense of being known by external parties. Notation: $x$.
+(Some scientific articles use ``instance'' and ``statement'' interchangeably, but we distinguish between the two.)
 \loosen
- 
-{\bfseries  \hypertarget{def:witness}{Witness}:} 
+
+\inpar[:]{\hypertarget{def:witness}{Witness}}
 Private input to the prover. Others may or may not know something about the witness. 
 Notation: $w$.
  
-{\bfseries \hypertarget{def:relation}{Relation}:}\luissug{Consider organizing the set of definitions in two or three classes: 
-\textCR: a) participants (prover and verifier);
-\textCR: b) elements instantiated in each proof execution (instance, witness, statement, setup);
-\textCR: c) elements defining a proof system (language, relation) that define the proof system;} 
-	Specification of relationship between instances and witness.
-	A relation can be viewed as a set of permissible pairs (instance, witness). 
+\inpar[:]{\hypertarget{def:relation}{Relation}}
+Specification of relationship between instances and witness.
+A relation can be viewed as a set of permissible pairs (instance, witness). 
 Notation: $R$.
- 
-{\bfseries \hypertarget{def:language}{Language}:} 
+
+\inpar[:]{\hypertarget{def:language}{Language}} 
 Set of instances that appear as a permissible pair in $R$. 
 Notation: $L$.
- 
-{\bfseries \hypertarget{def:statement}{Statement}:} 
-Defined by instance and relation. Claims the instance has a witness in the relation (which is either true or false). 
+
+\inpar[:]{\hypertarget{def:statement}{Statement}}
+Defined by instance and relation.
+Claims the instance has a witness in the relation (which is either true or false). 
 Notation: $x \in L$.
 
-{\bfseries Security parameter:} 
+\inpar[:]{Security parameter}
 Positive integer indicating the desired security level (e.g. 128 or 256) where higher security parameter means greater security.
 In most constructions, distinction is made between computational security parameter and statistical security parameter. 
 Notation: $k$ (computational) or $s$ (statistical).
- 
 
+\inpar[:]{Setup}
+The inputs given to the prover and to the verifier, apart from the instance $x$ and the witness $w$. 
+The setup of each party can be decomposed into a private component (``PrivateSetup$_P$'' or ``PrivateSetup$_V$'', respectively not known to the other party) and a common component ``CommonSetup = CRS'' (known by both parties), where CRS denotes a ``common reference string'' (required by some zero-knowledge proof systems). 
+Notation: setup$_P$ = (PrivateSetup$_P$, CRS) and setup$_V$ = (PrivateSetup$_V$, CRS).''
+\loosen
 
-
-{\bfseries Setup:} The inputs given to the prover and to the verifier, apart from the instance $x$ and the witness $w$. 
-	The setup of each party can be decomposed into a private component (``PrivateSetup$_P$'' or ``PrivateSetup$_V$'', respectively not known to the other party) 
-	and a common component ``CommonSetup = CRS'' (known by both parties), where CRS denotes a ``common reference string'' (required by some zero-knowledge proof systems). 
-	Notation: setup$_P$ = (PrivateSetup$_P$, CRS) and setup$_V$ = (PrivateSetup$_V$, CRS).''
-	\loosen
-
-	For simplicity, some parameters of the setup are left implicit (possibly inside the CRS), 
-such as the security parameters, and auxiliary elements defining the language and relation.
+For simplicity, some parameters of the setup are left implicit (possibly inside the CRS), such as the security parameters, and auxiliary elements defining the language and relation.
 See more details in \refsec{security:syntax:setup}.
-	While the witness ($w$) and the instance ($x$) could be assumed as elements of the setup 
-of a concrete ZKP protocol execution, they are often distinguished in their own category. 
-	In practice, the term ``Setup'' is often used with respect to the setup of a proof system that can then be instantiated for multiple executions with varying instances ($x$) and witnesses ($w$).
+While the witness ($w$) and the instance ($x$) could be assumed as elements of the setup of a concrete ZKP protocol execution, they are often distinguished in their own category. 
+In practice, the term ``Setup'' is often used with respect to the setup of a proof system that can then be instantiated for multiple executions with varying instances ($x$) and witnesses ($w$).
 
 
 \reftab{tab:example-scenarios-zkps} exemplifies at a high level a differentiation between the \emph{statement}, the \emph{instance} and the \emph{witness} elements for the initial examples mentioned in \refsec{security:intro:what-is-a-ZK}.
@@ -58,11 +49,11 @@ of a concrete ZKP protocol execution, they are often distinguished in their own 
 
 \vspace{.5em}\begin{table}[H]\centering\newcommand{\scaleTitle}[1]{\scalebox{.95}{#1}}
 \def\tmpCapTab{Example scenarios for zero-knowledge proofs}
-\mytabcap[tab:example-scenarios-zkps]{\tmpCapTab}{\tmpCapTab}
+\CIL\mytabcap[tab:example-scenarios-zkps]{\tmpCapTab}{\tmpCapTab}
 
-\internallinenumbers\small\begin{edtable}{tabular}{|l|l||l||l||l|}
+\small\begin{edtable}{tabular}{|l|l||l||l||l|}
 \hline \rowcolor{colorRowHead}
-			\bfseries \scalebox{.85}{\#}
+		  \bfseries \scalebox{.85}{\#}
 		& \diagbox{\small \bfseries \makebox[2.25em]{\hspace{1em}\scalebox{.8}{Scenarios}}}{\small \bfseries \makebox[0pt]{\hspace*{-2.75em}\scalebox{.8}{Elements}}}
 		& \subtab[l]{{\bfseries Statement}\\being proven}
 		& \subtab[l]{{{\bfseries Instance}}\\used as substrate}
@@ -75,7 +66,7 @@ of a concrete ZKP protocol execution, they are often distinguished in their own 
 		& \subtab[l]{Birthdate and personal\\data (signed by a cer-\\tification authority)}
 		\\
 \hline \bfseries 2 
-		&	\bfseries \scaleTitle{\subtab[l]{Hedge fund\\solvency}}
+		& \bfseries \scaleTitle{\subtab[l]{Hedge fund\\solvency}}
 		& \subtab[l]{We are not bankrupt}
 		& \subtab[l]{Encrypted \& certified\\bank records}
 		& \subtab[l]{Portfolio data and\\decryption key}
@@ -94,7 +85,7 @@ of a concrete ZKP protocol execution, they are often distinguished in their own 
 		\\
 \hline \bfseries 5
 		& \bfseries \scaleTitle{\subtab[l]{Theorem\\validity}}
-		& \subtab[l]{This $<$expression$>$\\is a theorem}  %(provable\\in $<n$ steps)
+		& \subtab[l]{This $<$expression$>$\\is a theorem}  % [provable\\in $<n$ steps]
 		& \subtab[l]{(A set of axioms,\\and the logical \\rules of inference)}   
 		& \subtab[l]{A sequence of logical\\implications}
 		\\

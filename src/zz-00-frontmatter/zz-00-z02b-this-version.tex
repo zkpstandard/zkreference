@@ -1,43 +1,49 @@
-\paragraph{About this version.}\addcontentsline{toc}{section}{About this version}
-\label{sec:prelim:msg-editors}
-
-	This is the version 0.2 of the ZKProof Community Reference.
-	It results from the help of many contributors, as described 
-in the \hyperref[app:acknowledgments]{Acknowledgments}, 
-in the \hyperref[app:version-history]{Version history}, and 
-in the documentation of previous ZKProof workshops.
-	At a 0.$x$ version, this document should be considered as being in an incomplete state, serving as a basis for further development.
-	Reaching a future stable version requires additional revision and substantial contributions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{About this version}\addcontentsline{toc}{section}{About this version}%
+\label{sec:prelim:about-this-version}\label{sec:prelim:msg-editors}%
+This is the version 0.3 of the ZKProof Community Reference.
+It results from many contributions, as described in the \hyperref[app:acknowledgments]{Acknowledgments}, in the \hyperref[app:version-history]{Version history}, and in the documentation of previous ZKProof workshops.
+While at a 0.$x$ version, this document should be considered as an incomplete draft, serving as a basis for further development.
+Reaching a future stable version requires additional revision and substantial contributions from the community.
+\loosen
 
 
-\def\owncitetag{2019:zkproof:community-reference-0.2}
+\def\ownciteversion{Version \zkpcomrefversion}
+\def\ownciteyear{2022}
+\def\owncitemonthNumber{7}
+\def\owncitemonthMMM{July}
+\def\owncitetag{\ownciteyear:zkproof:\zkpcomrefabbrev-\zkpcomrefversion}
 \def\ownciteauthor{ZKProof}
-\def\owncitetitle{ZKProof Community Reference}
-\def\ownciteversion{Version 0.2}
-%%% Not using field `version' because it prints after the authors, and in non-italic
+\def\owncitetitle{\zkpcomreftitle}
 \def\owncitepublisher{zkproof.org}
-\def\owncitenote{Updated versions at https://zkproof.org}
+\def\owncitenote{Updated versions at https://docs.zkproof.org/reference}
 
-\def\owncitebibtexcode{@report\{\owncitetag,\textCR
-	author = \{\ownciteauthor\},\textCR
-	title = \{\owncitetitle\},\textCR
-	subtitle = \{\ownciteversion\},\textCR
-	year = \{2019\},\textCR
-	month = \{December\},\textCR
-	publisher = \{\owncitepublisher\},\textCR
-	editor = \{Benarroch, Daniel and Brand{\~a}o, Lu{\'i}s T. A. N. and Tromer, Eran\},\textCR
-	license = \{Creative Commons Attribution 4.0 International\},\textCR
-	key = \{ZKP\},\textCR
-	addendum = \{\owncitenote\}\textCR
+\def\crtab{\textCR~~~}
+
+
+%%% Code to generate bibtex file for how to cite this version
+\def\owncitebibtexcode{@report\{\owncitetag,\crtab
+	author = \{\ownciteauthor\},\crtab
+	title = \{\owncitetitle\},\crtab
+	%%% Using the field `subtitle' (instead of `version'), so that it prints immediately after the title
+	subtitle = \{\ownciteversion\},\crtab
+	year = \{\ownciteyear\},\crtab
+	month = \{\owncitemonthNumber\},\crtab
+	publisher = \{\owncitepublisher\},\crtab
+	editor = \{\editorscurrversion\},\crtab
+	keywords = \{cryptography; interoperability; privacy, security; standards; zero-knowledge proofs\}\crtab
+	contributors-to-v0 = \{\contributorsToVersionZero\},\crtab
+	contributors-to-v01 = \{\contributorsToVersionZeroDotOne\},\crtab
+	contributors-to-v02 = \{\contributorsToVersionZeroDotTwo\},\crtab
+	contributors-to-v03 = \{\contributorsToVersionZeroDotThree\},\crtab
+	addendum = \{\owncitenote\},\crtab
+	license = \{Creative Commons Attribution 4.0 International\},\crtab
+	shorthand = \{ZkpComref\}\textCR
 \}}
 
 
 \vspace{1.5em}
-	
-\minip[\textwidth][1.08\textwidth]{\textbf{Citing this version:}
-\pslabel{how-to-cite-this-version} %\cite{\owncitetag}
-	\pdfcomment[color=blue,opacity=0.5,author=Bibtex code,disable=false]{\owncitebibtexcode}
-	\ownciteauthor. \emph{\owncitetitle. \ownciteversion}.
-	Ed.\ by D.\ Benarroch, L.~T.~A.~N.\ Brandão, E.\ Tromer. 
-	Pub.\ by \owncitepublisher. Dec.\ 2019. \owncitenote}
-
+\inpar[:]{\makebox[0pt][l]{\blue{Citing this version}}\protect\textattachfile[mimetype={text/plain}]{./zz-99-biblio/zkpcomref2022.bib}{\phantom{Citing this version}}\pslabel{how-to-cite-this-version}}%
+\ownciteauthor. \emph{\owncitetitle. \ownciteversion}.
+Ed.\ by \editorscurrversion. Pub.\ by \owncitepublisher. 
+\owncitemonthMMM\ \ownciteyear. \owncitenote

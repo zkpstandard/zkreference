@@ -1,5 +1,5 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% This file: defines counters and commands useful for cross-referencing feedback notes and corresponding changes
-
 
 \newcommand{\ifoddeven}[2]{\ifthenelse{\isodd{\value{page}}}{#1}{#2}}
 
@@ -15,9 +15,7 @@
 \newcommand{\tops}[2]{\texorpdfstring{#1}{#2}}
 \newcommand{\nolink}[1]{\href*{#1}{#1}}
 
-\newcommand{\subtab}[2][c]{\begin{tabular}{@{}#1}#2\end{tabular}}
 \newcommand{\subtabL}[1]{\subtab[l]{#1}}
-
 \newcommand{\edsubtab}[2][c]{\begin{edtable}{tabular}{@{}#1}#2\end{edtable}}
 
 \newcommand{\brkttext}[1]{\ensuremath{\left\langle\right.}#1\ensuremath{\left.\right\rangle}}
@@ -25,11 +23,8 @@
 
 \newenvironment{bulletize}{\begin{itemize}[label={$\bullet$}]}{\end{itemize}}
 
-\newcommand{\mypar}[1]{\paragraph{#1}\mbox{}\\\vspace{-1ex}}
-\newcommand{\myurl}[1]{\href{#1}{\nolinkurl{#1}}}
-%%%\newcommand{\myurl}[1]{{\hypersetup{pdfborder={0 0 0}}\url{#1}}}
-\urlstyle{rm} %tm, tt, sf, ... same, ...
 
+\newcommand{\myurl}[1]{\href{#1}{\nolinkurl{#1}}}
 \newcommand{\myemail}[1]{\href{mailto:#1}{#1}}
 
 
@@ -39,30 +34,32 @@
 \newcommand{\rowend}{\end{minipage}\\}
 
 
-\newcommand{\restoline}[1]{\resizebox{\linewidth}{!}{#1}}
-
-
 %LB: colors for bookmarks of table and Figures
 \newcommand{\red}[1]{{\color[rgb]{1,0,0}#1}}
 \newcommand{\blue}[1]{{\color[rgb]{0,0,1}#1}}
 \newcommand{\colorbkmtab}{brown}
 \newcommand{\colorbkmfig}{blue}
+\definecolor{colorRowHead}{rgb}{0.95,0.95,0.95}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% Caption for Table, adding special pdf bookmark and allowing line number
 
-%%% LB: \mytabcap: to be used (instead of \caption) inside environment table
+\newcommand{\conditionalinternallinenumbers}{\ifbool{boolShowLineNumbers}{\internallinenumbers}{}}
+\let\CIL\conditionalinternallinenumbers
+
+
+%%% LB: \mytabcap: to be used (instead of \caption) inside environment table (for easier line numbering)
   % does not require the `table' environment, but can be inside of it
   % Enables correct line numbers and it also creates a pdfbookmark
   % 1st arg is the text for the listoffigures (lot); 2nd arg is the main text of the caption
 \newcommand{\vertspaceintabcap}{\vspace{.5em}}  %may be locally redefined 
-\newcommand{\setlinenumbermargin}[1]{\renewcommand{\thelinenumber}{\arabic{linenumber}\hspace*{#1}}} %to be used inside local context, e.g., within \begingroup...\endgroup
+\newcommand{\setlinenumbermargin}[1]{\ifbool{boolShowLineNumbers}{\renewcommand{\thelinenumber}{\arabic{linenumber}\hspace*{#1}}}{}} %to be used inside local context, e.g., within \begingroup...\endgroup
 \newcommand{\setlinenumberintable}{}  %%% if boolShowFeedback, it will be redefined to force disappearance of line numbers
 
 
 \newcommand{\mytabcap}[3][]{%
-	\begin{internallinenumbers}\begingroup\normalsize\centering{\refstepcounter{table}\label{#1}\bfseries\hypertarget{ht:table:\thetable}{Table}~\thetable{}:} %intentional space before comment %
+	\begingroup\CIL\normalsize\centering{\refstepcounter{table}\label{#1}\bfseries\hypertarget{ht:table:\thetable}{Table}~\thetable{}:} %intentional space before comment %
 				\addcontentsline{lot}{table}{Table~\thetable{}: #2}#3\endgroup
-	\end{internallinenumbers}
 
 	\vertspaceintabcap\setlinenumberintable%
 				{\bookmarksetup{color=\colorbkmtab}%
@@ -73,37 +70,191 @@
 	}
 }
 
-\newcommandtwoopt{\minip}[3][\textwidth][\textwidth]{\nolinenumbers\resizebox{#1}{!}{\begin{minipage}[t]{#2}\begin{internallinenumbers}#3\end{internallinenumbers}\end{minipage}}\vskip0pt\linenumbers}
+\newcommandtwoopt{\minip}[3][\textwidth][\textwidth]{\begingroup\nolinenumbers\resizebox{#1}{!}{\begin{minipage}[t]{#2}\conditionalinternallinenumbers #3\end{minipage}}\vskip0pt\endgroup}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%% Caption for Figure, adding special pdf bookmark
+%%%%%%%%%%%%%%%%%%%%%%%% Caption for Figure, adding special pdf bookmark
 
 \newcommand{\myfigcap}[2]{\refstepcounter{figure}\centering{\bfseries Figure~\thefigure{}:}
 														 \addcontentsline{lof}{figure}{Figure~\thefigure{}: #1} #2 \nolinenumbers}
 
-\definecolor{colorRowHead}{rgb}{0.95,0.95,0.95}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%% Commands
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% Commands handling hyper-references
 
-\def\fillindesc{\red{$<$fill with description$>$}}
-\newcommand{\todo}[1]{\red{[To-do: #1]}}
+\urlstyle{rm} %\renewcommand\UrlFont{\color{red}\rmfamily\itshape}  %tm, tt, sf, ... same, ...
 
-
-\newcommand{\loosen}{\looseness=-1}
-\newcommand{\pslabel}{\phantomsection\label}
-\newcommand{\emphbrkt}[1]{\ensuremath{\left\langle\emph{#1}\right\rangle}}
-
-
+\let\incgr\includegraphics
+\newcommand{\mcc}[2][1]{\multicolumn{#1}{c}{#2}}
+\newcommand{\restoline}[2][1.]{\resizebox{#1\linewidth}{!}{#2}}
 \newcommand{\refchap}[1]{Chapter~\ref{#1}}
 \newcommand{\refsec}[1]{Section~\ref{#1}}
 \newcommand{\reftab}[1]{Table~\ref{#1}}
-\newcommand{\reffig}[1]{Figure~\ref{#1}}
+\newcommand{\reffig}[1]{Fig.~\ref{#1}}
+\newcommand{\reffigure}[1]{Figure~\ref{#1}}
+\newcommand{\refsecnamenum}[1]{``\nameref{#1}''~(\S\ref{#1})}
+
+\newcommand{\pslabel}[1]{\phantomsection\label{#1}}
+\newcommand{\subtab}[2][c]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
 
 \newcommand{\refrem}[1]{Remark~\ref{#1}}
 \newcommand{\refGad}[1]{Gadget~\ref{#1}}
 \newcommand{\refgad}[1]{gadget~\ref{#1}}
 
+\providecommand{\eqref}[1]{Equation~(\ref{#1})}
+\newcommand{\eqcomment}{\mbox{// }}
+\newcommand{\elcomment}[1]{\mbox{\quad// #1}}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%% Symbols and abbreviations
+
+
+%%%%%%%%%%%%%%%%%%%%%%%% Commands related to bibliography
+
+%% The "aa" prefix in the commands denotes "Also at"
+
+
+\newcommand{\iacrurl}[1]{\href{https://eprint.iacr.org/#1}{\nolinkurl{ia.cr/#1}}} %% ia.cr/\hspace{0em}#1
+\newcommand{\aaiacr}[1]{Also at \iacrurl{#1}}
+\newcommand{\eprintiacr}[1]{IACR Cryptology ePrint Archive, \iacrurl{#1}}  % when reference only exists at eprint
+\newcommand{\seealsoiacr}[1]{See also \iacrurl{#1}}
+
+\newcommand{\myhrefsplittwo}[3]{\href{#1}{#2}\hspace{0em}\href{#1}{#3}}  %% useful to enable a url to break line at a non usual place
+
+
+\newcommand{\aaarxiv}[1]{Also at arXiv:\href{https://arxiv.org/abs/#1}{#1}}
+
+%% \aaECCCTR{YYYY}{YY}{NNN}
+\newcommand{\aaECCCTR}[3]{Also at ECCC~\href{https://eccc.weizmann.ac.il/report/#1/#3}{TR#2/#3}}
+\newcommand{\seealsoweizmann}[2]{See also \href{https://eccc.weizmann.ac.il/report/#1/#2}{TR #1-#2}}
+
+\newcommand{\doiurl}[1]{\href{https://doi.org/#1}{#1}}
+% \printdoi: to use sometimes inside field addendum; should match the style used by biblatex in field doi
+\newcommand{\printdoi}[1]{DOI:\doiurl{#1}}
+
+\def\Proc{Proc.} % Abbreviation of ``Proceedings of the''
+
+\DeclareListWrapperFormat{publisher}{Pub.\ by \mkbibemph{#1}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%% Commands
+
+\def\fillindesc{\red{$<$fill with description$>$}}
+\newcommand{\emphbrkt}[1]{\ensuremath{\left\langle\emph{#1}\right\rangle}}
+\newcommand{\mathfullstop}{\enspace.}
+\def\ifempty#1{\def\temp{#1} \ifx\temp\empty }  % mathml doesn't support ifthenelse
+
+
+%%%%%%%%%%%%%%%%%%%%%% Indexed environments
+
+\newtheoremstyle{recbfstyle}{1em}{.5em}{\rm}{0em}{\bfseries}{. }{.5em}{\fontfamheads{\thmname{#1 }}{\thmnumber{#2}}\bfseries{}\ifthenelse{\equal{#3}{}}{}{ --- \thmnote{#3}}}
+\theoremstyle{recbfstyle}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{remark}{Remark}[chapter]
+
+%%% \newtheoremstyle{mystyle}%    % Name
+%%%   {}%                         % Space above
+%%%   {}%                         % Space below
+%%%   {\itshape}%                 % Body font
+%%%   {}%                         % Indent amount
+%%%   {\bfseries}%                % Theorem head font
+%%%   {.}%                        % Punctuation after theorem head
+%%%   { }%                        % Space after theorem head, ' ', or \newline
+%%%   {}%                         % Theorem head spec (can be left empty, meaning `normal')
+
+%% style for recommendations and requirements
+
+\theoremstyle{recbfstyle}
+\newtheorem{recommendation}{Recommendation}[chapter]
+\newtheorem{requirement}{Requirement}[chapter]
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% Gadgets
+
+\newcommand{\defgadget}[5]{{%   {name}{args}{ancilla}{constraints}{comment}
+  \par
+  \def\endofwitness{:}
+  \let\oldelcomment=\elcomment
+  \def\elcomment{\def\endofwitness{}\oldelcomment}
+  \ensuremath{
+  \begin{array}{l}
+    \textsc{#1}(#2) := \{ 
+    \ifempty{#5}\else{\quad \mbox{// {#5}} }\fi\\
+    \mbox{}\quad\begin{array}{l}
+       \ifempty{#3}\else#3\endofwitness \\ \fi
+        #4 \; 
+    \end{array} \\
+  \}
+  \end{array}
+  }
+}}
+
+\newcommand{\usegadget}[2]{%   {name}{args}
+  \ensuremath{ \textsc{#1}(#2) }
+}
+
+\newcommand{\namegadget}[1]{%   {name}
+  \ensuremath{ \textsc{#1} }}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\definecolor{NPcolor}{rgb}{0,0.3,0}
+\newcommand{\NPstatement}[3]{{\color{NPcolor}\begin{itemize}[nosep]\item[] #1; \item[] #2; \item[] #3.\end{itemize}}}
+\newcommand{\NPstatementNOperiod}[3]{{\color{NPcolor} \begin{itemize}[nosep] \item[] #1; \item[] #2; \item[] #3 \end{itemize}}}
+\newcommand{\pkB}{\mathsf{pkB}}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% Template for proposed future figures
+\newcounter{cntFF}[chapter]\setcounter{cntFF}{0}
+\renewcommand{\thecntFF}{FF\thechapter.\arabic{cntFF}}
+\def\futfigheadtext{Proposed future figure (illustration, diagram, ...):}
+\def\futfigfoottext{}
+%% The optional argument is a label that allows referencing this future figure
+\newcommand{\futfig}[2][]{\begingroup\nolinenumbers\vskip.5em\setlength{\fboxsep}{.5em}\fbox{{\begin{minipage}{\textwidth-2\fboxsep-2\fboxrule}\centering\conditionalinternallinenumbers\setlinenumbermargin{1em}
+    \textbf{\refstepcounter{cntFF}\ifthenelse{\equal{#1}{}}{}{\label{#1}}\textbf{\thecntFF.} \futfigheadtext}\vskip.5em
+    #2
+    \ifthenelse{\equal{\futfigfoottext}{}}{}{\vskip.5em\restoline{\futfigfoottext}}
+    \end{minipage}}}\vskip.5em\endgroup}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% TO-DO's
+
+\newcommand{\TODO}[1][]{\dtcolornote[TODO]{red}{#1}}
+
+\definecolor{wantedcolor}{rgb}{0.5,0,0}
+\newcommand{\WANTED}[1][elaboration]{\dtcolornote[CONTRIBUTION WANTED]{wantedcolor}{#1}}
+
+\renewcommand{\WANTED}[1][]{\begingroup\nolinenumbers\vskip.5em\setlength{\fboxsep}{.75em}\fbox{{\begin{minipage}{\textwidth-2\fboxsep-2\fboxrule}\conditionalinternallinenumbers\setlinenumbermargin{1em}
+    \color{wantedcolor}\textbf{Contribution wanted}\ifthenelse{\equal{#1}{}}{}{:~}#1
+    \end{minipage}}}\vskip.75em\endgroup}
+
+
+%\setlength{\marginparwidth}{2cm}  %%% temporary command to avoid warning when using comments
+%\usepackage[colorinlistoftodos]{todonotes} 
+%\newcommand{\scrtodo}[2]{\begingroup\setstretch{.5}\todo{\tiny #1}{#2}\endgroup}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%% Command to create file based on expanding macros
+% \filecontentsspecials|[]: https://tex.stackexchange.com/questions/534035/macros-commands-inside-a-filecontents-environment-does-not-expand
+% needs to be run once before each \filecontents* that requires expanding some macros
+
+\def\filecontentsspecials#1#2#3{
+  \global\let\ltxspecials\dospecials
+  \gdef\dospecials{\ltxspecials
+    \catcode`#1=0
+    \catcode`#2=1
+    \catcode`#3=2
+    \global\let\dospecials\ltxspecials
+  }
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%% Symbols and abbreviations
 
 \newcommand{\shortleftarrow}{\ensuremath{\scalebox{1}{\ensuremath{\leftarrow}}}}
 
@@ -129,3 +280,53 @@
 \newcommand{\should}{{\ttfamily should}}
 \newcommand{\can}{{\ttfamily can}}
 \newcommand{\neednot}{{\ttfamily need not}}
+
+
+%%%%%% Crypto primitives
+
+\newcommand{\commit}{\ensuremath{\mathsf{Commit}}}
+\newcommand{\open}{\ensuremath{\mathsf{Open}}}
+\newcommand{\invalid}{\ensuremath{\mathsf{invalid}}}
+
+\newcommand{\owf}{\ensuremath{\mathsf{owf}}}
+
+%%%%%% VARIOUS ABBREVIATED COMMANDS
+\def\s{\ensuremath{\sigma}}
+\def\field{\ensuremath{\mathbb F}}
+\def\F{\field}
+\def\cF{\ensuremath{\cal F}}
+\def\N{\ensuremath{\mathbb N}}
+\def\bC{\ensuremath{\mathbf C}}
+\def\params{\ensuremath{params}}
+
+
+%%%%%% Constraint systems
+
+\newcommand{\defem}[1]{\emph{\textbf{#1}}}
+\newcommand{\enlargeparens}{{\rule{0pt}{2.2ex}}}
+\newcommand{\ip}[2]{\left\langle #1 , #2 \right\rangle}
+\newcommand{\bigip}[2]{\ip{\enlargeparens #1}{#2}}
+
+\newcommand{\FieldSize}{\ensuremath{q}}
+\newcommand{\FieldBits}{\ensuremath{n}}
+\newcommand{\Field}{\ensuremath{\mathbb{F}_{\FieldSize}}} %_\FieldSize
+\newcommand{\NumConstr}{\ensuremath{n_{\mathsf{c}}}}
+\newcommand{\NumWit}{\ensuremath{{n_{\mathsf{w}}}}}
+\newcommand{\NumInst}{\ensuremath{{n_{\mathsf{x}}}}}
+\newcommand{\NumConc}{\ensuremath{{n_{\mathsf{z}}}}}
+\newcommand{\inst}{\ensuremath{x}}
+\newcommand{\wit}{\ensuremath{w}}
+\newcommand{\conc}{\ensuremath{z}}
+\newcommand{\vinst}{\ensuremath{\vec{\inst}}}
+\newcommand{\vwit}{\ensuremath{\vec{\wit}}}
+\newcommand{\vconc}{\ensuremath{\vec{z}}}
+\newcommand{\lcoef}{\ensuremath{a}}
+\newcommand{\rcoef}{\ensuremath{b}}
+\newcommand{\ocoef}{\ensuremath{c}}
+\newcommand{\System}{\ensuremath{\mathcal{S}}}
+\newcommand{\Rel}{\ensuremath{\mathcal{R}}}
+\newcommand{\Lang}{\ensuremath{\mathcal{L}}}
+
+\newcommand{\zo}{\{0,1\}}
+\newcommand{\NN}{\ensuremath{\mathbb{N}}}
+\newcommand{\ZZ}{\ensuremath{\mathbb{Z}}}

@@ -1,37 +1,32 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Contents: Table of Contents, List of Tables, List of Figures, ...
-     %%% Still to add: List of Examples, List of Recommendations
-\cleartooddpage
-\begingroup\setstretch{1.25}
-\phantomsection\chapter*{Contents}\addcontentsline{toc}{section}{Contents}
-\label{prelim:contents}
+\begingroup
+    \phantomsection\chapter*{Contents}\addcontentsline{toc}{section}{Contents}
+    \label{prelim:contents}
 
 
-	\begingroup
-	\setlength{\cftbeforetoctitleskip}{1em} %defines the vertical space before toc
-	
-	\tableofcontents
-	\endgroup
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %%%%%% TABLE OF CONTENTS
+    \setlength{\cftbeforetoctitleskip}{1em}%  %defines the vertical space before toc
+    \tableofcontents
 
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %%%%%% LIST OF TABLES
+    \setlength{\cftbeforeloftitleskip}{3em} %defines the vertical space before lof
+    \let\oldnumberline\numberline%
+    \renewcommand{\numberline}{\figurename~\oldnumberline}%
+    \addtocontents{lof}{\vspace*{-3em}}%
+    \renewcommand{\listfigurename}{\pdfbookmark[2]{List of Figures}{pdfbkm:lof}\label{lof:lof}List of Figures}%
+    \listoffigures
 
-	\setstretch{1.2}
-	\begingroup
-  \setlength{\cftbeforeloftitleskip}{3em} %defines the vertical space before lof
-	\let\oldnumberline\numberline%
-  \renewcommand{\numberline}{\figurename~\oldnumberline}%
-	\addtocontents{lof}{\vspace*{-3em}}
-	\renewcommand{\listfigurename}{\pdfbookmark[2]{List of Figures}{pdfbkm:lof}\label{lof:lof}List of Figures}  %\vspace*{-1em}List of Figures
-	\listoffigures
-	\endgroup
-
-
-	%https://tex.stackexchange.com/questions/20337/adding-word-table-before-each-entry-in-list-of-tables
-	\begingroup
-	\setlength{\cftbeforelottitleskip}{3em} %defines the vertical space before lot
-  \let\oldnumberline\numberline%
-  \renewcommand{\numberline}{\tablename~\oldnumberline}%
-	\addtocontents{lot}{\vspace*{-3em}}
-	\renewcommand{\listtablename}{\pdfbookmark[2]{List of Tables}{pdfbkm:lot}\label{lot:lot}List of Tables}  %\vspace*{-1em}List of Tables
-	\listoftables
-	\endgroup
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %%%%%% LIST OF FIGURES
+    \setlength{\cftbeforelottitleskip}{3em} %defines the vertical space before lot
+    \renewcommand{\numberline}{\tablename~\oldnumberline}%
+    \addtocontents{lot}{\vspace*{-3em}}%
+    \renewcommand{\listtablename}{\pdfbookmark[2]{List of Tables}{pdfbkm:lot}\label{lot:lot}List of Tables}%
+    \listoftables
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %%% Still to add: List of Examples, List of Recommendations
 
 \endgroup

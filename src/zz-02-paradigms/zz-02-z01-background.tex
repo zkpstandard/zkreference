@@ -1,0 +1,154 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Background}
+\label{paradigms:background}
+
+There are many types of zero-knowledge proof (ZKP) systems in the literature, offering tradeoffs between communication cost, computational cost, and underlying cryptographic assumptions. 
+Many of these proofs can be decomposed into an 
+\hyperref[par:paradigms:background:IT]{information-theoretic (IT) proof system}, and a 
+\hyperref[par:paradigms:background:CC]{cryptographic compiler} (CC) that compiles such an IT-proof system into a real ZKP.
+
+The properties of the IT proof system are considered in a model taken for granted, not needing justification.
+However, to achieve a proof that is useful in the real world, the IT proof system then needs to be instantiated by a CC that removes the ideal components.
+An actual proof implementation in the real world also requires agreement on an  \hyperref[par:paradigms:background:arithmetization]{arithmetization} procedure that 
+represents the \emph{statement}, the \emph{instance} and the \emph{witness} in some concrete way.
+
+
+The IT/CC separation can simplify the protocol design, allowing each part to be analyzed, optimized, and implemented separately.
+This also facilitates a systematic exploration of the design space, when in search of the best solution for a task at hand.
+For simplicity, the term ``ZK'' is sometimes omitted, but the implicit default focus remains on ZKP systems. 
+The IT/CC perspective (considered in Sections~\ref{paradigms:IT} and \ref{paradigms:CC}) is essentially focused on general proof systems for NP relations.
+Other types and aspects of ZKPs exist, explained outside the IT/CC categorization, including the case of some specialized languages (\refsec{paradigms:specialized}), and aspects of recursive proof composition (\refsec{paradigms:proof-composition}) and interactivity (\refsec{paradigms:interactivity}).
+\loosen
+
+\futfig{Diagram representing the three main concepts: IT, CC, Arithmetization}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Information-theoretic (IT) proof system}
+\label{par:paradigms:background:IT}
+
+An IT proof system provides soundness and ZK guarantees even when the prover and the verifier are computationally unbounded.
+However, they use an idealized model of interaction, where the prover and/or verifier's powers 
+are restricted, structured or augmented in some ideal way. 
+
+A common type of idealized model provides access to some black-box communication functionality, which will be concretely realized by the cryptographic compiler.
+For instance, the idealized model may let the prover produce a long proof vector, and then only give the verifier restricted access to this vector, such as querying just a few elements from the vector (without seeing the rest, but also without letting the prover change the answers depending on the queries; that is, the whole vector is committed to in advance).
+Another common example is an \emph{ideal commitment}, where a party can commit to a value by sending it to a trusted oracle (while keeping it hidden), and can later allow the other party to retrieve the value (with assurance that te value did not change).
+
+\futfig{Illustration of ideal commitment}
+
+The idealized model can also place restrictions on the parties. 
+For example, a restricted prover may consist of multiple separate parties that can coordinate in advance but cannot communicate with each other during the protocol execution.
+This allows the verifier to challenge them separately, and compare their answers for consistency.
+The cryptographic compiler, in such cases, shows how to transform the idealized parties into real-world parties that are not subject to artificial restrictions (but may be computationally bounded).
+\loosen
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{-.6em}
+\subsection{Cryptographic compiler (CC)}
+\label{par:paradigms:background:CC}
+
+\vspace{-.5em}
+A cryptographic compiler transforms an IT proof system into a real-world protocol that involves direct interaction between the prover and verifier.
+The aforementioned idealized assumptions on interaction models and parties' powers are eliminated, often by \emph{enforcing} them so they no longer need to be axiomatically assumed.
+This is done using protocols that, typically, rely on simpler cryptographic building blocks.
+The primitives used by a cryptographic compiler are then realized by (possibly heuristic) concrete instantiations, such as hash functions or pairing-friendly elliptic curves.
+This yields a concrete scheme that can be implemented and used in real-world applications.
+
+
+The underlying building blocks may be cryptographic primitives (e.g., collision-resistant hash functions or homomorphic commitment schemes).
+In this case, the security of the combination of the IT proof system with the compiler depends on the cryptographic assumptions in the realizations of these primitives, and in particular, typically applies only to computationally-bounded parties.
+\loosen
+
+Alternatively, the compiler may eliminate the high-level ideal models assumed by the IT proof system, but introduce new idealized primitives meant to capture finer-grained local assumptions (e.g., a random oracle or a generic bilinear group).
+In this case its security would hold under some ideal-model assumptions (e.g., bounding the number of queries made to the random oracle), and the real-world realization would either use a further compiler (e.g., to achieve the requisite properties of the finer-grained model under well-defined assumptions), or be heuristic (i.e., intuitively plausible but not formally proven).
+These, too, are typically plausible only for computationally-bounded parties.
+The cryptographic compiler may also provide extra desirable properties, such as eliminating interaction, shrinking the size of some of the messages, or even adding a ZK feature to an IT proof system that does not have it.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{-.6em}
+\subsection{Arithmetization}
+\label{par:paradigms:background:arithmetization}
+
+\vspace{-.5em}
+\xetexfontscale{.99}{
+Every IT proof systems has some \emph{native representation} in which it accepts the statement to be proven.
+Common ones include polynomial equations, Boolean circuits and arithmetic circuits. 
+Conversely, applications often prefer higher-level succinct representations, such as finite automatons, CPU+memory models, or circuits augmented with lookup tables and repeated elements.
+\loosen}
+
+The conversion of a high-level representation to the native representation may be wholly handled by a \hyperref[implem:frontends]{\emph{frontend}}, which is separate from the proof scheme per se. 
+However, many proof systems, as presented and implemented, already include some internal conversion from some natural format to their lower-level native (e.g., polynomial equations).
+This conversion is referred to as \emph{arithmetization} and consists of the following procedures:
+\begin{itemize}[nosep]
+\item \emph{statement reduction}: generates the \underline{native statement} representation (e.g., the polynomials to be checked); 
+\item \emph{instance reduction}: generates the \underline{native instance} representation (e.g., assignments to instance variables on which the polynomials are evaluated); and 
+\item \emph{witness reduction}: generates the \underline{native witness} representation (e.g., assignments to witness variable).
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Complexity and features}
+\label{par:paradigms:taxonomy:proof-systems:features}
+The concrete ZKP schemes that emerge from combining an IT proof system and a crypto compiler --- as well as any other specialized ZKP ---   are possible when following these proof systems can vary in characteristics.  
+Important complexity measures for these proofs include:
+proof length, 
+round complexity, 
+query complexity (number of queries and size of each query), 
+field (alphabet) size, 
+complexity of the verifier's decision predicate (e.g., when expressed as an arithmetic circuit).
+
+
+\newcounter{cntFeat}\setcounter{cntFeat}{0}
+\newcommand{\newfeat}{\refstepcounter{cntFeat}\arabic{cntFeat}}
+
+\newcounter{cntSubFeat}[cntFeat]\setcounter{cntSubFeat}{0}
+\newcommand{\newsubfeat}{\refstepcounter{cntSubFeat}\alph{cntSubFeat}}
+\renewcommand{\thecntSubFeat}{\arabic{cntFeat}\alph{cntSubFeat}}
+
+
+\futfig{Illustration that comprises the various metrics of interest}
+
+
+\paragraph{Proof succinctness}\label{feat:succint}
+With respect to proof length, there are several categories of interest:
+\begin{enumerate}
+\item[(\newsubfeat)\label{subfeat:succinct:fully}] Fully succinct: independent of statement size, i.e., $O(1)$ crypto elements.
+\item[(\newsubfeat)\label{subfeat:succinct:polylog}] Polylog succinct: number of crypto elements is polylogarithmic in the circuit size.
+\item[(\newsubfeat)\label{subfeat:succinct:sqrt}] Sqrt succinct: Proportional to square root of circuit size.
+\item[(\newsubfeat)\label{subfeat:succinct:depth}] Depth-succinct: depends on depth of a verification circuit representing the statement.
+\item[(\newsubfeat)\label{subfeat:succinct:non}] Non succinct: Proof length is not sublinear in the circuit size.
+\end{enumerate}
+The term SNARK %was first conceived in \cite{2017:BCCGLRT:Jr-Crypt:hunting-snarks} to describe 
+denotes a succinct non-interactive argument of knowledge \cite{2017:BCCGLRT:Jr-Crypt:hunting-snarks}.
+
+
+\paragraph{Complexity reference}\label{complexity-reference}
+Complexity measures (such as proof succinctness) should be properly contextualized. 
+For example, it does matter whether a complexity measure takes into account only the public information (e.g., statement and instance) or whether it also depends on the private part (e.g., witness).
+It also matters whether the expressed complexity (e.g., linear, quadratic, square-root, etc.) of a proof length is given with respect to the statement size refers to the statement before of after arithmetization.
+Different references are used across different works.
+
+
+\paragraph{Other features}
+Further characterization aspects of interest include:
+\begin{enumerate}
+    \item[\newfeat.\label{feat:plain}] \textbf{Setup trust.}
+    All non-interactive zero-knowledge proofs require a set of global public parameters agreed on by all parties.
+    If the global public parameters can be chosen \textit{randomly}, e.g., by hashing a famous quote,
+    then we say that the proving system has a public coin setup,
+    or a trustless setup.  This is the most ideal setup when it is possible. 
+    
+    If the global public parameters cannot be chosen randomly and are instead chosen either via a trusted party or using a multiparty computation,
+    then we say that the proving system has a private coin setup, or a trusted setup.
+    In this case either the trusted party or a coalition of all the parties involved in the multiparty computation are able to forge proofs.
+    Trusted setups can either be universal or language dependent.
+    A universal setup allows the same setup to be used for any language and therefore provides greater flexibility that a language dependent setup.
+    \loosen
+    
+    \item[\newfeat.\label{feat:symm-key}] \textbf{Types of primitives} (e.g.,
+    Symmetric-key cryptography (e.g., blockciphers), collision-re\-sist\-ant hash functions, random oracles, public-key crypto)
+
+\end{enumerate}

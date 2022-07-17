@@ -1,103 +1,91 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Specifying Statements for ZK}
 \label{security:spec-statements-ZK}
 
- 
-	This document considers types of statements defined by a relation $R$ between instances $x$ and witnesses $w$.
-	The relation $R$ specifies which pairs $(x,w)$ are considered related to each other, and which are not related to each other.
-	The relation defines a matching language $L$ consisting of instances $x$ that have a witness $w$ in $R$.
+This document considers types of statements defined by a relation $R$ between instances $x$ and witnesses $w$.
+The relation $R$ specifies which pairs $(x,w)$ are considered related to each other, and which are not related to each other.
+The relation defines a matching language $L$ consisting of instances $x$ that have a witness $w$ in $R$.
 
 
-	
-	A \emph{statement} is either a \emph{membership} claim of the form ``$x \in L$'', 
-or a \emph{knowledge} claim of the form ``In the scope of relation $R$, I know a witness for instance $x$.''
-	For some cases, the \emph{knowledge} and \emph{membership} types of statement can be informally considered interchangeable, but formally there are technical reasons to distinguish between the two notions. 
-	In particular, there are scenarios where a statement of knowledge cannot be converted into a statement of membership, and vice-versa (as exemplified in Section 1.4).
-	The examples in this document are often based on statements of knowledge.
-	\loosen
+A \emph{statement} is either a \emph{membership} claim of the form ``$x \in L$'', or a \emph{knowledge} claim of the form ``In the scope of relation $R$, I know a witness for instance $x$.''
+For some cases, the \emph{knowledge} and \emph{membership} types of statement can be informally considered interchangeable, but formally there are technical reasons to distinguish between the two notions. 
+In particular, there are scenarios where a statement of knowledge cannot be converted into a statement of membership, and vice-versa (as exemplified in Section 1.4).
+The examples in this document are often based on statements of knowledge.
+\loosen
 
  
-	The relation $R$ can for instance be specified as a program (e.g. in C or Java), which given inputs $x$ and $w$ decides to accept, meaning $(x,w) \in R$, or reject, meaning $w$ is not a witness to $x \in L$. 
-	Examples of such specifications of the relation are detailed in the \hyperref[chap:apps]{Applications track}.
-	In the academic literature, relations are often specified either as 
-random access memory (RAM) programs or through Boolean and arithmetic circuits, described below.
+The relation $R$ can for instance be specified as a program (e.g. in C or Java), which given inputs $x$ and $w$ decides to accept, meaning $(x,w) \in R$, or reject, meaning $w$ is not a witness to $x \in L$. 
+Examples of such specifications of the relation are detailed in the \hyperref[chap:apps]{Applications track}.
+In the academic literature, relations are often specified either as random access memory (RAM) programs or through Boolean and arithmetic circuits, described below.
 
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Circuit representation}
 \label{security:spec-statements-ZK:circuit-representation}
 
 
-A circuit is a directed acyclic graph (DAG) comprised of nodes and labels for nodes, which satisfy the following constraints:
+A circuit is a directed acyclic graph (DAG) comprised of nodes and labels for nodes, as follows:
 \begin{itemize}
-\item Nodes with in-degree 0 are referred to as the \textbf{input nodes}\luissug{Consider adjusting all items to become of the form \textbf{<new term>}: <description>.} and are labeled with some constant (e.g., $0, 1, \ldots$) or with input variable names (e.g., $v_1, v_2, \ldots$)
-\item There is a single node with out-degree 0 that is referred to as the \textbf{output node}.
-\item Internal nodes are referred to as \textbf{gate nodes} and describe a computation performed at the node.\loosen
+\item \textbf{Input nodes:} Nodes with in-degree 0; they are labeled with some constant (e.g., $0, 1, \ldots$) or with input variable names (e.g., $v_1, v_2, \ldots$)
+\item \textbf{Output node:} A single node with out-degree 0.
+\item \textbf{Gates:} The internal nodes, describing a computation.
 \end{itemize}
 
 
-%%%LB: Consider moving the `parametes' up, because it defines n_x and n_w, which are used in the subsequent bullets
-\paragraph{Parameters.} 
+\inpar{Parameters} 
 Depending on the application, various parameters may be important, for instance the number of gates in the circuit, the number of instance variables $n_x$, the number of witness variables $n_w$, the circuit depth, or the circuit width.
  
-\paragraph{Boolean Circuit satisfiability.} 
-	The relation $R$ has instances of the form $x = (C, v_1, \ldots, v_{n_x})$ and witnesses $w = (w_1,...,w_{n_w})$. 
-	For $(x,w)$ to be in the relation, $C$ must be a circuit with fan-in 2 gate nodes 
-that are labeled with Boolean operations, e.g., \XOR\ or \AND, $v_1,...,v_{n_x}$ must specify 
-truth values for some of the input nodes, and $w_1,...,w_{n_w}$ must specify 
-truth values for the remaining input variables, such that when evaluating the circuit the output node becomes 1 (true).
+\inpar{Boolean Circuit satisfiability} 
+The relation $R$ has instances of the form $x = (C, v_1, \ldots, v_{n_x})$ and witnesses $w = (w_1,...,w_{n_w})$. 
+For $(x,w)$ to be in the relation, $C$ must be a circuit with fan-in 2 gate nodes that are labeled with Boolean operations, e.g., \XOR\ or \AND, $v_1,...,v_{n_x}$ must specify truth values for some of the input nodes, and $w_1,...,w_{n_w}$ must specify truth values for the remaining input variables, such that when evaluating the circuit the output node becomes 1 (true).
  
-\paragraph{Arithmetic Circuit satisfiability.} 
-	The relation has instances of the form $x = (F, C, v_1,...,v_{n_x})$ and witnesses $w = (w_1,...,w_{n_w})$.
-	For $(x,w)$ to be in the relation, $F$ must be a finite field (e.g., integers modulo a prime $p$), $C$ must be a circuit with gate nodes that are labeled with field operations, i.e., addition or multiplication, $v_1,...,v_{n_x}$ must specify field elements for some of the input nodes, and $w_1,...,w_{n_w}$ must specify field elements for the remaining input variables, such that when evaluating the circuit the output node becomes 1.
+\inpar{Arithmetic Circuit satisfiability} 
+The relation has instances of the form $x = (F, C, v_1,...,v_{n_x})$ and witnesses $w = (w_1,...,w_{n_w})$.
+For $(x,w)$ to be in the relation, $F$ must be a finite field (e.g., integers modulo a prime $p$), $C$ must be a circuit with gate nodes that are labeled with field operations, i.e., addition or multiplication, $v_1,...,v_{n_x}$ must specify field elements for some of the input nodes, and $w_1,...,w_{n_w}$ must specify field elements for the remaining input variables, such that when evaluating the circuit the output node becomes 1.
  
+\futfig{Illustrate the various components of a circuit, including the variable}
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{R1CS representation}
 \label{security:spec-statements-ZK:R1CS-representation}
 
 \newcommand{\brkt}[1]{\ensuremath{\left\langle #1\right\rangle}}
 
-
-
-	A rank-1 constraint system (R1CS) is a system of equations represented by a 
-list of triplets $(\vec{a}, \vec{b}, \vec{c})$ of vectors of elements of some field.
-	Each triplet defines a ``constraint'' as an equation of the form $(A) \cdot (B) - (C) = 0$.
-	Each of the three elements --- (A), (B), (C) --- in such equation is a linear combination 
-(e.g., $(C) = c_1 \cdot s_1 + c_2 \cdot s_2 + ...$) of variables $s_i$ of the so called solution $\vec{s}$ vector.
+A rank-1 constraint system (R1CS) is a system of equations represented by a list of triplets $(\vec{a}, \vec{b}, \vec{c})$ of vectors of elements of some field.
+Each triplet defines a ``constraint'' as an equation of the form $(A) \cdot (B) - (C) = 0$.
+Each of the three elements --- (A), (B), (C) --- in such equation is a linear combination (e.g., $(C) = c_1 \cdot s_1 + c_2 \cdot s_2 + ...$) of variables $s_i$ of the so called solution $\vec{s}$ vector.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\paragraph{R1CS satisfiability.}
-	For all triplets ($\vec{a}, \vec{b}, \vec{c}$) of vectors in the R1CS, the solution vector $\vec{s}$ must satisfy 
-$\brkt{\vec{a}, \vec{s}} \cdot \brkt{\vec{b}, \vec{s}} - \brkt{\vec{c}, \vec{s}} = 0$, 
-where $\brkt{\cdot, \cdot}$ denotes the dot product of two vectors.
-	The first element of $\vec{s}$ is fixed to the constant 1 (instead of a variable), to enable encoding constants in the constraints.
-	The remaining elements represent several kinds of variables:
-	\begin{itemize}
-	\item \textbf{Witness variables:} 
-	known only to the prover; represent external inputs to the constraint system --- the witness of the ZK proof system.
-	\item \textbf{Internal variables}: 
-	known only to the prover; internal to the constraint system (represent the inputs and outputs of multiplication gates);
-	\item \textbf{Instance variables:} known by both prover and verifier.
-	\end{itemize}
-
-	A R1CS does not produce an output from an input (as for example a circuit does), but can be used to 
-verify the correctness of a computation (e.g., performed by circuits with logic and/or arithmetic gates).
-	The R1CS checks that the output variables (commonly known by both prover and verifier) are 
-consistent with all other variables (possibly known only by the prover) in the solution vector.
-	R1CS is only an intermediate representation, since the actual use in a ZKP system requires 
-subsequent formulations (e.g., into a QAP) to enable verification without revealing the secret variables.
-
-
-	A R1CS can be used to represent a Boolean circuit satisfiability 
-problem and also to verify computations in arithmetic circuits.
-	It is sufficient to observe that arbitrary circuits can be represented 
-using multiplication and linear combination of polynomials, and these 
-in turn correspond to R1CS constraints. For example:
+\paragraph{R1CS satisfiability}
+For all triplets ($\vec{a}, \vec{b}, \vec{c}$) of vectors in the R1CS, the solution vector $\vec{s}$ must satisfy $\brkt{\vec{a}, \vec{s}} \cdot \brkt{\vec{b}, \vec{s}} - \brkt{\vec{c}, \vec{s}} = 0$, where $\brkt{\cdot, \cdot}$ denotes the dot product of two vectors.
+The first element of $\vec{s}$ is fixed to the constant 1 (instead of a variable), to enable encoding constants in the constraints.
+The remaining elements represent several kinds of variables:
 
 \begin{itemize}
+\item \textbf{Witness variables:} 
+known only to the prover; represent external inputs to the constraint system --- the witness of the ZK proof system.
+
+\item \textbf{Internal variables}: 
+known only to the prover; internal to the constraint system (represent the inputs and outputs of multiplication gates);
+
+\item \textbf{Instance variables:} 
+known by both prover and verifier.
+\end{itemize}
+
+A R1CS does not produce an output from an input (as for example a circuit does), but can be used to verify the correctness of a computation (e.g., performed by circuits with logic and/or arithmetic gates).
+The R1CS checks that the output variables (commonly known by both prover and verifier) are consistent with all other variables (possibly known only by the prover) in the solution vector.
+R1CS is only an intermediate representation, since the actual use in a ZKP system requires subsequent formulations (e.g., into a QAP) to enable verification without revealing the secret variables.
+
+A R1CS can be used to represent a Boolean circuit satisfiability problem and also to verify computations in arithmetic circuits.
+It is sufficient to observe that arbitrary circuits can be represented using multiplication and linear combination of polynomials, and these in turn correspond to R1CS constraints.
+For example:
+
+
+\futfig{Illustrate an R1CS}
+
+\begin{itemize}
+
 
 \item \textbf{Boolean circuits operations:}
 
@@ -108,11 +96,10 @@ in turn correspond to R1CS constraints. For example:
 	Put differently, if $x$ is 0 or 1, then $1-x$ is respectively 1 or 1.
 
 	\item \textbf{\AND\ operation:} 
-		can be implemented as $(A) \times (B)$
+	can be implemented as $(A) \times (B)$
 
 	\item \textbf{\XOR\ operation ($c = a~\XOR~b$):}
-		can be implemented as $(2 \cdot a ) \times (b) = (a + b - c)$, 
-	or equivalently as $c = a + b - (a~\AND~b) \ast 2$
+	can be implemented as $(2 \cdot a ) \times (b) = (a + b - c)$, or equivalently as $c = a + b - (a~\AND~b) \ast 2$
 	\end{itemize}
 
 
@@ -120,31 +107,24 @@ in turn correspond to R1CS constraints. For example:
 
 	\begin{itemize}
 	\item Multiplication gates are directly represented as equations of the form $a \ast b = c$.
-	\item Linear constraints are used to keep track of inputs and outputs across these gates, 
-and to represent addition and multiplication-by-constants.
+	\item Linear constraints are used to keep track of inputs and outputs across these gates, and to represent addition and multiplication-by-constants.
 	\end{itemize}
 
 \end{itemize}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Types of relations}
 \label{security:spec-statements-ZK:types-of-relations}
 
 
- 
-\textbf{Special purpose relations:} Circuit satisfiability is 
-a complete problem within the non-deter\-min\-istic polynomial (NP) class,
-i.e., it is NP-complete,
-but a relation does not have to be that. 
-	Examples of statements that appear in cryptographic usage include that a committed value falls in a certain range $[A;B]$ or belongs to a set $S$, that a ciphertext has plaintext 0 or that two ciphertexts encrypt the same value, that the prover has a secret key associated with a set of public verification keys for a signature scheme, etc.
+\inpar{Special purpose relations} 
+Circuit satisfiability is a complete problem within the non-deter\-min\-istic polynomial (NP) class, i.e., it is NP-complete, but a relation does not have to be that. 
+Examples of statements that appear in cryptographic usage include that a committed value falls in a certain range $[A;B]$ or belongs to a set $S$, that a ciphertext has plaintext 0 or that two ciphertexts encrypt the same value, that the prover has a secret key associated with a set of public verification keys for a signature scheme, etc.
 
 
-\textbf{Setup-dependent relations:} 
-	Sometimes it is convenient to let the relation $R$ take an additional input setup$_R$, i.e., let the relation contain triples $(\textmd{setup}_R, x, w)$. 
-	The input setup$_R$ can be used to specify persistent information.
-	For example, for arithmetic circuit satisfiability, if the same finite field $\mathbb{F}$ and circuit $C$ are used many times, 
-then $\textmd{setup}_R = (\mathbb{F}, C)$ and $x = (v_1,...,v_{n_x})$.
-	The input setup$_R$ can also be used to capture trusted input the relation does not check, 
-e.g., a trusted Rivest--Shamir--Adleman (RSA) modulus.
-
+\inpar{Setup-dependent relations}
+Sometimes it is convenient to let the relation $R$ take an additional input setup$_R$, i.e., let the relation contain triples $(\textmd{setup}_R, x, w)$. 
+The input setup$_R$ can be used to specify persistent information.
+For example, for arithmetic circuit satisfiability, if the same finite field $\mathbb{F}$ and circuit $C$ are used many times, then $\textmd{setup}_R = (\mathbb{F}, C)$ and $x = (v_1,...,v_{n_x})$.
+The input setup$_R$ can also be used to capture trusted input the relation does not check, e.g., a trusted Rivest--Shamir--Adleman (RSA) modulus.

@@ -2,82 +2,99 @@
 \label{sec:prelim:executive-summary}
 
 
-	
-
-	Zero-knowledge proofs (ZKPs) are an important privacy-enhancing tool from cryptography. 
-	They allow proving the veracity of a statement, related to confidential data, without revealing any information beyond the validity of the statement.
-	%%% They preserve confidentiality of data, while proving the veracity of statements about the data. %%% statements of membership
-	%%% They can also be used to prove knowledge of such data without having to disclose it. %%% Statements of knowledge
-  ZKPs were initially developed by the academic community in the 1980s, and have seen tremendous improvements since then.
-	They are now of practical feasibility in multiple domains of interest to the industry, and to a large community of developers and researchers.  
-  ZKPs can have a positive impact in industries, agencies, and for personal use, by allowing privacy-preserving applications where designated private data can be made useful to third parties, despite not being disclosed to them.
+Zero-knowledge proofs (ZKPs) are an important privacy-enhancing tool from cryptography. 
+They allow proving the veracity of a statement, related to confidential data, without revealing any information beyond the validity of the statement.
+ZKPs were initially developed by the academic community in the 1980s, and have seen tremendous improvements since then.
+They have since become feasible in practice for application in multiple domains of interest to the industry, and to a large community of developers and researchers. 
+ZKPs can have a positive impact in industries, agencies, and for personal use, by allowing privacy-preserving applications where designated private data can be made useful to third parties, despite not being disclosed to them.
 
 
-	The development of this reference document aims to serve the broader community, particularly those interested in understanding ZKP systems, making an impact in their advancement, and using related products.
-	This is a step towards enabling wider adoption of ZKP technology, which may precede the establishment of future standards.
-	However, this document is not a substitution for research papers, technical books, or standards. 
-	It is intended to serve as a reference handbook of introductory concepts, basic techniques, implementation suggestions and application use-cases. 
+The development of this reference document aims to serve the broader community, particularly those interested in understanding ZKP systems, making an impact in their advancement, and using related products.
+This is a step towards enabling wider adoption of ZKP technology, which may precede the establishment of future standards.
+However, this document is not a substitution for research papers, technical books, or standards. 
+It is intended to serve as a reference handbook of introductory concepts, basic techniques, implementation suggestions and application use-cases. 
 
 
-	ZKP systems involve at least two parties: a prover and a verifier.  
-	The goal of the prover is to convince the verifier that a statement is true, without revealing any additional information.  
-	For example, suppose the prover holds a birth certificate digitally signed by an authority.
-	In order to access some service, the prover may have to prove being at least 18 years old, that is, that there exists a birth certificate, tied to the identify of the prover and digitally signed by a trusted certification authority, stating a birthdate consistent with the age claim.
-	A ZKP allows this, without the prover having to reveal the birthdate.
+ZKP systems involve at least two parties: a prover and a verifier.  
+The goal of the prover is to convince the verifier that a \emph{statement} is true, without revealing any additional information.  
+For example, suppose the prover holds a birthdate certificate digitally signed by an authority.
+In order to access some service, the prover may have to prove being at least 18 years old, that is, that the prover \emph{knows} a certificate, tied to their identify and digitally signed by a trusted certification authority, stating a birthdate consistent with the age claim.
+A ZKP allows this, without the prover having to reveal the birthdate.
 
 
-	This document describes important aspects of the current state of the art in ZKP security, implementation, and applications.
-	There are several use-cases and applications where ZKPs can add value.
-	To better assess this it is useful to benchmark implementations under several metrics, evaluate tradeoffs between security and efficiency, and develop an interoperability basis.
-    The security of a proof system is paramount for the system users, but efficiency is also essential for user experience.
+\xetexfontscale{.985}{
+This document describes important aspects of the current state of the art in ZKP
+\hyperref[chap:security]{security}, 
+\hyperref[chap:paradigms]{paradigms}, 
+\hyperref[chap:implem]{implementation}, and 
+\hyperref[chap:apps]{applications}.
+There are several use-cases and applications where ZKPs can add value.
+To better assess this it is useful to benchmark implementations under several metrics, evaluate tradeoffs between security and efficiency, and develop an interoperability basis.
+The security of a proof system is paramount for the system users, but efficiency is also essential for user experience.
+}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%% ABOUT CHAPTER "SECURITY"
-	The ``Security'' chapter introduces the theory and terminology of ZKP systems.
-	A ZKP system can be described with three components: {\texttt setup}, {\texttt prove}, {\texttt verify}. 
-	The {\texttt setup}, which can be implemented with various techniques, determines the initial state of the prover and the verifier, including private and common elements.
-	The {\texttt prove} and {\texttt verify} components are the algorithms followed by the prover and verifier, respectively, possibly in an interactive manner.
-	These algorithms are defined so as to ensure three main security requirements: completeness, soundness, and zero-knowledge.
+\label{par:exec-summ:chap-security}
+The ``\hyperref[chap:security]{Security}'' chapter introduces the baseline terminology and security concepts of ZKP systems.
+A ZKP system can be described with three components: {\tt setup}, {\tt prove}, {\tt verify}. 
+The {\tt setup} determines the initial state of the prover and the verifier, including private and common elements, such as private and public keys, or a common reference string.
+The {\tt prove} and {\tt verify} components are the prover and verifier's algorithms, respectively, possibly interactive.
+Overall they need to ensure three main security requirements: completeness, soundness, and zero-knowledge.
 
-	Completeness requires that if both {\texttt prove} and {\texttt verify} are correct, and if the statement is true, then at the end of the interaction the prover is convinced of this fact.
-	Soundness requires that not even a malicious prover can convince the verifier of a false statement.
-	Zero knowledge requires that even a malicious verifier cannot extract any information beyond the truthfulness of the given statement.  
+\xetexfontscale{.99}{
+Completeness requires that if both {\tt prove} and {\tt verify} are correct, and if the statement is true, then at the end of the interaction the verifier is convinced of this fact.
+Soundness requires that not even a malicious prover can convince the verifier of a false statement.
+Zero knowledge requires that even a malicious verifier cannot extract from the proof process any information beyond the truthfulness of the given statement.
+Other properties and variations may be built in by design, as desired features, such as succinctness, non-interactivity, transferability and composability, among others.
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%% ABOUT CHAPTER "PARADIGMS"
+\pslabel{par:exec-summ:chap-paradigms}
+The ``\hyperref[chap:paradigms]{Paradigms}'' chapter presents an overview of paradigms for constructing zero-knowledge proofs for general statements, namely those related to non-deterministic polynomial (NP) relations.
+The presentation describes a modern perspective of composition of an \emph{information theoretic} (IT) system, based on ideal components, a \emph{cryptographic compiler} (CC), where cryptographic elements come into play, and an \emph{arithmetization} system to encode the actual public data (statement and instance) and private data (witness) that determine the specific proof taking place.
+The provided organization allows for a systematized covering/characterization of many modern ZKP systems, many of which enable succinct proofs.
+Future updates to this chapter should include additional examples for specialized languages/relations, which can follow  a different approach.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%% ABOUT CHAPTER "IMPLEMENTATION"
-	The ``Implementation'' chapter focuses on devising a framework for the implementation of ZKPs, which is important for interoperability.
-	One important aspect to consider upfront is the representation of statements.
-	In a ZKP protocol, the statement needs to be converted into a mathematical object.
-	For example, in the case of proving that an age is at least 18, the statement is equivalent to proving that the private birthdate {\texttt Y$_1$-M$_1$-D$_1$} (year-month-day) satisfies a relation with the present date {\texttt Y$_2$-M$_2$-D$_2$}, namely that their distance is greater than or equal to 18 years.
-	This simple example can be represented as a disjunction of conditions: 
-{\tt Y$_2>$Y$_1$+18}, 
-or {\tt Y$_2$=Y$_1$+18}~$\wedge$~{\tt M$_2$}$>${\tt M$_1$},
-or {\tt Y$_2$=Y$_1$+18 }$\wedge${ \tt M$_2$=M$_1$ }$\wedge${ \tt D$_2$}$\geq${\tt D$_1$}.
-	An actual conversion suitable for ZKPs, namely for more complex statements, can pose an implementation challenge. 
-    There are nonetheless various techniques that enable converting a statement into a mathematical object, such as a circuit.
-    This document gives special attention to representations based on a Rank-1 constraint system (R1CS) and quadratic arithmetic programs (QAP), which are adopted by several ZKP solutions in use today.
-	Also, the document gives special emphasis to implementations of non-interactive proof systems.
+\pslabel{par:exec-summ:chap-implementation}
+The ``\hyperref[chap:implem]{Implementation}'' chapter focuses on devising a framework for the implementation of ZKPs, which is important for interoperability.
+One important aspect to consider upfront is the representation of statements.
+In a ZKP protocol, the statement needs to be converted into a mathematical object.
+For example, in the case of proving that an age is at least 18, the statement is equivalent to proving that the private birthdate {\texttt Y$_1$-M$_1$-D$_1$} (year-month-day) satisfies a relation with the present date {\texttt Y$_2$-M$_2$-D$_2$}, namely that their distance is greater than or equal to 18 years.
+This simple example can be represented as a disjunction of conditions: 
+    {\tt Y$_2>$Y$_1$+18}, 
+    or {\tt Y$_2$=Y$_1$+18}~$\wedge$~{\tt M$_2$}$>${\tt M$_1$},
+    or {\tt Y$_2$=Y$_1$+18 }$\wedge${ \tt M$_2$=M$_1$ }$\wedge${ \tt D$_2$}$\geq${\tt D$_1$}.
+An actual conversion suitable for ZKPs, namely for more complex statements, can pose an implementation challenge. 
+There are nonetheless various techniques that enable converting a statement into a mathematical object, such as a circuit.
+This document gives special attention to representations based on a Rank-1 constraint system (R1CS) and quadratic arithmetic programs (QAP), which are adopted by several ZKP solutions in use today.
+Also, the document gives special emphasis to implementations of non-interactive proof systems.
 \loosen
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%% ABOUT CHAPTER "APPLICATIONS"
-	The privacy enhancement offered by ZKPs can be applied to a wide range of scenarios.  
-	The ``Applications'' chapter presents three use-cases that can benefit from ZKP systems: identity framework; asset transfer; regulation compliance. 
-	In a privacy-preserving identity framework, one can for example prove useful personal attributes, such as age and state of residency, without revealing more detailed personal data such as birthdate and address.
-	In an asset-transfer setting, financial institutions that facilitate transactions usually require knowing the identities of the sender and receiver, and the asset type and amount. 
-	ZKP systems enable a privacy-preserving variant where the transaction is performed between anonymous parties, while at the same time ensuring they and their assets satisfy regulatory requirements.
-	In a regulation compliance setting, ZKPs enables an auditor to obtain proof that a process satisfies a number of requirements, without having to learn details about how they were achieved.
-	These use cases, as well as a wide range of many other conceivable privacy-preserving applications, can be enabled by a common set of tools, or gadgets, for example including commitments, signatures, encryption and circuits.
+\pslabel{par:exec-summ:chap-applications}
+The privacy enhancement offered by ZKPs can be applied to a wide range of scenarios.  
+The ``\hyperref[chap:apps]{Applications}'' chapter presents three use-cases that can benefit from ZKP systems: identity framework; asset transfer; regulation compliance. 
+In a privacy-preserving identity framework, one can for example prove useful personal attributes, such as age and state of residency, without revealing more detailed personal data such as birthdate and address.
+In an asset-transfer setting, financial institutions that facilitate transactions usually require knowing the identities of the sender and receiver, and the asset type and amount. 
+ZKP systems enable a privacy-preserving variant where the transaction is performed between anonymous parties, while at the same time ensuring they and their assets satisfy regulatory requirements.
+In a regulation compliance setting, ZKPs enables an auditor to obtain proof that a process satisfies a number of requirements, without having to learn details about how they were achieved.
+These use cases, as well as a wide range of many other conceivable privacy-preserving applications, can be enabled by a common set of tools, or gadgets, for example including commitments, signatures, encryption and circuits.
 \loosen
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%% CONCLUDING PARAGRAPH
-	The interplay between security concepts and implementation guidelines must be balanced in %to enable 
-the development of secure, practical, and interoperable ZKP applications.
-	Solutions provided by ZKP technology must be ensured by careful security practices and realistic assumptions.
-	This document aims to summarize security properties and implementation techniques that help achieve these goals.
-		
+\xetexfontscale{.995}{\pslabel{par:exec-summ:conclude}
+The development of secure, practical, and interoperable ZKP applications requires a balanced interplay between security concepts and implementation guidelines.
+Solutions provided by ZKP technology must be ensured by careful security practices and realistic assumptions.
+This document aims to summarize security properties and implementation techniques that help achieve these goals.
+}

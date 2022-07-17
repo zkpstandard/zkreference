@@ -1,29 +1,37 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \pdfbookmark[0]{Front matter}{pdfbkm:frontmatter}
 \pagenumbering{Alph}\setcounter{page}{1}\thispagestyle{empty}
 \addtocontents{toc}{\vspace*{-2em}}
 \input{zz-00-z01-cover-page.tex}
 
-\clearpage
-\pagenumbering{Alph}\setcounter{page}{2}\thispagestyle{empty}
-\input{zz-00-z02a-abstract.tex}
-\vfill
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage\ifodd\value{page}\else
+    {\thispagestyle{empty}\centering\intentionallyblank\clearpage}\fi
+\pagenumbering{roman}\setcounter{page}{1}
+\input{zz-00-z02a-abstract.tex}\vfill
 \input{zz-00-z02b-this-version.tex}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
-\pagenumbering{roman}\setcounter{page}{1}%\thispagestyle{empty}
 \addtocontents{section}{\vspace*{-5em}}
-
 \input{zz-00-z03-this-community-ref.tex}
 
-\clearpage\begingroup\setstretch{.98} %fit in single place
-\input{zz-00-z04a-charter.tex}
-\input{zz-00-z04b-ip-policy.tex}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begingroup
+    \clearpage\setstretch{.98} % to fit in a single page
+    \input{zz-00-z04a-charter.tex}
+    \input{zz-00-z04b-ip-policy.tex}
 \endgroup
 
-\clearpage\input{zz-00-z05-contents.tex}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\clearpage\input{zz-00-z06-exec-summary.tex}
+\cleartooddpage
+% \thispagestyle{cnts}\pagestyle{cnts}
+\begingroup\setstretch{1.3} %% adjust for a nice fit of page breaks
+\input{zz-00-z05-contents.tex}
+\endgroup
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\cleartooddpage
+\thispagestyle{exec-summ}\pagestyle{exec-summ}
+\input{zz-00-z06-exec-summary.tex}

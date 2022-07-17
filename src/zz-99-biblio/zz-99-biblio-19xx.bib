@@ -1,20 +1,8 @@
-@InProceedings{1987:crypto-86:How-to-Prove-Yourself,
-author={Fiat, Amos and Shamir, Adi},
-editor={Odlyzko, Andrew M.},
-title={How To Prove Yourself: Practical Solutions to Identification and Signature Problems},
-booktitle={Advances in Cryptology --- CRYPTO' 86},
-series={LNCS},
-volume={263},
-year={1987},
-publisher={Springer Berlin Heidelberg},
-address={Berlin, Heidelberg},
-pages={186--194},
-doi={10.1007/3-540-47721-7_12},
-isbn={978-3-540-47721-1}
-}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%% 1980's
 
 
-@article{1989:SJC:the-knowledge-complexity-of-interactive-proof-systems,
+@article{1985:GMR:STOC:the-knowledge-complexity-of-interactive-proof-systems,
 author = {Goldwasser, Shafi. and Micali, Silvio. and Rackoff, Charles.},
 title = {The Knowledge Complexity of Interactive Proof Systems},
 journal = {SIAM Journal on Computing},
@@ -23,36 +11,119 @@ number = {1},
 pages = {186-208},
 year = {1989},
 doi = {10.1137/0218012},
+addendum = {Also later at: SIAM Journal on Computing, Vol. 18, Issue 1, ACM, 1989, doi:\doiurl{110.1137/0218012}}
 }
+
+
+@InProceedings{1987:FS:crypto:How-To-Prove-Yourself,
+author = {Fiat, Amos and Shamir, Adi},
+editor = {Odlyzko, Andrew M.},
+title = {How To Prove Yourself: Practical Solutions to Identification and Signature Problems},
+booktitle = {Advances in Cryptology --- CRYPTO' 86},
+year = {1987},
+series = {LNCS},
+volume = {263},
+publisher = {Springer Berlin Heidelberg},
+address= {Berlin, Heidelberg},
+pages = {186--194},
+abstract = {In this paper we describe simple identification and signature schemes which enable any user to prove his identity and the authenticity of his messages to any other user without shared or public keys. The schemes are provably secure against any known or chosen message attack if factoring is difficult, and typical implementations require only 1{\%} to 4{\%} of the number of modular multiplications required by the RSA scheme. Due to their simplicity, security and speed, these schemes are ideally suited for microprocessor-based devices such as smart cards, personal computers, and remote control systems.},
+isbn = {978-3-540-47721-1},
+doi = {10.1007/3-540-47721-7_12}
+}
+
+
+@INPROCEEDINGS{1987:blum:how-to-prove,
+    author = {Manuel Blum},
+    title = {How to prove a theorem so no one else can claim it},
+    booktitle = {\Proc{} International Congress of Mathematicians},
+    year = {1987},
+    pages = {1444--1451}
+}
+
+
+% 1990:BGGHKMR:everything-provable
+@InProceedings{1988:BGGHKMR:everything-provable,
+author = {Ben-Or, Michael and Goldreich, Oded and Goldwasser, Shafi and H{\aa}stad, Johan and Kilian, Joe and Micali, Silvio and Rogaway, Phillip},
+editor = {Goldwasser, Shafi},
+title = {Everything Provable is Provable in Zero-Knowledge},
+booktitle = {Advances in Cryptology --- CRYPTO' 88},
+year = {1990},
+series = {LNCS},
+volume = {403},
+publisher = {Springer New York},
+address = {New York, NY},
+pages = {37--56},
+abstract = {Assuming the existence of a secure probabilistic encryption scheme, we show that every language that admits an interactive proof admits a (computational) zero-knowledge interactive proof. This result extends the result of Goldreich, Micali and Wigderson, that, under the same assumption, all of NP admits zero-knowledge interactive proofs. Assuming envelopes for bit commitment, we show that every language that admits an interactive proof admits a perfect zero-knowledge interactive proof.},
+doi = {10.1007/0-387-34799-2_4}
+}
+
+
+@inproceedings{1988:BGW,
+author = {Ben-Or, Michael and Goldwasser, Shafi and Wigderson, Avi},
+title = {Completeness Theorems for Non-Cryptographic Fault-Tolerant Distributed Computation},
+year = {1988},
+isbn = {0897912640},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/62212.62213},
+doi = {10.1145/62212.62213},
+abstract = {Every function of n inputs can be efficiently computed by a complete network of n processors in such a way that:
+If no faults occur, no set of size t < n/2 of players gets any additional information (other than the function value),Even if Byzantine faults are allowed, no set of size t < n/3 can either disrupt the computation or get additional information.Furthermore, the above bounds on t are tight!},
+booktitle = {\Proc{} 20th Annual ACM Symposium on Theory of Computing},
+pages = {1–10},
+numpages = {10},
+location = {Chicago, Illinois, USA},
+series = {STOC '88}
+}
+
+
+@inproceedings{1988:CCD,
+author = {Chaum, David and Cr\'{e}peau, Claude and Damgard, Ivan},
+title = {Multiparty Unconditionally Secure Protocols},
+year = {1988},
+isbn = {0897912640},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/62212.62214},
+doi = {10.1145/62212.62214},
+abstract = {Under the assumption that each pair of participants can communicate secretly, we show that any reasonable multiparty protocol can be achieved if at least 2n/3 of the participants are honest. The secrecy achieved is unconditional. It does not rely on any assumption about computational intractability.},
+booktitle = {\Proc{} 20th Annual ACM Symposium on Theory of Computing},
+pages = {11–19},
+numpages = {9},
+location = {Chicago, Illinois, USA},
+series = {STOC '88}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%% 1990's
 
 
 @InProceedings{1990:eurocrypt-89:schnorr,
-author="Schnorr, C. P.",
-editor="Quisquater, Jean-Jacques
-and Vandewalle, Joos",
-title="Efficient Identification and Signatures for Smart Cards",
-booktitle="Advances in Cryptology --- EUROCRYPT '89",
-series="LNCS",
-volume="434",
-year="1990",
-publisher="Springer Berlin Heidelberg",
-address="Berlin, Heidelberg",
-pages="688--689",
-doi = "10.1007/3-540-46885-4_68",
-abstract="We present an efficient interactive identification scheme and a related signature scheme that are based on discrete logarithms and which are particularly suited for smart cards. Previous cryptosystems, based on the discrete logarithm, have been proposed by El Gamal (1985), Chaum, Evertse, van de Graaf (1988), Beth (1988) and G{\"u}nther (1989). The new scheme comprises the following novel features.",
-isbn="978-3-540-46885-1"
+author = {Schnorr, C. P.},
+editor = {Quisquater, Jean-Jacques and Vandewalle, Joos},
+title = {Efficient Identification and Signatures for Smart Cards},
+booktitle = {Advances in Cryptology --- EUROCRYPT '89},
+series = {LNCS},
+volume = {434},
+year = {1990},
+publisher = {Springer Berlin Heidelberg},
+address = {Berlin, Heidelberg},
+pages = {688--689},
+doi = {10.1007/3-540-46885-4_68},
+abstract = {We present an efficient interactive identification scheme and a related signature scheme that are based on discrete logarithms and which are particularly suited for smart cards. Previous cryptosystems, based on the discrete logarithm, have been proposed by El Gamal (1985), Chaum, Evertse, van de Graaf (1988), Beth (1988) and G{\"u}nther (1989). The new scheme comprises the following novel features.},
+isbn = {978-3-540-46885-1}
 }
 
 
-
-@article{1991:JACM:proofs-that-yield-nothing-but-their-validity,
+@article{1991:GMW:JACM:proofs-that-yield-nothing-but-their-validity,
  author = {Goldreich, Oded and Micali, Silvio and Wigderson, Avi},
  title = {Proofs That Yield Nothing but Their Validity or All Languages in NP Have Zero-knowledge Proof Systems},
  journal = {J. ACM},
  issue_date = {July 1991},
  volume = {38},
  number = {3},
- month = jul,
+ month = {7},
  year = {1991},
  issn = {0004-5411},
  pages = {690--728},
@@ -63,56 +134,188 @@ isbn="978-3-540-46885-1"
  address = {New York, NY, USA},
  keywords = {NP, cryptographic protocols, fault tolerant distributed computing, graph isomorphism, interactive proofs, methodological design of protocols, one-way functions, proof systems, zero-knowledge},
 } 
+%%%url = {https://www.researchgate.net/publication/220431215_Proofs_that_Yield_Nothing_But_Their_Validity_for_All_Languages_in_NP_Have_Zero-Knowledge_Proof_Systems}
+
+
+
+@inproceedings{1991:BFL:checking-computations,
+author = {Babai, L\'{a}szl\'{o} and Fortnow, Lance and Levin, Leonid A. and Szegedy, Mario},
+title = {Checking Computations in Polylogarithmic Time},
+year = {1991},
+isbn = {0897913973},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/103418.103428},
+doi = {10.1145/103418.103428},
+booktitle = {\Proc{} 23rd Annual ACM Symposium on Theory of Computing},
+pages = {21–32},
+numpages = {12},
+location = {New Orleans, Louisiana, USA},
+series = {STOC '91}
+}
+
+
+@article{1992:LFKN:algebraic,
+author = {Lund, Carsten and Fortnow, Lance and Karloff, Howard and Nisan, Noam},
+title = {Algebraic Methods for Interactive Proof Systems},
+year = {1992},
+issue_date = {Oct. 1992},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {39},
+number = {4},
+issn = {0004-5411},
+url = {https://doi.org/10.1145/146585.146605},
+doi = {10.1145/146585.146605},
+abstract = {A new algebraic technique for the construction of interactive proof systems is presented. Our technique is used to prove that every language in the polynomial-time hierarchy has an interactive proof system. This technique played a pivotal role in the recent proofs that IP = PSPACE [28] and that MIP = NEXP [4].},
+journal = {J. ACM},
+month = {10},
+pages = {859–868},
+numpages = {10},
+keywords = {interactive proof systems}
+}
+
+
+@inproceedings{1992:kilian:note-on-efficient-ZKPs-and-args,
+author = {Kilian, Joe},
+title = {A Note on Efficient Zero-Knowledge Proofs and Arguments (Extended Abstract)},
+year = {1992},
+isbn = {0897915119},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/129712.129782},
+doi = {10.1145/129712.129782},
+abstract = {In this note, we present new zero-knowledge interactive proofs and arguments for languages in NP. To show that x ε L, with an error probability of at most 2-k, our zero-knowledge proof system requires O(|x|c1)+O(lgc2|x|)k ideal bit commitments, where c1 and c2 depend only on L. This construction is the first in the ideal bit commitment model that achieves large values of k more efficiently than by running  k independent iterations of the base interactive proof system. Under suitable complexity assumptions, we exhibit  zero knowledge arguments that require O(lgc|x|kl bits of communication, where c depends only on L, and l is the security parameter for the prover. This is the first construction in which the total amount of communication can be less than that needed to transmit the NP witness. Our protocols are based on efficiently checkable proofs for NP[4].},
+booktitle = {\Proc{} 24th Annual ACM Symposium on Theory of Computing},
+pages = {723–732},
+numpages = {10},
+location = {Victoria, British Columbia, Canada},
+series = {STOC '92}
+}
+
 
 %[Kilian]
-%Cite this paper as: Kilian J. (1995) Improved Efficient Arguments. In: Coppersmith D. (eds) Advances in Cryptology ? CRYPT0? 95. CRYPTO 1995. Lecture Notes in Computer Science, vol 963. Springer, Berlin, Heidelberg
 @InProceedings{1995:crypto:Improved-Efficient-Arguments,
-author="Kilian, Joe",
-editor="Coppersmith, Don",
-title="Improved Efficient Arguments",
-booktitle="Advances in Cryptology --- CRYPT0' 95",
-series = "LNCS",
-volume = "1070",
-year="1995",
-publisher="Springer Berlin Heidelberg",
-address="Berlin, Heidelberg",
-pages="311--324",
-abstract="We consider complexity of perfect zero-knowledge arguments [4]. Let T denote the time needed to (deterministically) check a proof and let L denote an appropriate security parameter. We introduce new techniques for implementing very efficient zero-knowledge arguments. The resulting argument has the following features:The arguer can, if provided with the proof that can be deterministically checked in O(T) time, run in time O(TLO(1)). The best previous bound was O(T1+$\epsilon$LO(1)).The protocol can be simulated in time O(LO(1)). The best previous bound was O(T1+$\epsilon$LO(1)).A communication complexity of O(L lg L), where L is the security parameter against the prover. The best previous known bound was O(L lg T).",
-isbn="978-3-540-44750-4",
-doi={10.1007/3-540-44750-4_25}
+author = {Kilian, Joe},
+editor = {Coppersmith, Don},
+title = {Improved Efficient Arguments},
+booktitle = {Advances in Cryptology --- CRYPTO' 95},
+series = {LNCS},
+volume = {1070},
+year = {1995},
+publisher = {Springer Berlin Heidelberg},
+address = {Berlin, Heidelberg},
+pages = {311--324},
+abstract = {We consider complexity of perfect zero-knowledge arguments [4]. Let T denote the time needed to (deterministically) check a proof and let L denote an appropriate security parameter. We introduce new techniques for implementing very efficient zero-knowledge arguments. The resulting argument has the following features:The arguer can, if provided with the proof that can be deterministically checked in O(T) time, run in time O(TLO(1)). The best previous bound was O(T1+$\epsilon$LO(1)).The protocol can be simulated in time O(LO(1)). The best previous bound was O(T1+$\epsilon$LO(1)).A communication complexity of O(L lg L), where L is the security parameter against the prover. The best previous known bound was O(L lg T).},
+isbn = {978-3-540-44750-4},
+doi = {10.1007/3-540-44750-4_25}
 }
 
 
 @InProceedings{1996:eurocrypt:designated-verifier-proofs,
-author="Jakobsson, Markus and Sako, Kazue and Impagliazzo, Russell",
-editor="Maurer, Ueli",
-title="Designated Verifier Proofs and Their Applications",
-booktitle="Advances in Cryptology --- EUROCRYPT '96",
-year="1996",
-publisher="Springer Berlin Heidelberg",
-address="Berlin, Heidelberg",
-pages="143--154",
-abstract="For many proofs of knowledge it is important that only the verifier designated by the confirmer can obtain any conviction of the cor- rectness of the proof. A good example of such a situation is for undeniable signatures, where the confirmer of a signature wants to make sure that only the intended verifier(s) in fact can be convinced about the validity or invalidity of the signature.",
-isbn="978-3-540-68339-1",
-doi="10.1007/3-540-68339-9_13"
+author = {Jakobsson, Markus and Sako, Kazue and Impagliazzo, Russell},
+editor = {Maurer, Ueli},
+title = {Designated Verifier Proofs and Their Applications},
+booktitle = {Advances in Cryptology --- EUROCRYPT '96},
+year = {1996},
+publisher = {Springer Berlin Heidelberg},
+address = {Berlin, Heidelberg},
+pages = {143--154},
+abstract = {For many proofs of knowledge it is important that only the verifier designated by the confirmer can obtain any conviction of the cor- rectness of the proof. A good example of such a situation is for undeniable signatures, where the confirmer of a signature wants to make sure that only the intended verifier(s) in fact can be convinced about the validity or invalidity of the signature.},
+isbn = {978-3-540-68339-1},
+doi = {10.1007/3-540-68339-9_13}
 }
 
 
+@techreport{1996:GH:complexity,
+author = {Oded Goldreich and Johan H{\aa}stad},
+title = {On the Complexity of Interactive Proof with Bounded Communication.},
+howpublished = {Revision \#2 of \href{https://eccc.weizmann.ac.il//eccc-reports/1996/TR96-018}{TR96-018}},
+url = {https://eccc.weizmann.ac.il//eccc-reports/1996/TR96-018},
+year = {1997},
+month = {4},
+addendum = {\aaECCCTR{1996}{96}{018}}
+}
 
 
+@ARTICLE{1996:Spi:linear-time-encodable-dcodable-ECC,
+  author = {D. A. {Spielman}},
+  journal = {IEEE Transactions on Information Theory}, 
+  title = {Linear-time encodable and decodable error-correcting codes}, 
+  year = {1996},
+  volume = {42},
+  number = {6},
+  pages = {1723-1731},
+  doi = {10.1109/18.556668}
+}
 
-%[Cramer-Damgård]
-%Cite this paper as: Cramer R., Damgård I. (1998) Zero-knowledge proofs for finite field arithmetic, or: Can zero-knowledge be for free?. In: Krawczyk H. (eds) Advances in Cryptology ? CRYPTO '98. CRYPTO 1998. Lecture Notes in Computer Science, vol 1462. Springer, Berlin, Heidelberg
+
+@article{1996:GK:how-to,
+author = {Goldreich, Oded and Kahan, Ariel},
+title = {How to Construct Constant-Round Zero-Knowledge Proof Systems for NP},
+year = {1996},
+issue_date = {June 1996},
+publisher = {Springer-Verlag},
+address = {Berlin, Heidelberg},
+volume = {9},
+number = {3},
+issn = {0933-2790},
+url = {https://doi.org/10.1007/BF00208001},
+doi = {10.1007/BF00208001},
+abstract = {Constant-round zero-knowledge proof systems for every language in  $\mathcal{NP}$  are presented, assuming the existence of a collection of claw-free functions. In particular, it follows that such proof systems exist assuming the intractability of either the Discrete Logarithm Problem or the Factoring Problem for Blum integers.},
+journal = {J. Cryptol.},
+month = {6},
+pages = {167–189},
+numpages = {23},
+keywords = {Zero-knowledge proofs, Parallel composition of proof systems, NP, Commitment schemes, Coin flipping protocols, Claw-free functions}
+}
+
+
+@article{1998:CGH:RO-revisited,
+author = {Canetti, Ran and Goldreich, Oded and Halevi, Shai},
+title = {The Random Oracle Methodology, Revisited},
+year = {2004},
+issue_date = {July 2004},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {51},
+number = {4},
+issn = {0004-5411},
+url = {https://doi.org/10.1145/1008731.1008734},
+doi = {10.1145/1008731.1008734},
+abstract = {We take a critical look at the relationship between the security of cryptographic schemes in the Random Oracle Model, and the security of the schemes that result from implementing the random oracle by so called "cryptographic hash functions".The main result of this article is a negative one: There exist signature and encryption schemes that are secure in the Random Oracle Model, but for which any implementation of the random oracle results in insecure schemes. In the process of devising the above schemes, we consider possible definitions for the notion of a "good implementation" of a random oracle, pointing out limitations and challenges.},
+journal = {J. ACM},
+month = {7},
+pages = {557–594},
+numpages = {38},
+keywords = {Correlation intractability, CS-proofs, diagonalization, cryptography, the random-oracle model},
+addendum = {\aaiacr{1998/011}}
+}
+
+
+%CD98
 @InProceedings{1998:crypto:zkps-for-finite-field-arithmetic,
-author="Cramer, Ronald and Damg{\aa}rd, Ivan",
-editor="Krawczyk, Hugo",
-title="Zero-knowledge proofs for finite field arithmetic, or: Can zero-knowledge be for free?",
-booktitle="Advances in Cryptology --- CRYPTO '98",
-year="1998",
-publisher="Springer Berlin Heidelberg",
-address="Berlin, Heidelberg",
-pages="424--441",
-abstract="We present a general method for constructing commitment schemes based on existence of q-one way group homomorphisms, in which elements in a finite prime field GF(q) can be committed to. A receiver of commitments can non-interactively check whether committed values satisfy linear equations. Multiplicative relations can be verified interactively with exponentially small error, while communicating only a constant number of commitments. Particular assumptions sufficient for our commitment schemes include: the RSA assumption, hardness of discrete log in a prime order group, and polynomial security of Diffie-Hellman encryption.",
-isbn="978-3-540-68462-6",
-doi={10.1007/BFb0055745}
+author = {Cramer, Ronald and Damg{\aa}rd, Ivan},
+editor = {Krawczyk, Hugo},
+title = {Zero-knowledge proofs for finite field arithmetic, or: Can zero-knowledge be for free?},
+booktitle = {Advances in Cryptology --- CRYPTO '98},
+year = {1998},
+publisher = {Springer Berlin Heidelberg},
+address = {Berlin, Heidelberg},
+pages = {424--441},
+abstract = {We present a general method for constructing commitment schemes based on existence of q-one way group homomorphisms, in which elements in a finite prime field GF(q) can be committed to. A receiver of commitments can non-interactively check whether committed values satisfy linear equations. Multiplicative relations can be verified interactively with exponentially small error, while communicating only a constant number of commitments. Particular assumptions sufficient for our commitment schemes include: the RSA assumption, hardness of discrete log in a prime order group, and polynomial security of Diffie-Hellman encryption.},
+isbn = {978-3-540-68462-6},
+doi = {10.1007/BFb0055745}
+}
+
+
+@article{1999:FLS:multiple-NIZKPs-under-general-assumptions,
+author = {Feige, Uriel and Lapidot, Dror and Shamir, Adi},
+title = {Multiple NonInteractive Zero Knowledge Proofs Under General Assumptions},
+journal = {SIAM Journal on Computing},
+volume = {29},
+number = {1},
+pages = {1-28},
+year = {1999},
+doi = {10.1137/S0097539792230010},
 }

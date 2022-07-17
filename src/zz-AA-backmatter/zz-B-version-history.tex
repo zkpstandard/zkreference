@@ -1,62 +1,48 @@
 \chapter{Version history}
 \label{app:version-history}
 
+The ZKProof Community Reference (ZkpComRef) development follows a sequence of main versions:
+\loosen
+
+\begin{itemize}\setlength{\itemsep}{.75em}
+
+\item \textbf{Version 0 [\dateVersionZero]: Baseline documents.}
+The proceedings of the 1st ZKProof Workshop (May 2018), with contributions settled by 2018-08-01 and available at \href{https://zkproof.org/documents}{ZKProof.org}, along with the \hyperref[sec:prelim:charter]{ZKProof Charter}, constitute the starting point of the ZKProof Community reference.
+Each of the three Workshop tracks --- security, applications, implementation --- led to a corresponding proceedings document, titled ``ZKProof Standards \emphbrkt{track name} Track Proceedings''.
+The ZKProof charter is also part of the baseline documents.
 
 
-The development of the ZKProof Community reference can be tracked across a sequence of main versions.
-Here is a summarized description of their sequence:
-
-\begin{itemize}\setlength{\itemsep}{1em}
-
-\item \textbf{Version 0 [2018-08-01]: Baseline documents.}
-	The proceedings of the 1st ZKProof Workshop (May 2018), 
-with contributions settled by 2018-08-01 and available 
-at \href{https://zkproof.org/documents}{ZKProof.org},
-along with the \hyperref[sec:prelim:charter]{ZKProof Charter}, 
-constitute the starting point of the ZKProof Community reference.
-	Each of the three Workshop tracks --- security, applications, implementation --- 
-lead to a corresponding proceedings document, 
-named ``ZKProof Standards \emphbrkt{track name} Track Proceedings''.
-	The ZKProof charter is also part of the baseline documents.
+\item \textbf{Version 0.1 [\dateVersionZeroDotOne]: LaTeX/PDF compilation.}
+The several proceedings composing version 0 were ported to LaTeX code and compiled into a single PDF document entitled ``ZKProof Community Reference'' (version 0.1) for presentation and discussion at the 2nd ZKProof workshop. 
+That version included editorial adjustments for easier indexation and consistent style. 
 
 
-\item \textbf{Version 0.1 [2019-04-11]: LaTeX/PDF compilation.}
-	Upon the ZKProof organization team requested feedback from the NIST-PEC team, the content in the 
-several proceedings was ported to LaTeX code and compiled into a single PDF document entitled 
-``ZKProof Community Reference'' (version 0.1) for presentation and discussion at the 2nd ZKProof workshop.
-	The version includes editorial adjustments for consistent style and easier indexation. 
-
-
-\item \textbf{Version 0.2 [2019-12-31]: Consolidated draft.}
-	The process of consolidating the draft community reference document started at the 
-2nd ZKProof workshop (April 2019), where an editorial process was introduced and 
-several ``breakout sessions'' were held for discussion on focused topics, including
-the ``NIST comments on the initial ZKProof documentation''.
-	The discussions yielded suggestions of topics to develop and incorporate in a new version of the document.
-	Several concrete items of ``proposed contributions'' were then defined as GitHub issues,
-and the subsequently submitted contributions provided several content improvements, such as:
-	distinguish ZKPs of knowledge vs.\ of membership;
-	recommend security parameters for benchmarks;
-	clarify some terminology related to ZKP systems (e.g., statements, CRS, R1CS);
-	discuss interactivity vs.\ non-interactivity, and transferability vs.\ deniability;
+\item \textbf{Version 0.2 [\dateVersionZeroDotTwo]: Consolidated draft.}
+The process of consolidating the draft community reference document started at the 2nd ZKProof workshop (April 2019), where an editorial process was introduced and several ``breakout sessions'' were held for discussion on focused topics, including the ``NIST comments on the initial ZKProof documentation''.
+The discussions yielded suggestions of topics to develop and incorporate in a new version of the document.
+Several concrete items of ``proposed contributions'' were then defined as GitHub issues.
+Subsequently, various submitted contributions provided content improvements, such as:
+	distinguish \hyperref[security:zkp-knowledge-vs-membership]{ZKPs of knowledge vs.\ of membership};
+	recommend \hyperref[security:Efficiency]{security parameters for benchmarks};
+	clarify some \hyperref[security:terminology]{terminology} related to ZKP systems (e.g., statements, CRS, R1CS);
+	discuss \hyperref[paradigms:interactivity]{interactivity vs.\ non-interactivity, and transferability vs.\ deniability};
 	clarify the scope of use-cases and applications; 
-	update the ``gadgets'' table; add new references.
-	The new version also includes numerous editorial improvements towards a consolidated document, 
-namely a substantially reformulated frontmatter with several new sections
-(abstract, open to contributions, change log, acknowledgments, intellectual property, executive summary),
-a reorganized structure with a new chapter (still to be completed) on construction paradigms.
-	The changes are tracked in a ``diff'' version of the document.
+	update the \hyperref[tab:list-gadgets]{``gadgets'' table}; add new \hyperref[references]{references}.
+The new version also includes numerous editorial improvements towards a consolidated document, namely a substantially reformulated frontmatter with several new sections (\hyperref[sec:prelim:abstract]{abstract}, \hyperref[sec:prelim:about-this-version]{about this community reference}, \hyperref[app:version-history]{change log}, \hyperref[app:acknowledgments]{acknowledgments}, \hyperref[sec:prelim:IP]{intellectual property}, \hyperref[sec:prelim:executive-summary]{executive summary}), a reorganized structure with a new chapter (still to be completed) on construction \hyperref[chap:paradigms]{paradigms}.
+The changes are tracked in a ``diff'' version of the document.
+
+
+\item \textbf{Version 0.3 [\dateVersionZeroDotThree]: Paradigms addon.}
+The main update was in the \nameref{chap:paradigms} chapter, replacing the old ``Taxonomy of Constructions'' section by three new sections: \refsecnamenum{paradigms:background}, \refsecnamenum{paradigms:IT} and \refsecnamenum{paradigms:CC}.
+New placeholder sections (contributions needed) were also included for \refsecnamenum{paradigms:specialized} and \refsecnamenum{paradigms:proof-composition}.
+Other small changes include an improvement of \reftab{tab:example-scenarios-zkps} in \refsec{security:terminology}, a new paragraph in the \hyperref[]{executive summary}.
+
 \end{itemize}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\paragraph{External resources.}%\pdfbookmark[2]{External resources}{pdfbkm:ext-res}
-\label{par:prelim:change-log:external-resources}
-
-Additional documentation covering the history of development of this 
-community reference can be found in the following online resources:
-\begin{itemize}[topsep=0pt,itemsep=1ex]
-	\item ZKProof GitHub repository: \myurl{https://github.com/zkpstandard/}
-	\item ZKProof documentation: \sloppy\mbox{\myurl{https://zkproof.org/documents.html}}
-	\item ZKProof Forum: \myurl{https://community.zkproof.org/}
-\end{itemize}
+Additional documentation covering the development history of the ZkpComRef can be found in the 
+ZKProof GitHub repository (\myurl{https://github.com/zkpstandard/zkreference})
+and the ZKProof webpage (\sloppy\mbox{\myurl{https://docs.zkproof.org/reference}})
+and forum (\myurl{https://community.zkproof.org}).
+\loosen

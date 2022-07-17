@@ -1,180 +1,164 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Interactivity}
 \label{paradigms:interactivity} 
 
-% Include here a detailed discussion of interactive vs. non-interactive protocols
-  % advantages and disadvantages, security properties, implementation concerns, ...
-
-
-
-
-Several of the proof systems described in the Taxonomy of Constructions given in Section \ref{paradigms:taxonomy}
-are interactive, including classical interactive proofs (IPs), IOPs, and linear IOPs. 
-This means that the verifier sends multiple challenge messages to the prover,
-with the prover replying to challenge $i$ before receiving challenge $i+1$;
+Several of the proof systems described in \refsec{paradigms:IT} are interactive, including classical interactive proofs (IPs), IOPs, and linear IOPs. 
+This means that the verifier sends multiple challenge messages to the prover, with the prover replying to challenge $i$ before receiving challenge $i+1$;
 soundness relies on the prover being unable to predict challenge $i+1$ when it responds to challenge $i$.
-The other proof systems from the Taxonomy of Constructions are non-interactive, namely classical PCPs and linear PCPs. 
-All of these proof systems can be combined with cryptographic
-compilers to yield argument systems that may or may not be interactive, depending on the compiler.
+The other proof systems are non-interactive, namely classical PCPs and linear PCPs. 
+All of these proof systems can be combined with cryptographic compilers (see \refsec{paradigms:CC}) to yield argument systems that may or may not be interactive, depending on the compiler.
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Advantages of Interactive Proof and Argument Systems}
 \label{sec:paradigms:interactivity:advantages}
-\begin{enumerate}[label=\alph*.]
-\item \underline{Efficiency and Simplicity.} 
+
+\begin{enumerate}[label=\arabic*.] %\alph
+\item \textbf{Efficiency and Simplicity.} 
 Interactive proof systems can be simpler or more efficient than non-interactive ones.
-As an example, researchers introduced the IOP model \cite{2016:tcc:IOPs, 2016:stoc:Constant-round-Interactive-Proofs-for-Delegating-Computation}, which is interactive, in part because interactivity allowed for circumventing efficiency bottlenecks arising
-in state of the art PCP constructions \cite{2013:STOC:concrete-efficiency-PCPs}. 
-As another example, some argument systems derived from IPs \cite{2018:SP:Doubly-efficient-zkSNARKs-without-trusted-setup, 2019:crypto:libra}
-have substantially better space complexity for the prover (a key scalability bottleneck) than state of the art PCPs \cite{2013:STOC:concrete-efficiency-PCPs} or linear PCPs \cite{2013:QSPs-and-succinct-NIZKs-without-PCPs, 2016:Eurocrypt:On-the-Size-of-Pairing-Based-Non-interactive-Arguments}. 
+As an example, researchers introduced the IOP model \cite{2016:BCS:tcc:IOPs,2016:RRR:stoc:Constant-round-IP-for-Delegating-Computation}, which is interactive, in part because interactivity allowed for circumventing efficiency bottlenecks arising in state of the art PCP constructions \cite{2013:STOC:concrete-efficiency-PCPs}. 
+As another example, some argument systems derived from IPs \cite{2018:SP:Doubly-efficient-zkSNARKs-without-trusted-setup, 2019:XZZPS:crypto:libra}
+have substantially better space complexity for the prover (a key scalability bottleneck) than state of the art PCPs \cite{2013:STOC:concrete-efficiency-PCPs} or linear PCPs \cite{2013:GGPR:eurocrypt:QSPs-and-succinct-NIZKs-without-PCPs, 2016:Eurocrypt:On-the-Size-of-Pairing-Based-Non-interactive-Arguments}. 
 
-Yet, if an interactive protocol is public coin, it can be rendered non-interactive and publicly verifiable in most settings via the Fiat-Shamir transformation (see \refsec{paradigms:taxonomy:compilers-crypto}), often with little loss in efficiency. This means that protocol designers have the freedom to leverage interactivity as a ``resource'' to simplify protocol design, improve efficiency, weaken or remove trusted setup, etc., and still have the option of obtaining a non-interactive argument using the Fiat-Shamir transformation.
+Yet, if an interactive protocol is public coin, it can be rendered non-interactive and publicly verifiable in most settings via the Fiat-Shamir transformation (see \refsec{paradigms:CC}), often with little loss in efficiency.
+This means that protocol designers have the freedom to leverage interactivity as a ``resource'' to simplify protocol design, improve efficiency, weaken or remove trusted setup, etc., and still have the option of obtaining a non-interactive argument using the Fiat-Shamir transformation.
 
-(Applying the Fiat-Shamir heuristic to an interactive protocol to obtain a non-interactive argument may increase soundness error, and may transform statistical security to computational security --- see \refsec{security:efficiency:stat-sec-levels}.
-However, recent works \cite{2016:tcc:IOPs, 2019:STC:Fiat-Shamir-from-practice-to-theory} show that when the transformation is applied to specific IP, IOP, and linear IOP protocols of both practical and theoretical interest, the blowup in soundness error is only polynomial in the number of rounds of interaction.) 
+(Applying the Fiat-Shamir heuristic to an interactive protocol to obtain a non-interactive argument may increase soundness error, and may transform statistical security into computational security --- see \refsec{security:efficiency:stat-sec-levels}.
+However, recent works \cite{2016:BCS:tcc:IOPs, 2019:STC:Fiat-Shamir-from-practice-to-theory} show that when the transformation is applied to specific IP, IOP, and linear IOP protocols of both practical and theoretical interest, the blowup in soundness error is only polynomial in the number of rounds of interaction.) 
 
 
-\item \underline{Setup.} 
+\item \textbf{Setup.} 
 Cryptographic compilers for linear PCPs currently require a structured reference string (SRS) (see \refsec{implem:correctness:SRS-gen}). 
-Here, an SRS is a structured string that must be generated by a trusted third party during a setup phase, and soundness requires that any
-trapdoor used during this trusted setup must not be revealed. In contrast, some compilers that apply to IPs, IOPs (as well as PCPs), and linear IPs
-yields arguments in which the prover and the verifier need only access a uniform random string (URS), which can be obtained
-from a common source of randomness. Such a setup is referred as \emph{transparent} setup in the literature.
+Here, an SRS is a structured string that must be generated by a trusted third party during a setup phase, and soundness requires that any trapdoor used during this trusted setup must not be revealed. In contrast, some compilers that apply to IPs, IOPs (as well as PCPs), and linear IPs yields arguments in which the prover and the verifier need only access a uniform random string (URS), which can be obtained from a common source of randomness. Such a setup is referred as \emph{transparent} setup in the literature.
 
-\item \underline{Cryptographic Primitives.} 
-Argument systems derived from IPs, IOPs, or linear IOPs also sometimes rely on more desirable cryptographic primitives. For example, IPs themselves are information-theoretically secure, relying on no cryptographic assumptions at all. And
-in contrast to arguments derived from linear PCPs, those derived from IOPs rely only on symmetric-key cryptographic primitives (see, e.g., \cite{2016:tcc:IOPs}).
-Finally, it has long been known how to obtain succinct \emph{interactive} arguments in the plain model based on falsifiable assumptions like collision-resistant
-hash families \cite{1995:crypto:Improved-Efficient-Arguments}, but this is not the case for succinct \emph{non-interactive} arguments.
+\item \textbf{Cryptographic Primitives.} 
+Argument systems derived from IPs, IOPs, or linear IOPs also sometimes rely on more desirable cryptographic primitives. For example, IPs themselves are information-theoretically secure, not relying on cryptographic assumptions. 
+And in contrast to arguments derived from linear PCPs, those derived from IOPs rely only on symmetric-key cryptographic primitives (e.g., \cite{2016:BCS:tcc:IOPs}).
+It is also known how to obtain succinct \emph{interactive} arguments in the plain model based on falsifiable assumptions like collision-resistant hash families \cite{1995:crypto:Improved-Efficient-Arguments}, but this is not the case for succinct \emph{non-interactive} arguments.
 
-
-
-\item \underline{Non-transferability.} 
-In some applications, it is essential that proofs be deniable or \emph{non-transferable} (i.e., it must be impossible for a verifier to convince a third party of the validity of the statement --- see Sections~\ref{sec:security:defs-props:transferability-deniability}). 
-While these properties are not unique to interactive protocols, interaction offers a natural way to make proofs non-transferable (for details, see  \refsec{sec:paradigms:interactivity:transferability-deniability}). %%% LB: Check if the referred section is providing sufficient explanation
+\item \textbf{Non-transferability.} 
+In some applications, it is essential that proofs be deniable or \emph{non-transferable} (i.e., that a verifier cannot convince a third party of the validity of the statement --- see \refsec{sec:security:defs-props:transferability-deniability}). 
+While these properties are not unique to interactive protocols, interaction offers a natural way to make proofs non-transferable (for details, see  \refsec{sec:paradigms:interactivity:transferability-deniability}).
 
 
-\item  \underline{Interactivity May Limit Adversaries' Abilities.}  
-Interactive protocols can potentially be run with fewer bits of security and hence be more efficient. For example, interactive settings may allow
-for the enforcement of a time limit for the protocol to terminate, limiting the runtime of attackers. Alternatively, 
-in an interactive setting
-it may be possible to ensure that adversaries only have one attempt to attack a protocol, 
-while this will not be possible in many non-interactive settings. 
+\item  \textbf{Interactivity May Limit Adversaries' Abilities.}  
+Interactive protocols can potentially be run with fewer bits of security and hence be more efficient. 
+For example, interactive settings may allow for the enforcement of a time limit for the protocol to terminate, limiting the runtime of attackers. 
+Alternatively, in an interactive setting it may be possible to ensure that adversaries only have one attempt to attack a protocol, while this will not be possible in many non-interactive settings. 
 See \refsec{par:security:efficiency:comp-sec-levels:exception} for details.
 
 
-\item \underline{Interactivity May Be Inherent to Applications}. 
-Many applications are inherently interactive. For example, real-world networking protocols involve multiple messages just to initiate a connection. In addition,
-zero-knowledge protocols are often combined with other cryptographic primitives in applications (e.g., oblivious transfer). If the other primitives are interactive, then the final cryptographic protocol will be interactive regardless of whether the zero-knowledge protocol is non-interactive.
+\item \textbf{Interactivity May Be Inherent to Applications}. 
+Many applications are inherently interactive. For example, real-world networking protocols involve multiple messages just to initiate a connection.
+In addition, zero-knowledge protocols are often combined with other cryptographic primitives in applications (e.g., oblivious transfer).
+If the other primitives are interactive, then the final cryptographic protocol will be interactive regardless of whether the zero-knowledge protocol is non-interactive.
 If an application is inherently interactive, it may be reasonable to leverage the interaction as a resource if it can render a protocol simpler, more efficient, etc. 
 
 \end{enumerate}
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Disadvantages of Interactive Proof and Argument Systems}
 \label{sec:paradigms:interactivity:disadvantages}
-\begin{enumerate}
 
-\item \underline{Interactive protocols must occur online.} In an interactive protocol, the proof cannot simply be published or posted and checked later at the verifier's convenience, as can be done with non-interactive protocols.
+\begin{enumerate}[label=\arabic*.]
 
-\item \underline{Public Verifiability}. Many applications require that proofs be verifiable by any party at any time. 
-Public verifiability
-may be difficult to achieve for interactive protocols. This is because soundness of interactive 
-protocols relies on the prover being unable to predict the next challenge it will receive in the protocol. Unless there is a publicly trusted source of unpredictable
-randomness (e.g., a randomness beacon) and a way for provers to timestamp messages, it is not clear how any party other than
+\item \textbf{Interactive protocols must occur online.} 
+In an interactive protocol, the proof cannot simply be published or posted and checked later at the verifier's convenience, as can be done with non-interactive protocols.
+
+\item \textbf{Public Verifiability}. 
+Many applications require that proofs be verifiable by any party at any time. 
+Public verifiability may be difficult to achieve for interactive protocols.
+This is because soundness of interactive protocols relies on the prover being unable to predict the next challenge it will receive in the protocol.
+Unless there is a publicly trusted source of unpredictable randomness (e.g., a randomness beacon) and a way for provers to timestamp messages, it is not clear how any party other than
 the one sending the challenges can be convinced that the challenges were properly generated, and the prover replied to challenge $i$ before learning challenge $i+1$.
 See Section \ref{sec:paradigms:interactivity:transferability-deniability} below for further details.
 
-\item \underline{Network latency can make interactive protocols slow.} If an interactive protocol consists of many messages sent over a network,
-network latency may contribute significantly to the total execution time of the protocol.
+\item \textbf{Network latency can make interactive protocols slow.} 
+If an interactive protocol consists of many messages sent over a network, network latency may contribute significantly to the total execution time of the protocol.
 
-\item \underline{Timing or Side Channel Attacks.} Because interactive protocols require the prover to send multiple messages, there may be more vulnerability to side channel or timing attacks compared to non-interactive protocols. Timing attacks will only affect zero-knowledge, not soundness, for public-coin protocols, because the verifier's messages are simply random coins, and timing attacks should not leak information to the prover in this case. In private coin protocols, both zero-knowledge and soundness may be affected by these attacks.
+\item \textbf{Timing or Side Channel Attacks.} 
+Because interactive protocols require the prover to send multiple messages, there may be more vulnerability to side channel or timing attacks compared to non-interactive protocols.
+Timing attacks will only affect zero-knowledge, not soundness, for public-coin protocols, because the verifier's messages are simply random coins, and timing attacks should not leak information to the prover in this case.
+In private coin protocols, both zero-knowledge and soundness may be affected by these attacks.
 
-\item \underline{Concurrent Security.}  If an interactive protocol is not used in isolation, but is instead used in an environment where multiple interactive
-protocols may be executed concurrently, then considerable care should be taken to ensure that the protocol remains secure. 
- See for example \cite[Section 2.1]{2013:CISS:a-short-tutorial-on-zero-knowledge}
-and the references therein. Issues of concurrent execution security
-are greatly mitigated for non-interactive protocols \cite{2006:eurocrypt:perfect-NIZK-for-NP}. 
+\item \textbf{Concurrent Security.}  
+If an interactive protocol is not used in isolation, but is instead used in an environment where multiple interactive protocols may be executed concurrently, then considerable care should be taken to ensure that the protocol remains secure. 
+See for example \cite[Section 2.1]{2013:CISS:a-short-tutorial-on-zero-knowledge} and the references therein. 
+Issues of concurrent execution security are greatly mitigated for non-interactive protocols \cite{2006:eurocrypt:perfect-NIZK-for-NP}. 
 
-\item \underline{Proof Length.} Currently, the zero-knowledge protocols with the shortest known proofs are based on linear PCPs, which are non-interactive. These proofs are just a few group elements (see Table \ref{tab:different-types-of-PCP}). While (public-coin) zero-knowledge protocols based on IPs or IOPs can be rendered non-interactive with the Fiat-Shamir heuristic, they currently produce longer proofs. The longer proofs may render these protocols unsuitable for some applications (e.g., public blockchain), but they may still be suitable for other applications (even related ones, like enterprise blockchain applications).
+\item \textbf{Proof Length.} 
+Currently, the zero-knowledge protocols with the shortest known proofs are based on \hyperref[paradigms:IT:linear-PCP]{linear PCPs}, which are non-interactive. 
+These proofs are just a few group elements. 
+While (public-coin) zero-knowledge protocols based on IPs or IOPs can be rendered non-interactive with the Fiat-Shamir heuristic, they currently produce longer proofs. 
+The longer proofs may render these protocols unsuitable for some applications (e.g., public blockchain), but they may still be suitable for other applications (even related ones, like enterprise blockchain applications).
 
 \end{enumerate}
 
 
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Nuances on transferability vs. interactivity}
 \label{sec:paradigms:interactivity:transferability-deniability}
-
-
 	
-  The relation between interactivity and transferability/deniability is not without nuances.
-	The following paragraphs show several possible combinations.
-	\loosen
-
-
-\noindent\textbf{Non-interactive and deniable.} 
-	A non-interactive ZKP may be non-transferable.
-	This may be based for example on a setup assumption such as a local CRS that is itself deniable.
-	In that case, a malicious verifier cannot prove to an external party that the CRS was the one used in a real protocol execution, leading the external party to have reasonable suspicion that the verifier may have simulated the CRS so as to become able to simulate a protocol execution transcript, without actual participation of a legitimate prover.
-    Another example of non-transferability is when a ZKP intended to prove (i) an assertion (of membership or knowledge) actually proves its disjunction with (ii) the knowledge of the secret key of a designated verifier, for example assuming a public key infrastructure (PKI). 
-    This suffices to convince the original verifier the initial statement (i) is true, since the verifier knows that the prover does not actually know the secret key (ii).
-    In other words, a success in the interactive proof stems from the initial assertion (i) being truthful.
-    However, for any external party, the transcript of the proof may conceivably have been produced by the original designated verifier, who can simply do it with the knowledge of the secret key (ii).
-    In that sense, the designated verifier would be unable to convince others that the transcript of a legitimate proof was not simulated by the verifier.
-
-
-\noindent\textbf{Non-interactive and transferable.}
-	If transferability is intended as a feature, then a non-interactive protocol can be achieved for example with a public (undeniable) CRS. 
-	For example, if a CRS is generated by a trusted randomness beacon, and if soundness follows from the inability of the prover to control the CRS, then any external party (even one not involved with the prover at the time of proof generation) can at a later time verify that a proof transcript could have only been generated by a legitimate prover.
-
-
-\noindent\textbf{Interactive and deniable.}
-	A classical example (in a standalone setting, without concurrent executions) for obtaining the deniability property comes from interactive ZKP protocols proven secure based on the use of rewinding.
-	Here, deniability follows from the simulatability of transcripts for any malicious verifier.
-	For each interactive step, the simulator learns the challenge issued by the possibly malicious verifier, and then rewinds to reselect the preceding message of the prover, so as to be able to answer the subsequent challenge.
-	Some techniques require the use of commitments and/or trapdoors, and may enable this property even for straight-line simulation (i.e., without rewinding), provided there is an appropriate trusted setup.
+The relation between interactivity and transferability/deniability is not without nuances.
+The following paragraphs show several possible combinations.
 \loosen
 
 
-\noindent\textbf{Interactive and transferable.} 
-	In certain settings it is possible, even from an interactive ZKP protocol execution, to produce a transcript that constitutes a transferable proof.
-	Usually, transferability can be achieved when the (possibly malicious) verifier can convincingly show to external parties that the challenges selected during a protocol execution were unpredictable at the time of the determination of the preceding messages of the prover.
-	The transferable proof transcript is then composed of the messages sent by the prover and additional information from the internal state of a malicious verifier, including details about the generation of challenges.
-    For example, a challenge produced (by the verifier) as a cryptographic hash output (or as a keyed pseudo-random function) of the previous messages may later be used to provide assurance that only a legitimate prover would have been able to generate a valid subsequent message (response).
-    As another example, if the interactive ZKP protocol is composed with a communication protocol where the prover authenticates all sent messages (e.g., signed within a PKI, and timestamped by a trusted service), then the overall sequence of those certified messages becomes, in the hands of the verifier, a transferable proof.
-	Furthermore, from a transferable transcript, the actual transfer can also be performed in an interactive way: the verifier (in possession of the transcript) acts as prover in a transferable ZKP of knowledge of a transferable transcript, thereby transferring to the external verifier a new transferable transcript.
+\paragraph{Non-interactive and deniable} 
+A non-interactive ZKP may be non-transferable.
+This may be based for example on a setup assumption such as a local CRS that is itself deniable.
+In that case, a malicious verifier cannot prove to an external party that the CRS was the one used in a real protocol execution, leading the external party to have reasonable suspicion that the verifier may have simulated the CRS so as to become able to simulate a protocol execution transcript, without actual participation of a legitimate prover.
+Another example of non-transferability is when a ZKP intended to prove (i) an assertion (of membership or knowledge) actually proves its disjunction with (ii) the knowledge of the secret key of a designated verifier, for example assuming a public key infrastructure (PKI). 
+This suffices to convince the original verifier the initial statement (i) is true, since the verifier knows that the prover does not actually know the secret key (ii).
+In other words, a success in the interactive proof stems from the initial assertion (i) being truthful.
+However, for any external party, the transcript of the proof may conceivably have been produced by the original designated verifier, who can simply do it with the knowledge of the secret key (ii).
+In that sense, the designated verifier would be unable to convince others that the transcript of a legitimate proof was not simulated by the verifier.
+
+
+\paragraph{Non-interactive and transferable}
+If transferability is intended as a feature, then a non-interactive protocol can be achieved for example with a public (undeniable) CRS. 
+For example, if a CRS is generated by a trusted randomness beacon, and if soundness follows from the inability of the prover to control the CRS, then any external party (even one not involved with the prover at the time of proof generation) can at a later time verify that a proof transcript could have only been generated by a legitimate prover.
+
+
+\paragraph{Interactive and deniable}
+A classical example (in a standalone setting, without concurrent executions) for obtaining the deniability property comes from interactive ZKP protocols proven secure based on the use of rewinding.
+Here, deniability follows from the simulatability of transcripts for any malicious verifier.
+For each interactive step, the simulator learns the challenge issued by the possibly malicious verifier, and then rewinds to reselect the preceding message of the prover, so as to be able to answer the subsequent challenge.
+Some techniques require the use of commitments and/or trapdoors, and may enable this property even for straight-line simulation (i.e., without rewinding), provided there is an appropriate trusted setup.
+\loosen
+
+
+\paragraph{Interactive and transferable} 
+In certain settings it is possible, even from an interactive ZKP protocol execution, to produce a transcript that constitutes a transferable proof.
+Usually, transferability can be achieved when the (possibly malicious) verifier can convincingly show to external parties that the challenges selected during a protocol execution were unpredictable at the time of the determination of the preceding messages of the prover.
+The transferable proof transcript is then composed of the messages sent by the prover and additional information from the internal state of a malicious verifier, including details about the generation of challenges.
+For example, a challenge produced (by the verifier) as a cryptographic hash output (or as a keyed pseudo-random function) of the previous messages may later be used to provide assurance that only a legitimate prover would have been able to generate a valid subsequent message (response).
+As another example, if the interactive ZKP protocol is composed with a communication protocol where the prover authenticates all sent messages (e.g., signed within a PKI, and timestamped by a trusted service), then the overall sequence of those certified messages becomes, in the hands of the verifier, a transferable proof.
+Furthermore, from a transferable transcript, the actual transfer can also be performed in an interactive way: the verifier (in possession of the transcript) acts as prover in a transferable ZKP of knowledge of a transferable transcript, thereby transferring to the external verifier a new transferable transcript.
 \loosen
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{(Non)-Transferability/Deniability of Zero-Knowledge Proofs}  %%% Contribution by I. Visconti
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{(Non)-Transferability/Deniability of Zero-Knowledge Proofs}
 \label{paradigms:interactivity:deniability:online-offline}
 
-%%% LB: Need to explain in advance the meaning of online and offline
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\paragraph{Off-line non-transferability (deniability) of ZK proofs.}
+\paragraph{Off-line non-transferability (deniability) of ZK proofs}
 Zero-knowledge proofs are in general interactive. 
 Interaction is inherent without a setup. Indeed, Goldreich and Oren showed that for non-trivial languages zero-knowledge proofs require at least 3 rounds. 
 
-	The zero-knowledge property in absence of setup guarantees a property called off-line non-transfer\-ability, also known as deniability --- 
-%%% LB editor note: currently avoiding footnotes, so moved the text in the proposed footnote to the main text
-note that a verifier could always compute an equivalent transcript by running the simulator.
-	This property means that the verifier gets no evidence of having received an accepting proof from a prover and thus has no advantage in transferring the received proof to others.
+With absence setup, the ZP property guarantees a property called off-line non-transfer\-ability, also known as deniability --- note that a verifier could always compute an equivalent transcript by running the simulator.
+This means the verifier gets no evidence of having received an accepting proof from a prover and thus has no advantage in transferring the received proof to others.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\paragraph{On-line non-transferability of ZK proofs.}
+\paragraph{On-line non-transferability of ZK proofs}
 The situation is more complicated in case of on-line non-transferability.
 Indeed, in this case a malicious verifier plays with a honest prover in a zero-knowledge proof system and at the same time the malicious verifier plays with others in the attempt of transferring the proof that he his receiving from the prover. 
 Non-transferability is therefore a form of security against man-in-the-middle attacks. 
@@ -183,7 +167,7 @@ When instead different protocols are involved as part of the activities of the a
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\paragraph{Transferability of a NIZK proof: publicly verifiable ZK.}
+\paragraph{Transferability of a NIZK proof: publicly verifiable ZK}
 The transferability of a zero-knowledge proof could become unavoidable when some forms of setups are considered and the zero-knowledge proof makes some crucial use of it. 
 Indeed, notice that both in the common reference string model and in the programmable random oracle model one can construct non-interactive zero-knowledge proofs. 
 Such proofs cannot be simulated by the verifier with the same setup or the same instantiation of the random oracle. 
@@ -191,7 +175,7 @@ More specifically, non-interactive zero-knowledge proofs are constructed without
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\paragraph{Designated-verifier NIZK proofs.}
+\paragraph{Designated-verifier NIZK proofs}
 With more sophisticated setups other options become possible. 
 Consider for instance a verifier possessing a public identity implemented through a public key. 
 In this case the prover can compute a non-interactive zero-knowledge proof that makes crucially use of the public key of the verifier at the point that the verifier using the corresponding secret key could compute an indistinguishable proof. 
@@ -199,8 +183,7 @@ In this case we have that the proof is a non-interactive designated-verifier zer
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\paragraph{Transferability of interactive ZK proofs.} 
+\paragraph{Transferability of interactive ZK proofs}
 The use of identities implemented through public keys can also have impact in the interactive case. 
-Consider the case where there is no trusted setup. 
-In this case one can design an interactive zero-knowledge proof system that can have a transferability flavor by exploiting the public keys of prover and verifier. 
-Indeed, if the prover signs the transcript, then the proof is transferable by the verifier to whoever believes that the prover is honest.
+For example, one can design an interactive ZKP system with a transferability flavor. 
+If the prover signs the transcript, then the verifier is able to transfer the ``proof'' to whoever believes that the original prover was honest.

@@ -1,78 +1,56 @@
-\section{Types of verifiability}   %Verifiability scope of use-cases
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Types of verifiability}
 \label{apps:scope-use-cases}
 
 
-\paragraph{Verifiability type.}
-
+\paragraph{Verifiability type}
 When designing ZK based applications, one needs to keep in mind which of the following three models (that define the functionality of the ZKP) is needed:
 
+
 \begin{enumerate}
-
     \item \textbf{Public.}
-		Publicly verifiable as a requirement: a scheme / use-case where 
+	Publicly verifiable as a requirement: a scheme / use-case where 
 	there is a system requirement that the proofs are transferable. %%%, where such property is actually a requirement of the system. 
-		
 
-		
     \item \textbf{Designated.} 
-		Designated verifier as a security feature: only the intended receiver of the proof can verify it, making the proof non-transferable. 
-		This property can apply to both interactive and non-interactive ZKPs.
-
-		
+	Designated verifier as a security feature: only the intended receiver of the proof can verify it, making the proof non-transferable. 
+	This property can apply to both interactive and non-interactive ZKPs.
+	
     \item \textbf{Optional.} %The final model is one where neither of the above is needed: a ZK where 
-		There is no need to be able to transfer but also no non-transferability requirement. %Again, 
-		This property is applicable both in the interactive and in the non-interactive model.
-
+	There is no need to be able to transfer but also no non-transferability requirement. %Again, 
+	This property is applicable both in the interactive and in the non-interactive model.
 \end{enumerate}
 
 
-	\refsec{sec:paradigms:interactivity:transferability-deniability} discusses transferability vs.\ deniability, %%%public verifiability vs. designated verifiability
-
-which is strongly related to aspects of public verifiability vs.\ designated verifiability,
+\refsec{sec:paradigms:interactivity:transferability-deniability} discusses transferability vs.\ deniability, which is strongly related to aspects of public verifiability vs.\ designated verifiability,
 both in the interactive and in the non-interactive settings.
-	As a use-case example, consider some application related to blockchain currency, where aspects of user-privacy and regulatory-control are relevant.
+As a use-case example, consider some application related to blockchain currency, where aspects of user-privacy and regulatory-control are relevant.
 	
 	
-	Publicly-verifiable ZKPs can be appropriate when the validity of a transaction should be public 
-(e.g., so that everyone knows that some asset changed owner), while some supporting data needs to remain private 
-(e.g., the secret key of a blockchain address, controlling the ownership of the asset).
-	However, sometimes even the statement being proven should remain private beyond the scope of the verifier, and therefore a non-transferable proof	should be used.
-	This may apply for example to a proof of having enough funds available for a purchase, or also of knowing the secret key of a certain blockchain address.
-	Alice wants to prevent Bob from using the received proof to convince Charley of the claims made by Alice.
-	For that purpose, Alice can perform a deniability interactive proof with Bob.
-	Alternatively, Alice can send to Bob a (non-interactive) proof transcript built for Bob as a \emph{designated verifier}.
-	Depending on the use case, both public-verifiability and designated-verifiability may make sense as an application goal, and it is important to distinguish between both.
-%%%For example, using a designated-verifier proof of a secret-key, related to a public key, Alice can convince Bob, without the latter being able to transfer the proof to any other external party. 
-%%%“Compliance for regulation” can make sense in the second model (albeit depending on the 1940 use-case).
-%%%In general, the credential system can be in both of the last two models, given the extra constraints that would make it belong to the second model.
+Publicly-verifiable ZKPs can be appropriate when the validity of a transaction should be public (e.g., so that everyone knows that some asset changed owner), while some supporting data needs to remain private (e.g., the secret key of a blockchain address, controlling the ownership of the asset).
+However, sometimes even the statement being proven should remain private beyond the scope of the verifier, and therefore a non-transferable proof	should be used.
+This may apply for example to a proof of having enough funds available for a purchase, or also of knowing the secret key of a certain blockchain address.
+Alice wants to prevent Bob from using the received proof to convince Charley of the claims made by Alice.
+For that purpose, Alice can perform a deniability interactive proof with Bob.
+Alternatively, Alice can send to Bob a (non-interactive) proof transcript built for Bob as a \emph{designated verifier}.
+Depending on the use case, both public-verifiability and designated-verifiability can make sense as an application goal.
+It is important to distinguish between both.
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%\paragraph{Designated-verifier proofs.}
-
-	
-	The ``designation of verifiers'' allows resolving possible conflicts between authenticity and privacy \cite{1996:eurocrypt:designated-verifier-proofs}.
-	For example, a voting center wants only Bob to be convinced that the vote he cast was counted;
-	the voting center designates Bob to be the one convinced by the validity of the proof, 
-in order to prevent a malicious coercer to force him to prove how he voted.
-	Since the designated-verifier proofs are non-transferable, Bob cannot transfer the proof even if he wants to.
+The ``designation of verifiers'' allows resolving possible conflicts between authenticity and privacy \cite{1996:eurocrypt:designated-verifier-proofs}.
+For example, a voting center wants only Bob to be convinced that the vote he cast was counted;
+the voting center designates Bob to be the one convinced by the validity of the proof, in order to prevent a malicious coercer to force him to prove how he voted.
+Since the designated-verifier proofs are non-transferable, Bob cannot transfer the proof even if he wants to.
 
 
-	Suppose Alice wants to convince \emph{only} Bob that a statement $\theta$ is true.
-	For that purpose, Alice can prove the disjunction ``Either $\theta$ is true or I know the secret key of Bob''.
-	Given that Bob knows his own secret key, Bob could have produced such proof by himself.
-	Therefore, a third party Charlie will not be convinced that $\theta$ is true after seeing such proof transcript sent from Bob.
-	This holds even if Bob shares his secret key to Charlie, or if the key has been publicly leaked.
+Suppose Alice wants to convince \emph{only} Bob that a statement $\theta$ is true.
+For that purpose, Alice can prove the disjunction ``Either $\theta$ is true or I know the secret key of Bob''.
+Given that Bob knows his own secret key, Bob could have produced such proof by himself.
+Therefore, a third party Charlie will not be convinced that $\theta$ is true after seeing such proof transcript sent from Bob.
+This holds even if Bob shares his secret key to Charlie, or if the key has been publicly leaked.
 
-	%%%For example, \cite{1996:eurocrypt:designated-verifier-proofs} describes one protocol based on trapdoor commitments.
-	Designated proofs are possible both in the interactive and non-interactive settings.
-	In the interactive setting (e.g., proving being the signer of an undeniable signature) the prover has the ability to control when the verification takes place.
-	However, in general (without a designated-verifier approach) the prover may be unable to control who 
-is able to verify the proof, namely if the verifier is acting as a relay to another controlling party.
-	The use of a designated proof has the potential to solve this problem.
 
-%	Non-interactivity can be based on the Fiat-Shamir technique \cite{1987:crypto-86:How-to-Prove-Yourself},
-%where the challenge of the interactive protocol is instead computed as 
-%the hash of previous elements in the interactive protocol.
-	
-
+Designated proofs are possible both in the interactive and non-interactive settings.
+In the interactive setting (e.g., proving being the signer of an undeniable signature) the prover has the ability to control when the verification takes place.
+However, in general (without a designated-verifier approach) the prover may be unable to control who is able to verify the proof, namely if the verifier is acting as a relay to another controlling party.
+The use of a designated proof has the potential to solve this problem.\loosen

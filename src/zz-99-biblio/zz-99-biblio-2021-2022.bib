@@ -1,0 +1,77 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%  2021
+
+
+@article{2021:LSTW:eprint:linear-time-ZK-SNARKs-for-R1CS,
+  title = {Linear-time zero-knowledge SNARKs for {R1CS}},
+  author = {Jonathan Lee and Srinath T. V. Setty and Justin Thaler and Riad S. Wahby},
+  journal = {Cryptology ePrint Archive, Report~\iacrurl{2021/030}},
+  year = {2021},
+  institution = {IACR}, % publisher
+}
+
+
+@misc{2021:HGBNL:ZIP224,
+    author = {Daira Hopwood and Jack Grigg and Sean Bowe and Kris Nuttycombe and Ying Tong Lai},
+    title  = {Zcash Improvement Proposal 224: Orchard Shielded Protocol},
+    year   = {2021},
+    note   = {\url{https://zips.z.cash/zip-0224}},
+}
+
+
+@inproceedings{2021:ZWZZ:virgo++,
+author = {Zhang, Jiaheng and Liu, Tianyi and Wang, Weijie and Zhang, Yinuo and Song, Dawn and Xie, Xiang and Zhang, Yupeng},
+title = {Doubly Efficient Interactive Proofs for General Arithmetic Circuits with Linear Prover Time},
+year = {2021},
+isbn = {9781450384544},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3460120.3484767},
+doi = {10.1145/3460120.3484767},
+booktitle = {\Proc{} 2021 ACM SIGSAC Conference on Computer and Communications Security},
+pages = {159–177},
+series = {CCS '21},
+addendum = {\aaiacr{2020/1247}},
+numpages = {19},
+keywords = {interactive proofs, zero knowledge proofs},
+location = {Virtual Event, Republic of Korea},
+abstract = {We propose a new doubly efficient interactive proof protocol for general arithmetic circuits. The protocol generalizes the interactive proof for layered circuits proposed by Goldwasser, Kalai and Rothblum to arbitrary circuits, while preserving the optimal prover complexity that is strictly linear to the size of the circuits. The proof size remains succinct for low depth circuits and the verifier time is sublinear for structured circuits. We then construct a new zero knowledge argument scheme for general arithmetic circuits using our new interactive proof protocol together with polynomial commitments. Our key technique is a new sumcheck equation that reduces a claim about the output of one layer to claims about its input only, instead of claims about all the layers above which inevitably incurs an overhead proportional to the depth of the circuit. We developed efficient algorithms for the prover to run this sumcheck protocol and to combine multiple claims back into one in linear time in the size of the circuit. Not only does our new protocol achieve optimal prover complexity asymptotically, but it is also efficient in practice. Our experiments show that it only takes 0.3 seconds to generate the proof for a circuit with more than 600,000 gates, which is 13 times faster than the original interactive proof protocol on the corresponding layered circuit. The proof size is 208 kilobytes and the verifier time is 66 milliseconds. Our implementation can take general arithmetic circuits directly, without transforming them to layered circuits with a high overhead on the size of the circuit.},
+}
+
+
+@misc{url:ZKP-science,
+    shorthand = {ZKP.Science},
+    author = {ZKP.Science},
+    title = {Zero-Knowledge Proofs --- What are they, how do they work, and are they fast yet?},
+    howpublished = {\url{https://zkp.science}},
+    note = {Sourced from \url{https://github.com/ZKProofs/ZKProofs.github.io}. Accessed in 2022} 
+}
+
+
+@misc{libsnark,
+    shorthand = {libsnark},
+    author = {libsnark},
+    title = {libsnark: a C++ library for zkSNARK proofs},
+    howpublished = {\url{https://github.com/scipr-lab/libsnark}},
+    note = {Accessed in 2022} 
+}
+
+
+@misc{zkproof-file-formats,
+    shorthand = {ZKP-FF},
+    author = {ZKProof},
+    title = {ZKProof file formats},
+    howpublished = {\url{https://github.com/zkpstandard/file_formats}},
+    note = {Accessed in 2022} 
+}
+
+
+
+@misc{code-fed-regulations,
+    shorthand = {ECFR},
+    author = {{ECFR}},
+    title = {Code of Federal Regulations},
+    subtitle = {eCFR -- Title 17, Chapter II, \textsection 230.500},
+    howpublished = {\url{https://www.ecfr.gov/current/title-17/section-230.501}},
+    note = {Accessed in 2018}
+}

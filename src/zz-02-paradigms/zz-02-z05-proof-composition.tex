@@ -1,0 +1,19 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Proof Composition}
+\label{paradigms:proof-composition}
+
+With recursive composition one can prove there exists a proof of a proof of a proof, etc.
+This can have multiple advantages, ranging from improved efficiency, to improved functionality, to the ability to prove machine computations \cite{2014:crypto:Scalable-ZK-via-Cycles-of-EC}.
+For example, using a recursive zero-knowledge proof it is theoretically possible to prove that a \texttt{while} loop of an unspecified size in a machine computation is satisfied, and furthermore to update the proof incrementally as the computation proceeds --- the notion of \emph{incrementally-verifiable computation} \cite{Valiant08incrementally}.
+Recursive proofs can also prove integrity of ongoing distributed computation --- the notion of \emph{proof-carrying data} \cite{2010:ICS:proof-carrying-data,CTV15cluster} --- to assure intermediate nodes, as well as a final verifier, that all preceding parts of the computation (done by other parties) are correct.
+
+\futfig{Illustration of recursive ZK proving}
+
+
+In the realm of blockchains, these techniques found several applications.
+First, validity of the current state of the blockchain can be succinctly proven by considering it as an incrementally verifiable computation, so that any newcomer to the system can be certain that the state is correct just by checking one recursive proof, as in Mina (nee Coda) \cite{RMRS20coda}.
+Second, even within a single transaction, multiple proofs can be recursively composed to achieve succinctness (in transaction size and verification time), as in Zcash Orchard \cite{2021:HGBNL:ZIP224}.
+
+Approaches to build recursive proofs include recursive composition of zk-SNARKs \cite{Valiant08incrementally,2010:ICS:proof-carrying-data,2013:Recursive-Composition-and-Bootstrapping-for-SNARKS-and-Proof-carrying-Data,2014:crypto:Scalable-ZK-via-Cycles-of-EC}, and its generalization to accumulation / split-accumulation schemes \cite{haloBgh2019,tcc/BunzCMS20,2020:COS:Fractal,boneh2020halo}.
+
+\WANTED[more details on construction approaches and additional application]

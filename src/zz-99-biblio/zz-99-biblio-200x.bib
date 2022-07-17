@@ -1,6 +1,7 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%  2000
 
-%[Micali]
-%Micali:2000:CSP:586847.586984
+
 @article{2000:SIAM:Computationally-Sound-Proofs,
  author = {Micali, Silvio},
  title = {Computationally Sound Proofs},
@@ -8,7 +9,7 @@
  issue_date = {2000},
  volume = {30},
  number = {4},
- month = oct,
+ month = {10},
  year = {2000},
  issn = {0097-5397},
  pages = {1253--1298},
@@ -22,69 +23,324 @@
 } 
 
 
-%groth2006perfect
-@InProceedings{2006:eurocrypt:perfect-NIZK-for-NP,
-author="Groth, Jens
-and Ostrovsky, Rafail
-and Sahai, Amit",
-editor="Vaudenay, Serge",
-title="Perfect Non-interactive Zero Knowledge for NP",
-booktitle="Advances in Cryptology - EUROCRYPT 2006",
-series="LNC",
-volum="4004",
-year="2006",
-publisher="Springer Berlin Heidelberg",
-address="Berlin, Heidelberg",
-pages="339--358",
-abstract="Non-interactive zero-knowledge (NIZK) proof systems are fundamental cryptographic primitives used in many constructions, including CCA2-secure cryptosystems, digital signatures, and various cryptographic protocols. What makes them especially attractive, is that they work equally well in a concurrent setting, which is notoriously hard for interactive zero-knowledge protocols. However, while for interactive zero-knowledge we know how to construct statistical zero-knowledge argument systems for all NP languages, for non-interactive zero-knowledge, this problem remained open since the inception of NIZK in the late 1980's. Here we resolve two problems regarding NIZK:",
-isbn="978-3-540-34547-3",
-doi="10.1007/11761679_21"
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%  2001
+
+
+@InProceedings{2001:CD:secure-distributed-linear-algebra,
+author = {Cramer, Ronald and Damg{\aa}rd, Ivan},
+editor = {Kilian, Joe},
+title = {Secure Distributed Linear Algebra in a Constant Number of Rounds},
+booktitle = {Advances in Cryptology --- CRYPTO 2001},
+year = {2001},
+publisher = {Springer Berlin Heidelberg},
+address = {Berlin, Heidelberg},
+pages = {119--136},
+abstract = {Consider a network of processors among which elements in a finite field K can be verifiably shared in a constant number of rounds. Assume furthermore constant-round protocols are available for generating random shared values, for secure multiplication and for addition of shared values. These requirements can be met by known techniques in all standard models of communication.},
+isbn = {978-3-540-44647-7},
+doi = {10.1007/3-540-44647-8_7}
+}
+
+
+@book{2001:Gol:FOC-vol1,
+author = {Goldreich, Oded},
+year = {2001},
+month = {6},
+title = {The Foundations of Cryptography --- Volume 1, Basic Techniques.},
+isbn = {0-521-79172-3},
+note = {\url{https://www.wisdom.weizmann.ac.il/~oded/foc-vol1.html}}
+}
+ 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%  2002
+
+
+@article{2002:GVW:IP-laconic-prover,
+author = {Goldreich, Oded and Vadhan, Salil and Wigderson, Avi},
+title = {On Interactive Proofs with a Laconic Prover},
+year = {2002},
+issue_date = {June 2002},
+publisher = {Birkhauser Verlag},
+address = {CHE},
+volume = {11},
+number = {1/2},
+issn = {1016-3328},
+url = {https://doi.org/10.1007/s00037-002-0169-0},
+doi = {10.1007/s00037-002-0169-0},
+abstract = {We continue the investigation of interactive proofs with bounded communication, as initiated by Goldreich &amp; H\r{a}stad (1998). Let L be a language that has an interactive proof in which the prover sends few (say b) bits to the verifier. We prove that the complement L has a constant-round interactive proof of complexity that depends only exponentially on b. This provides the first evidence that for NP- complete languages, we cannot expect interactive provers to be much more "laconic" than the standard NP proof. When the proof system is further restricted (e.g., when b = 1, or when we have perfect completeness), we get significantly better upper bounds on the complexity of L.},
+journal = {Comput. Complex.},
+month = {6},
+pages = {1–53},
+numpages = {53},
+keywords = {NP, game theory, Arthur-Merlin games, statistical zero-knowledge, interactive proof systems, sampling protocols}
+}
+
+
+@INPROCEEDINGS{2002:Klauck:rectangle-size-bounds,
+  author = {H. {Klauck}},
+  booktitle = {\Proc\ 18th IEEE Annual Conference on Computational Complexity.}, 
+  title = {Rectangle size bounds and threshold covers in communication complexity}, 
+  year = {2003},
+  volume = {},
+  number = {},
+  pages = {118-134},
+  doi = {10.1109/CCC.2003.1214415},
+  addendum = {Also at \href{https://arxiv.org/abs/cs/0208006}{arXiv:cs/0208006}}
+  }
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%  2003
+
+
+@InProceedings{2003:CFIK:efficient-MPC-over-rings,
+author = {Cramer, Ronald and Fehr, Serge and Ishai, Yuval and Kushilevitz, Eyal},
+editor = {Biham, Eli},
+title = {Efficient Multi-party Computation over Rings},
+booktitle = {Advances in Cryptology --- EUROCRYPT 2003},
+year = {2003},
+publisher = {Springer Berlin Heidelberg},
+address = {Berlin, Heidelberg},
+pages = {596--613},
+abstract = {Secure multi-party computation (MPC) is an active research area, and a wide range of literature can be found nowadays suggesting improvements and generalizations of existing protocols in various directions. However, all current techniques for secure MPC apply to functions that are represented by (boolean or arithmetic) circuits over finite fields. We are motivated by two limitations of these techniques:Generality. Existing protocols do not apply to computation over more general algebraic structures (except via a brute-force simulation of computation in these structures).Efficiency. The best known constant-round protocols do not efficiently scale even to the case of large finite fields.},
+isbn = {978-3-540-39200-2},
+doi = {10.1007/3-540-39200-9_37},
+addendum = {\aaiacr{2003/030}},
+}
+
+
+@INPROCEEDINGS{2003:Naor:on-crypto-assumptions,
+    author = {Moni Naor},
+    title = {On cryptographic assumptions and challenges},
+    editor = {D. Boneh},
+    booktitle = {Advances in Cryptology --- CRYPTO 2003},
+    series = {Lecture Notes in Computer Science},
+    volume = {2729},
+    year = {2003},
+    publisher = {Springer, Berlin, Heidelberg},
+    doi = {10.1007/978-3-540-45146-4_6}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%  2004
+
+
+@InProceedings{2004:RTV:notions-of-reducibility,
+author = {Reingold, Omer and Trevisan, Luca and Vadhan, Salil},
+editor = {Naor, Moni},
+title = {Notions of Reducibility between Cryptographic Primitives},
+booktitle = {Theory of Cryptography},
+year = {2004},
+publisher = {Springer Berlin Heidelberg},
+address = {Berlin, Heidelberg},
+pages = {1--20},
+abstract = {Starting with the seminal paper of Impagliazzo and Rudich [17], there has been a large body of work showing that various cryptographic primitives cannot be reduced to each other via ``black-box'' reductions. The common interpretation of these results is that there are inherent limitations in using a primitive as a black box, and that these impossibility results can be overcome only by explicitly using the code of the primitive in the construction.},
+isbn = {978-3-540-24638-1},
+doi = {10.1007/978-3-540-24638-1_1}
+}
+
+
+@inproceedings{2004:BGHSV:STOC:robust-PCPs-proximity,
+author = {Ben-Sasson, Eli and Goldreich, Oded and Harsha, Prahladh and Sudan, Madhu and Vadhan, Salil},
+title = {Robust {PCP}s of Proximity, Shorter {PCP}s and Applications to Coding},
+year = {2004},
+isbn = {1581138520},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/1007352.1007361},
+doi = {10.1145/1007352.1007361},
+abstract = {We continue the study of the trade-off between the length of PCP sand their query complexity, establishing the following main results(which refer to proofs of satisfiability of circuits of size n): 1 We present PCPs of length exp(\~{O}(log log n)2)•n that can be verified by making o(log logn) Boolean queries.For every ε&gt;0, we present PCPs of length exp(logε n)• n that can be verified by making a constant number of Boolean queries. In both cases, false assertions are rejected withconstant probability (which may be set to be arbitrarily close to 1). The multiplicative overhead on the length of the proof, introduced by transforming a proof into a probabilistically checkable one, is just quasi-polylogarithmic in the first case (ofquery complexity o(log logn)), and 2(log n)ε, for any ε&gt;0, in the second case (of constant query complexity). In contrast, previous results required at least 2 √logn overhead in the length, even to get query complexity 2 √log n. Our techniques include the introduction of a new variant of PCPs that we call "Robust PCPs". These new PCPs facilitate proof composition, which is a central ingredient in construction of PCP systems. (A related notion and its composition properties were discovered independently by Dinur and Reingold. ) Our main technical contribution is a construction of a "length-efficient" Robust PCP. While the new construction uses many of the standard techniques in PCPs, it does differ from previous constructions in fundamental ways, and in particular does not use the "parallelization" step of Arora et al. . The alternative approach may be of independent interest. We also obtain analogous quantitative results for locally testable codes. In addition, we introduce a relaxed notion of locally decodable codes,and present such codes mapping k information bits to code words of length κ1+ε, for any ε&gt;0.},
+booktitle = {\Proc{} 36th Annual ACM Symposium on Theory of Computing},
+pages = {1–10},
+numpages = {10},
+keywords = {locally testable codes, PCP, property testing, locally decodable codes, probabilistically checkable proofs},
+location = {Chicago, IL, USA},
+series = {STOC '04},
+addendum = {\aaECCCTR{2004}{04}{021}}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%  2005
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%  2006
+
+
+@InProceedings{2006:eurocrypt:perfect-NIZK-for-NP, 
+author = {Groth, Jens and Ostrovsky, Rafail and Sahai, Amit},
+editor = {Vaudenay, Serge},
+title = {Perfect Non-interactive Zero Knowledge for NP},
+booktitle = {Advances in Cryptology --- EUROCRYPT 2006},
+series = {LNC},
+volum = {4004},
+year = {2006},
+publisher = {Springer Berlin Heidelberg},
+address = {Berlin, Heidelberg},
+pages = {339--358},
+abstract = {Non-interactive zero-knowledge (NIZK) proof systems are fundamental cryptographic primitives used in many constructions, including CCA2-secure cryptosystems, digital signatures, and various cryptographic protocols. What makes them especially attractive, is that they work equally well in a concurrent setting, which is notoriously hard for interactive zero-knowledge protocols. However, while for interactive zero-knowledge we know how to construct statistical zero-knowledge argument systems for all NP languages, for non-interactive zero-knowledge, this problem remained open since the inception of NIZK in the late 1980's. Here we resolve two problems regarding NIZK:},
+isbn = {978-3-540-34547-3},
+doi = {10.1007/11761679_21},
+addendum = {\aaiacr{2005/290}}
+}
+
+
+@article{2006:Mau:CC:SMPC-made-simple,
+title = {Secure multi-party computation made simple},
+journal = {Discrete Applied Mathematics},
+volume = {154},
+number = {2},
+pages = {370-381},
+year = {2006},
+note = {Coding and Cryptography},
+issn = {0166-218X},
+doi = {https://doi.org/10.1016/j.dam.2005.03.020},
+url = {https://www.sciencedirect.com/science/article/pii/S0166218X05002428},
+author = {Ueli Maurer},
+keywords = {Secure multi-party computation, Verifyable secret sharing, Adversary structures},
+abstract = {Known secure multi-party computation protocols are quite complex, involving non-trivial mathematical structures and sub-protocols. The purpose of this paper is to present a very simple approach to secure multi-party computation with straight-forward security proofs. This approach naturally yields protocols secure for mixed (active and passive) corruption and general (as opposed to threshold) adversary structures, confirming the previously proved tight bounds in a simpler framework. Due to their simplicity, the described protocols are well-suited for didactic purposes, which is a main goal of this paper.}
+}
+
+
+@InProceedings{2006:CC:algebraic-geometric-SSS-and-SMPC-over-small-fields,
+author = {Chen, Hao and Cramer, Ronald},
+editor = {Dwork, Cynthia},
+title = {Algebraic Geometric Secret Sharing Schemes and Secure Multi-Party Computations over Small Fields},
+booktitle = {Advances in Cryptology --- CRYPTO 2006},
+year = {2006},
+publisher = {Springer Berlin Heidelberg},
+address = {Berlin, Heidelberg},
+pages = {521--536},
+abstract = {We introduce algebraic geometric techniques in secret sharing and in secure multi-party computation (MPC) in particular. The main result is a linear secret sharing scheme (LSSS) defined over a finite field $\mathbb{F}_q$, with the following properties.},
+isbn = {978-3-540-37433-6},
+doi = {10.1007/11818175_31}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%  2007
+
+
+@INPROCEEDINGS{2007:IKO,
+  author = {Y. {Ishai} and E. {Kushilevitz} and R. {Ostrovsky}},
+  booktitle = {Twenty-Second Annual IEEE Conference on Computational Complexity (CCC'07)}, 
+  title = {Efficient Arguments without Short PCPs}, 
+  year = {2007},
+  volume = {},
+  number = {},
+  pages = {278-291},
+  doi = {10.1109/CCC.2007.10}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%  2008
+
+
+%% using \nolinkurl to allow breaking the line at the slash /
+@InProceedings{Valiant08incrementally,
+author = {Valiant, Paul},
+editor = {Canetti, Ran},
+title = {Incrementally Verifiable Computation or Proofs of Knowledge Imply \nolinkurl{Time/Space} Efficiency},
+booktitle = {5th Theory of Cryptography Conference},
+series = {TCC~'08},
+year = {2008},
+publisher = {Springer Berlin Heidelberg},
+doi = {10.1007/978-3-540-78524-8_1},
+address = {Berlin, Heidelberg},
+abstract = {A probabilistically checkable proof (PCP) system enables proofs to be verified in time polylogarithmic in the length of a classical proof. Computationally sound (CS) proofs improve upon PCPs by additionally shortening the length of the transmitted proof to be polylogarithmic in the length of the classical proof.},
+isbn = {978-3-540-78524-8}
 }
 
 
 
-
-%IKOS
-%Ishai:2007:ZSM:1250790.1250794
-@inproceedings{2007:stoc:ZK-from-SMPC,
- author = {Ishai, Yuval and Kushilevitz, Eyal and Ostrovsky, Rafail and Sahai, Amit},
- title = {Zero-knowledge from Secure Multiparty Computation},
- booktitle = {Proceedings of the Thirty-ninth Annual ACM Symposium on Theory of Computing},
- series = {STOC '07},
- year = {2007},
- isbn = {978-1-59593-631-8},
- location = {San Diego, California, USA},
- pages = {21--30},
- numpages = {10},
- url = {http://doi.acm.org/10.1145/1250790.1250794},
- doi = {10.1145/1250790.1250794},
- acmid = {1250794},
- publisher = {ACM},
- keywords = {black-box reductions, cryptography, secure computation, zero-knowledge},
-} 
-%biblatex complains if location+address
-%address = {New York, NY, USA},
-
-
-
-
-
 %KR08
-%Kalai:2008:IP:1427987.1428043
 @inproceedings{2008:icalp:interactive-PCP,
  author = {Kalai, Yael Tauman and Raz, Ran},
  title = {Interactive PCP},
- booktitle = {Proceedings of the 35th International Colloquium on Automata, Languages and Programming, Part II},
+ booktitle = {\Proc{} 35th International Colloquium on Automata, Languages and Programming, Part II},
  series = {ICALP '08},
+ editor = {Aceto, Luca and Damg{\aa}rd, Ivan and Goldberg, Leslie Ann and Halld{\'o}rsson, Magn{\'u}s M. and Ing{\'o}lfsd{\'o}ttir, Anna and Walukiewicz, Igor},
  year = {2008},
  isbn = {978-3-540-70582-6},
  location = {Reykjavik, Iceland},
+ publisher = {Springer Berlin Heidelberg},
  pages = {536--547},
  numpages = {12},
  url = {http://dx.doi.org/10.1007/978-3-540-70583-3_44},
  doi = {10.1007/978-3-540-70583-3_44},
  acmid = {1428043},
  publisher = {Springer-Verlag},
+ addendum = {\aaECCCTR{2007}{07}{031}}
 } 
-%biblatex complains if location+address
-%address = {Berlin, Heidelberg},
+
+
+
+@inproceedings{2008:GKR,
+author = {Goldwasser, Shafi and Kalai, Yael and Rothblum, Guy},
+year = {2008},
+month = {5},
+pages = {113-122},
+title = {Delegating Computation: Interactive Proofs for Muggles},
+volume = {62},
+journal = {\Proc{} Annual ACM Symposium on Theory of Computing},
+doi = {10.1145/1374376.1374396},
+addendum = {Also at Journal of the ACM, Vol.~62, Issue~4, No.~27, 2015, \printdoi{10.1145/2699436}. \aaECCCTR{2017}{07}{108}.}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%  2009
+
+
+@article{2009:IKOS:ZKPs-from-SMPC,
+author = {Ishai, Yuval and Kushilevitz, Eyal and Ostrovsky, Rafail and Sahai, Amit},
+title = {Zero-Knowledge Proofs from Secure Multiparty Computation},
+journal = {SIAM Journal on Computing},
+volume = {39},
+number = {3},
+pages = {1121-1152},
+year = {2009},
+doi = {10.1137/080725398},
+addendum = {See also ``ZK from SMPC'' at \Proc{} STOC '07, \printdoi{10.1145/1250790.1250794}}
+}
+
+
+
+@phdthesis{2009:gen:a-FHE-scheme,
+author = {Gentry, Craig},
+advisor = {Boneh, Dan},
+title = {A Fully Homomorphic Encryption Scheme},
+year = {2009},
+isbn = {9781109444506},
+publisher = {Stanford University},
+address = {Stanford, CA, USA},
+abstract = {We propose the first fully homomorphic encryption scheme, solving an old open problem. Such a scheme allows one to compute arbitrary functions over encrypted data without the decryption key—i.e., given encryptions  E (  m  1), ...,  E (  m t ) of  m  1, ...,  m  t,  one can efficiently compute a compact ciphertext that encrypts  f (  m  1, ...,  m  t ) for any efficiently computable function  f . Fully homomorphic encryption has numerous applications. For example, it enables encrypted search engine queries—i.e., a search engine can give you a succinct encrypted answer to your (boolean) query without even knowing what your query was. It also enables searching on encrypted data; you can store your encrypted data on a remote server, and later have the server retrieve only files that (when decrypted) satisfy some boolean constraint, even though the server cannot decrypt the files on its own. More broadly, it improves the efficiency of secure multiparty computation. In our solution, we begin by designing a somewhat homomorphic "boostrappable" encryption scheme that works when the function  f  is  the scheme's own decryption function.  We then show how, through recursive self-embedding, bootstrappable encryption gives fully homomorphic encryption.},
+note = {AAI3382729},
+doi = {10.5555/1834954}
+}
+
+
+@article{2009:algebrization:Aaronson,
+author = {Aaronson, Scott and Wigderson, Avi},
+title = {Algebrization: A New Barrier in Complexity Theory},
+year = {2009},
+issue_date = {February 2009},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {1},
+number = {1},
+issn = {1942-3454},
+url = {https://doi.org/10.1145/1490270.1490272},
+doi = {10.1145/1490270.1490272},
+abstract = {Any proof of P ≠ NP will have to overcome two barriers: relativization and natural proofs. Yet over the last decade, we have seen circuit lower bounds (e.g., that PP does not have linear-size circuits) that overcome both barriers simultaneously. So the question arises of whether there is a third barrier to progress on the central questions in complexity theory.In this article, we present such a barrier, which we call algebraic relativization or algebrization. The idea is that, when we relativize some complexity class inclusion, we should give the simulating machine access not only to an oracle A, but also to a low-degree extension of A over a finite field or ring.We systematically go through basic results and open problems in complexity theory to delineate the power of the new algebrization barrier. First, we show that all known nonrelativizing results based on arithmetization---both inclusions such as IP = PSPACE and MIP = NEXP, and separations such as MAEXP ⊄ P/poly---do indeed algebrize. Second, we show that almost all of the major open problems---including P versus NP, P versus RP, and NEXP versus P/poly---will require non-algebrizing techniques. In some cases, algebrization seems to explain exactly why progress stopped where it did: for example, why we have superlinear circuit lower bounds for PromiseMA but not for NP.Our second set of results follows from lower bounds in a new model of algebraic query complexity, which we introduce in this article and which is interesting in its own right. Some of our lower bounds use direct combinatorial and algebraic arguments, while others stem from a surprising connection between our model and communication complexity. Using this connection, we are also able to give an MA-protocol for the Inner Product function with O (√nlogn) communication (essentially matching a lower bound of Klauck), as well as a communication complexity conjecture whose truth would imply NL ≠ NP.},
+journal = {ACM Trans. Comput. Theory},
+month = {2},
+articleno = {2},
+numpages = {54},
+keywords = {arithmetization, oracles, communication complexity, Low-degree polynomials, interactive proofs, query complexity},
+addendum = {\aaECCCTR{2008}{08}{005}}
+}  

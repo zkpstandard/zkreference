@@ -1,87 +1,130 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% Related to package titlesec
 
+\def\fontfamheads{\sffamily}  %% font family type for headings: sans serif, serif, ... ... check the options when loading titlesec
 
-%%% Related to package titlesec
-%%%\titlespacing{<command>}{<left>}{<before-sep>}{<after-sep>}[<right>]
-%\titlespacing*{\chapter}{0pt}{-25pt}{0pt} %%-40pt
-\titlespacing*{\chapter}{0pt}{-25pt}{2em} %%-40pt
-\titleformat{\chapter}[display]{\normalfont\huge\centering}{Chapter \thechapter.\enskip}{20pt}{\Huge}
-\titleformat{\chapter}[hang] 
-{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter.}{.5em}{} 
+\titlespacing*{\chapter}{0pt}{-25pt}{2em}
+\titleformat{\chapter}[display]{\fontfamheads\huge\centering}{Chapter \thechapter.\enskip}{20pt}{\Huge}
+\titleformat{\chapter}[hang]{\fontfamheads\huge\bfseries}{\chaptertitlename\ \thechapter.}{.5em}{} 
 \titlespacing{\subsubsection}{0pt}{1em}{0em}
 
+%%% Same font size as section header ?
+\renewcommand{\cfttoctitlefont}{\fontfamheads\bfseries\Large}
+\renewcommand{\cftloftitlefont}{\fontfamheads\bfseries\Large}
+\renewcommand{\cftlottitlefont}{\fontfamheads\bfseries\Large}
 
-%%% \presection: prints a centered and unnumbered section header, and adds the header to the table of contents
+\renewcommand\cftchapafterpnum{\vskip0pt} %spacing between items in toc
+\renewcommand\cftsecafterpnum{\vskip0pt} %spacing between items in toc
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% \presection: 
+% prints a centered and unnumbered section header, and adds the header to the table of contents
 % 2nd optional argument has default value `section'
 % e.g., \presection[short-section-name]{my-very-long-section-name}
 % e.g., \presection[short-subsection-name][subsection]{my-very-long-subsection-name}
-%\newcommandtwoopt{\presection}[3][][section]{\phantomsection\section*{\centering #3}\addcontentsline{toc}{#2}{\ifEmptyElse{#2}{#3}{#2}}}
 
 \newcommandtwoopt{\presection}[3][][section]{\phantomsection\section*{\centering #3}\ifEmptyElse{#1}{\addcontentsline{toc}{#2}{#3}}{\addcontentsline{toc}{#2}{#1}}}
 
-%\newcommand{\presection}[2][section]{\phantomsection\section*{\centering #2}\addcontentsline{toc}{#1}{#2}}
-%\newcommand{\presection}[2][section]{\phantomsection\section*{\centering #2}\addcontentsline{toc}{#1}{#2}}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%% Vertical Spacing
 
-\renewcommand{\headrulewidth}{0pt}
-
-
-%%%%%%%%%%%% Formatting
-\theorembodyfont{\rm}\newtheorem{remark}{Remark} %needs package theorem
-\setcounter{tocdepth}{3} % depth at which to show contents in the table of contents % needs package tocloft
-\renewcommand\cftchapafterpnum{\vskip0pt} %spacing between items in toc
-\renewcommand\cftsecafterpnum{\vskip0pt} %spacing between items in toc
+\setitemize{itemsep=0em}  % requires \usepackage{enumitem}
 \setlist[itemize]{itemsep=.5ex, topsep=0pt}
 \setlist[enumerate]{itemsep=.5ex, topsep=0pt}
+
+\setlength{\parskip}{\medskipamount} 
 \setlength{\parskip}{.75em}
 \setlength{\parindent}{0pt}
 
-\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
-\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+%% Changing the paragraph command to automatically end with a dot, and so that it can include a label as an optional argument  
+\let\originalparagraph\paragraph
+\renewcommand{\paragraph}[2][.]{\vskip0pt\vspace{-.5em}\originalparagraph{#2#1}}
+\renewcommand{\paragraph}[2][.]{{\fontfamheads\vskip.5em\noindent\textbf{#2#1}~}}  %% similar to \paragraph, but without the extra vertical spacing
 
+\newcommand{\mypar}[1]{\paragraph{#1}\mbox{}\\\vspace{-1ex}}  %%% paragraph whose label ends the line
+
+%%% \inpar: similar to a paragraph command, but without any extra vertical spacing
+\newcommand{\inpar}[2][.]{{\fontfamheads\vskip0pt\noindent\textbf{#2#1}~}}  %% similar to \paragraph, but without the extra vertical spacing
+
+% \parhead: originally defined in package dtrt
+\providecommand{\parhead}[1]{\smallskip \noindent {\bfseries\boldmath\ignorespaces \dt@MaybeAddPunct{#1}}\hskip 0.9em plus 0.3em minus 0.3em \dt@ignorespacesandimplicitepars}
+
+\newcommand{\question}[1]{\subsection{#1}}
+\newcommand{\subquestion}[1]{\parhead{#1}}
+\newcommand{\subanswer}[1]{\parhead{#1}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%% Bookmarks and meta-bookmarks
+
+\setcounter{tocdepth}{3} % depth at which to show contents in the table of contents % needs package tocloft
+\setcounter{secnumdepth}{3} % to show numbering for subsubsections
 
 \hypersetup{
 	linktocpage,
-	bookmarksnumbered,
-	bookmarksopen,
-	bookmarksdepth=3,
-	bookmarksopenlevel=1,
+	bookmarksnumbered,bookmarksopen,bookmarksdepth=3,bookmarksopenlevel=1,
 	pdfdisplaydoctitle=true,
 	pdfstartview={FitH},    % fits the width of the page to the window
 	breaklinks=true,
-	colorlinks=true,
-	allcolors=darkblue,
+	colorlinks=true,allcolors=darkblue
 }
-\urlstyle{rm}
 
 
-
-%%%%%%%%%%%% Related to package fancyhdr
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% Related to headers, footers and the configuration related to package fancyhdr
 %use \ifoddeven to define different headers between odd and even pages
 
+\renewcommand{\headrulewidth}{0pt}
 \setlength{\headheight}{13.6pt}
 
-\fancypagestyle{mainmatter}{\fancyhead{}
-		\lhead{\ifoddeven{\nouppercase{\leftmark}}{}}
-		\rhead{\ifoddeven{}{Section \nouppercase{\rightmark}}}
-		\cfoot{\thepage}
+%\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+%\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+
+\renewcommand{\chaptermark}[1]{\markboth{\chaptername~\thechapter: #1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection~ #1}}
+
+
+\fancypagestyle{cnts}{\fancyhead{}
+	\lhead{\ifoddeven{\zkpcomrefabbrev~\zkpcomrefversion}{}}  % . \nouppercase{\leftmark}
+	\rhead{\ifoddeven{}{Contents}}  % \nouppercase{\rightmark}
+	\cfoot{\thepage}
 }
+
+\fancypagestyle{exec-summ}{\fancyhead{}
+	\lhead{\ifoddeven{\zkpcomrefabbrev~\zkpcomrefversion}{}}
+	\rhead{\ifoddeven{}{Executive summary}}
+	\cfoot{\thepage}
+}
+
+\fancypagestyle{mainmatter}{\fancyhead{}
+	\lhead{\ifoddeven{\zkpcomrefabbrev~\zkpcomrefversion. \nouppercase{\leftmark}}{}}
+	\rhead{\ifoddeven{}{Section \nouppercase{\rightmark}}}
+	\cfoot{\thepage}
+}
+
+\fancypagestyle{acks}{\fancyhead{}
+	\lhead{\ifoddeven{Acknowledgments}{}}
+    \rhead{\ifoddeven{}{Acknowledgments}}
+	\cfoot{\thepage}}
 
 \fancypagestyle{references}{\fancyhead{}
-		\lhead{\ifoddeven{References}{}}
-		\rhead{\ifoddeven{}{References}}
-		\cfoot{\thepage}}
+	\lhead{\ifoddeven{References}{}}
+	\rhead{\ifoddeven{}{References}}
+	\cfoot{\thepage}}
 
 \fancypagestyle{appendix}{\fancyhead{}
-		\lhead{\ifoddeven{\nouppercase{\leftmark}}{}}
-		\rhead{\ifoddeven{}{Section \nouppercase{\rightmark}}}
-		\cfoot{\thepage}
+	\lhead{\ifoddeven{\zkpcomrefabbrev~\zkpcomrefversion. Appendix \nouppercase{\leftmark}}{}}
+	\rhead{\ifoddeven{}{Section \nouppercase{\rightmark}}}
+	\cfoot{\thepage}
 }
 
-\def\intentiallyblank{\smash{\raisebox{-3.5em}{\scalebox{1.5}{\color[rgb]{0.85,0.85,0.85}Page intentionally blank}}}}
-\fancypagestyle{intentionallyblank}{\fancyhead{}\chead{\intentiallyblank}\cfoot{}}
+\def\intentionallyblank{\scalebox{1.5}{\color[rgb]{0.85,0.85,0.85}Page intentionally blank}}
+\def\raisedintblank{\smash{\raisebox{-3.5em}{\intentionallyblank}}}
+\fancypagestyle{intentionallyblank}{\fancyhead{}\chead{\smash{\raisebox{-3.5em}{\raisedintblank}}}\cfoot{}}
 
-
-\fancypagestyle{blankpagewithnumber}{\fancyhead{}\chead{\intentiallyblank}\cfoot{\thepage}} %to avoid
+\fancypagestyle{blankpagewithnumber}{\fancyhead{}\chead{\raisedintblank}\cfoot{\thepage}} %to avoid
 
 \newcommand\cleartooddpage{\clearpage\ifodd\value{page}\else
 	%avoid the \rightmark of the `mainmatter' page style, but still include a page number
@@ -90,10 +133,8 @@
 \fancypagestyle{empty}{\fancyhead{}\cfoot{}}
 
 
-%%% Same font size as section header ?
-\renewcommand\cfttoctitlefont{\bfseries\Large}
-\renewcommand\cftloftitlefont{\bfseries\Large}
-\renewcommand\cftlottitlefont{\bfseries\Large}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%% Table of Contents and References
 
 \makeatletter
 \@ifpackageloaded{babel}{%
@@ -111,35 +152,83 @@
 \makeatother
 
 
-\DeclareListWrapperFormat{publisher}{Pub.\ by \mkbibemph{#1}}
-%\DeclareListWrapperFormat{organization}{\mkbibemph{#1}}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% FORMATTING of others
 
-%%%\newcommand{\myciton}{cited on}
-%%%\newcommand{\mybibstring}{}
-%%%\DeclareListFormat{list:citon}{%
-%%%    \ifnumless{\value{listcount}}{\value{liststop}}
-%%%    {\ifdefstring{\titlepagename}{#1}{\myciton\ppspace\listbreak}{}}
-%%%    {\ifdefstring{\titlepagename}{#1}{\myciton}{\mybibstring}\ppspace}}
-%%%\renewbibmacro*{pageref}{\iflistundef{pageref}{}
-%%%    {\printtext[parens]{%
-%%%       \ifnumgreater{\value{pageref}}{1}
-%%%         {\renewcommand{\mybibstring}{\bibstring{backrefpages}}}
-%%%         {\renewcommand{\mybibstring}{\bibstring{backrefpage}}}%
-%%%       \printlist[list:citon]{pageref}
-%%%       \printlist[pageref][-\value{listtotal}]{pageref}}}}
-			
+%%% \topscite: citation to be used in places 
+%\newcommand{\topscite}[1]{\texorpdfstring{\cite{#1}}{{\protect\NoHyper\cite{#1}\protect\endNoHyper}}}
 
-%%% https://tex.stackexchange.com/questions/149009/biblatex-pagebackref-reference-in-the-flush-right-margin
-\renewbibmacro*{pageref}{%
-   \iflistundef{pageref}
-     {\renewcommand{\finentrypunct}{\addperiod}}
-     {\renewcommand{\finentrypunct}{\addspace}%
-      \printtext{\addperiod\hfill\rlap{\hskip15pt\colorbox{blue!5}{\scriptsize\printlist[pageref][-\value{listtotal}]{pageref}}}}}}
-
+%\fboxmp: add an fbox, but the parameter will also be wrapped within a minipage. The optional arg is the width factor
+\newcommand{\fboxmp}[2][1]{\fbox{\begin{minipage}{#1\textwidth-2\fboxrule-2\fboxsep}#2\end{minipage}}}
 
 \newcommand\twodigits[1]{\ifnum#1<10 0#1\else #1\fi}
 \def\todayext{\ifcase\month\or
   January\or February\or March\or April\or May\or June\or
   July\or August\or September\or October\or November\or December\fi
   \space\twodigits{\number\day}, \number\year}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% Formatting related to bibliography
+
+
+%%% Options for biblatex ... could also be called when loading the package
+\ExecuteBibliographyOptions{sorting=anyt, % anyt: sorts by alphabetic label, name, year, title
+	backref=true, % Search \renewbibmacro*{pageref} for the styling of back page references
+	bibencoding=utf8,%
+	dateabbrev=false,%
+	giveninits=true,%
+	isbn=false,url=false,%
+	maxnames=10, %minnames=4, %    %maxnames=99
+	minbibnames=4,maxbibnames=99,
+	minalphanames=5,maxalphanames=8,
+	mincitenames=4,maxcitenames=10,
+	}
+
+
+\DefineBibliographyStrings{english}{%
+backrefpage = {Cited on p.}, %
+backrefpages = {Cited on pp.} %
+}
+
+\DeclareListFormat{location}{}
+
+%%% LB: code to avoid indentation of lines after the first
+\setlength{\bibhang}{0em}
+\defbibenvironment{bibliography}%
+{\list{\printtext[labelalphawidth]{%
+        %\printfield{prefixnumber}%
+        \textbf{\printfield{labelalpha}}}} %\list
+{\setlength{\leftmargin}{\bibhang}%
+\setlength{\itemindent}{2.5em}%  %-\leftmargin
+\setlength{\itemsep}{\bibitemsep}%
+\setlength{\parsep}{\bibparsep}}%
+%\renewcommand*{\makelabel}[1]{\hss##1}%
+}
+{\endlist} %\endlist
+{\item} %%%\makelabel{#1}
+
+%\patchcmd requires package etoolbox
+\patchcmd{\thebibliography}{\chapter*}{\section*}{}{} %will prevent the bibliography from breaking the page
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% Microtyping to improve paragraph ending
+
+%%% \loosen (requires \usepackage{microtype}): uses microtype features to help prevent some line breaks in paragraphs. Does not currently work with xetex
+\def\loosen{\looseness=-1}
+
+%%% Luis B: command \xetexfontscale (as alternative to \loosen) for use with xetex, where the microtype package does not provide kerning or tracking, 
+\ifPDFTeX\newcommand{\xetexfontscale}[2]{#2\loosen}
+\else
+\usepackage{anyfontsize,xfp}
+\makeatletter
+\newcommand{\xetexfontscale}[2]{\ifxetex\makeatother%\normalsize% Capture font definitions for \normalsize
+\xdef\f@size@normalsize{\f@size}%
+\xdef\f@baselineskip@normalsize{\f@baselineskip}%
+\fontsize{\fpeval{(\f@size@normalsize)*#1}}{\fpeval{(\f@baselineskip@normalsize)*#1}}\selectfont{}#2\fontsize{\fpeval{(\f@size@normalsize)}}{\fpeval{(\f@baselineskip@normalsize)}}\selectfont{}\else{}#2\fi}
+\makeatother
+\fi
+
+\renewcommand\linenumberfont{\normalfont\tiny\rmfamily}

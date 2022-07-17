@@ -1,86 +1,52 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Introduction}  % and Motivation %%% uniformizing the title of the intro section of each chapter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
 \label{apps:intro}
  
 This chapter aims to overview existing techniques for building ZKP-based applications, including designing the protocols to meet best-practice security requirements.
 We distinguish between high-level and low-level applications, where the former are the protocols designed for specific use-cases and the latter are the necessary underlying operations or sub-protocols.
 Each use case admits a circuit, and we discuss the sub-circuits needed to ensure security and functionality of the protocol.
 We refer to the circuits as \emph{predicates} and the sub-circuits as \emph{gadgets}:
+
 \begin{itemize}
+    \item {\bfseries \hypertarget{def:predicate}{Predicate}:} 
+    The relation or condition that the statement and witness must satisfy.
+    Can be represented as a circuit.
 
-\item {\bfseries \hypertarget{def:predicate}{Predicate}:} 
-The relation or condition that the statement and witness must satisfy.
-Can be represented as a circuit.
-
-\item \textbf{\hypertarget{def:gadget}{Gadget}:} 
-The underlying tools needed to construct the predicate.  
-In some cases, a gadget can be interpreted as a security requirement 
-(e.g., using the commitment verification gadget is equivalent to ensuring the privacy of underlying data).
-\loosen
-
+    \item \textbf{\hypertarget{def:gadget}{Gadget}:} 
+    The underlying tools needed to construct the predicate.  
+    In some cases, a gadget can be interpreted as a security requirement (e.g., using the commitment verification gadget is equivalent to ensuring the privacy of underlying data).
 \end{itemize}
 
-
-	Recall from \refsec{security:syntax}
-the syntax of a proof system between a prover and verifier.
-	As we will see, the protocols can be abstracted and generalized to admit several use-cases; 
+Recall from \refsec{security:syntax} the syntax of a proof system between a prover and verifier.
+As we will see, the protocols can be abstracted and generalized to admit several use-cases; 
 similarly, there exist compilers that will generate the necessary gadgets from commonly used programming languages. 
-	Creating the constraint systems is a fundamental part of the applications of ZKP, which is the reason why there is a large variety of front-end software options available.
+Creating the constraint systems is a fundamental part of the applications of ZKP, which is the reason why there is a large variety of front-end software options available.
 
 
-
-
-
-
-%%% NOTE LB: Contains minor editorial changes
-\paragraph{Functionality vs.\ performance.}\pslabel{par:apps:intro:functionality-vs-performance}
-
-	The design of ZKPs is subject to the tradeoff between functionality and performance. 
-	Users would like to have powerful ZKPs, in the sense that the system permits constructing %to construct 
-proofs for any predicate, which %what 
-leads to the necessity of universal ZKPs. 
-	On the other hand, users would like to have efficient constructions. 
-	According to Table~\ref{tab:apps:APIS-and-interfaces-by-univ-and-preproc}, it is possible to classify ZKPs as:
+\paragraph{Functionality vs.\ performance}\pslabel{par:apps:intro:functionality-vs-performance}
+The design of ZKPs is subject to the tradeoff between functionality and performance. 
+Users would like to have powerful ZKPs, in the sense that the system permits constructing proofs for any predicate, which leads to the necessity of universal ZKPs. 
+On the other hand, users would like to have efficient constructions. 
+According to Table~\ref{tab:apps:APIS-and-interfaces-by-univ-and-preproc}, it is possible to classify ZKPs as:
 (i) universal or non-universal;
 (ii) scalable or non-scalable; and 
 (iii) preprocessing or non-preprocessing. 
-	Item (i) is related to the functionality of the underlying %subjacent 
-ZKP, while items (ii) and (iii) are related to performance. 
-	The utilization of zk-SNARKs allows %to have 
-universal ZKPs with very efficient verifiers. 
-	However, many proposals %%% LB editorial: changed ``most'' (which is very contextual to a moment in time) to ``many''
-depend upon an expensive preprocessing, which makes such systems hard to scale for some use-cases. 
-	A technique called \textit{Proof-Carrying Data} (PCD), originally proposed in Ref.~\cite{2010:ICS:proof-carrying-data}, 
-allows obtaining %to obtain 
-\textit{recursive composition} for existing ZKPs in a modular way. %, which
-	This means that zk-SNARKs can be used as a building block to construct scalable and non-preprocessing solutions.
-	%thus obtaining 
-	The result is not only an efficient verifier, as in zk-SNARKs, but also a prover whose consumption of computational resources is efficient, in particular with respect to memory requirements, as described in Refs.~\cite{2017:Alg:Scalable-Zero-Knowledge-Via-Cycles-of-Elliptic-Curves} and~\cite{2013:Recursive-Composition-and-Bootstrapping-for-SNARKS-and-Proof-carrying-Data}.
+
+Item (i) is related to the functionality of the underlying ZKP, while items (ii) and (iii) are related to performance. 
+The utilization of zk-SNARKs allows universal ZKPs with very efficient verifiers. 
+However, many proposals depend upon an expensive preprocessing, which makes such systems hard to scale for some use-cases. 
+A technique called \emph{Proof-Carrying Data} (PCD), originally proposed in Ref.~\cite{2010:ICS:proof-carrying-data}, allows obtaining \emph{recursive composition} for existing ZKPs in a modular way.
+This means that zk-SNARKs can be used as a building block to construct scalable and non-preprocessing solutions. 
+The result is not only an efficient verifier, as in zk-SNARKs, but also a prover whose consumption of computational resources is efficient, in particular with respect to memory requirements, as described in Refs.~\cite{2014:crypto:Scalable-ZK-via-Cycles-of-EC} and~\cite{2013:Recursive-Composition-and-Bootstrapping-for-SNARKS-and-Proof-carrying-Data}.
 \loosen
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%\paragraph{What this document is NOT about:}
-%\begin{itemize}
-% \item A unique explanation of how to build ZKP applications
-% \item An exhaustive list of the security requirements needed to build a ZKP system
-% \item A comparison of front-end tools
-% \item A show of preference for some use-cases or others
-%\end{itemize}
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\paragraph{Organization.}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Organization}
 \refsec{apps:scope-use-cases} mentions different types of verifiability properties of interest to applications.
 \refsec{apps:previous-works} enumerates some prior works.
 \refsec{apps:gadgets-within-predicates} describes possible gadgets useful for diverse applications.
 The subsequent three sections present three ZKP use-cases:
-%In this document, we present three ZKP use-cases: 
-%identity framework, asset transfer and regulation compliance and emphasize the incorporation of suitable gadgets to ensure security of these protocols.  
 \refsec{apps:id-framework} describes a use-case related to \emph{identity management};
 \refsec{apps:asset-transfer} examines an application context related to \emph{asset transfer};
 \refsec{apps:regulation-compliance} exemplifies one use-case related to \emph{regulation compliance}.

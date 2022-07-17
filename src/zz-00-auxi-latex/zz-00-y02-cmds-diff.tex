@@ -1,6 +1,5 @@
 %%% This file: defines commands and counters useful for cross-referencing feedback notes and corresponding changes
 
-
 \newcommand{\ignoreDiff}[1]{#1}  % To mark areas to be ignored by the diff operation
 \ifbool{boolDiff}{\setbool{boolShowFeedback}{true}}{}
 \ifbool{boolShowFeedback}{}{\newcommandtwoopt{\revblock}[3][][]{}} 
@@ -18,15 +17,6 @@
 \newcommand{\suggest}[2][]{\popupColor[blue]{#1}{Suggestion: #2}}
 \newcommand{\edited}[2][]{\popupColor[green]{#1}{Edited: #2}}
 \newcommand{\smttodo}[2][]{\popupColor[red]{#1}{To-do: #2}}
-
-\def\luisb{Lu{\'i}s B.}
-\newcommand{\luis}[1]{\popupColor[blue]{\luisb}{#1}}
-\let\luiscom\luis
-\newcommand{\luissug}[1]{\suggest[\luisb]{#1}}
-\newcommand{\luised}[1]{\edited[\luisb]{#1}}
-\newcommand{\luistodo}[1]{\smttodo[\luisb]{#1}}
-\newcommand{\luisin}[1]{\red{[[\luisb: #1]]}}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%% MARK EDIT/REVISION BLOCKS
@@ -68,11 +58,6 @@
 \newcommand{\needscontributors}{\red{needs contributors}}
 
 
-
-
-%\newcommand{\singlebullet}[1]{\protect\begin{itemize}\item #1 \protect\end{itemize}}
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newcommand{\newcol}{&}
@@ -101,7 +86,7 @@
 \setlength{\tabcolsep}{1ex}
 
 
-%Use of commands defined with optionla arguments inside cells can break the workings of tabular
+%Use of commands defined with optional arguments inside cells can break the workings of tabular
 %See complicated solution in https://tex.stackexchange.com/questions/277140/optional-argument-breaks-command-with-multicolumn
 %As a temporary solution, I'll just define all commands as mandatory
 %\newcommand{\headreviewer}[2]{\rowcolor{LLyellow}\incIssue[#1]\pdfbookmark[2]{\thecntContrib\ --- #2}{pdfbkm:\thecntContrib}\textbf{\thecntContrib} & Location & Comments from #2 & & & \rowend}

@@ -12,6 +12,7 @@
 
 %%%%%% LOCAL COMPILATION:
 % The main file for compilation is zkpcomref.tex
+% Optimized for compilation with xetex
 % The bibliography is using biblatex and biber
 % Check that 'biber' is set as the processor working with biblatex
 % A Diff PDF file can be compiled using latexpand and latexdiff

@@ -1,4 +1,4 @@
-%% Creator: Inkscape inkscape 0.92.3, www.inkscape.org
+%% Creator: Inkscape 1.2 (dc2aedaf03, 2022-05-15), www.inkscape.org
 %% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
 %% Accompanies image file 'implem--api-diagram.pdf' (pdf, eps, ps)
 %%
@@ -38,7 +38,7 @@
   \newcommand*\fsize{\dimexpr\f@size pt\relax}%
   \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
   \ifx\svgwidth\undefined%
-    \setlength{\unitlength}{1525.28622437bp}%
+    \setlength{\unitlength}{1447.96224976bp}%
     \ifx\svgscale\undefined%
       \relax%
     \else%
@@ -50,18 +50,22 @@
   \global\let\svgwidth\undefined%
   \global\let\svgscale\undefined%
   \makeatother%
-  \begin{picture}(1,0.48290263)%
+  \begin{picture}(1,0.27441918)%
     \lineheight{1}%
     \setlength\tabcolsep{0pt}%
     \put(0,0){\includegraphics[width=\unitlength,page=1]{implem--api-diagram.pdf}}%
-    \put(0.00113247,0.27981987){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.09197985\unitlength}\centering \figlang\end{minipage}}}%
-    \put(0.16923895,0.27981987){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.14490943\unitlength}\centering \figgen\end{minipage}}}%
-    \put(0.42939724,0.27981987){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.14490943\unitlength}\centering \figpp\end{minipage}}}%
-    \put(0.68689402,0.27981987){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.14490943\unitlength}\centering \figprover\end{minipage}}}%
-    \put(0.90846101,0.27981987){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.08835328\unitlength}\centering \figproof\end{minipage}}}%
-    \put(0.33558056,0.14208903){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.14490943\unitlength}\centering \figpp\end{minipage}}}%
-    \put(0.51855632,0.14208903){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.14490943\unitlength}\centering \figpp\end{minipage}}}%
-    \put(0.5192216,0.46412638){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.14490943\unitlength}\centering \figwitness\end{minipage}}}%
-    \put(0.5192216,0.39093608){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.14490943\unitlength}\centering \figinstance\end{minipage}}}%
+    \put(0.00754313,0.06049141){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.15264786\unitlength}\centering \figgen\end{minipage}}}%
+    \put(0.22565368,0.06049141){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.15264786\unitlength}\centering \figpp\end{minipage}}}%
+    \put(0.46973897,0.06049141){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.12907547\unitlength}\centering \figprover\end{minipage}}}%
+    \put(0.67953939,0.06049141){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.09307151\unitlength}\centering \figproof\end{minipage}}}%
+    \put(0.28090917,0.25464024){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.15264786\unitlength}\centering \figwitness\end{minipage}}}%
+    \put(0.28090917,0.17754144){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.15264786\unitlength}\centering \figinstance\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{implem--api-diagram.pdf}}%
+    \put(0.85718002,0.06049141){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.12907547\unitlength}\centering \figverifier\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{implem--api-diagram.pdf}}%
+    \put(0.00327762,0.22356208){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.15264786\unitlength}\centering \figlang\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{implem--api-diagram.pdf}}%
+    \put(0.84445978,0.25464024){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.15264786\unitlength}\centering \figoutput\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{implem--api-diagram.pdf}}%
   \end{picture}%
 \endgroup%

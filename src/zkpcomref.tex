@@ -1,26 +1,36 @@
-%%% ZKProof Community Reference
-%%% Main source at https://github.com/zkpstandard/zkreference
-%%% This is the main compilation file
-
-\documentclass[11pt,letterpaper,oneside]{report}    
-%using option `oneside' instead of `twoside' makes some definitions easier
-
-\makeatletter\def\input@path{{.}{./figs/}{./zz-00-auxi-latex/}{./zz-00-frontmatter/}{./zz-01-baseline/}{./zz-02-paradigms/}{./zz-03-implementation/}{./zz-04-applications/}{./zz-99-biblio/}{./zz-AA-backmatter/}{./zz-ZZ-backmatter/}}\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% Project: ZKProof Community Reference (CC BY 4.0 International 2018--2022)
+% Main source at https://github.com/zkpstandard/zkreference
+% This is the main compilation file
+% Compilation better tested with xetex
+% Read file "latex-editing.txt" for notes on integrating new content 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[11pt,letterpaper,oneside]{report}
+
+%%% Adding to default paths the folders used for better file organization 
+\makeatletter\def\input@path{{.}{./figs/}{./zz-00-auxi-latex/}%
+    {./zz-00-frontmatter/}{./zz-01-baseline/}{./zz-02-paradigms/}%
+    {./zz-03-implementation/}{./zz-04-applications/}%
+    {./zz-99-biblio/}{./zz-AA-backmatter/}}
+\makeatother
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%% DEFINE WHICH VERSION TO COMPILE: Clean, ShowFeedback, Diff
 
-%allows \ifthenelse{}{}{}; 
 \usepackage{ifthen,etoolbox}
 \newcommand{\providesetbool}[2]{\providebool{#1}\setbool{#1}{#2}}
-% boolShowFeedback: set to `true' to show the table of proposed contributions and changes
+
+% boolShowLineNumbers: `true' to show line numbers throughout the document
+\providesetbool{boolShowLineNumbers}{true}
+% boolShowFeedback: `true' to show table of proposed contributions and changes
 \providesetbool{boolShowFeedback}{false}
-% booldiff: set to `true' to prepare this for diffing with a previous version; 
+% booldiff: `true' if preparing this for diffing with a previous version 
 \providesetbool{boolDiff}{false} % if true, it forces boolShowFeedback to true
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%% LOAD PRELIMINARY DEFINITIONS
 
 \input{zz-00-y01-pkgs.tex}
@@ -28,23 +38,30 @@
 \input{zz-00-y02-cmds-diff.tex}
 \input{zz-00-y03-format.tex}
 \input{zz-00-y04-metadata.tex}
-\graphicspath{{}{figs/}}
+\graphicspath{{}{figs/}{figs/from-EB-20210422/}}
 
-%%% Define the files with bibliographic references
+\ifbool{boolShowLineNumbers}{\linenumbers}{\renewcommand{\thelinenumber}{}}
+
+\hbadness=10000 %%% temporary hack to suppress ``Underfull \hbox'' warnings
+\hfuzz=1.00pt %% supress \hbox overfull warnings when it's for less than 1.0 pt
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Load files with bibliographic references
 \addbibresource{zz-99-biblio/zz-99-biblio-19xx.bib}
 \addbibresource{zz-99-biblio/zz-99-biblio-200x.bib}
 \addbibresource{zz-99-biblio/zz-99-biblio-2010-2017.bib}
 \addbibresource{zz-99-biblio/zz-99-biblio-2018-2020.bib}
+\addbibresource{zz-99-biblio/zz-99-biblio-2021-2022.bib}
 \addbibresource{zz-99-biblio/zz-99-biblio-zkproof.bib}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% FRONT MATTER
-\ignoreDiff{\ifbool{boolDiff}{\input{zz-00-z00-precover-diff.tex}}{\ifbool{boolShowFeedback}{\input{zz-00-z00-precover-ref-changes.tex}}{}}}
-
-\ifbool{boolShowFeedback}{}{\nolinenumbers\renewcommand{\linenumbers}{}\renewcommand{\internallinenumbers}{}\renewcommand{\setlinenumberintable}{\renewcommand{\thelinenumber}{}}}
+\ignoreDiff{\ifbool{boolDiff}{\input{zz-00-z00-precover-diff.tex}}%
+      {\ifbool{boolShowFeedback}{\input{zz-00-z00-precover-ref-changes.tex}}{}}}
 
 \input{zz-00-frontmatter}
 
@@ -54,15 +71,21 @@
 \cleartooddpage\pagenumbering{arabic}\setcounter{page}{1}
 \thispagestyle{mainmatter}\pagestyle{mainmatter}
 
+\begingroup
 \input{zz-01-baseline.tex}
 \cleartooddpage\input{zz-02-paradigms.tex}
 \cleartooddpage\input{zz-03-implem.tex}
 \cleartooddpage\input{zz-04-apps.tex}
 
-\cleartooddpage\input{zz-91-acks.tex}
+\cleartooddpage\thispagestyle{acks}\pagestyle{acks}
+\input{zz-91-acks.tex}
+\endgroup
+
 
 \cleartooddpage\pagestyle{references}\thispagestyle{references}
 \phantomsection\chapter*{References}\addcontentsline{toc}{chapter}{References}
+% \bibitemsep: %% tweak between 0.4 and 0.7 for better fit in last page
+\setlength{\bibitemsep}{0.6\baselineskip}
 \label{references}{\small\printbibliography[heading=none]}
 
 
@@ -82,10 +105,9 @@
 \ifbool{boolShowFeedback}{\ignoreDiff{
 	\nolinenumbers %disable line numbering
 	\input{zzz-00-insert-comments.tex}
-
-	%Insert here the tables of review comments to be cross-referenced with the introduced changes
+	%Insert here tables of review comments (for cross-referencing changes)
 	\input{zzz-01-changes-to-v0.1--1-by-editors.tex}
 	\input{zzz-01-changes-to-v0.1--2-by-contributors.tex}
-}{}}
+}}{}
 
 \end{document}
